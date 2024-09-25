@@ -270,8 +270,9 @@ Agama includes an specific `mode` options to set the mode, instead of abusing th
 
 ### Bridge connections
 
-> [!WARNING]
-> Bridge support is not implemented yet, although we have support at model level.
+:::warning Bridge support is not implemented yet
+Although we have support at model level.
+:::
 
 The AutoYaST `bridge*` elements allow setting up a bridge. In Agama, those settings are placed under
 a `bridge` key in the `connection` structure.
@@ -286,8 +287,9 @@ a `bridge` key in the `connection` structure.
 
 ### VLAN
 
-> [!WARNING]
-> VLAN support is not implemented yet, although we have support at model level.
+:::warning VLAN support is not implemented yet
+Although we have support at model level.
+:::
 
 The AutoYaST `vlan_settings` elements allow setting up a bridge. In Agama, those settings are placed
 under a `vlan` key in the `connection` structure.
