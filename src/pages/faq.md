@@ -75,7 +75,7 @@ But there are also some caveats. Bear in mind that Agama is focused on the insta
 further configuration to other tools. Therefore it includes less features and there are some
 sections you can find in an AutoYaST profile that are ignored by Agama.
 
-You can find further details in the [AutoYaST support section](http://localhost:3000/docs/user/autoyast).
+You can find further details in the [AutoYaST support section](docs/user/autoyast).
 
 ## Will Agama replace YaST as the main installer for SUSE Linux?
 
