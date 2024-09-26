@@ -10,7 +10,7 @@ perspective.
 
 - [Users documentation](/docs/user): it explains how to use Agama to install a system. It is
   oriented towards users that want to use an Agama Live ISO (e.g., the [openSUSE Agama
-  ISO](../download)) to perform an installation.
+  ISO](/download)) to perform an installation.
 - [Developer resources](/docs/devel/): are you interested in Agama's development? Then do not forget
   to check out these resources.
 
