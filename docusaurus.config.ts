@@ -74,7 +74,7 @@ const config: Config = {
           position: "left",
         },
         {
-          href: "https://github.com/openSUSE/agama",
+          href: "https://github.com/agama-project/agama",
           label: "GitHub",
           position: "right",
         },
@@ -105,7 +105,7 @@ const config: Config = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/openSUSE/agama",
+              href: "https://github.com/agama-project/agama",
             },
             {
               label: "IRC",
