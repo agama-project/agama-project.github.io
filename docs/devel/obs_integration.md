@@ -170,7 +170,7 @@ of commits in the `master` branch since that release.
 The version is automatically constructed by the OBS service, for the `rubygem-agama` package the
 version is built using the `git describe --tags` command.
 
-## Release Project
+## Release project
 
 For releasing a public version of Agama we use the [systemsmanagement:Agama:Release](
 https://build.opensuse.org/project/show/systemsmanagement:Agama:Devel) project and respective
