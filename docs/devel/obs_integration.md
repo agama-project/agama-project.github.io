@@ -162,7 +162,7 @@ select the respective "Submit" action in the left side bar and in the main area 
 workflow" selector. Then in the popup keep the default `master` branch and click the "Run workflow"
 button.
 
-### Devel Package Versioning
+### Devel package versioning
 
 The packages in the Devel project use a version built from the last released version with a number
 of commits in the `master` branch since that release.
