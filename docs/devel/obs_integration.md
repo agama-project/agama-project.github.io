@@ -162,10 +162,30 @@ select the respective "Submit" action in the left side bar and in the main area 
 workflow" selector. Then in the popup keep the default `master` branch and click the "Run workflow"
 button.
 
-## Package versioning
+### Devel Package Versioning
 
 The packages in the Devel project use a version built from the last released version with a number
 of commits in the `master` branch since that release.
 
 The version is automatically constructed by the OBS service, for the `rubygem-agama` package the
 version is built using the `git describe --tags` command.
+
+## Release Project
+
+For relasing a public version of Agama we use the
+[systemsmanagement:Agama:Release](
+https://build.opensuse.org/project/show/systemsmanagement:Agama:Devel) project
+and respective [release](https://github.com/agama-project/agama/tree/release)
+branch in Git. The reason for a separate project is that we might need to
+release a hot fix but the `master` branch might already contain a new feature
+for the next version.
+
+The integration works the same way as for the Devel project above, the only
+difference is that it uses the `OBS_PROJECT_RELEASE` GitHub Action variable
+to define the target OBS project to allow submitting to a different project.
+
+### Release Package Versioning
+
+The packages in the Release project use a version based on the version tag
+matching `v[0-9]+`. Use `rake tag` command for creating a tag. See more details
+in the [packaging documentation](packaging.md#bumping-the-version).
