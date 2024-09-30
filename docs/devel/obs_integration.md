@@ -182,7 +182,7 @@ The integration works the same way as for the Devel project above, the only diff
 uses the `OBS_PROJECT_RELEASE` GitHub Action variable to define the target OBS project to allow
 submitting to a different project.
 
-### Release Package Versioning
+### Release package versioning
 
 The packages in the Release project use a version based on the version tag matching `v[0-9]+`. Use
 `rake tag` command for creating a tag. See more details in the [packaging
