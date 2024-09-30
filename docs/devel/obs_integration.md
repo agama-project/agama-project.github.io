@@ -172,20 +172,18 @@ version is built using the `git describe --tags` command.
 
 ## Release Project
 
-For releasing a public version of Agama we use the
-[systemsmanagement:Agama:Release](
-https://build.opensuse.org/project/show/systemsmanagement:Agama:Devel) project
-and respective [release](https://github.com/agama-project/agama/tree/release)
-branch in Git. The reason for a separate project is that we might need to
-release a hot fix but the `master` branch might already contain a new feature
-for the next version.
+For releasing a public version of Agama we use the [systemsmanagement:Agama:Release](
+https://build.opensuse.org/project/show/systemsmanagement:Agama:Devel) project and respective
+[release](https://github.com/agama-project/agama/tree/release) branch in Git. The reason for a
+separate project is that we might need to release a hot fix but the `master` branch might already
+contain a new feature for the next version.
 
-The integration works the same way as for the Devel project above, the only
-difference is that it uses the `OBS_PROJECT_RELEASE` GitHub Action variable
-to define the target OBS project to allow submitting to a different project.
+The integration works the same way as for the Devel project above, the only difference is that it
+uses the `OBS_PROJECT_RELEASE` GitHub Action variable to define the target OBS project to allow
+submitting to a different project.
 
 ### Release Package Versioning
 
-The packages in the Release project use a version based on the version tag
-matching `v[0-9]+`. Use `rake tag` command for creating a tag. See more details
-in the [packaging documentation](packaging.md#bumping-the-version).
+The packages in the Release project use a version based on the version tag matching `v[0-9]+`. Use
+`rake tag` command for creating a tag. See more details in the [packaging
+documentation](packaging.md#bumping-the-version).
