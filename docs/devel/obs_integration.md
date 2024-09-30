@@ -172,7 +172,7 @@ version is built using the `git describe --tags` command.
 
 ## Release Project
 
-For relasing a public version of Agama we use the
+For releasing a public version of Agama we use the
 [systemsmanagement:Agama:Release](
 https://build.opensuse.org/project/show/systemsmanagement:Agama:Devel) project
 and respective [release](https://github.com/agama-project/agama/tree/release)
