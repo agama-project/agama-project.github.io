@@ -27,19 +27,19 @@
 
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
 
-  article a:where(:not(.button)) {
-    text-decoration: underline;
-  }
+article a:where(:not(.button)) {
+  text-decoration: underline;
+}
 
-  .flex-container {
-    display: flex;
-    gap: calc(var(--ifm-button-group-spacing) * 2);
-  }
+.flex-container {
+  display: flex;
+  gap: calc(var(--ifm-button-group-spacing) * 2);
+}
 
-  .footer--dark {
-    --ifm-footer-link-hover-color: var(--jungleGreenColor);
-  }
+.footer--dark {
+  --ifm-footer-link-hover-color: var(--jungleGreenColor);
 }
 
 /**
@@ -61,9 +61,14 @@
   --ifm-color-primary-lightest: #96e4bf;
   --ifm-background-color: #0c322c;
 
-  .footer--dark {
-    --ifm-footer-background-color: var(--ifm-navbar-background-color);
-  }
-
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  /*
+   * NOTE: Do not use nested rules here! The CSS minifier in the production
+   * builds does not handle that correctly. See the example rule below.
+   */
+}
+
+[data-theme="dark"] .footer--dark {
+  --ifm-footer-background-color: var(--ifm-navbar-background-color);
 }
