@@ -120,7 +120,7 @@ OBS build power._
 
 ### GitHub fork
 
-Then you can fork the [Agama](https://github.com/openSUSE/agama) repository at GitHub.
+Then you can fork the [Agama](https://github.com/agama-project/agama) repository at GitHub.
 
 When creating a fork GitHub by default copies only the `master` branch. It does not copy the other
 branches nor tags. The code supports this option, just be prepared that the package versions might
