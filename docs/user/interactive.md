@@ -7,7 +7,7 @@ sidebar_position: 1
 Agama features a web-based user interface that you can use to install the system either locally or
 from a remote device. For local installations, once you boot [the Live image](/download), you
 should get to the product selection screen. If you want to connect from a remote device, please
-check the [connecting remotely] section.
+check the [connecting remotely](#remote) section.
 
 Assuming that you are already connected to the system you want to install, let's go briefly through
 the installation workflow.
@@ -122,7 +122,7 @@ button, Agama ask for confirmation. Once you accept, the installation starts.
 
 ![Overview page containing the `Install` button](/img/user/install-button.png)
 
-## Remote access
+## Remote access {#remote}
 
 The Live ISO automatically starts a graphical interface (using the local browser). However, you
 might want to access remotely to the installer. If you know the IP address of the system, you just
