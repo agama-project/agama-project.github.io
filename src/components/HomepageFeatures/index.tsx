@@ -94,7 +94,7 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Automate the installation process using either the command-line
-        interface or the HTTP API and integrate it into your worklow.
+        interface or the HTTP API and integrate it into your workflow.
       </>
     ),
     asset: (

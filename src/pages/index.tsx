@@ -38,7 +38,7 @@ export default function Home(): JSX.Element {
       <main>
         <HomepageFeatures />
         <div
-          className="contianer text--center margin-vert--xl"
+          className="container text--center margin-vert--xl"
           style={{ width: "100%" }}
         >
           <Link
