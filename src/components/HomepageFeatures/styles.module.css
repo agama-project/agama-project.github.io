@@ -39,3 +39,14 @@
     max-inline-size: 35vw;
   }
 }
+
+/*
+ * Carousel fixes (revert some of the styling above) in .carousel
+ */
+:global .carousel .control-dots .dot, :global .carousel li.slide {
+  padding-block-start: 0;
+}
+
+:global .carousel li img {
+  max-inline-size: none;
+}

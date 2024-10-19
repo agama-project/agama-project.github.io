@@ -43,17 +43,6 @@ article a:where(:not(.button)) {
 }
 
 /*
- * Carousel fixes (revert some of the HomepageFeatures styling)
- */
-.carousel .control-dots .dot, .carousel li.slide {
-  padding-block-start: 0;
-}
-
-.container .carousel li img {
-  max-inline-size: none;
-}
-
-/*
  * Carousel styling
  */
 .carousel .control-dots .dot.selected {
