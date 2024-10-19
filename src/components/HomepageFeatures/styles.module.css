@@ -21,6 +21,10 @@
   max-block-size: 400px;
 }
 
+.descriptionBlock {
+  min-width: 30%;
+}
+
 @media screen and (min-width: 996px) {
   .features li {
     flex-direction: row;

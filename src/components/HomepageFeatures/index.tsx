@@ -4,6 +4,10 @@ import BrowserWindow from "@site/src/components/BrowserWindow";
 import clsx from "clsx";
 import profile from "!!raw-loader!@site/static/profiles/tw.json";
 
+// image carousel
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+
 import styles from "./styles.module.css";
 
 type FeatureItem = {
@@ -29,7 +33,32 @@ const FeatureList: FeatureItem[] = [
     ),
     asset: (
       <BrowserWindow aria-hidden url="https://agama.local" paddingLess>
-        <img src={require("@site/static/img/storage.png").default} />
+        <Carousel
+          autoPlay
+          infiniteLoop
+          showStatus={false}
+          showThumbs={false}
+          interval={5000}
+        >
+          <div>
+            <img src={require("@site/static/img/user/overview.png").default} />
+          </div>
+          <div>
+            <img src={require("@site/static/img/user/users.png").default} />
+          </div>
+          <div>
+            <img src={require("@site/static/img/storage.png").default} />
+          </div>
+          <div>
+            <img src={require("@site/static/img/user/network.png").default} />
+          </div>
+          <div>
+            <img src={require("@site/static/img/user/software.png").default} />
+          </div>
+          <div>
+            <img src={require("@site/static/img/user/install-button.png").default} />
+          </div>
+        </Carousel>
       </BrowserWindow>
     ),
   },
@@ -86,7 +115,7 @@ function Feature({ title, asset, description }: FeatureItem) {
   return (
     <li>
       {asset}
-      <div>
+      <div className={clsx(styles.descriptionBlock)}>
         <Heading as="h2">{title}</Heading>
         <p>{description}</p>
       </div>
