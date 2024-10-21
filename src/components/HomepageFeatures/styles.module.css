@@ -21,6 +21,10 @@
   max-block-size: 400px;
 }
 
+.descriptionBlock {
+  min-width: 30%;
+}
+
 @media screen and (min-width: 996px) {
   .features li {
     flex-direction: row;
@@ -34,4 +38,15 @@
   .features li img {
     max-inline-size: 35vw;
   }
+}
+
+/*
+ * Carousel fixes (revert some of the styling above) in .carousel
+ */
+:global .carousel .control-dots .dot, :global .carousel li.slide {
+  padding-block-start: 0;
+}
+
+:global .carousel li img {
+  max-inline-size: none;
 }

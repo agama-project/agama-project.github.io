@@ -42,12 +42,29 @@ article a:where(:not(.button)) {
   --ifm-footer-link-hover-color: var(--jungleGreenColor);
 }
 
+/*
+ * Carousel styling
+ */
+.carousel .control-dots .dot.selected {
+  background-color: var(--ifm-color-primary-lightest);
+}
+
+.container .carousel .control-next.control-arrow:before
+{
+  border-left-color: var(--ifm-color-primary);
+}
+
+.container .carousel .control-prev.control-arrow:before
+{
+  border-right-color: var(--ifm-color-primary);
+}
+
 /**
  * For readability concerns, you should choose a lighter palette in dark mode
  *
  * NOTE: #40ce8a is a lighter variant of SUSE Jungle Green color (#30BA78).
  * Needed such a lighter version as primary color in order to achieve
- * acceptable constrast ratings for the other dark and light variants.
+ * acceptable contrast ratings for the other dark and light variants.
  * Variants calculated with the help of
  * https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
  */
