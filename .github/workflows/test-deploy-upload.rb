@@ -43,6 +43,8 @@ def set_status(success, url)
 
   cmd += ["-f" , "description=#{description}"]
 
+  puts "Running: #{cmd}"
+
   system(*cmd)
 end
 
