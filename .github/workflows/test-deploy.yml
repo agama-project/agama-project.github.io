@@ -34,4 +34,5 @@ jobs:
       - name: Deploy to surge.sh
         run: .github/workflows/test-deploy-upload.rb
         env:
+          GH_TOKEN: ${{ github.token }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
