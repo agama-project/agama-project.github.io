@@ -27,3 +27,9 @@ jobs:
 
       - name: Test build website
         run: yarn build
+
+      - name: Install surge
+        run: yarn add surge
+
+      - name: Deploy to surge.sh
+        run: .github/workflows/test-deploy-upload.rb
