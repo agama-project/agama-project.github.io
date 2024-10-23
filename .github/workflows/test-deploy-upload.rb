@@ -8,8 +8,8 @@
 # Additionally it reports the status and the target URL back to GitHub.
 
 # require "octokit"
-require "yaml"
 require "shellwords"
+require "uri"
 
 # secure variable not present, cannot deploy
 if ENV["SURGE_TOKEN"].to_s.empty?
