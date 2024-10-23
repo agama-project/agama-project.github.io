@@ -29,6 +29,11 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
+/* small shadow around blog post images to make them more stand out */
+.markdown img {
+  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
 article a:where(:not(.button)) {
   text-decoration: underline;
 }
@@ -49,13 +54,11 @@ article a:where(:not(.button)) {
   background-color: var(--ifm-color-primary-lightest);
 }
 
-.container .carousel .control-next.control-arrow:before
-{
+.container .carousel .control-next.control-arrow:before {
   border-left-color: var(--ifm-color-primary);
 }
 
-.container .carousel .control-prev.control-arrow:before
-{
+.container .carousel .control-prev.control-arrow:before {
   border-right-color: var(--ifm-color-primary);
 }
 

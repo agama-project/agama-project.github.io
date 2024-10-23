@@ -42,6 +42,11 @@ const config: Config = {
         theme: {
           customCss: "./src/css/custom.css",
         },
+        blog: {
+          blogTitle: "Agama blog",
+          blogDescription: "A blog about Agama development and new releases.",
+          postsPerPage: 20,
+        },
       } satisfies Preset.Options,
     ],
   ],
@@ -71,6 +76,11 @@ const config: Config = {
         {
           href: "/download",
           label: "Download",
+          position: "left",
+        },
+        {
+          to: "blog",
+          label: "Blog",
           position: "left",
         },
         {
@@ -129,12 +139,23 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
+    colorMode: {
+      respectPrefersColorScheme: true,
+    },
+    zoom: {
+      selector: ".markdown :not(em) > img",
+      background: {
+        light: "rgb(255, 255, 255)",
+        dark: "rgb(27, 27, 29)",
+      },
+    },
   } satisfies Preset.ThemeConfig,
 
   markdown: {
     mermaid: true,
   },
   themes: ["@docusaurus/theme-mermaid"],
+  plugins: ["docusaurus-plugin-image-zoom"],
 };
 
 export default config;

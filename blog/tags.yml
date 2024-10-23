@@ -1,19 +1,18 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+agama:
+  label: Agama
+  description: Agama installer project
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+programming:
+  label: Programming
+  description: Programming and development
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+project:
+  label: Project
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+systems-management:
+  label: Systems Management
+
+YaST:
+  label: YaST
+  permalink: /yast
+
