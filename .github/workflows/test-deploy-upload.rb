@@ -36,7 +36,7 @@ def set_status(success, url)
 
   if success
     cmd += ["-f", "target_url=#{url}"]
-    description = pull_request? ? "PR Preview" : "Branch Preview"
+    description = "Preview deployed to #{url}"
   else
     description = "Preview failed!"
   end
