@@ -25,7 +25,7 @@ end
 
 # set GitHub commit status
 def set_status(success, url)
-  sha = ENV["GITHUB_SHA"]
+  sha = ENV["STATUS_SHA"]
   repo = ENV["GITHUB_REPOSITORY"]
   context = pull_request? ? "site-preview/pr" : "site-preview/commit"
   state = success ? "success" : "failure"
