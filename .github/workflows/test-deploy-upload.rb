@@ -7,7 +7,6 @@
 # For security reasons this does not work across forks.
 # Additionally it reports the status and the target URL back to GitHub.
 
-# require "octokit"
 require "shellwords"
 require "uri"
 
@@ -20,39 +19,31 @@ if ENV["SURGE_TOKEN"].to_s.empty?
   exit 0
 end
 
-# # create an Octokit client for communication with GitHub
-# def client
-#   return @client if @client
-#   @client = Octokit::Client.new(:access_token => ENV["GH_STATUS_TOKEN"])
-#   @client
-# end
+def pull_request?
+  ENV["GITHUB_EVENT_NAME"] == "pull_request"
+end
 
-# # set GitHub status
-# def set_status(status, description)
-#   sha = ENV["GITHUB_SHA"]
-#   repo = ENV["GITHUB_REPOSITORY"]
+# set GitHub commit status
+def set_status(success, url)
+  sha = ENV["GITHUB_SHA"]
+  repo = ENV["GITHUB_REPOSITORY"]
+  context = pull_request? ? "site-preview/pr" : "site-preview/commit"
+  state = success ? "success" : "failure"
 
-#   opts = {
-#     description: description
-#   }
-#   opts[:target_url] = url if status == "success"
-#   opts[:context] = pull_request? ? "site-preview-pr" : "site-preview"
+  cmd = ["gh", "api", "--method", "POST", "-H", "Accept: application/vnd.github+json",
+    "/repos/#{repo}/statuses/#{sha}", "-f", "state='#{state}'", "-f", "context='#{context}'"]
 
-#   puts "Setting GitHub status, repo: #{repo}, sha: #{sha}, status: #{status}, opts: #{opts.inspect}"
+  if success
+    cmd += ["-f", "target_url='#{url}'"]
+    description = pull_request? ? "PR Preview" : "Branch Preview"
+  else
+    description = "Preview failed!"
+  end
 
-#   client.create_status(repo, sha, status, opts)
-# end
+  cmd += ["-f" , "description='#{description}'"]
 
-# # report success at GitHub
-# def report_success
-#   set_status("success", pull_request? ? "PR Preview" : "Branch Preview")
-# end
-
-# # report failure at GitHub and exit
-# def report_failure_and_exit
-#   set_status("failure", "Preview failed!")
-#   exit 1
-# end
+  system(*cmd)
+end
 
 # update the configuration - change the site URL to the preview target
 def url_from_config
@@ -66,10 +57,10 @@ url = url_from_config
 domain = URI(url_from_config).host
 puts "Publishing the pages at #{url}..."
 
-system("npx surge --project ./build --domain #{domain.shellescape}")
-
-# report_failure_and_exit unless system("npx surge --project ./build --domain #{domain}")
-
-# report_success
-# puts "\nFinished, see the #{url} page for the site preview."
-
+if system("npx surge --project ./build --domain #{domain.shellescape}")
+  set_status(true, url)
+  puts "\nFinished, see the #{url} page for the site preview."
+else
+  set_status(false, url)
+  exit 1
+end
