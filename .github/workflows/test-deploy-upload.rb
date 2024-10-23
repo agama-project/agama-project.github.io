@@ -7,7 +7,7 @@
 # For security reasons this does not work across forks.
 # Additionally it reports the status and the target URL back to GitHub.
 
-require "octokit"
+# require "octokit"
 require "yaml"
 require "shellwords"
 
@@ -20,39 +20,39 @@ if ENV["SURGE_TOKEN"].to_s.empty?
   exit 0
 end
 
-# create an Octokit client for communication with GitHub
-def client
-  return @client if @client
-  @client = Octokit::Client.new(:access_token => ENV["GH_STATUS_TOKEN"])
-  @client
-end
+# # create an Octokit client for communication with GitHub
+# def client
+#   return @client if @client
+#   @client = Octokit::Client.new(:access_token => ENV["GH_STATUS_TOKEN"])
+#   @client
+# end
 
-# set GitHub status
-def set_status(status, description)
-  sha = ENV["GITHUB_SHA"]
-  repo = ENV["GITHUB_REPOSITORY"]
+# # set GitHub status
+# def set_status(status, description)
+#   sha = ENV["GITHUB_SHA"]
+#   repo = ENV["GITHUB_REPOSITORY"]
 
-  opts = {
-    description: description
-  }
-  opts[:target_url] = url if status == "success"
-  opts[:context] = pull_request? ? "site-preview-pr" : "site-preview"
+#   opts = {
+#     description: description
+#   }
+#   opts[:target_url] = url if status == "success"
+#   opts[:context] = pull_request? ? "site-preview-pr" : "site-preview"
 
-  puts "Setting GitHub status, repo: #{repo}, sha: #{sha}, status: #{status}, opts: #{opts.inspect}"
+#   puts "Setting GitHub status, repo: #{repo}, sha: #{sha}, status: #{status}, opts: #{opts.inspect}"
 
-  client.create_status(repo, sha, status, opts)
-end
+#   client.create_status(repo, sha, status, opts)
+# end
 
-# report success at GitHub
-def report_success
-  set_status("success", pull_request? ? "PR Preview" : "Branch Preview")
-end
+# # report success at GitHub
+# def report_success
+#   set_status("success", pull_request? ? "PR Preview" : "Branch Preview")
+# end
 
-# report failure at GitHub and exit
-def report_failure_and_exit
-  set_status("failure", "Preview failed!")
-  exit 1
-end
+# # report failure at GitHub and exit
+# def report_failure_and_exit
+#   set_status("failure", "Preview failed!")
+#   exit 1
+# end
 
 # update the configuration - change the site URL to the preview target
 def url_from_config
