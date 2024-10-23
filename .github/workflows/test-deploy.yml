@@ -22,10 +22,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Test
-        run: |
-          ruby --version
-          gh --version
+      - name: Use a surge.sh URL
+        run: .github/workflows/test-deploy-patch-url.rb
 
       - name: Test build website
         run: yarn build
