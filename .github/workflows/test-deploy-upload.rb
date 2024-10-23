@@ -30,17 +30,18 @@ def set_status(success, url)
   context = pull_request? ? "site-preview/pr" : "site-preview/commit"
   state = success ? "success" : "failure"
 
+  # see https://docs.github.com/en/rest/commits/statuses#create-a-commit-status
   cmd = ["gh", "api", "--method", "POST", "-H", "Accept: application/vnd.github+json",
-    "/repos/#{repo}/statuses/#{sha}", "-f", "state='#{state}'", "-f", "context='#{context}'"]
+    "/repos/#{repo}/statuses/#{sha}", "-f", "state=#{state}", "-f", "context=#{context}"]
 
   if success
-    cmd += ["-f", "target_url='#{url}'"]
+    cmd += ["-f", "target_url=#{url}"]
     description = pull_request? ? "PR Preview" : "Branch Preview"
   else
     description = "Preview failed!"
   end
 
-  cmd += ["-f" , "description='#{description}'"]
+  cmd += ["-f" , "description=#{description}"]
 
   system(*cmd)
 end
