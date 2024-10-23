@@ -33,3 +33,5 @@ jobs:
 
       - name: Deploy to surge.sh
         run: .github/workflows/test-deploy-upload.rb
+        env:
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
