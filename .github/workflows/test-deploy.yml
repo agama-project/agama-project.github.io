@@ -17,7 +17,8 @@ jobs:
       - name: Debug
         run: |
           env | sort
-          echo '${{ github }}'
+          echo '${{ toJSON(github) }}'
+          echo '${{ toJSON(github) }}' | python -m json.tool
 
       - uses: actions/checkout@v4
 
