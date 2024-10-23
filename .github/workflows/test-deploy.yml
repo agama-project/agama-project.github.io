@@ -14,12 +14,6 @@ jobs:
     permissions:
       statuses: write
     steps:
-      - name: Debug
-        run: |
-          env | sort
-          echo '${{ toJSON(github) }}'
-          echo '${{ toJSON(github) }}' | python -m json.tool
-
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4

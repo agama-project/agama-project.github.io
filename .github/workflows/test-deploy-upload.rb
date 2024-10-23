@@ -36,7 +36,7 @@ def set_status(success, url)
 
   if success
     cmd += ["-f", "target_url=#{url}"]
-    description = "Preview deployed to #{url}"
+    description = "Preview deployed to surge.sh"
   else
     description = "Preview failed!"
   end
