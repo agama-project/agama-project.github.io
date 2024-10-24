@@ -6,6 +6,21 @@ agama:
   label: Agama
   description: Agama installer project
 
+auto-installation:
+  label: Auto-installation
+  description: Automatic unattended installation
+
+ci:
+  label: CI
+  description: Continuous integration
+
+container:
+  label: Container
+  description: Linux container
+
+d-bus:
+  label: D-Bus
+
 programming:
   label: Programming
   description: Programming and development
@@ -19,7 +34,15 @@ project:
 
 release:
   label: Release
-  description: Releasing a new version of Agama
+  description: Releasing a new version
+
+ruby:
+  label: Ruby
+  description: Programming in Ruby language
+
+rust:
+  label: Rust
+  description: Programming in Rust language
 
 systems-management:
   label: Systems Management

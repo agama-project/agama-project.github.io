@@ -1,0 +1,8 @@
+.smallImageBox {
+  text-align: center;
+}
+
+.smallImageBox img {
+  width: 45%;
+  margin: 0 10px;
+}
