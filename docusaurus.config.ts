@@ -46,6 +46,8 @@ const config: Config = {
           blogTitle: "Agama blog",
           blogDescription: "A blog about Agama development and new releases.",
           postsPerPage: 20,
+          // the number of posts in the "Recent Posts" list
+          blogSidebarCount: 20,
         },
       } satisfies Preset.Options,
     ],
