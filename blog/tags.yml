@@ -1,3 +1,7 @@
+announcement:
+  label: Announcement
+  description: General announcements
+
 agama:
   label: Agama
   description: Agama installer project
@@ -6,8 +10,16 @@ programming:
   label: Programming
   description: Programming and development
 
+plan:
+  label: Plan
+  description: Plan for the future
+
 project:
   label: Project
+
+release:
+  label: Release
+  description: Releasing a new version of Agama
 
 systems-management:
   label: Systems Management
