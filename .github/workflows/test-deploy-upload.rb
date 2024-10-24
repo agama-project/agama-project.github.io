@@ -43,9 +43,7 @@ def set_status(success, url)
 
   cmd += ["-f" , "description=#{description}"]
 
-  puts "Running: #{cmd}"
-
-  system(*cmd)
+  system(cmd.map{|c| c.shellescape}.join(" ") + " > /dev/null")
 end
 
 # update the configuration - change the site URL to the preview target
