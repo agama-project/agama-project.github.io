@@ -11,10 +11,11 @@ jobs:
   test-deploy:
     name: Test deployment
     runs-on: ubuntu-latest
+    permissions:
+      statuses: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+
       - uses: actions/setup-node@v4
         with:
           node-version: 18
@@ -22,5 +23,19 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Use a surge.sh URL
+        run: .github/workflows/test-deploy-patch-url.rb
+
       - name: Test build website
         run: yarn build
+
+      - name: Install surge
+        run: yarn add surge
+
+      - name: Deploy to surge.sh
+        run: .github/workflows/test-deploy-upload.rb
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+          STATUS_SHA: ${{ github.event.after }}

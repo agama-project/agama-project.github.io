@@ -1,19 +1,30 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+announcement:
+  label: Announcement
+  description: General announcements
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+agama:
+  label: Agama
+  description: Agama installer project
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+programming:
+  label: Programming
+  description: Programming and development
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+plan:
+  label: Plan
+  description: Plan for the future
+
+project:
+  label: Project
+
+release:
+  label: Release
+  description: Releasing a new version of Agama
+
+systems-management:
+  label: Systems Management
+
+YaST:
+  label: YaST
+  permalink: /yast
+
