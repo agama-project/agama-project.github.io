@@ -140,6 +140,8 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      // see node_modules/prismjs/components/prism-*.js for additional languages
+      additionalLanguages: ["bash", "ruby"],
     },
     colorMode: {
       respectPrefersColorScheme: true,
