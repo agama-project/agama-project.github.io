@@ -35,8 +35,8 @@ included in the repository to get an impression of how a profile looks like.
 
 ```json
 {
-  "l10n": {
-    "languages": ["en_US.UTF-8"]
+  "localization": {
+    "language": "en_US.UTF-8"
   },
   "product": {
     "id": "Tumbleweed"
