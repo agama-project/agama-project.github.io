@@ -68,14 +68,14 @@ possible to install openSUSE Leap 16.0 Alpha. We also created a SLES 16 flavor b
 available for public.
 
 The product selection dialog now contains the product icons so the product selection should be more
-intuitive.
+intuitive. Many thanks to [Luboš Kocman](https://github.com/lkocman) for implementing this!
 
 ![Product selection](../static/img/blog/2024-10-30/product-selection.png)
 
 ## Improvements in storage {#storage}
 
 Agama now supports creating LVM volume groups, logical volumes, thin pools and thin logical volumes
-in automatic installations. Reusing volume groups or logical volumes is not supported.
+in automatic installations. Reusing volume groups or logical volumes is not supported yet.
 
 Also the existing partitions can be deleted automatically. There are two options, unconditional
 delete and delete only if needed. The first option always deletes the specified partition, the
@@ -105,7 +105,7 @@ https://github.com/openSUSE/agama/blob/master/doc/auto_storage.md) documentation
 ## Installation repository URL {#installation-url}
 
 By default Agama installs the packages from the repositories specified in the product configuration.
-Those normally points to the official SUSE/openSUSE installation repositories.
+Those normally point to the official SUSE/openSUSE installation repositories.
 
 But for testing purposes, especially in the openQA tests, you might need to install the packages
 from some testing or staging repository to test the latest versions which are not published in those
