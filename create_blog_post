@@ -24,6 +24,7 @@ img="static/img/blog/$date"
 cat <<EOF > "$mdx"
 ---
 title: $1
+discussion_id: 42 # ID from https://github.com/agama-project/agama-project.github.io/discussions/<ID>
 tags:
   - release
 ---
@@ -45,3 +46,11 @@ echo "Created blog post:  $mdx"
 
 mkdir -p "$img"
 echo "Image directory:    $img"
+
+discussion_date=$(echo -n "$date" | tr - /)
+# use the same naming schema for manually created discussion as for the
+# discussions automatically created by Giscus
+echo
+echo "Create a discussion with \"blog/$discussion_date/$title\" title at"
+echo "https://github.com/agama-project/agama-project.github.io/discussions/new?category=blog"
+echo "and set the new ID in the \"discussion_id\" value in the blog front matter"
