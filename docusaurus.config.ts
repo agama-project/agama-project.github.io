@@ -159,7 +159,15 @@ const config: Config = {
     mermaid: true,
   },
   themes: ["@docusaurus/theme-mermaid"],
-  plugins: ["docusaurus-plugin-image-zoom"],
+  plugins: [
+    // zoom images on click
+    "docusaurus-plugin-image-zoom",
+    // search functionality, works only in production builds!
+    [
+      "docusaurus-lunr-search",
+      { maxHits: 10, disableVersioning: true, highlightResult: true },
+    ],
+  ],
 };
 
 export default config;
