@@ -43,7 +43,7 @@ $ GIT_USER=<Your GitHub username> yarn deploy
 If you are using GitHub pages for hosting, this command is a convenient way to build the website and
 push to the `gh-pages` branch.
 
-## Search
+### Search
 
 The search functionality is provided using the
 [docusaurus-lunr-search](https://github.com/praveenn77/docusaurus-lunr-search) plugin. It
@@ -57,3 +57,18 @@ or usual `+` or `-` search terms, see more details in the
 
 :warning: *The search index is generated only in a production build, not during development! To test
 the search functionality locally you need to run the `yarn build && yarn serve` commands!*
+
+### Blog
+
+To create a new blog post run the [create_blog_post](create_blog_post) script with a short title as
+the argument, for example:
+
+```bash
+./create_blog_post "New blog post!"
+```
+
+The title is used in the created file name and in the post URL so use something short and
+meaningful. The blog post itself then can contain a longer title specified in the `title` front
+matter.
+
+See more details about writing blog posts in the [blog.md](blog.md) document.
