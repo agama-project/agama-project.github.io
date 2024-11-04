@@ -1,0 +1,47 @@
+#! /bin/bash
+
+if [ -z "$1" ]; then
+  echo "Error: Missing argument"
+  echo
+  echo "Usage:"
+  echo "  $0 <short-title>"
+  echo
+  echo "Example:"
+  echo "  $0 \"New blog post\""
+
+  exit 1
+fi
+
+# convert the title to a file name
+title=$(echo -n "$1" | tr "[:upper:]" "[:lower:]" | tr "[:space:]" "-" | tr -d -c "[:alnum:]-" )
+# current date in YYYY-MM-DD format
+date=$(date +%F)
+# blog post MDX file
+mdx="blog/${date}-${title}.mdx"
+# directory for storing images
+img="static/img/blog/$date"
+
+cat <<EOF > "$mdx"
+---
+title: $1
+tags:
+  - release
+---
+
+This is a template for Agama blog posts. All text above the "truncate" comment is displayed also in
+the blog index page as a summary.
+
+{/* truncate */}
+
+## Heading {#heading}
+
+Place images into the \`static/img/blog/$date\` directory and insert them with this Markdown:
+
+![Image description](../static/img/blog/$date/image.png)
+
+See the blog.md file for more details about writing blog posts.
+EOF
+echo "Created blog post:  $mdx"
+
+mkdir -p "$img"
+echo "Image directory:    $img"

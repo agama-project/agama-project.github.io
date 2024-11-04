@@ -39,3 +39,18 @@ $ GIT_USER=<Your GitHub username> yarn deploy
 ```
 
 If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+
+### Blog
+
+To create a new blog post run the [create_blog_post](create_blog_post) script with a short title as
+the argument, for example:
+
+```bash
+./create_blog_post "New blog post!"
+```
+
+The title is used in the created file name and in the post URL so use something short and
+meaningful. The blog post itself then can contain a longer title specified in the `title` front
+matter.
+
+See more details about writing blog posts in the [blog.md](blog.md) document.
