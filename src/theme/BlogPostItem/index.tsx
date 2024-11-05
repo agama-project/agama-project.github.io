@@ -78,10 +78,10 @@ export default function BlogPostItemWrapper(props: Props): JSX.Element {
 
   const discussionProps =
     discussionId > 0
-      // the respective GitHub discussion is explicitly set in the front matter
-      ? { mapping: "number", term: discussionId, emitMetadata: "0" }
-      // find the respective discussion at GitHub using the blog post URL path
-      : { mapping: "pathname", emitMetadata: "1" };
+      ? // the respective GitHub discussion is explicitly set in the front matter
+        { mapping: "number", term: discussionId, emitMetadata: "0" }
+      : // find the respective discussion at GitHub using the blog post URL path
+        { mapping: "pathname", emitMetadata: "1" };
 
   return (
     <>
@@ -92,9 +92,20 @@ export default function BlogPostItemWrapper(props: Props): JSX.Element {
         We are interested in your feedback, feel free to leave a comment here!
       </p>
       <p>
-        To comment you need a <a href="https://github.com/">GitHub</a> account
-        and authorize the <a href="https://giscus.app/">Giscus</a> application.{" "}
-        {discussionLink}
+        To comment here you need a <a href="https://github.com/">GitHub</a>{" "}
+        account and authorize the <a href="https://giscus.app/">Giscus</a>{" "}
+        application. {discussionLink}
+      </p>
+      <p>
+        Alternatively you can reach us at the{" "}
+        <a href="https://web.libera.chat/#yast">#yast</a> channel at the{" "}
+        <a href="https://libera.chat">Libera.Chat</a>,{" "}
+        <a href="https://lists.opensuse.org/archives/list/yast-devel@lists.opensuse.org">
+          YaST Development
+        </a>{" "}
+        mailing list or the{" "}
+        <a href="https://github.com/agama-project/agama">Agama project</a> at
+        GitHub.
       </p>
       <Giscus
         // to get the ID values fill the GitHub repository name at https://giscus.app/
