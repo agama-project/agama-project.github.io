@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import BlogPostItem from "@theme-original/BlogPostItem";
 import type BlogPostItemType from "@theme/BlogPostItem";
 import type { WrapperProps } from "@docusaurus/types";
+import styles from "@docusaurus/theme-classic/src/theme/Heading/styles.module.css";
 
 import { useBlogPost } from "@docusaurus/plugin-content-blog/client";
 import { useColorMode } from "@docusaurus/theme-common";
@@ -87,7 +88,18 @@ export default function BlogPostItemWrapper(props: Props): JSX.Element {
     <>
       <BlogPostItem {...props} />
       <hr />
-      <h2>Comments</h2>
+      <h2
+        className={`anchor ${styles.anchorWithStickyNavbar}`}
+        id="comments"
+      >
+        Comments
+        <a
+          href="#comments"
+          className="hash-link"
+          aria-label="Direct link to comments"
+          title="Direct link to comments"
+        ></a>
+      </h2>
       <p>
         We are interested in your feedback, feel free to leave a comment here!
       </p>
