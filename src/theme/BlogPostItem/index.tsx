@@ -20,8 +20,10 @@ export default function BlogPostItemWrapper(props: Props): JSX.Element {
   // use "discussion: false" to disable discussion in a specific post
   const discussionEnabled = frontMatter.discussion !== false;
 
-  // if discussion is disabled then just return the standard blog page content
-  if (!discussionEnabled) return <BlogPostItem {...props} />;
+  // if discussion is disabled then just return the standard blog page content,
+  // do not show the discussions in the blog index page
+  if (!discussionEnabled || !useBlogPost().isBlogPostPage)
+    return <BlogPostItem {...props} />;
 
   const discussionId =
     frontMatter.discussion_id && Number(frontMatter.discussion_id);
@@ -88,10 +90,7 @@ export default function BlogPostItemWrapper(props: Props): JSX.Element {
     <>
       <BlogPostItem {...props} />
       <hr />
-      <h2
-        className={`anchor ${styles.anchorWithStickyNavbar}`}
-        id="comments"
-      >
+      <h2 className={`anchor ${styles.anchorWithStickyNavbar}`} id="comments">
         Comments
         <a
           href="#comments"
