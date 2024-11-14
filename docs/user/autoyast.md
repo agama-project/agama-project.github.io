@@ -122,7 +122,7 @@ For the first user, the following elements are supported:
 | AutoYaST             | Supported | Agama    | Comment                |
 | -------------------- | --------- | -------- | ---------------------- |
 | authorized_keys      | Planned   |          | Only for the root user |
-| encrypted            | Planned   |          |                        |
+| encrypted            | Yes       |          |                        |
 | forename             | No        |          |                        |
 | fullname             | Yes       | fullName |                        |
 | gid                  | No        |          |                        |
@@ -340,6 +340,18 @@ present anymore.
 If we want to support `post` or `init` scripts, we need to copy them to the installed system and run
 them through a systemd service.
 
+### `services-manager`
+
+The `services-manager` section is used to define systemd services status. It is composed of a list
+of services to enable and a list of services to disable.
+
+| AutoYaST            | Supported | Agama             | Comment                           |
+| ------------------- | --------- | ----------------- | --------------------------------- |
+| default_target      | No        |                   |                                   |
+| services.enable     | Planned   |                   |                                   |
+| services.disable    | Planned   |                   |                                   |
+| services.ondemand   | Planned   |                   |                                   |
+
 ### `software`
 
 The `software` section is composed of several lists:
@@ -364,7 +376,7 @@ web UI.
 | install_recommended | No        |                   |                                   |
 | instsource          | No        |                   |                                   |
 | kernel              | No        |                   |                                   |
-| packages            | No        |                   |                                   |
+| packages            | Planned   | software.packages |                                   |
 | patterns            | Partial   | software.patterns | No support for regular expresions |
 | post-packages       | No        |                   | No 2nd stage                      |
 | post-patterns       | No        |                   | No 2nd stage                      |
@@ -429,7 +441,6 @@ About the `slp_discoverty` element, Agama does not support [SLP] at all?
 - `ntp-client`
 - `printer`
 - `samba-client`
-- `services-manager`
 - `sound`
 - `squid`
 - `ssh_import`
