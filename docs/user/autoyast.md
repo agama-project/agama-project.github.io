@@ -119,23 +119,43 @@ groups plus some authentication settings. We have at least two options here:
 
 For the first user, the following elements are supported:
 
-| AutoYaST             | Supported | Agama    | Comment                |
-| -------------------- | --------- | -------- | ---------------------- |
-| authorized_keys      | Planned   |          | Only for the root user |
-| encrypted            | Yes       |          |                        |
-| forename             | No        |          |                        |
-| fullname             | Yes       | fullName |                        |
-| gid                  | No        |          |                        |
-| group                | No        |          |                        |
-| groups               | No        |          |                        |
-| home                 | No        |          |                        |
-| home_btrfs_subvolume | No        |          |                        |
-| password_settings    | No        |          |                        |
-| shell                | No        |          |                        |
-| surname              | No        |          |                        |
-| uid                  | No        |          |                        |
-| user_password        | Yes       | password |                        |
-| username             | Yes       | userName |                        |
+| AutoYaST             | Supported | Agama             | Comment                |
+| -------------------- | --------- | ----------------- | ---------------------- |
+| authorized_keys      | Planned   |                   | Only for the root user |
+| encrypted            | Yes       | encryptedPassword |                        |
+| forename             | No        |                   |                        |
+| fullname             | Yes       | fullName          |                        |
+| gid                  | No        |                   |                        |
+| group                | No        |                   |                        |
+| groups               | No        |                   |                        |
+| home                 | No        |                   |                        |
+| home_btrfs_subvolume | No        |                   |                        |
+| password_settings    | No        |                   |                        |
+| shell                | No        |                   |                        |
+| surname              | No        |                   |                        |
+| uid                  | No        |                   |                        |
+| user_password        | Yes       | password          |                        |
+| username             | Yes       | userName          |                        |
+
+#### Encrypted password
+
+The encrypted password can be obtained by running the `mkpasswd` command from the `whois` package.
+
+To get the list of supported hashing methods run the `mkpasswd --method=help` command. Then use the
+selected method for hashing your password, for example `mkpasswd --method=yescrypt`.
+
+Make sure the selected hashing method is supported by the target system, different systems might
+support different set of methods.
+
+:::warning
+
+Do not use any DES or MD5 based algorithms, these are considered insecure. Check `man 5 crypt`
+manual page for details about the hashing methods and their strength.
+
+:::
+
+Alternatively you can use the `openssl passwd -6` command. This generates a SHA-512 password hash,
+for the SHA-256 method use the `-5` option.
 
 ### `keyboard`
 
@@ -303,7 +323,7 @@ under a `vlan` key in the `connection` structure.
 ### `partitioning`
 
 By far, the most complex part of an AutoYaST profile. We can import the AutoYaST `partitioning`
-section as it is because the partitioning is handled by the same code in Agama and AutoyaST.
+section as it is because the partitioning is handled by the same code in Agama and AutoYaST.
 
 However, we must implement a mechanism to convert to/from both profile types.
 
@@ -345,12 +365,12 @@ them through a systemd service.
 The `services-manager` section is used to define systemd services status. It is composed of a list
 of services to enable and a list of services to disable.
 
-| AutoYaST            | Supported | Agama             | Comment                           |
-| ------------------- | --------- | ----------------- | --------------------------------- |
-| default_target      | No        |                   |                                   |
-| services.enable     | Planned   |                   |                                   |
-| services.disable    | Planned   |                   |                                   |
-| services.ondemand   | Planned   |                   |                                   |
+| AutoYaST          | Supported | Agama | Comment |
+| ----------------- | --------- | ----- | ------- |
+| default_target    | No        |       |         |
+| services.enable   | Planned   |       |         |
+| services.disable  | Planned   |       |         |
+| services.ondemand | Planned   |       |         |
 
 ### `software`
 
@@ -370,20 +390,20 @@ Only the product and the list of products or patterns are available for Agama. W
 adding support for the packages list and the `install_recommended` setting, although none are in the
 web UI.
 
-| AutoYaST            | Supported | Agama             | Comment                           |
-| ------------------- | --------- | ----------------- | --------------------------------- |
-| do_online_update    | No        |                   | No 2nd stage                      |
-| install_recommended | No        |                   |                                   |
-| instsource          | No        |                   |                                   |
-| kernel              | No        |                   |                                   |
-| packages            | Planned   | software.packages |                                   |
-| patterns            | Partial   | software.patterns | No support for regular expresions |
-| post-packages       | No        |                   | No 2nd stage                      |
-| post-patterns       | No        |                   | No 2nd stage                      |
-| products            | Yes       | software.id       |                                   |
-| remove-packages     | No        |                   | No upgrade                        |
-| remove-patterns     | No        |                   | No upgrade                        |
-| remove-products     | No        |                   | No upgrade                        |
+| AutoYaST            | Supported | Agama             | Comment                            |
+| ------------------- | --------- | ----------------- | ---------------------------------- |
+| do_online_update    | No        |                   | No 2nd stage                       |
+| install_recommended | No        |                   |                                    |
+| instsource          | No        |                   |                                    |
+| kernel              | No        |                   |                                    |
+| packages            | Planned   | software.packages |                                    |
+| patterns            | Partial   | software.patterns | No support for regular expressions |
+| post-packages       | No        |                   | No 2nd stage                       |
+| post-patterns       | No        |                   | No 2nd stage                       |
+| products            | Yes       | software.id       |                                    |
+| remove-packages     | No        |                   | No upgrade                         |
+| remove-patterns     | No        |                   | No upgrade                         |
+| remove-products     | No        |                   | No upgrade                         |
 
 ### `suse_register`
 
@@ -393,7 +413,7 @@ way to select the list of add-ons.
 It is arguable whether we should offer a `install_updates` element instead of just installing them
 (which is the use case for not installing them?).
 
-About the `slp_discoverty` element, Agama does not support [SLP] at all?
+About the `slp_discovery` element, Agama does not support [SLP] at all?
 
 [SLP]: https://documentation.suse.com/sles/15-SP5/single-html/SLES-administration/#cha-slp
 
