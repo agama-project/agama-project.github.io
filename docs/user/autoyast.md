@@ -148,10 +148,8 @@ Make sure the selected hashing method is supported by the target system, differe
 support different set of methods.
 
 :::warning
-
 Do not use any DES or MD5 based algorithms, these are considered insecure. Check `man 5 crypt`
 manual page for details about the hashing methods and their strength.
-
 :::
 
 Alternatively you can use the `openssl passwd -6` command. This generates a SHA-512 password hash,
@@ -288,7 +286,7 @@ placed under a `bond` key in the `connection` structure.
 Agama includes an specific `mode` options to set the mode, instead of abusing the
 `bonding_module_opts`.
 
-### Bridge connections
+#### Bridge connections
 
 :::warning
 Bridge support is not implemented yet although we have support at model level.
@@ -305,7 +303,7 @@ a `bridge` key in the `connection` structure.
 | bridge_forward_delay | Planned   | forward_delay |                                         |
 | bridge_forwarddelay  | Planned   | forward_delay | Compatibility bsc#1180944               |
 
-### VLAN
+#### VLAN
 
 :::warning
 VLAN support is not implemented yet although we have support at model level.
