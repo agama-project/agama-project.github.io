@@ -148,10 +148,8 @@ Make sure the selected hashing method is supported by the target system, differe
 support different set of methods.
 
 :::warning
-
 Do not use any DES or MD5 based algorithms, these are considered insecure. Check `man 5 crypt`
 manual page for details about the hashing methods and their strength.
-
 :::
 
 Alternatively you can use the `openssl passwd -6` command. This generates a SHA-512 password hash,
@@ -288,7 +286,7 @@ placed under a `bond` key in the `connection` structure.
 Agama includes an specific `mode` options to set the mode, instead of abusing the
 `bonding_module_opts`.
 
-### Bridge connections
+#### Bridge connections
 
 :::warning
 Bridge support is not implemented yet although we have support at model level.
@@ -305,7 +303,7 @@ a `bridge` key in the `connection` structure.
 | bridge_forward_delay | Planned   | forward_delay |                                         |
 | bridge_forwarddelay  | Planned   | forward_delay | Compatibility bsc#1180944               |
 
-### VLAN
+#### VLAN
 
 :::warning
 VLAN support is not implemented yet although we have support at model level.
@@ -348,17 +346,84 @@ section.
 
 ### `scripts`
 
-The only way to use scripts in Agama is to write your own autoinstallation script. Unlike AutoYaST,
-you cannot embed the script within the Jsonnet-based profile. This is relevant from the
-implementation point of view because we might need to extract AutoYaST scripts and put them in some
-place for Agama to run them.
+AutoYaST implements five kind of scripts: `pre`, `post-partitioning`, `chroot`, `post`, and `init`.
+In Agama there are only three of them, although the original `pre-scripts` behavior is preserved
+when importing an AutoYaST profile.
 
-Apart from that, AutoYaST considers five kind of scripts: `pre`, `post-partitioning`, `chroot`,
-`post`, and `init`. The last two are expected to run after the first boot, where Agama is not
-present anymore.
+The following table summarizes the equivalences:
 
-If we want to support `post` or `init` scripts, we need to copy them to the installed system and run
-them through a systemd service.
+| AutoYaST          | When they run                   | Agama equivalent                       |
+| ----------------- | ------------------------------- | -------------------------------------- |
+| pre               | before the installation starts  | pre, see [Pre-scripts](#pre-scripts)   |
+| post-partitioning | after the partitioning is done  | none                                   |
+| chroot            | after the installation finishes | post                                   |
+| post              | before the 2nd stage            | none, as there is no 2nd stage         |
+| init              | at the end of the 1st boot      | init                                   |
+
+The pre-scripts are processed by AutoYaST code itself, and the `post` and `init` scripts are merged
+into a single type (`init`) which runs during the 1st boot after the installation.
+
+#### Scripts representation
+
+A definition of an AutoYaST script supports several features. However, in Agama we are implementing
+only those we consider essential.
+
+| AutoYaST      | Supported | Agama  | Comment               |
+| ------------- | --------- | ------ | --------------------- |
+| file_name     | Yes       | name   |                       |
+| location      | Yes       | url    |                       |
+| source        | Yes       | body   |                       |
+| rerun         | No        |        |                       |
+| interpreter   | Partial   |        | Script's shebang      |
+| feedback      | No        |        |                       |
+| feedback_type | No        |        |                       |
+| debug         | No        |        |                       |
+| notification  | No        |        |                       |
+| param-list    | Planned   |        |                       |
+| chrooted      | Yes       | chroot | Only for post-scripts |
+
+#### pre-scripts
+
+AutoYaST pre-scripts are executed before the installation and are a powerful method to customize the
+profile at runtime. If you are using an AutoYaST profile, `pre-scripts` will work in the same way
+with Agama. Please, check the [Dynamic profiles](#dynamic-profiles) section for further details.
+
+However, Agama ships its own pre-scripts mechanism, although they do not allow modifying the profile
+itself because using [Jsonnet](https://jsonnet.org/) is the preferred way to do that. The main use
+cases for Agama pre-scripts are activating hardware, tweaking the installation media, etc.
+
+:::note
+We might consider adding support to modify the profile using a pre-script directly in Agama.
+:::
+
+#### post-partitioning scripts
+
+AutoYaST post-partitioning scripts are executed after the partitioning is done and before the
+software installation starts. Agama does not implement a similar mechanism because we failed to find
+a use case for it.
+
+#### chroot-scripts
+
+`chroot-scripts` allows running scripts at the end of the installation and before the system is
+rebooted. Agama's counterpart are `post-scripts`. Both methods allow running the scripts on the
+installation media or in the target system, using a `chroot`.
+
+#### post-scripts and init-scripts
+
+AutoYaST allows running scripts after the first boot of the system, during and after the so-called
+2nd stage. Agama is not present into the installed system, thus it does not implements a 2nd stage.
+However, it supports defining a set of `init` scripts. If required, Agama installs a systemd service
+that takes care of running those scripts during the 1st boot.
+
+It is worth to mention that AutoYaST `init` scripts are kind of limited and they do not support as
+many features as other kind of scripts.
+
+| AutoYaST | Supported | Agama | Comment |
+| -------- | --------- | ----- | ------- |
+| location | Yes       | url   |         |
+| source   | Yes       | body  |         |
+| filename | No        |       |
+| rerun    | No        |       |         |
 
 ### `services-manager`
 
@@ -371,6 +436,24 @@ of services to enable and a list of services to disable.
 | services.enable   | Planned   |       |         |
 | services.disable  | Planned   |       |         |
 | services.ondemand | Planned   |       |         |
+
+At this point, it is possible to use post-scripts to enable/disable services.
+
+```jsonnet
+{
+  scripts: {
+    posts: [
+      {
+        name: "post",
+        body: |||
+          #!/bin/bash
+          systemctl enable sshd
+        |||,
+      },
+    ]
+  }
+}
+```
 
 ### `software`
 
