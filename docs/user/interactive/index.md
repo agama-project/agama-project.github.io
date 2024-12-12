@@ -77,7 +77,7 @@ Agama makes it easy to adjust your network configuration. It allows setting up w
 devices, specifying the mode (DHCP/manual), IP addresses, name servers, etc. Advanced
 connections types, like bridges or bonds, does not have support in the user interface yet. However,
 it is a matter of time that they get added, given that Agama supports many of them during an
-[unattended installation](./unattended.md) or using the [command-line interface](./cli.md).
+[unattended installation](../unattended/index.md) or using the [command-line interface](../cli.md).
 
 :::warning Changes are applied instantly
 Beware that network configuration changes are applied instantly. So you must be careful when
@@ -88,15 +88,13 @@ adjusting the network configuration on a remote installation.
 
 ### Storage
 
-Without a doubt, storage configuration is one of the strongest areas of YaST. And, although it is
-still a work in progress, Agama aims to play in the same league. Advanced features are landing into
-Agama at good pace, especially because it shares most of the storage-related codebase with YaST.
+Setting up the different file systems and their corresponding logical devices -like partitions,
+LVM volumes or RAIDs- is one of the most complex aspects of the installation. Agama offers
+great flexibility in that regard.
 
-However, when it comes to the user interface, Agama approach is rather different.
+The Agama approach to storage configuration is detailed on its own [separate section](./storage.md).
 
-<!-- TODO: explain why and how they are so different -->
-
-![Storage configuration, including devices selection, encryption, partitions and file systems, etc.](/img/storage.png)
+![Overview of the storage configuration page](/img/storage.png)
 
 ### Software
 
@@ -148,4 +146,4 @@ ssh root@agama.local
 ```
 
 If you want to know more about the mDNS support, please check the [remote access
-documentation](./remote.md).
+documentation](../remote.md).

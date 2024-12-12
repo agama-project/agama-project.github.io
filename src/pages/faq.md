@@ -51,8 +51,9 @@ in many convenient and flexible ways.
 ## Where is the Expert Partitioner?
 
 There is currently no direct replacement for the YaST Expert Partitioner. All the capabilities are
-still there and can be used from the unattended installation, but we have still not decided how to
-expose them in the interactive interface.
+still there and can be used from the unattended installation. It is also planned to offer most
+capabilities of the Expert Partitioner at the web interface, but with a different approach. Check
+the [documentation about storage](docs/user/interactive/storage) for more details.
 
 ## What about unattended installation?
 
