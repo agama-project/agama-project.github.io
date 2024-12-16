@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # Storage configuration
 
 The general concepts regarding configuration of storage devices with Agama are exposed at the
