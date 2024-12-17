@@ -380,7 +380,7 @@ there is any. In other words, the two following search sections are equivalent.
 
 ## Referencing Other Devices
 
-Sometimes is necessary to reference other devices as part of the specification of an LVM volume
+Sometimes it is necessary to reference other devices as part of the specification of an LVM volume
 group or RAID. Those can be existing system devices or devices that will be created as response to
 another entry of the Agama profile.
 
@@ -479,7 +479,9 @@ limits when possible. There are basically two kinds of situations in which that 
 calculation can be performed.
 
 On the one hand, the device may directly contain a `filesystem` entry specifying a mount point.
-Agama will then use the settings of the product to set the size limits.
+Agama will then use the settings of the product to set the size limits. In Agama Jargon, the
+"product" is the operating system being installed. And each product specifies the default size
+ranges for its relevant file systems like "/", "swap", "/home", etc.
 
 On the other hand, the size limits of some devices can be omitted if they can be inferred from other
 related devices following some rules.
@@ -533,6 +535,27 @@ technologies like LVM or the used partition table type.
 Using a `boot` entry makes it possible to configure whether (and where, using an alias) Agama
 should calculate and create the extra partitions needed for booting. If the device is not
 specified, Agama will take the location of the root file system as a reference.
+
+```json
+"storage": {
+  "drives": [
+    {
+      "search": "/dev/sda",
+      "alias": "bootDisk"
+    },
+    {
+      "search": "/dev/sdb",
+      "partitions": [
+        { "filesystem": { "path": "/" } }
+      ]
+    }
+  ],
+  "boot": {
+    "configure": true,
+    "device": "bootDisk"
+  }
+}
+```
 
 ## Keeping an Existing File System or Encryption Layer
 
