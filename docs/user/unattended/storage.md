@@ -197,36 +197,36 @@ it) to allocate two file systems.
 
 ```json
 "storage": {
-    "drives": [
+  "drives": [
+    {
+      "partitions": [
         {
-            "partitions": [
-                {
-                    "alias": "pv",
-                    "id": "lvm",
-                    "size": { "min": "12 GiB" },
-                    "encryption": {
-                        "luks2": { "password": "my secret passphrase" }
-                    }
-                }
-              ]
+          "alias": "pv",
+          "id": "lvm",
+          "size": { "min": "12 GiB" },
+          "encryption": {
+            "luks2": { "password": "my secret passphrase" }
+          }
         }
-    ],
-    "volumeGroups": [
+      ]
+    }
+  ],
+  "volumeGroups": [
+    {
+      "name": "system",
+      "physicalVolumes": [ "pv" ],
+      "logicalVolumes": [
         {
-            "name": "system",
-            "physicalVolumes": [ "pv" ],
-            "logicalVolumes": [
-                {
-                    "size":   { "min": "10 GiB" },
-                    "filesystem": { "path": "/", "type": "btrfs" }
-                },
-                {
-                    "size":   "2 GiB",
-                    "filesystem": { "path": "swap", "type": "swap" }
-                }
-            ]
+          "size":   { "min": "10 GiB" },
+          "filesystem": { "path": "/", "type": "btrfs" }
+        },
+        {
+          "size":   "2 GiB",
+          "filesystem": { "path": "swap", "type": "swap" }
         }
-    ]
+      ]
+    }
+  ]
 }
 ```
 
@@ -280,38 +280,38 @@ within them and create new partitions of type RAID.
 
 ```json
 "storage": {
-    "drives": [
+  "drives": [
+    {
+      "search": {
+        "sort": { "property": "sizeKib", "order": "desc" },
+        "max": 3
+      },
+      "partitions": [
         {
-            "search": {
-                "sort": { "property": "sizeKib", "order": "desc" },
-                "max": 3
-            },
-            "partitions": [
-                {
-                    "search": {
-                        "condition": {
-                            "and": [
-                                { "property": "id", "value": "linux" },
-                                { "property": "sizeGib", "value": 1, "operator": "greater" }
-                            ]
-                        }
-                    },
-                    "delete": true
-                },
-                {
-                    "alias": "newRaidPart",
-                    "id": "raid",
-                    "size": { "min": "1 GiB" }
-                }
+          "search": {
+            "condition": {
+              "and": [
+                { "property": "id", "value": "linux" },
+                { "property": "sizeGib", "value": 1, "operator": "greater" }
               ]
+            }
+          },
+          "delete": true
+        },
+        {
+          "alias": "newRaidPart",
+          "id": "raid",
+          "size": { "min": "1 GiB" }
         }
-    ]
+      ]
+    }
+  ]
 }
 ```
 
 The example also serves to illustrate the scope of each search. That is, the devices from the system
 that are considered as possible candidates. That obviously depends on the place in the profile of
-the `search` section.  A `search` section inside the description of an MD RAID will only match MD
+the `search` section. A `search` section inside the description of an MD RAID will only match MD
 devices and a `search` section inside the `partitions` subsection of that RAID description will only
 match partitions of RAIDs that have matched the conditions of the most external `search`.
 
@@ -321,22 +321,22 @@ on the profile.
 
 ```json
 "storage": {
-    "drives": [
-        {
-            "search": {
-                "sort": { "property": "sizeKib", "order": "desc" },
-                "max": 1
-            },
-            "alias": "biggest"
-        },
-        {
-            "search": {
-                "sort": { "property": "sizeKib", "order": "desc" },
-                "max": 1
-            },
-            "alias": "secondBiggest"
-        }
-    ]
+  "drives": [
+    {
+      "search": {
+        "sort": { "property": "sizeKib", "order": "desc" },
+        "max": 1
+      },
+      "alias": "biggest"
+    },
+    {
+      "search": {
+        "sort": { "property": "sizeKib", "order": "desc" },
+        "max": 1
+      },
+      "alias": "secondBiggest"
+    }
+  ]
 }
 ```
 
@@ -345,12 +345,13 @@ partitions of the chosen disk.
 
 ```json
 "storage": {
-    "drives": [
-        {
-            "partitions":
-                { "search": {}, "delete": true }
-        }
-     ]
+  "drives": [
+    {
+      "partitions": [
+        { "search": {}, "delete": true }
+      ]
+    }
+  ]
 }
 ```
 
@@ -403,19 +404,20 @@ Aliases can be used for that purpose as shown in this example.
 
 ```json
 "storage": {
-    "drives": [
-        {
-            "partitions":
-                { "size": "50 GiB", "id": "lvm", "alias": "newPV" }
-        }
-     ],
-     "volumeGroups": [
-        {
-            "name": "newVG",
-            "physicalVolumes": [ "newPV" ],
-            "logicalVolumes": [ { "name": "data", "size": "20 GiB" } ]
-        }
-    ]
+  "drives": [
+    {
+      "partitions": [
+        { "size": "50 GiB", "id": "lvm", "alias": "newPV" }
+      ]
+    }
+   ],
+   "volumeGroups": [
+    {
+      "name": "newVG",
+      "physicalVolumes": [ "newPV" ],
+      "logicalVolumes": [ { "name": "data", "size": "20 GiB" } ]
+    }
+  ]
 }
 ```
 
@@ -424,47 +426,47 @@ to be a reference to all the devices. As a consequence, this two examples are eq
 
 ```json
 "storage": {
-    "drives": [
-        {
-            "search": {
-                "sort": { "property": "sizeKib", "order": "desc" },
-                "max": 1,
-            },
-            "alias": "biggest"
-        },
-        {
-            "search": {
-                "sort": { "property": "sizeKib", "order": "desc" },
-                "max": 1,
-            },
-            "alias": "secondBiggest"
-        }
-    ],
-    "mdRaids": [
-        {
-            "devices": [ "biggest", "secondBiggest" ],
-            "level": "raid0"
-        }
-    ]
+  "drives": [
+    {
+      "search": {
+        "sort": { "property": "sizeKib", "order": "desc" },
+        "max": 1,
+      },
+      "alias": "biggest"
+    },
+    {
+      "search": {
+        "sort": { "property": "sizeKib", "order": "desc" },
+        "max": 1,
+      },
+      "alias": "secondBiggest"
+    }
+  ],
+  "mdRaids": [
+    {
+      "devices": [ "biggest", "secondBiggest" ],
+      "level": "raid0"
+    }
+  ]
 }
 
 "storage": {
-    "drives": [
-        {
-            "search": {
-                "sort": { "property": "sizeKib", "order": "desc" },
-                "max": 2,
-                "min": 2
-            },
-            "alias": "big"
-        }
-    ],
-    "mdRaids": [
-        {
-            "devices": [ "big" ],
-            "level": "raid0"
-        }
-    ]
+  "drives": [
+    {
+      "search": {
+        "sort": { "property": "sizeKib", "order": "desc" },
+        "max": 2,
+        "min": 2
+      },
+      "alias": "big"
+    }
+  ],
+  "mdRaids": [
+    {
+      "devices": [ "big" ],
+      "level": "raid0"
+    }
+  ]
 }
 ```
 
@@ -516,23 +518,23 @@ a configuration with no explicit sizes at all like the following example.
 
 ```json
 "storage": {
-    "drives": [
-        {
-            "partitions": [
-                { "alias": "pv" }
-              ]
-        }
-    ],
-    "volumeGroups": [
-        {
-            "name": "system",
-            "physicalVolumes": [ "pv" ],
-            "logicalVolumes": [
-                { "filesystem": { "path": "/" } },
-                { "filesystem": { "path": "swap" } }
-            ]
-        }
-    ]
+  "drives": [
+    {
+      "partitions": [
+        { "alias": "pv" }
+       ]
+    }
+  ],
+  "volumeGroups": [
+    {
+      "name": "system",
+      "physicalVolumes": [ "pv" ],
+      "logicalVolumes": [
+        { "filesystem": { "path": "/" } },
+        { "filesystem": { "path": "swap" } }
+      ]
+    }
+  ]
 }
 ```
 
@@ -580,20 +582,20 @@ deleting other partitions as needed to make space for the new partition of 30 Gi
 
 ```json
 "storage": {
-    "drives": [
+  "drives": [
+    {
+      "partitions": [
         {
-            "partitions": [
-                {
-                    "search": {
-                        "condition": { "property": "fsLabel", "value": "root" }
-                    },
-                    "delete": true
-                },
-                { "search": {}, "deleteIfNeeded": true },
-                { "size": "30 GiB" }
-            ]
-        }
-    ]
+          "search": {
+            "condition": { "property": "fsLabel", "value": "root" }
+          },
+          "delete": true
+        },
+        { "search": {}, "deleteIfNeeded": true },
+        { "size": "30 GiB" }
+      ]
+    }
+  ]
 }
 ```
 
@@ -612,18 +614,18 @@ found) devices if `size` is completely omitted.
 
 ```json
 "storage": {
-    "drives": [
+  "drives": [
+    {
+      "partitions": [
         {
-            "partitions": [
-                {
-                    "search": {
-                        "condition": { "property": "fsLabel", "value": "reuse" }
-                    },
-                    "size": { "min": "current", "max": "current" }
-                }
-            ]
+          "search": {
+            "condition": { "property": "fsLabel", "value": "reuse" }
+          },
+          "size": { "min": "current", "max": "current" }
         }
-    ]
+      ]
+    }
+  ]
 }
 ```
 
@@ -632,36 +634,36 @@ following examples with explanatory filesystem labels.
 
 ```json
 "storage": {
-    "drives": [
+  "drives": [
+    {
+      "partitions": [
         {
-            "partitions": [
-                {
-                    "search": {
-                        "condition": { "property": "fsLabel", "value": "shrinkIfNeeded" }
-                    },
-                    "size": { "min": 0, "max": "current" }
-                },
-                {
-                    "search": {
-                        "condition": { "property": "fsLabel", "value": "resizeToFixedSize" }
-                    },
-                    "size": "15 GiB"
-                },
-                {
-                    "search": {
-                        "condition": { "property": "fsLabel", "value": "resizeByRange" }
-                    },
-                    "size": { "min": "10 GiB", "max": "50 GiB" }
-                },
-                {
-                    "search": {
-                        "condition": { "property": "fsLabel", "value": "growAsMuchAsPossible" }
-                    },
-                    "size": { "min": "current" }
-                },
-            ]
-        }
-    ]
+          "search": {
+            "condition": { "property": "fsLabel", "value": "shrinkIfNeeded" }
+          },
+          "size": { "min": 0, "max": "current" }
+        },
+        {
+          "search": {
+            "condition": { "property": "fsLabel", "value": "resizeToFixedSize" }
+          },
+          "size": "15 GiB"
+        },
+        {
+          "search": {
+            "condition": { "property": "fsLabel", "value": "resizeByRange" }
+          },
+          "size": { "min": "10 GiB", "max": "50 GiB" }
+        },
+        {
+          "search": {
+            "condition": { "property": "fsLabel", "value": "growAsMuchAsPossible" }
+          },
+          "size": { "min": "current" }
+        },
+      ]
+    }
+  ]
 }
 ```
 
@@ -673,17 +675,17 @@ space first by shrinking the partitions and deleting them only if shrinking is n
 
 ```json
 "storage": {
-    "drives": [
+  "drives": [
+    {
+      "partitions": [
         {
-            "partitions": [
-                {
-                    "search": {},
-                    "size": { "min": 0, "max": "current" },
-                    "deleteIfNeeded": true
-                }
-            ]
+          "search": {},
+          "size": { "min": 0, "max": "current" },
+          "deleteIfNeeded": true
         }
-    ]
+      ]
+    }
+  ]
 }
 ```
 
