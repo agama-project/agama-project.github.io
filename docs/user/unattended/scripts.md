@@ -110,4 +110,3 @@ is disabled.
 
 They are a good alternative for those cases where a post-script falls short. The system is fully
 operational in this case, so there are no limitations.
-system is fully operational, so there are no limitations.
