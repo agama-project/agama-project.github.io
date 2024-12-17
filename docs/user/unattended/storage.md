@@ -35,22 +35,23 @@ legacy mode.
 ## Basic structure of the Storage section
 
 As mentioned above, the Agama process to setup the storage devices can be configured using a
-`storage` section at the Agama configuration profile. A formal specification of the outer level of
-that section would look like this.
+`storage` section at the Agama configuration profile. The outer level of that section would look
+like this, with all subsections being optional.
 
 ```
-Storage
-  drives <Drive[]>
-  volumeGroups <VolumeGroup[]>
-  mdRaids <MdRaid[]>
-  btrfsRaids <BtrfsRaid[]>
-  nfsMounts <NFS[]>
-  boot [BootSettings]
+"storage": {
+  "drives": [ ... ],
+  "volumeGroups": [ ... ],
+  "mdRaids": [ ... ],
+  "btrfsRaids": [ ... ],
+  "nfsMounts": [ ... ]
+  "boot": { ... }
+}
 ```
 
 Thus, a `storage` section can contain several entries describing how to configure the corresponding
 storage devices and some extra entries (currently only `boot`) to setup some general aspects that
-influence the final layout.
+influence the final layout. Check the Agama JSON schema for a more formal definition.
 
 Each volume group, RAID, bcache device or NFS share can represent a new logical device to be created
 or an existing device from the system to be processed. Entries below `drives` represent devices
@@ -61,139 +62,102 @@ found at the system, since Agama cannot create that kind of devices.
 In fact, a single entry can represent several devices from the system. That is explained in depth at
 the section "searching existing devices" of this document.
 
-## Entries for Describing the Devices
+## Entries for describing the devices
 
-The formal specification of the previous section can be extended as we dive into the structure.
+The specification of the previous section can be extended as we dive into the structure.
+
+For example, an element of the `drives` collection can contain the following fields. All of them are
+optional and some of them are mutually exclusive. Check the schema and use Agama's built-in
+validation process for more formal details.
 
 ```
-Drive
-  search [<Search|string>]
-  alias [<string>]
-  encryption [<Encryption>]
-  filesystem [<Filesystem>]
-  ptableType [<string>]
-  partitions [<Partition[]>]
-
-VolumeGroup
-  search [<Search|string>]
-  alias [<string>]
-  name [<string>]
-  peSize [<number>]
-  physicalVolumes [<string[]>]
-  logicalVolumes [<LogicalVolume[]>]
-  delete [<boolean=false>]
-
-MdRaid
-  search [<Search|string>]
-  alias [<string>]
-  name <string>
-  level [<string>]
-  chunkSize [<number>]
-  devices [<string[]>]
-  size [<Size>]
-  encryption [<Encryption>]
-  filesystem [Filesystem]
-  ptableType [<string>]
-  partitions [<Partition[]>]
-  delete [<boolean=false>]
-
-BtrfsRaid
-  search [<Search|string>]
-  alias [<string>]
-  dataRaidLevel <string>
-  metadataRaidLevel <string>
-  devices [<string[]>]
-  label [<string>]
-  mkfsOptions [<string[]>]
-  [Btrfs]
-  delete [<boolean=false>]
-
-NFS
-  alias [<string>]
-  path [<string>]
-  mount [<MountAction>]
-
-Partition
-  search [<Search|string>]
-  alias [<string>]
-  id [<string>]
-  size [<Size>]
-  encryption [Encryption]
-  filesystem [<Filesystem>]
-  delete [<boolean=false>]
-  deleteIfNeeded [<boolean=false>]
-
-LogicalVolume
-  search [<Search|string>]
-  alias [<string>]
-  name [<string>]
-  size [<Size>]
-  pool [<boolean>]
-  usedPool [<string>]
-  stripes [<number>]
-  stripSize [<number>]
-  encryption [Encryption]
-  filesystem [<Filesystem>]
-  delete [<boolean=false>]
-  deleteIfNeeded [<boolean=false>]
-
-Encryption
-  reuse <Boolean>
-  type <EncryptionType>
-
-EncryptionType <EncryptionLUKS1|EncryptionLUKS2|EncryptionPervasiveLUKS2|"protected_swap"|"secure_swap"|"random_swap">
-
-EncryptionLUKS1
-  password <string>
-  keySize [<number>]
-  cipher [<string>]
-
-EncryptionLUKS2
-  password <string>
-  keySize [<number>]
-  cipher [<string>]
-  pdkdf [<string>]
-  label [<string>]
-
-EncryptionPervasiveLUKS2
-  password <string>
-
-Filesystem
-  reuse <Boolean>
-  type <string|Btrfs>
-  label [<string>]
-  mkfsOptions [<string[]>]
-  path <string>
-  mountOptions [<string[]>]
-  mountBy [<string>]
-
-Btrfs
-  subvolumePrefix [<string>]
-  subvolumes [<Subvolume[]>]
-  snapshots [<boolean=false>]
-  quotas [<boolean=false>]
-
-Size <string|SizeRange>
-
-SizeRange
-  min <string>
-  max <string>
-
-BootSettings
-  configure <boolean>
-  device <string>
-
-EncryptionSettings
-  method <string>
-  key [<string>]
-  pdkdf [<string>]
-  cipher [<string>]
-  keySize [<number>]
+{
+  "alias": "...",
+  "search": { ... },
+  "encryption": { ... },
+  "filesystem": { ... },
+  "partitions": [ ... ],
+  "ptableType": "..."
+}
 ```
 
-To illustrate how all that fits together, let's see the following example in which the first disk of
-the system is partitioned and a volume group is created on top of that partition (after encrypting
-it) to allocate two file systems.
+Normally the device represented by a `drive` entry will be divided into several partitions. Each
+entry of `partitions` follows this structure with several optional fields.
+
+```
+{
+  "alias": "...",
+  "search": { ... },
+  "id": "...",
+  "size": { ... },
+  "encryption": { ... },
+  "filesystem": { ... },
+  "delete": ...,
+  "deleteIfNeeded": ...
+}
+```
+
+Drives and partitions can be combined to create a simple example in which the first disk is used to
+create some partitions and the second one is directly formatted.
+
+```json
+"storage": {
+  "drives": [
+    {
+      "partitions": [
+        {
+          "filesystem": { "path": "/" },
+          "size": { "min": "10 GiB" }
+        },
+        {
+          "filesystem": { "path": "swap" },
+          "size": "2 GiB"
+        }
+      ]
+    },
+    {
+      "filesystem": { "path": "/home" },
+    }
+  ]
+}
+```
+
+An entry from `volumeGroups` can have the following properties.
+
+```
+{
+  "alias": "...",
+  "name": "...",
+  "search": { ... },
+  "physicalVolumes": [ ... ],
+  "logicalVolumes": [ ... ],
+  "peSize": ... ,
+  "delete": ...
+}
+```
+
+Entries of `logicalVolumes` are relatively similar to the ones used to describe partitions.
+
+```
+{
+  "alias": "...",
+  "search": { ... },
+  "name": "...",
+  "size": { ... },
+  "encryption": { ... },
+  "filesystem": { ... },
+  "pool": ...,
+  "usedPool": "...",
+  "stripes": ...,
+  "stripeSize": ...,
+  "delete": ...,
+  "deleteIfNeeded": ...
+}
+```
+
+To illustrate how all the previously described elements fit together, let's see the following
+example in which the first disk of the system is partitioned and a volume group is created on top of
+that partition (after encrypting it) to allocate two file systems.
 
 ```json
 "storage": {
@@ -230,6 +194,55 @@ it) to allocate two file systems.
 }
 ```
 
+Agama can also manage MD RAID arrays represented as entries at the `mdRaids` collection.
+
+```
+{
+  "alias": "...",
+  "name": "...",
+  "search": { ... },
+  "level": "...",
+  "chunkSize": ... ,
+  "devices": [ ... ],
+  "size": { ... },
+  "encryption": { ... },
+  "filesystem": { ... },
+  "partitions": [ ... ],
+  "ptableType": "...",
+  "delete": ...
+}
+```
+
+In addition to traditional MD RAIDs, multi-device Btrfs file systems can also be defined as part of
+the `btrfsRaids` section.
+
+```
+{
+  "alias": "...",
+  "search": { ... },
+  "dataRaidlevel": "...",
+  "metaDataRaidLevel": "..." ,
+  "devices": [ ... ],
+  "label": "...",
+  "mkfsOptions": { ... },
+  "subvolumePrefix": "...",
+  "subvolumes": [ ... ],
+  "snapshots": ...,
+  "quotas": ...,
+  "delete": ...
+}
+```
+
+Last but not least, NFS shares can be mounted as entries at `nfsMounts`.
+
+```
+{
+  "alias": "...",
+  "path": "...",
+  "mount": "..."
+}
+```
+
 ## Searching Existing Devices
 
 Many sections in the profile are used to describe how some devices must be created, modified or even
@@ -243,35 +256,6 @@ or deleting all partitions of a disk that match a given criteria.
 Matching is performed using a `search` subsection like described below, although not all the
 capabilities are fully implemented and some aspects of the format may change during the
 implementation phase.
-
-```
-Search
-  condition [<Condition>]
-  sort [<Sort>]
-  max [<number>]
-  ifNotFound [<NotFoundAction='skip'>]
-
-Condition <Rule|OperatorAnd|OperatorOr>
-
-OperatorAnd
-  and: <Condition[]>
-
-OperatorOr
-  or: <Condition[]>
-
-Rule
-  property <string>
-  value <any>
-  operator [<Operator='equal'>]
-
-Operator <'equal'|'notEqual'|'less'|'greater'|'lessOrEqual'|'greaterOrEqual'>
-
-Sort
-  property <string>
-  order <'asc'|'desc'>
-
-NotFoundAction <'create'|'skip'|'error'>
-```
 
 By default, all devices in the scope fitting the conditions will be matched. The number of device
 matches can be limited using `max`. The following example shows how several `search` sections could
