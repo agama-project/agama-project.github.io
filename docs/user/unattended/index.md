@@ -55,6 +55,10 @@ Check the [JSON
 Schema](https://github.com/openSUSE/agama/blob/master/rust/agama-lib/share/profile.schema.json) to
 learn about the supported elements.
 
+Some areas are relatively complex and just looking at the schema may not be enough to fully
+understand how they work. That is definitely the case of the storage setup, that is described in its
+own [separate section](./storage.md).
+
 ### Dynamic profiles
 
 The profile can be adapted at runtime depending on the system where the auto-installation is
@@ -105,4 +109,4 @@ sudo agama config show > profile.json
 
 To start an unattended installation process, you need to tell Agama where to find the profile. When
 using the Live ISO, you must use the `agama.auto` boot option. Please, check the [boot
-options](boot_options.md) for further information.
+options](../boot_options.md) for further information.
