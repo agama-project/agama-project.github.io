@@ -53,8 +53,11 @@ the three scripts types, and each key can contain a list of scripts.
 }
 ```
 
-:::warning
-JSON does not allow multiline strings. For that reason, it is better to use Jsonnet. If you prefer JSON, you can write the `\n` to separate lines.
+:::note
+JSON does not allow multiline strings, so it might be better to use Jsonnet instead. However, you
+need to pay attention to the indentation, because it matters.
+
+If you prefer JSON, you can write the `\n` to separate lines.
 
 ```json
 {
@@ -110,3 +113,13 @@ is disabled.
 
 They are a good alternative for those cases where a post-script falls short. The system is fully
 operational in this case, so there are no limitations.
+
+## Troubleshooting
+
+You can find the scripts and their logs at `/var/log/agama-installation/scripts` after the
+installation has finished. There is a directory for each kind of script (`pre`, `post` and `init`).
+Each folder contains the scripts (named according to the `name` element) and their corresponding
+standard output (`[name].log`), standard error (`[name].err`) and exit status (`[name].out`).
+
+If you need to debug a problem during installation, you can find those files at
+`/run/agama/scripts`.
