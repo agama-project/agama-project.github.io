@@ -19,15 +19,21 @@ Please, let us know if you miss support for any section.
 
 ## Loading an AutoYaST profile
 
-The typical way[^agama-profile-import] of starting an unattended installation in Agama is by setting
-that the URL corresponds to an AutoYaST profile, it will start take care of pre-processing and converting the profile to an Agama equivalent.
+The typical way of starting an unattended installation in Agama is by passing the URL of an AutoYaST
+profile through the [`agama.auto`](./boot_options.md#boot-options) argument in the kernel's
+command-line[^agama-profile-import]. For example:
 
-As part of this pre-processing, Agama supports handling of [dynamic profiles][dynamic-profiles], including:
+```text
+agama.auto=http://example.net/agama/tumbleweed.xml
+```
+
+Agama takes care of pre-processing and converting the profile to an Agama equivalent. As part of
+this pre-processing, it supports handling of [dynamic profiles][dynamic-profiles], including:
 
 - [Rules and classes][rules-classes].
 - [Embedded Ruby (ERB)][erb].
 - [Pre-installation scripts][pre-scripts].
-- Ask lists (not implemeted yet). Note for developers: fortunately, the code to
+- [Ask lists][ask-lists] (not implemented yet). Note for developers: fortunately, the code to
   [parse][ask-list-reader] and [run][ask-list-runner] the process is there but we need to adapt the
   [user interface][ask-list-dialog], which is not trivial.
 
@@ -36,7 +42,6 @@ As part of this pre-processing, Agama supports handling of [dynamic profiles][dy
 [erb]: https://doc.opensuse.org/documentation/leap/autoyast/html/book-autoyast/erb-templates.html
 [pre-scripts]: https://doc.opensuse.org/documentation/leap/autoyast/html/book-autoyast/cha-configuration-installation-options.html#pre-install-scripts
 [ask-lists]: https://doc.opensuse.org/documentation/leap/autoyast/html/book-autoyast/cha-configuration-installation-options.html#CreateProfile-Ask
-[autoyast-branch]: https://github.com/openSUSE/agama/tree/import-autoyast-profiles
 [ask-list-reader]: https://github.com/yast/yast-autoinstallation/blob/c2dc34560df4ba890688a0c84caec94cc2718f14/src/lib/autoinstall/ask/profile_reader.rb#L29
 [ask-list-runner]: https://github.com/yast/yast-autoinstallation/blob/c2dc34560df4ba890688a0c84caec94cc2718f14/src/lib/autoinstall/ask/runner.rb#L50
 [ask-list-dialog]: https://github.com/yast/yast-autoinstallation/blob/c2dc34560df4ba890688a0c84caec94cc2718f14/src/lib/autoinstall/ask/dialog.rb#L23
@@ -324,13 +329,13 @@ when importing an AutoYaST profile.
 
 The following table summarizes the equivalences:
 
-| AutoYaST          | When they run                   | Agama equivalent                       |
-| ----------------- | ------------------------------- | -------------------------------------- |
-| pre               | before the installation starts  | pre, see [Pre-scripts](#pre-scripts)   |
-| post-partitioning | after the partitioning is done  | none                                   |
-| chroot            | after the installation finishes | post                                   |
-| post              | before the 2nd stage            | none, as there is no 2nd stage         |
-| init              | at the end of the 1st boot      | init                                   |
+| AutoYaST          | When they run                   | Agama equivalent                     |
+| ----------------- | ------------------------------- | ------------------------------------ |
+| pre               | before the installation starts  | pre, see [Pre-scripts](#pre-scripts) |
+| post-partitioning | after the partitioning is done  | none                                 |
+| chroot            | after the installation finishes | post                                 |
+| post              | before the 2nd stage            | none, as there is no 2nd stage       |
+| init              | at the end of the 1st boot      | init                                 |
 
 The pre-scripts are processed by AutoYaST code itself, and the `post` and `init` scripts are merged
 into a single type (`init`) which runs during the 1st boot after the installation.
@@ -358,7 +363,7 @@ only those we consider essential.
 
 AutoYaST pre-scripts are executed before the installation and are a powerful method to customize the
 profile at runtime. If you are using an AutoYaST profile, `pre-scripts` will work in the same way
-with Agama. Please, check the [Dynamic profiles](#dynamic-profiles) section for further details.
+with Agama. Please, check the [Dynamic profiles][dynamic-profiles] section for further details.
 
 However, Agama ships its own pre-scripts mechanism, although they do not allow modifying the profile
 itself because using [Jsonnet](https://jsonnet.org/) is the preferred way to do that. The main use
