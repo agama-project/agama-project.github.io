@@ -1,75 +1,52 @@
 # AutoYaST support
 
-Agama offers a mechanism to perform [unattended installations](./unattended). However, we
-would like AutoYaST users to be able to use their profiles in Agama. This document describes how
-Agama could support, to some extent, such profiles.
+We know that many AutoYaST users have invested quite some time in writing their profiles to perform
+unattended installations. For that reason, Agama offers a mechanism to reuse such profiles to some extent.
 
-Bear in mind that it is a living document and our plans could change as we progress.
-
-## What to support
-
-We want to point out that Agama and AutoYaST have different features. Agama is focused on the
+However, Agama and AutoYaST have different features. Unlike AutoYaST, Agama is focused on the
 installation and delegates further configuration to other tools. From this point of view, it is
-clear that many of the sections you can find in an AutoYaST profile will not have an Agama
-counterpart.
+clear that many of the sections in an AutoYaST profile will not have an Agama counterpart.
 
-Nevertheless, we want to cover:
+This document describes how AutoYaST supports work, including the limitations you might find.
 
-- Dynamic profiles, including rules/classes, ERB templates, pre-installation scripts and even "ask
-  lists". See [Dynamic profiles](#dynamic-profiles).
-- Compatibility (partial or full) for the following sections: `networking`, `partitioning`,
-  `language`, `timezone`, `keyboard`, `software`, `scripts`, `users`, `iscsi-client`, `proxy` and
-  `suse_register`. See [Supported sections](#supported-sections).
+:::warning
+AutoYaST support is not fully defined yet, which means that we might add support for more sections
+in the future even if we do not plan to do so now. However, we will do our best to keep this
+document up to date.
 
-We still need to decide how to handle other sections like `firewall`, `bootloader`, `report`,
-`general` or even some elements from `security` or `kdump`.
+Please, let us know if you miss support for any section.
+:::
 
-Finally, we plan to "ignore" many other sections (e.g., all \*-server elements) and sysconfig-like
-elements. See [Unsupported sections](#unsupported-sections).
+## Loading an AutoYaST profile
 
-## Dynamic profiles
+The typical way of starting an unattended installation in Agama is by passing the URL of an AutoYaST
+profile through the [`agama.auto`](./boot_options.md#boot-options) argument in the kernel's
+command-line[^agama-profile-import]. For example:
 
-Many AutoYaST users rely on its dynamic capabilities to build adaptable profiles that they can use
-to install different systems. For that reason, we need Agama to support these features:
+```text
+agama.auto=http://example.net/agama/tumbleweed.xml
+```
+
+Agama takes care of pre-processing and converting the profile to an Agama equivalent. As part of
+this pre-processing, it supports handling of [dynamic profiles][dynamic-profiles], including:
 
 - [Rules and classes][rules-classes].
 - [Embedded Ruby (ERB)][erb].
 - [Pre-installation scripts][pre-scripts].
-- Ask lists.
+- [Ask lists][ask-lists] (not implemented yet). Note for developers: fortunately, the code to
+  [parse][ask-list-reader] and [run][ask-list-runner] the process is there but we need to adapt the
+  [user interface][ask-list-dialog], which is not trivial.
 
-The most realistic way to support those features in the mid-term is to use the AutoYaST code with
-some adaptations. The [import-autoyast-profiles branch][autoyast-branch] contains a proof-of-concept
-that supports rules/classes, ERB and pre-installation scripts. If you are interested, you can give
-it a try:
-
-```
-cd service
-sudo bundle exec bin/agama-autoyast \
-  file:///$PWD/test/fixtures/profiles/invalid.xml /tmp/output
-cat /tmp/output/autoinst.json
-```
-
-You can even use the `agama-cli`:
-
-```
-cd rust
-cargo build
-sudo PATH=$PWD/../service/bin:$PATH ./target/debug/agama profile download \
-  file:///$PWD/../service/test/fixtures/profiles/pre-scripts.xml
-```
-
-About "ask lists", there might need more work. Fortunately, the code to [parse][ask-list-reader] and
-[run][ask-list-runner] the process are there but we need to adapt the
-[user interface][ask-list-dialog], which is not trivial.
-
+[dynamic-profiles]: https://doc.opensuse.org/documentation/leap/autoyast/html/book-autoyast/part-dynamic-profiles.html
 [rules-classes]: https://doc.opensuse.org/documentation/leap/autoyast/html/book-autoyast/rulesandclass.html
 [erb]: https://doc.opensuse.org/documentation/leap/autoyast/html/book-autoyast/erb-templates.html
 [pre-scripts]: https://doc.opensuse.org/documentation/leap/autoyast/html/book-autoyast/cha-configuration-installation-options.html#pre-install-scripts
 [ask-lists]: https://doc.opensuse.org/documentation/leap/autoyast/html/book-autoyast/cha-configuration-installation-options.html#CreateProfile-Ask
-[autoyast-branch]: https://github.com/openSUSE/agama/tree/import-autoyast-profiles
 [ask-list-reader]: https://github.com/yast/yast-autoinstallation/blob/c2dc34560df4ba890688a0c84caec94cc2718f14/src/lib/autoinstall/ask/profile_reader.rb#L29
 [ask-list-runner]: https://github.com/yast/yast-autoinstallation/blob/c2dc34560df4ba890688a0c84caec94cc2718f14/src/lib/autoinstall/ask/runner.rb#L50
 [ask-list-dialog]: https://github.com/yast/yast-autoinstallation/blob/c2dc34560df4ba890688a0c84caec94cc2718f14/src/lib/autoinstall/ask/dialog.rb#L23
+
+[^agama-profile-import]: You can use the `agama profile import` command, but that's out of the scope of this document.
 
 ## Supported sections
 
@@ -87,8 +64,8 @@ Agama. In some cases, you might find a table with the following columns:
 
 ### `dasd` and `iscsi-client`
 
-Support for iSCSI and DASD devices is missing in Agama profiles. Let's work on that when adding the
-`partitioning` section equivalent.
+Support for iSCSI and DASD devices is missing in Agama profiles. But we definitely plan to support
+them.
 
 ### `general`
 
@@ -352,13 +329,13 @@ when importing an AutoYaST profile.
 
 The following table summarizes the equivalences:
 
-| AutoYaST          | When they run                   | Agama equivalent                       |
-| ----------------- | ------------------------------- | -------------------------------------- |
-| pre               | before the installation starts  | pre, see [Pre-scripts](#pre-scripts)   |
-| post-partitioning | after the partitioning is done  | none                                   |
-| chroot            | after the installation finishes | post                                   |
-| post              | before the 2nd stage            | none, as there is no 2nd stage         |
-| init              | at the end of the 1st boot      | init                                   |
+| AutoYaST          | When they run                   | Agama equivalent                     |
+| ----------------- | ------------------------------- | ------------------------------------ |
+| pre               | before the installation starts  | pre, see [Pre-scripts](#pre-scripts) |
+| post-partitioning | after the partitioning is done  | none                                 |
+| chroot            | after the installation finishes | post                                 |
+| post              | before the 2nd stage            | none, as there is no 2nd stage       |
+| init              | at the end of the 1st boot      | init                                 |
 
 The pre-scripts are processed by AutoYaST code itself, and the `post` and `init` scripts are merged
 into a single type (`init`) which runs during the 1st boot after the installation.
@@ -386,7 +363,7 @@ only those we consider essential.
 
 AutoYaST pre-scripts are executed before the installation and are a powerful method to customize the
 profile at runtime. If you are using an AutoYaST profile, `pre-scripts` will work in the same way
-with Agama. Please, check the [Dynamic profiles](#dynamic-profiles) section for further details.
+with Agama. Please, check the [Dynamic profiles][dynamic-profiles] section for further details.
 
 However, Agama ships its own pre-scripts mechanism, although they do not allow modifying the profile
 itself because using [Jsonnet](https://jsonnet.org/) is the preferred way to do that. The main use
