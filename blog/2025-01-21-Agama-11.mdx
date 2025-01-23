@@ -44,20 +44,20 @@ TODO: does it deserve entry? Should we document how to do it in agama pages?
 ## Changes in the web interface {#webui}
 
 Beyond the mentioned new installation possibilities, Agama 11 comes with a small reorganization of
-the workflow of the web interface. First of all, a screen to configure the root authentication was
-added right after the product selection.
+the workflow of the web interface. In previous versions, it was always necessary to visit the
+"Users" section to configure the root authentication and then go back to the "Overview" page in
+order to proceed with the installation. That happened because authentication is the only aspect of
+the system configuration for which Agama cannot infer any reasonable setup. You surely don't want
+Agama to choose a root password for you!
+
+Starting with Agama 11, a screen to configure the root authentication is presented to the user right
+away after the product selection.
 
 ![Dialog to set the password for root](../static/img/blog/2025-01-21/rootpwd-agama11.png)
 
-Configuring the authentication was always a mandatory step and is the only aspect of the system
-configuration for which Agama cannot infer any reasonable setup. You surely don't want Agama to
-choose a root password for you!
-
-Previously all users were forced to visit the "Users" section to configure the authentication and
-then go back to the "Overview" page in order to proceed with the installation. Now the step to
-configure root authentication is directly presented to the user before showing the overview for the
-very first time and the general layout has been reorganized to ensure the "install" button is always
-accessible from all sections of the Agama interface.
+After configuring the root password the user lands in the main Agama screen, where the general
+layout has been reorganized to ensure the "install" button is always accessible from all sections of
+the interface.
 
 ![Install button visible](../static/img/blog/2025-01-21/installbutton-agama11.png)
 
