@@ -7,17 +7,18 @@ tags:
   - release
 ---
 
-INTRO STILL TO BE REVIEWED
-
-With comming Alpha phase of Leap16 and Beta phase of SLES 16 we added some mandatory features and do polishing with
-version 11 release. :tada:
+The first beta versions of SUSE Linux Enterprise Server 16 are almost around the corner and openSUSE
+Leap 16 is already at [alpha phase](https://en.opensuse.org/openSUSE:Roadmap). So the YaST Team (or
+should we already say the Agama Team?) has focused during the last couple of weeks on providing a
+better installation experience for both families of distributions. Agama 11 is the result, so let's
+see what's new on this release.
 
 {/* truncate */}
 
-We are just releasing the Agama version 11 and it can still has some minor changes to ensure it can
-be included in SLES16 Beta1 and [Alpha of Leap16](https://en.opensuse.org/openSUSE:Roadmap).
-
-So lets not waste a time and jump on new stuff in this release.
+Bear in mind that some minor revisions of Agama 11 could be released in the following
+days to correct issues detected during the testing of SLES 16 Beta and openSUSE Leap 16 Alpha. We
+will update this blog post if any of those changes affect significantly any of the features listed
+below.
 
 ## Agama can install Slowroll now {#slowroll}
 
@@ -51,7 +52,7 @@ the system configuration for which Agama cannot infer any reasonable setup. You 
 Agama to choose a root password for you!
 
 Starting with Agama 11, a screen to configure the root authentication is presented to the user right
-away after the product selection.
+away after selecting the operating system to install.
 
 ![Dialog to set the password for root](../static/img/blog/2025-01-21/rootpwd-agama11.png)
 
@@ -176,43 +177,44 @@ On the other hand, now it is possible to specify TPM-based unlocking of the encr
 part of the Agama storage configuration. Thus, users of unattended installation can also deploy
 fully encrypted systems based on TPMv2.
 
-## Generate OpenAPI, Manual Pages, Markdown Documentation and Shell Completion from Sources {#generate}
+## Automatic generation of documentation and shell completion {#generate}
 
-SECTION STILL NOT REVIEWED
+A comprehensive and up-to-date documentation is key for a project like Agama, especially for users
+of the command-line interface and the HTTP API. And the best way to ensure the documentation is
+always in sync with the current version of Agama is to generate it automagically from the source
+code.
 
-When we are at CLI in Agama 11 the manual pages, its Markdown variant and also Shell completion is
-generated from sources, so we are sure it is always up to date. The markdown you can see already in action
-on [agama webpages](https://agama-project.github.io/docs/user/cli). Do not forget that CLI is written
-in rust, so its dependencies are really minimal. So no excuses to not give it a try.
+In the case of the CLI, the manual pages, its Markdown variant and also the files needed for
+[shell completion](https://en.wikipedia.org/wiki/Command-line_completion) are all generated from
+sources. You can see the always current result of the Markdown version at the [corresponding
+section](https://agama-project.github.io/docs/user/cli) of the Agama web page.
 
-For HTTP API we start generating from sources its openAPI specification. This will help anyone
-interested in using Agama HTTP Api to generate its own client.
+The HTTP API is also automatically documented via an [OpenAPI](https://www.openapis.org/)
+specification. This will help anyone interested in integrating Agama into any solution or
+infrastructure or even in creating its own client application for Agama.
 
-For ones interested in technical details it is implemented using xtask pattern and benefiting from
-its integration with clap for CLI or utoipa for OpenAPI.
+## Even more changes under the hood {#techdetails}
 
+As you can imagine, the above list of features is far for representing everything that has changed
+from Agama 10. As usual, the new version also includes many bug fixes and small improvements. And
+we took the opportunity to update to the latest version of the three programming languages used in
+Agama, including all used libraries.
 
-## Under the Hood {#techdetails}
+We also gave some love to the Agama Live ISO. On the one hand, we revisited the list of included
+drivers, resulting in a smaller image that actually supports more hardware setups. On the other hand
+we tried to switch the graphical stack from X11 to Wayland. Although we didn't succeed due to
+technical problems related to Firefox's kiosk mode, we will keep trying (of course, any help is
+welcome).
 
-SECTION STILL NOT REVIEWED
+Other Agama change that may not be obvious to all users is the introduction of some changes to ease
+the creation of automated integration test. That helps the openSUSE and SUSE QA teams in their
+unvaluable effort to ensure a smoother experience to all users.
 
-There are also a lot of changes under the hood including many bug fixes and small improvements.
-All three programming languages used in Agama is updated to reflect the latest versions and libraries.
-Also our live medium gets a bit of love and now it include kernel drivers that was used in old YaST
-installer which leads to a bit smaller medium. We tried also if we can switch to Wayland from X11 and
-result is still that it contain some issues, so we will see if it is polished enough in future to do the switch. And more of live iso improvements will follow after Agama11.
-We also trying to make our QA guys live easier and implement specifically for them some small changes
-that allows more and easier automated integration testing of Agama which hopefully will provide smoother experience to all users.
+## Just another step {#conclusion}
 
-## Conclusion {#conclusion}
+We are already working on the next version of Agama and your feedback may be useful to decide in
+which aspects we should focus. So do not hesitate to report bugs through Bugzilla or to contact us
+at the [Agama project at GitHub](https://github.com/agama-project/agama). Of course, if you prefer
+to chat, you can find us as always at our `#yast` channel at [Libera.chat](https://libera.chat/).
 
-SECTION STILL NOT REVIEWED
-
-Your contributions and opinions are important sources for feedback about the new release. So don't
-hesitate to contact the YaST team at the [YaST Development mailing
-list](https://lists.opensuse.org/archives/list/yast-devel@lists.opensuse.org/), our `#yast` channel
-at [Libera.chat](https://libera.chat/) or the [Agama project at
-GitHub](https://github.com/agama-project/agama) if you find any problem or have an idea for
-improvement.
-
-Have a lot of fun!
+And don't forget to have a lot of fun!
