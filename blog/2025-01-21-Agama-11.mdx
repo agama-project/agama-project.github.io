@@ -97,7 +97,8 @@ useful in various situations like installing in machines that cannot serve the w
 due to limited resources), using scripts and other automation techniques or simply when the user
 prefers good old terminal over graphical interfaces. Now Agama's CLI offers a new global parameter
 `--api` that allows to run the tool (and any script based on it) on a different machine from that
-being effectively installed.
+being effectively installed. Bear in mind the new argument is still not honored by all Agama
+subcommands. Support for it will be extended on subsequent releases.
 
 ## Scripting support in unattended installation {#scripting}
 
@@ -179,7 +180,8 @@ section](https://agama-project.github.io/docs/user/cli) of the Agama web page.
 
 The HTTP API is also automatically documented via an [OpenAPI](https://www.openapis.org/)
 specification. This will help anyone interested in integrating Agama into any solution or
-infrastructure or even in creating its own client application for Agama.
+infrastructure or even in creating its own client application for Agama, especially taking into
+account that the Agama HTTP is still not stable and changes on every release.
 
 ## More changes under the hood {#techdetails}
 
@@ -201,7 +203,7 @@ invaluable effort to ensure a smoother experience to all users.
 ## Just another step {#conclusion}
 
 We are already working on the next version of Agama and your feedback may be useful to decide in
-which aspects we should focus. So do not hesitate to give Agama a try using our [Live ISO testing
+which aspects we should focus. So do not hesitate to give Agama a try using our [latest Live ISO
 images](https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/)
 and to report bugs through Bugzilla. You can also contact us at the [Agama project at
 GitHub](https://github.com/agama-project/agama). Of course, if you prefer to chat, you can find us
