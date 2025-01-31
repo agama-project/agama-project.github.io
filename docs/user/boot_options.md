@@ -32,6 +32,22 @@ to extend.
   agama.config_url=usb:///agama.yaml
   ```
 
+- `agama.info`
+  Points agama to info file that contains additional agama settings. It is useful when more options
+  are provided to agama and typing during boot is unreliable.
+
+  ```text
+  agama.info=ftp://myserver/devel.info
+  ```
+
+  :::warning
+  Available from Agama12.
+  :::
+
+  :::warning
+  Supports only parameters specified on this section. Kernel parameters are ignored.
+  :::
+
 - `agama.install_url`
   Override the default `installation_url` set in the product files
   [here](https://github.com/openSUSE/agama/tree/master/products.d) by passing the `agama.install_url`
