@@ -109,4 +109,4 @@ sudo agama config show > profile.json
 
 To start an unattended installation process, you need to tell Agama where to find the profile. When
 using the Live ISO, you must use the `agama.auto` boot option. Please, check the [boot
-options](../boot_options.md) for further information.
+options](../boot_options/index.md) for further information.
