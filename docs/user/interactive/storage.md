@@ -144,3 +144,13 @@ of the decision making process and aware of the changes introduced at the config
 extra capabilities to that initial attempt (eg. trying on several disks or adjusting some very
 visible parameters) is not fully discarded for the future, subject to finding the right way to make
 those decisions obvious to the users.
+
+## Unsupported configuration
+
+Agama allows configuring the storage devices in a very flexible and powerful way, see
+[the unattended storage configuration page](https://agama-project.github.io/docs/user/unattended/storage).
+Nevertheless, the Agama web interface does not support all the possible configuration options
+yet. If the loaded configuration is not manageable by the web interface, then the storage section
+shows a warning which alerts about the situation and offers to reset to the default settings.
+
+Such an alert is always shown if the loaded configuration uses [the legacy AutoYaST mode](https://agama-project.github.io/docs/user/unattended/storage#unattended-installation-using-the-legacy-autoyast-mode).
