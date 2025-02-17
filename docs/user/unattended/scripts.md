@@ -92,6 +92,12 @@ Jsonnet to build a dynamic profile. If you need something that behaves exactly l
 still use an AutoYaST profile with its own pre-scripts section.
 :::
 
+## Post-partitioning scripts
+
+The post-partitioning scripts are executed during the installation, after the storage is
+set up. A typical use case is to create configuration files that can modify the behavior of
+the RPM scripts.
+
 ## Post-installation scripts
 
 The post-installation scripts are executed after the system is installed. They are helpful for
