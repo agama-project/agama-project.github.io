@@ -1,7 +1,8 @@
 # AutoYaST compatibility reference
 
-Let's describe which sections and elements from an AutoYaST profile are (or will be) supported in
-Agama. In some cases, you might find a table with the following columns:
+Let's describe which sections and elements from an AutoYaST profile are (or will
+be) support ed in Agama. In some cases, you might find a table with the
+following columns:
 
 - AutoYaST: name of the AutoYaST element.
 - Supported: whether it is (or will be) supported. The meaning of each value is:
@@ -118,7 +119,8 @@ This section is supported.
 
 ### networking/interfaces[]
 
-This section is supported. It corresponds to Agama `connections`, but the format is not exactly the same.
+This section is supported. It corresponds to Agama `connections`, but the format is not exactly the
+same.
 
 | AutoYaST                       | Supported | Agama                                | Notes                                            |
 | ------------------------------ | --------- | ------------------------------------ | ------------------------------------------------ |
@@ -192,7 +194,8 @@ This section is supported. It corresponds to Agama `connections`, but the format
 
 ## services-manager
 
-There are plans to support this section in the future. You can use a post-installation script to handle these cases.
+There are plans to support this section in the future. Meanwhile you can use post-installation
+scripts to handle these cases.
 
 ## scripts
 
@@ -214,23 +217,6 @@ This section is supported.
 | `notification`  | no        |                      |                                       |
 | `param-list`    | no        |                      |                                       |
 | `rerun`         | no        |                      |                                       |
-
-### scripts/postpartitioning-scripts[]
-
-This section is supported.
-
-| AutoYaST        | Supported | Agama                             | Notes                                 |
-| --------------- | --------- | --------------------------------- | ------------------------------------- |
-| `filename`      | yes       | `scripts.postPartitioning[].name` |                                       |
-| `location`      | yes       | `scripts.postPartitioning[].url`  |                                       |
-| `source`        | yes       | `scripts.postPartitioning[].body` |                                       |
-| `interpreter`   | no        |                                   | Use the shebang line in your scripts. |
-| `feedback`      | no        |                                   |                                       |
-| `feedback_type` | no        |                                   |                                       |
-| `debug`         | no        |                                   |                                       |
-| `notification`  | no        |                                   |                                       |
-| `param-list`    | no        |                                   |                                       |
-| `rerun`         | no        |                                   |                                       |
 
 ### scripts/chroot-scripts[]
 
@@ -307,7 +293,8 @@ This section is not supported.
 
 ## proxy
 
-There are plans to support this section in the future. Set the proxy using the kernels' command line
+There are plans to support this section in the future. Meanwhile set the proxy
+using the kernels' command line.
 
 ## report
 
@@ -351,18 +338,18 @@ This section is not supported.
 
 This section is supported.
 
-| AutoYaST                           | Supported | Agama                       | Notes                                   |
-| ---------------------------------- | --------- | --------------------------- | --------------------------------------- |
-| `do_registration`                  | yes       |                             | The while section is ignored if "false" |
-| `email`                            | yes       | `product.registrationEmail` |                                         |
-| `install_updates`                  | no        |                             |                                         |
-| `reg_code`                         | yes       | `product.registrationCode`  |                                         |
-| `reg_server`                       | planned   |                             |                                         |
-| `reg_server_cert`                  | planned   |                             |                                         |
-| `reg_server_cert_fingerprint`      | planned   |                             |                                         |
-| `reg_server_cert_fingerprint_type` | planned   |                             |                                         |
-| `addons`                           | planned   |                             |                                         |
-| `slp_discovery`                    | planned   |                             |                                         |
+| AutoYaST                           | Supported | Agama                       | Notes                                                  |
+| ---------------------------------- | --------- | --------------------------- | ------------------------------------------------------ |
+| `do_registration`                  | yes       |                             | The whole suse_register section is ignored if "false". |
+| `email`                            | yes       | `product.registrationEmail` |                                                        |
+| `install_updates`                  | no        |                             |                                                        |
+| `reg_code`                         | yes       | `product.registrationCode`  |                                                        |
+| `reg_server`                       | planned   |                             |                                                        |
+| `reg_server_cert`                  | planned   |                             |                                                        |
+| `reg_server_cert_fingerprint`      | planned   |                             |                                                        |
+| `reg_server_cert_fingerprint_type` | planned   |                             |                                                        |
+| `addons`                           | planned   |                             |                                                        |
+| `slp_discovery`                    | planned   |                             |                                                        |
 
 ## sysconfig
 
@@ -399,4 +386,4 @@ This section is supported. Only the root and the first user are considered.
 | `fullName`        | yes       | `user.fullName`       |                                                                |
 | `password`        | yes       | `user.password`       |                                                                |
 | `encrypted`       | yes       | `user.hashedPassword` | If set to true, it uses "hashedPassword" instead of "password" |
-| `authorized_keys` | yes       | `root.sshPublicKey`   | It only considers one password and only for the root user.     |
+| `authorized_keys` | yes       | `root.sshPublicKey`   | It only considers a single key.                                |
