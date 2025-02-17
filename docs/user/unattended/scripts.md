@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Running scripts
@@ -13,7 +13,7 @@ Agama allows execute scripts at the following points of the installation process
 This section describes how to specify a script and goes through some use-cases.
 
 :::note
-You can compare Agama scripts to the AutoYaST ones in the [Scripts section](../autoyast.md#scripts)
+You can compare Agama scripts to the AutoYaST ones in the [scripts section](../autoyast/reference.md#scripts)
 of the backward compatibility documentation.
 :::
 
