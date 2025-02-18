@@ -50,6 +50,7 @@ the three scripts types, and each key can contain a list of scripts.
         url: "https://192.168.1.1/provisioning.sh"
       }
     ]
+  }
 }
 ```
 
