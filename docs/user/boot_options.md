@@ -46,6 +46,15 @@ to extend.
   Setting this variable will impact all products.
   :::
 
+- `agama.finish`
+  During an unattended installation, if the installation is completed successfully then the
+  installer will reboot into the target system by default. This behavior can be modified allowing
+  to `stop`, `halt` or `poweroff` the machine at the end of the installation.
+
+  ```text
+  agama.finish=poweroff
+  ```
+
 - `live.password` and `live.password_hash` Set the `root` password of the live system.
   `live.password` accepts a plain text password, while `live.password_hash` is expected to receive a
   hashed password, which is more secure. The disadvantage of a hashed password is that it is quite
