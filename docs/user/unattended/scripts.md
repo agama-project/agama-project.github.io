@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Running scripts
@@ -13,7 +13,7 @@ Agama allows execute scripts at the following points of the installation process
 This section describes how to specify a script and goes through some use-cases.
 
 :::note
-You can compare Agama scripts to the AutoYaST ones in the [Scripts section](../autoyast.md#scripts)
+You can compare Agama scripts to the AutoYaST ones in the [scripts section](../autoyast/reference.md#scripts)
 of the backward compatibility documentation.
 :::
 
@@ -92,6 +92,12 @@ Unlike AutoYaST, the pre-installation scripts cannot modify the current profile.
 Jsonnet to build a dynamic profile. If you need something that behaves exactly like AutoYaST, you can
 still use an AutoYaST profile with its own pre-scripts section.
 :::
+
+## Post-partitioning scripts
+
+The post-partitioning scripts are executed during the installation, after the storage is
+set up. A typical use case is to create configuration files that can modify the behavior of
+the RPM scripts.
 
 ## Post-installation scripts
 
