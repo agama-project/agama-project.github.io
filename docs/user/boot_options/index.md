@@ -33,8 +33,8 @@ to extend.
   ```
 
 - `agama.info`
-  Points agama to info file that contains additional agama settings. It is useful when more options
-  are provided to agama and typing during boot is unreliable.
+  Points to info file that contains additional Agama settings. It is useful when you want to provide
+  more options for Agama and typing them during boot is not possible.
 
   ```text
   agama.info=ftp://myserver/devel.info

@@ -4,9 +4,9 @@ sidebar_position: 6
 
 # Linuxrc Compatibility
 
-Agama provides few options to make easier transition from linuxrc. They are not identical and works
-slightly differently, but for usual usage it should be sufficient.
-Also agama is case sensitive and require exact parameter usage unlike linuxrc which allows
+Agama provides a few options to make it easier the transition from linuxrc. They are not identical and work
+slightly differently, but for a regular usage they should be sufficient.
+Also Agama is case sensitive and requires the exact parameter unlike linuxrc which allows
 additional dots, dashes and underscores.
 
 ## Info File Support
