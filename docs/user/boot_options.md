@@ -32,6 +32,16 @@ to extend.
   agama.config_url=usb:///agama.yaml
   ```
 
+- `agama.register_url`: sets the URL of the RMT or SCC proxy server to register the product with.
+
+  ```text
+  agama.register_url=http://rmt.example.net
+  ```
+
+  :::note
+  HTTPS is not supported yet.
+  :::
+
 - `agama.install_url`
   Override the default `installation_url` set in the product files
   [here](https://github.com/openSUSE/agama/tree/master/products.d) by passing the `agama.install_url`
