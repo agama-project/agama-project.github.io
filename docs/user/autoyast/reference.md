@@ -1,8 +1,7 @@
 # AutoYaST compatibility reference
 
-Let's describe which sections and elements from an AutoYaST profile are (or will
-be) support ed in Agama. In some cases, you might find a table with the
-following columns:
+Let's describe which sections and elements from an AutoYaST profile are (or will be) supported in
+Agama. In some cases, you might find a table with the following columns:
 
 - AutoYaST: name of the AutoYaST element.
 - Supported: whether it is (or will be) supported. The meaning of each value is:
