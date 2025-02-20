@@ -40,11 +40,7 @@ to extend.
   agama.info=ftp://myserver/devel.info
   ```
 
-  :::warning
-  Available from Agama12.
-  :::
-
-  :::warning
+  :::note
   Supports only parameters specified on this section. Kernel parameters are ignored.
   :::
 
