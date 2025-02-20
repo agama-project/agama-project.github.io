@@ -8,11 +8,8 @@ settings.
 Bear in mind that some of the mentioned features may be already available and fully working as
 described while others may still be incomplete in the current version of Agama.
 
-In particular, the presented interface is still under heavy development and not available at the
-latest version of Agama. As a result, the screenshots are not a faithfull representation of the
-final look & feel. Something that is represented as a sentence in the screenshots can become a
-tool-tip, a given icon can become a label, actions grouped in a drop-down can end up being
-represented as separate buttons, etc.
+Since the interface is in constant evolution, the screenshots are not a faithfull representation
+of the current look & feel.
 :::
 
 ## The general approach
@@ -38,8 +35,8 @@ parameters, usage of Btrfs snapshots...) and would calculate appropriate sizes f
 partitions. The user can decide at any point to override any of the automatic values (eg. specifying
 a size range for a partition) or to go back to the automatic mode for that particular setting.
 
-Something similar happens with complex structures like LVM or RAID, that can be specified in a quite
-loosely way, as explained below.
+Something similar happens with complex structures like LVM, that can be specified in a quite loosely
+way, as explained below.
 
 ## Overall description of the Storage page
 
@@ -52,8 +49,8 @@ result of applying those settings to the current system.
 
 ![Overview of the storage configuration page](/img/user/storage-overview.png)
 
-The configuration defines which devices to use and how, which new logical devices to create (LVM,
-software Raids, etc.) and where to allocate (or reuse) the file systems of the new operating system.
+The configuration defines which devices to use and how, which new logical devices to create
+(eg. LVM) and where to allocate (or reuse) the file systems of the new operating system.
 The result is currenty represented as a list of planned actions and a table representing the final
 state of the affected devices. In the long term, a better alternative to show the result could be
 developed.
@@ -66,6 +63,16 @@ relationship between those settings and the system being used for installation.
 
 ![Selecting a device for installation](/img/user/storage-device.png)
 
+:::warning Under development
+The current user interface does not support all the possibilities that can be expressed by an Agama
+storage configuration. For example, there is not support yet for representing RAID devices.
+
+If a given configuration is not manageable by the web interface, then the storage section shows a
+message explaining the situation and offers to reset to the default settings. Such an alert is
+always shown if the loaded configuration uses [the legacy AutoYaST
+mode](../unattended/storage#unattended-installation-using-the-legacy-autoyast-mode).
+:::
+
 There are several interactive elements allowing to control several aspects of the installation.
 
 ![Choosing how to make space](/img/user/storage-space.png)
@@ -77,9 +84,14 @@ to reuse existing file systems, among many other things.
 
 ## Usage of LVM and software RAID
 
-Adding LVM and RAID is done using the same interface.
+Adding LVM and RAID will be done using the same interface.
 
 ![Adding LVM and RAID](/img/user/storage-add-device.png)
+
+:::warning Under development
+The support to define new LVM volume groups and its logical volumes will be introduced soon.
+Configuration of RAID and more advanced LVM setups will come in a not so close future.
+:::
 
 Obviously, the file systems created on an LVM volume group will be created as logical volumes
 analogous to the partitions of the disk case. Once again, it is possible to specify a loose
@@ -96,10 +108,10 @@ create the additional partitions needed for booting.
 It is also possible to be more concrete and specify some existing devices to be used as physical
 volumes for any new LVM volume group.
 
-Defining a new RAID is done in a similar way from the same general user interface. Of course, LVM
-and RAID can be combined making it possible to configure an LVM setup on top of a mirrored RAID
-without explicitly creating any partition, delegating to Agama the creation of all the intermediate
-data structures.
+Defining a new RAID will be done in a similar way from the same general user interface. Of course,
+it will be possible to combine LVM and RAID. That will make it possible to configure an LVM setup
+on top of a mirrored RAID without explicitly creating any partition, delegating to Agama the
+creation of all the intermediate data structures.
 
 ## Configuration of partitions needed for booting
 
@@ -144,13 +156,3 @@ of the decision making process and aware of the changes introduced at the config
 extra capabilities to that initial attempt (eg. trying on several disks or adjusting some very
 visible parameters) is not fully discarded for the future, subject to finding the right way to make
 those decisions obvious to the users.
-
-## Unsupported configuration
-
-Agama allows configuring the storage devices in a very flexible and powerful way, see
-[the unattended storage configuration page](https://agama-project.github.io/docs/user/unattended/storage).
-Nevertheless, the Agama web interface does not support all the possible configuration options
-yet. If the loaded configuration is not manageable by the web interface, then the storage section
-shows a warning which alerts about the situation and offers to reset to the default settings.
-
-Such an alert is always shown if the loaded configuration uses [the legacy AutoYaST mode](https://agama-project.github.io/docs/user/unattended/storage#unattended-installation-using-the-legacy-autoyast-mode).
