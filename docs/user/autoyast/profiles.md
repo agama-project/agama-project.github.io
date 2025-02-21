@@ -1,11 +1,11 @@
 # Loading an AutoYaST profile
 
 The typical way of starting an unattended installation in Agama is by passing the URL of an AutoYaST
-profile through the [`agama.auto`](../boot_options.md#boot-options) argument in the kernel's
+profile through the [`inst.auto`](../boot_options.md#boot-options) argument in the kernel's
 command-line[^agama-profile-import]. For example:
 
 ```text
-agama.auto=http://example.net/agama/tumbleweed.xml
+inst.auto=http://example.net/agama/tumbleweed.xml
 ```
 
 Agama takes care of pre-processing and converting the profile to an Agama equivalent. As part of
