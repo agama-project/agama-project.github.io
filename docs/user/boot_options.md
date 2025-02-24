@@ -67,7 +67,8 @@ first one can be removed anytime.
   installer will reboot into the target system by default (`reboot`). This behavior can be modified
   allowing to `halt` or `poweroff` the machine at the end of the installation.
   In addition to the three values corresponding to systemd commands, the value `stop` will
-  only stop the installer, leaving the machine running.
+  pause at the final "Congratulations! [Reboot]" screen, allowing you to
+  extract logs.
   An interactive installation is not affected by this parameter.
 
   ```text

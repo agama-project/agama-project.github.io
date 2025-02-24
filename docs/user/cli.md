@@ -329,7 +329,8 @@ Finish the installation rebooting the system by default
 Possible values:
 
 - `stop`:
-  Stop the installer at the end of the installation but leave the machine running
+  Stop the installation at its end, at the "Congratulations! [Reboot]" screen,
+  leaving the backend running
 - `reboot` (default):
   Reboot into the installed system
 - `halt`:
