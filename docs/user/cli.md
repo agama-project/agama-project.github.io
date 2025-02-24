@@ -329,8 +329,8 @@ Finish the installation rebooting the system by default
 Possible values:
 
 - `stop`:
-  Stop at the end of the installation
-- `reboot`:
+  Stop the installer at the end of the installation but leave the machine running
+- `reboot` (default):
   Reboot into the installed system
 - `halt`:
   Halt the installed machine
