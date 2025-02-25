@@ -65,8 +65,11 @@ first one can be removed anytime.
 - `inst.finish`
   During an unattended installation, if the installation is completed successfully then the
   installer will reboot into the target system by default (`reboot`). This behavior can be modified
-  allowing to `stop`, `halt` or `poweroff` the machine at the end of the installation. An
-  interactive installation is not affected by this parameter.
+  allowing to `halt` or `poweroff` the machine at the end of the installation.
+  In addition to the three values corresponding to systemd commands, the value `stop` will
+  pause at the final "Congratulations! [Reboot]" screen, allowing you to
+  extract logs.
+  An interactive installation is not affected by this parameter.
 
   ```text
   inst.finish=poweroff
