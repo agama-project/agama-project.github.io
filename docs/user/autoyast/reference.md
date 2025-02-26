@@ -12,65 +12,17 @@ Agama. In some cases, you might find a table with the following columns:
 - Agama: name of the Agama element.
 - Comment: any comment or reason about the element.
 
-## add-on
-
-This section is not supported.
-
-## audit-laf
-
-This section is not supported.
-
-## auth-client
-
-This section is not supported.
-
-## configuration_management
-
-This section is not supported.
-
-## deploy_image
-
-This section is not supported.
-
-## dhcp-server
-
-This section is not supported.
-
-## dns-server
-
-This section is not supported.
-
-## fcoe-client
-
-This section is not supported.
-
 ## files
 
 There are plans to support this section in the future.
 
-## firstboot
+## iscsi-client
 
-This section is not supported.
+There are plans to support this section in the future.
 
-## ftp-server
+## kdump
 
-This section is not supported.
-
-## general
-
-This section is not supported.
-
-## groups
-
-This section is not supported.
-
-## host
-
-This section is not supported.
-
-## http-server
-
-This section is not supported.
+There are plans to support this section in the future.
 
 ## keyboard
 
@@ -118,8 +70,8 @@ This section is supported.
 
 ### networking/interfaces[]
 
-This section is supported. It corresponds to Agama `connections`, but the format is not exactly the
-same.
+This section is supported. It corresponds to Agama `connections`, but the format
+is not exactly the same.
 
 | AutoYaST                       | Supported | Agama                                | Notes                                            |
 | ------------------------------ | --------- | ------------------------------------ | ------------------------------------------------ |
@@ -191,10 +143,10 @@ same.
 | `wireless_wpa_password`        | yes       | `password`                           |                                                  |
 | `wireless_wpa_psk`             | yes       | `password`                           |                                                  |
 
-## services-manager
+## proxy
 
-There are plans to support this section in the future. Meanwhile you can use post-installation
-scripts to handle these cases.
+There are plans to support this section in the future. Meanwhile set the proxy
+using the kernels' command line.
 
 ## scripts
 
@@ -216,6 +168,23 @@ This section is supported.
 | `notification`  | no        |                      |                                       |
 | `param-list`    | no        |                      |                                       |
 | `rerun`         | no        |                      |                                       |
+
+### scripts/postpartitioning-scripts[]
+
+This section is supported.
+
+| AutoYaST        | Supported | Agama                             | Notes                                 |
+| --------------- | --------- | --------------------------------- | ------------------------------------- |
+| `filename`      | yes       | `scripts.postPartitioning[].name` |                                       |
+| `location`      | yes       | `scripts.postPartitioning[].url`  |                                       |
+| `source`        | yes       | `scripts.postPartitioning[].body` |                                       |
+| `interpreter`   | no        |                                   | Use the shebang line in your scripts. |
+| `feedback`      | no        |                                   |                                       |
+| `feedback_type` | no        |                                   |                                       |
+| `debug`         | no        |                                   |                                       |
+| `notification`  | no        |                                   |                                       |
+| `param-list`    | no        |                                   |                                       |
+| `rerun`         | no        |                                   |                                       |
 
 ### scripts/chroot-scripts[]
 
@@ -262,46 +231,10 @@ This section is supported.
 | `source`   | yes       | `scripts.init[].body` |       |
 | `rerun`    | no        |                       |       |
 
-## mail
+## services-manager
 
-This section is not supported.
-
-## nfs
-
-This section is not supported.
-
-## nfs_server
-
-This section is not supported.
-
-## nis
-
-This section is not supported.
-
-## nis_server
-
-This section is not supported.
-
-## ntp-client
-
-This section is not supported.
-
-## printer
-
-This section is not supported.
-
-## proxy
-
-There are plans to support this section in the future. Meanwhile set the proxy
-using the kernels' command line.
-
-## report
-
-This section is not supported.
-
-## samba-client
-
-This section is not supported.
+There are plans to support this section in the future. Meanwhile you can use
+post-installation scripts to handle these cases.
 
 ## software
 
@@ -321,18 +254,6 @@ This section is supported.
 | `remove-patterns[]`   | no        |                       |              |
 | `remove-products[]`   | no        |                       |              |
 
-## sound
-
-This section is not supported.
-
-## squid
-
-This section is not supported.
-
-## ssh_import
-
-This section is not supported.
-
 ## suse_register
 
 This section is supported.
@@ -350,14 +271,6 @@ This section is supported.
 | `addons`                           | planned   |                             |                                                        |
 | `slp_discovery`                    | planned   |                             |                                                        |
 
-## sysconfig
-
-This section is not supported.
-
-## tftp-server
-
-This section is not supported.
-
 ## timezone
 
 This section is supported.
@@ -366,14 +279,6 @@ This section is supported.
 | ---------- | --------- | ----------------------- | ----- |
 | `timezone` | yes       | `localization.timezone` |       |
 | `hwclock`  | no        |                         |       |
-
-## upgrade
-
-This section is not supported.
-
-## iscsi-client
-
-There are plans to support this section in the future.
 
 ## users[]
 
@@ -386,3 +291,38 @@ This section is supported. Only the root and the first user are considered.
 | `password`        | yes       | `user.password`       |                                                                |
 | `encrypted`       | yes       | `user.hashedPassword` | If set to true, it uses "hashedPassword" instead of "password" |
 | `authorized_keys` | yes       | `root.sshPublicKey`   | It only considers a single key.                                |
+
+## Unsupported sections
+
+The following sections are not supported and we do not plan to support them in
+the future.
+
+- `add-on`
+- `audit-laf`
+- `auth-client`
+- `configuration_management`
+- `deploy_image`
+- `dhcp-server`
+- `dns-server`
+- `fcoe-client`
+- `firstboot`
+- `ftp-server`
+- `general`
+- `groups`
+- `host`
+- `http-server`
+- `mail`
+- `nfs`
+- `nfs_server`
+- `nis`
+- `nis_server`
+- `ntp-client`
+- `printer`
+- `report`
+- `samba-client`
+- `sound`
+- `squid`
+- `ssh_import`
+- `sysconfig`
+- `tftp-server`
+- `upgrade`
