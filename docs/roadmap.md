@@ -10,8 +10,9 @@ page offers an overview on the current state of the ever-changing development pl
 ## Agama 12 (latest released version)
 
 - New user interface based on PatternFly v6.
-- Revamped "Storage" section at the UI. Support for LVM is temporarily removed.
-- First version of a new "Authentication" section at the UI replacing the previous "Users" one.
+- Revamped "Storage" section at the web user interface. Support for LVM is temporarily removed.
+- First version of a new "Authentication" section at the web user interface, replacing the
+  previous "Users" one.
 - Better information about AutoYaST compatibility offered at runtime.
 - Improved handling of failed integrity checks for software packages.
 - Support to register against a SUSE Customer Center proxy.
@@ -30,7 +31,7 @@ page offers an overview on the current state of the ever-changing development pl
 - Reorganize the commands `config` and `profile` at the command-line interface.
 - Enhancements on registration.
   - Support for extensions.
-  - Self-signed certificates for RMT and SCC proxy.
+  - Handling of self-signed certificates for RMT and SCC proxy.
 - Improvements at unattended installation.
   - Support to select individual software packages (beyond patterns).
   - Support for AutoYaST/SUSE-specific URLs.
