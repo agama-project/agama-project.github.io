@@ -50,4 +50,4 @@ general configuration tools.
 ## More Details
 
 If you need more information about what Agama can do, the plans for the future, how it compares to
-YaST or the level of compatibity with AutoYaST, check the [Frequenly Asked Questions](/faq).
+YaST or the level of compatibity with AutoYaST, check the [Frequenly Asked Questions](/docs/faq).
