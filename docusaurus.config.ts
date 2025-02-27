@@ -129,6 +129,14 @@ const config: Config = {
           title: "More",
           items: [
             {
+              label: "Blog",
+              to: "/blog",
+            },
+            {
+              label: "Roadmap",
+              to: "/docs/roadmap",
+            },
+            {
               label: "YaST blog",
               href: "https://yast.opensuse.org/blog",
             },
