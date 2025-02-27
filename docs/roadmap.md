@@ -35,12 +35,13 @@ page offers an overview on the current state of the ever-changing development pl
 - Improvements at unattended installation.
   - Support to select individual software packages (beyond patterns).
   - Support for AutoYaST/SUSE-specific URLs.
-  - Automatically search for the configuration (profile) at same locations than AutoYaST.
+  - Automatically search for the configuration (profile) at same locations as AutoYaST.
   - New configuration section analogous to the `<files />` AutoYaST element.
 
 ## Agama 14 (~ April 21st)
 
 - Welcome screen for local installation.
+- Deal with multiple real-time clocks.
 - Improvements at unattended installation.
   - Importing ask-lists from AutoYaST profiles (at least partially).
   - Defining MD RAIDs at the `storage` section.
@@ -72,7 +73,7 @@ page offers an overview on the current state of the ever-changing development pl
 ## Long term plans (after September)
 
 - Introduce the concept of security profiles.
-- Extend the "Software" section of the user interface.
+- Extend the "Storage" section of the user interface.
   - Management of MD RAID devices.
   - Advanced handling of Btrfs.
   - Option to re-install a system (equivalent to YaST's "import mount points").
