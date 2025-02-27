@@ -21,6 +21,9 @@ container:
 d-bus:
   label: D-Bus
 
+documentation:
+  label: Documentation
+
 programming:
   label: Programming
   description: Programming and development
