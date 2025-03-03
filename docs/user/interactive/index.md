@@ -94,7 +94,7 @@ great flexibility in that regard.
 
 The Agama approach to storage configuration is detailed on its own [separate section](./storage.md).
 
-![Overview of the storage configuration page](/img/storage.png)
+![Overview of the storage configuration page](/img/user/storage-overview.png)
 
 ### Software
 
