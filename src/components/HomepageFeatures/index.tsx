@@ -47,7 +47,7 @@ const FeatureList: FeatureItem[] = [
             <img src={require("@site/static/img/user/users.png").default} />
           </div>
           <div>
-            <img src={require("@site/static/img/storage.png").default} />
+            <img src={require("@site/static/img/user/storage-overview.png").default} />
           </div>
           <div>
             <img src={require("@site/static/img/user/network.png").default} />
