@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # AutoYaST support
 
 We know that many AutoYaST users have invested quite some time in writing their profiles to perform
