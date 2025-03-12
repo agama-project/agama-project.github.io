@@ -65,7 +65,7 @@ This feature is experimental and untested!
 The Agama packages on the Live ISO can be automatically updated from the [OBS Devel
 project](https://build.opensuse.org/project/show/systemsmanagement:Agama:Devel).
 
-- Use the `agama.self_update` boot parameter to run the self-update
+- Use the `inst.self_update` boot parameter to run the self-update
   automatically during boot.
 - Or run the `agama-self-update` script anytime later in a running Live system.
 

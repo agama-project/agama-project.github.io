@@ -32,7 +32,7 @@ is responsible for starting up Agama's web server using the `agama-web-server` c
 
 ## Auto-installation
 
-If the `agama.auto` option is specified in the kernel command-line, the
+If the `inst.auto` option is specified in the kernel command-line, the
 [agama-auto.service](https://github.com/openSUSE/agama/blob/master/autoinstallation/systemd/agama-auto.service)
 comes into play. It runs after the `agama-web-server.service` so the web server and the D-Bus daemon
 are ready.

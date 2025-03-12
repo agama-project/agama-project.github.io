@@ -14,25 +14,31 @@ on [dracut](https://manpages.opensuse.org/Tumbleweed/dracut/dracut.8.en.html) no
 to extend.
 :::
 
-- `agama.auto`:
+:::warning
+Originally `agama.` prefix used to be used for Agama related kernel boot options. This is obsolete now
+as we started to use more generic `inst.` prefix now. For now both prefixes can be used but support for the 
+first one can be removed anytime.
+:::
+
+- `inst.auto`:
   Tells the installer to use the profile in the given URL to start an unattended installation.
 
   ```text
-  agama.auto=http://mydomain.org/tumbleweed.jsonnet
+  inst.auto=http://mydomain.org/tumbleweed.jsonnet
 
   ```
 
-- `agama.config_url`: it uses the file at the given URL as the new Agama configuration. Please, do
+- `inst.config_url`: it uses the file at the given URL as the new Agama configuration. Please, do
   not confuse this file with an unattended installation profile. See [URL handling in the
   installer](https://github.com/yast/yast-installation/blob/master/doc/url.md) to find more details
   about the supported URLs.
 
   ```text
-  agama.config_url=http://192.168.122.1/my-agama.yaml
-  agama.config_url=usb:///agama.yaml
+  inst.config_url=http://192.168.122.1/my-agama.yaml
+  inst.config_url=usb:///agama.yaml
   ```
 
-- `agama.info`
+- `inst.info`
   Points to info file that contains additional Agama settings. It is useful when you want to provide
   more options for Agama and typing them during boot is not possible.
 
@@ -44,19 +50,42 @@ to extend.
   Supports only parameters specified on this section. Kernel parameters are ignored.
   :::
 
-- `agama.install_url`
+- `inst.register_url`: sets the URL of the RMT or SCC proxy server to register the product with.
+
+  ```text
+  inst.register_url=http://rmt.example.net
+  ```
+
+  :::note
+  HTTPS is not supported yet.
+  :::
+
+- `inst.install_url`
   Override the default `installation_url` set in the product files
-  [here](https://github.com/openSUSE/agama/tree/master/products.d) by passing the `agama.install_url`
+  [here](https://github.com/openSUSE/agama/tree/master/products.d) by passing the `inst.install_url`
   parameter as a boot option in the bootloader. This is particularly useful for any pre-production
   testing in openQA.
 
   ```text
-  agama.install_url=https://myrepo,https://myrepo2
+  inst.install_url=https://myrepo,https://myrepo2
   ```
 
   :::warning
   Setting this variable will impact all products.
   :::
+
+- `inst.finish`
+  During an unattended installation, if the installation is completed successfully then the
+  installer will reboot into the target system by default (`reboot`). This behavior can be modified
+  allowing to `halt` or `poweroff` the machine at the end of the installation.
+  In addition to the three values corresponding to systemd commands, the value `stop` will
+  pause at the final "Congratulations! [Reboot]" screen, allowing you to
+  extract logs.
+  An interactive installation is not affected by this parameter.
+
+  ```text
+  inst.finish=poweroff
+  ```
 
 - `live.password` and `live.password_hash` Set the `root` password of the live system.
   `live.password` accepts a plain text password, while `live.password_hash` is expected to receive a

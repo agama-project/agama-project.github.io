@@ -29,6 +29,7 @@ This document contains the help content for the `agama` command-line program.
 - [`agama auth logout`↴](#agama-auth-logout)
 - [`agama auth show`↴](#agama-auth-show)
 - [`agama download`↴](#agama-download)
+- [`agama finish`↴](#agama-finish)
 
 ## `agama`
 
@@ -314,3 +315,25 @@ The purpose of this command is to download files using AutoYaST supported schema
 ###### **Arguments:**
 
 - `<URL>` — URL pointing to file for download
+
+## `agama finish`
+
+Finish the installation rebooting the system by default
+
+**Usage:** `agama finish [METHOD]`
+
+###### **Arguments:**
+
+- `<METHOD>` — Action to be done at the end of the installation
+
+Possible values:
+
+- `stop`:
+  Stop the installation at its end, at the "Congratulations! [Reboot]" screen,
+  leaving the backend running
+- `reboot` (default):
+  Reboot into the installed system
+- `halt`:
+  Halt the installed machine
+- `poweroff`:
+  Poweroff the installed machine
