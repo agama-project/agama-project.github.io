@@ -38,6 +38,18 @@ first one can be removed anytime.
   inst.config_url=usb:///agama.yaml
   ```
 
+- `inst.info`
+  Points to info file that contains additional Agama settings. It is useful when you want to provide
+  more options for Agama and typing them during boot is not possible.
+
+  ```text
+  agama.info=ftp://myserver/devel.info
+  ```
+
+  :::note
+  Supports only parameters specified on this section. Kernel parameters are ignored.
+  :::
+
 - `inst.register_url`: sets the URL of the RMT or SCC proxy server to register the product with.
 
   ```text
