@@ -11,5 +11,5 @@ additional dots, dashes and underscores.
 
 ## Info File Support
 
-Agama provides `agama.info=` option that act similarly to linuxrc `info=` option. However, it
+Agama provides `inst.info=` option that act similarly to linuxrc `info=` option. However, it
 supports only URI schemas supported by curl. Also info file can contain only agama specific options.
