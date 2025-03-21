@@ -69,7 +69,7 @@ device:///cciss/c1d0p5/sles.json
 ### `usb`
 
 The `usb://` scheme is a particular form of the `device://` but limited to USB
-devices.As mentioned before, the following URL will search the
+devices. As mentioned before, the following URL will search the
 `profile/sles.json` in all USB devices.
 
 ```text
@@ -88,7 +88,7 @@ label://OEMDRV/sles.json
 
 ### `cd`, `dvd` and `hd`
 
-This is another particular case of `device://` but with an slightly different form. In Agama, there
+This is another particular case of `device://` but with a slightly different form. In Agama, there
 is no difference between these forms (`hd`, `dvd` and `cd`). The syntax is
 `dvd:/PATH?devices=DEVICE`:
 
