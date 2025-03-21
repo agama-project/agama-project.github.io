@@ -69,6 +69,9 @@ page offers an overview on the current state of the ever-changing development pl
   - Support for LVM use of system/devices.
   - Better logic for automatically calculated file system sizes.
 - iSCSI offloading and better support for iBFT.
+- Automatically import the registration code from a USB device.
+- Automatically import the SSH key from a USB device.
+- Passwords strength check.
 
 ## Long term plans (after September)
 
