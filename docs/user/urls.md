@@ -22,10 +22,10 @@ Agama supports the following standard schemes[^1]:
 
 In addition to those schemes, Agama supports a set of specific ones which can be rather useful:
 
-- [`device`](#device) for finding files in specific devices (even unmounted ones).
+- [`device`](#device) for finding files on specific devices (even unmounted ones).
 - [`usb`](#usb) for finding files in USB devices (even unmounted ones).
 - [`label`](#label) for finding files in a file system with a given label.
-- [`cd`, `dvd`, `hd`](#cd-dvd-and-hd) for finding files in specific devices (prefer `device`).
+- [`cd`, `dvd`, `hd`](#cd-dvd-and-hd) for finding files on specific devices (prefer `device`).
 
 ## Agama specific schemes
 
