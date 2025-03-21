@@ -4,12 +4,10 @@ sidebar_position: 10
 
 # Agama URLs
 
-When you want to perform an unattended installation, Agama needs to know where
-to find the profile. Usually, you make use of the `inst.auto` argument, which
-receives a URL. Agama supports a wide range of protocols, including
-`http(s)://`. `ftp://`, `file://`, etc. However, it supports most of the
-[AutoYaST specific URLs](https://doc.opensuse.org/projects/autoyast/#Commandline-ay)
-too.
+In addition to well known protocols, like `http(s)://`. `ftp://`, `file://`, etc., Agama understands
+most of [YaST and AutoYaST specific
+URLs](https://doc.opensuse.org/projects/autoyast/#Commandline-ay). So when you need to specify a URL
+(e.g., if you want to perform an unattended installation), you can use any of those options.
 
 ## Supported schemes
 
