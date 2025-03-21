@@ -37,6 +37,7 @@ first one can be removed anytime.
   inst.config_url=http://192.168.122.1/my-agama.yaml
   inst.config_url=usb:///agama.yaml
   ```
+
 - `inst.dud`
   Allows to patch or extend the Live Media by ponting to so called Driver Update. It currently
   supports only RPM packages. See more about supported URLs at [URLs section](/docs/user/urls).
