@@ -34,7 +34,7 @@ rather useful:
 The typical protocols are enough for most use cases. However, more specific URLs
 can be handy in many situations. For instance, instead of serving your profile
 through HTTP, you could just put it on a USB stick and tell Agama about it with
-`usb:///profile.json`. Agama would search in all your USB devices for the
+`usb:///profile.json`. Agama would search on all your USB devices for the
 profile to use. Cool, right?
 
 Let's have a look to the different kind of URLs that Agama offers.
@@ -68,7 +68,7 @@ device:///cciss/c1d0p5/sles.json
 
 The `usb://` scheme is a particular form of the `device://` but limited to USB
 devices. As mentioned before, the following URL will search the
-`profile/sles.json` in all USB devices.
+`profile/sles.json` on all USB devices.
 
 ```text
 usb:///profile/sles.json
