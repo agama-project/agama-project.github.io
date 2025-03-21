@@ -16,16 +16,16 @@ to extend.
 
 :::warning
 Originally `agama.` prefix used to be used for Agama related kernel boot options. This is obsolete now
-as we started to use more generic `inst.` prefix now. For now both prefixes can be used but support for the 
+as we started to use more generic `inst.` prefix now. For now both prefixes can be used but support for the
 first one can be removed anytime.
 :::
 
 - `inst.auto`:
-  Tells the installer to use the profile in the given URL to start an unattended installation.
+  Tells the installer to use the profile in the given URL to start an unattended installation. Check
+  the [URLs section](/docs/user/urls) to learn more about which URLs Agama supports.
 
   ```text
   inst.auto=http://mydomain.org/tumbleweed.jsonnet
-
   ```
 
 - `inst.config_url`: it uses the file at the given URL as the new Agama configuration. Please, do
