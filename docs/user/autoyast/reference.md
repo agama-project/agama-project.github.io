@@ -258,18 +258,18 @@ This section is supported.
 
 This section is supported.
 
-| AutoYaST                           | Supported | Agama                       | Notes                                                  |
-| ---------------------------------- | --------- | --------------------------- | ------------------------------------------------------ |
-| `do_registration`                  | yes       |                             | The whole suse_register section is ignored if "false". |
-| `email`                            | yes       | `product.registrationEmail` |                                                        |
-| `install_updates`                  | no        |                             |                                                        |
-| `reg_code`                         | yes       | `product.registrationCode`  |                                                        |
-| `reg_server`                       | planned   |                             |                                                        |
-| `reg_server_cert`                  | planned   |                             |                                                        |
-| `reg_server_cert_fingerprint`      | planned   |                             |                                                        |
-| `reg_server_cert_fingerprint_type` | planned   |                             |                                                        |
-| `addons`                           | planned   |                             |                                                        |
-| `slp_discovery`                    | planned   |                             |                                                        |
+| AutoYaST                           | Supported | Agama                       | Notes                                                                    |
+| ---------------------------------- | --------- | --------------------------- | ------------------------------------------------------------------------ |
+| `do_registration`                  | yes       |                             | The whole suse_register section is ignored if "false".                   |
+| `email`                            | yes       | `product.registrationEmail` |                                                                          |
+| `install_updates`                  | no        |                             |                                                                          |
+| `reg_code`                         | yes       | `product.registrationCode`  |                                                                          |
+| `reg_server`                       | planned   |                             |                                                                          |
+| `reg_server_cert`                  | planned   |                             |                                                                          |
+| `reg_server_cert_fingerprint`      | planned   |                             |                                                                          |
+| `reg_server_cert_fingerprint_type` | planned   |                             |                                                                          |
+| `addons[]`                         | yes       | `product.addons[]`          | Does not check the dependencies, it registers addons in the given order. |
+| `slp_discovery`                    | planned   |                             |                                                                          |
 
 ## timezone
 
