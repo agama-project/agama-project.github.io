@@ -39,7 +39,7 @@ first one can be removed anytime.
   ```
 
 - `inst.dud`
-  Allows to patch or extend the Live Media by ponting to so called Driver Update. It currently
+  Allows to patch or extend the Live Media by pointing to so called Driver Update. It currently
   supports only RPM packages. See more about supported URLs at [URLs section](/docs/user/urls).
   No checks of dependencies and no validation is currently provided. Multiple entries are allowed,
   but each of them is handled separately on its own.
