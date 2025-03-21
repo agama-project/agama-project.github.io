@@ -46,7 +46,7 @@ first one can be removed anytime.
 
 ```text
 inst.dud=https://download.opensuse.org/some-project/some.rpm
-inst.dud=label://OEMDRV/package.rpm
+inst.dud=label://UPDATES/package.rpm
 ```
 
 - `inst.info`
