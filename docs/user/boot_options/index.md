@@ -114,24 +114,22 @@ inst.dud=label://UPDATES/package.rpm
   avoids accidentally using the default password from the medium.
   :::
 
-- `live.password_dialog` Start an interactive dialog during the boot process. This uses a nice
+- `live.password_dialog=1` Start an interactive dialog during the boot process. This uses a nice
   dialog for entering and confirming the password. However, in some situations the full screen dialog
   might not be displayed correctly or some messages might be displayed over it. In that case you might
   use the `Ctrl+L` key shortcut to refresh the screen. If it still does not work then try using the
   other option below.
 
   ```text
-  live.password_dialog
   live.password_dialog=1
   ```
 
-- `live.password_systemd` Ask for a password using a simple prompt. This is
+- `live.password_systemd=1` Ask for a password using a simple prompt. This is
   similar to the option above, but the advantage is that this solution does not use a full screen
   dialog but a single line prompt so it should work better in special environments like a serial
   console.
 
   ```text
-  live.password_systemd
   live.password_systemd=1
   ```
 
