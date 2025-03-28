@@ -28,7 +28,7 @@ the three scripts types, and each key can contain a list of scripts.
     pre: [
       {
         name: "activate-multipath",
-        body: |||
+        content: |||
           #!/usr/bin/bash
           systemctl start multipathd.socket multipathd.service
         |||
@@ -38,7 +38,7 @@ the three scripts types, and each key can contain a list of scripts.
       {
         name: "enable-sshd",
         chroot: true,
-        body: |||
+        content: |||
           #!/usr/bin/bash
           systemctl enable sshd.service
         |||
@@ -64,7 +64,7 @@ If you prefer JSON, you can write the `\n` to separate lines.
 {
   "name": "enable-sshd",
   "chroot": true,
-  "body": "#!/usr/bin/bash\nsystemctl enable sshd.service"
+  "content": "#!/usr/bin/bash\nsystemctl enable sshd.service"
 }
 ```
 
@@ -75,10 +75,10 @@ If you prefer JSON, you can write the `\n` to separate lines.
 All scripts share the same elements:
 
 - `name`: a name to identify the script. It makes it easier to find the script logs.
-- `body`: the content of the script. It is important to include the _shebang_ as the first line of
-  the script.
-- `url`: alternatively to the `body`, you can define a URL to download the script. The scripts are
-  downloaded and written to the disk after the profile is imported.
+- `content`: the content of the script. It is important to include the _shebang_ as the first line
+  of the script.
+- `url`: alternatively to the `content`, you can define a URL to download the script. The scripts
+  are downloaded and written to the disk after the profile is imported.
 
 Check the following sections to find out the differences between the script types.
 
