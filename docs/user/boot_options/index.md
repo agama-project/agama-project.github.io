@@ -142,7 +142,7 @@ inst.dud=label://UPDATES/package.rpm
   ```
 
 - `systemd.unit`: standard way to change target for systemd boot. It is useful for head-less mode
-  when wayland neither browsers needs to be started locally.
+  when graphical interface neither browser needs to be started locally.
 
   ```text
   systemd.unit=multi-user.target
