@@ -141,6 +141,13 @@ inst.dud=label://UPDATES/package.rpm
   proxy=http://192.168.122.1:3128
   ```
 
+- `systemd.unit`: standard way to change target for systemd boot. It is useful for head-less mode
+  when graphical interface neither browser needs to be started locally.
+
+  ```text
+  systemd.unit=multi-user.target
+  ```
+
 <!-- TODO: move this tip to a better place -->
 
 :::tip Technical tip
