@@ -7,56 +7,55 @@ sidebar_position: 4
 Agama is a project under constant development and priorities are re-evaluated every few weeks. This
 page offers an overview on the current state of the ever-changing development plans.
 
-## Agama 12 (latest released version)
-
-- New user interface based on PatternFly v6.
-- Revamped "Storage" section at the web user interface. Support for LVM is temporarily removed.
-- First version of a new "Authentication" section at the web user interface, replacing the
-  previous "Users" one.
-- Better information about AutoYaST compatibility offered at runtime.
-- Improved handling of failed integrity checks for software packages.
-- Support to register against a SUSE Customer Center proxy.
-- Post-partitioning scripts.
-- Improvements at Agama-live (the default installation media).
-  - Better configuration for the underlying IceWM.
-  - Possibility to open xterm (ctrl+alt+t).
-  - Disable power-saving and screensaver.
-
-## Agama 13 (~ March 21st)
+## Agama 13 (latest released version)
 
 - Ability to define the hostname.
-- Restore support for LVM at the "Storage" section of the user interface.
-- Allow to solve conflicts for patterns at the user interface.
 - Improvements in the i18n architecture.
-- Reorganize the commands `config` and `profile` at the command-line interface.
-- Enhancements on registration.
-  - Support for extensions.
-  - Handling of self-signed certificates for RMT and SCC proxy.
+- Initial support for LVM at the "Storage" section of the user interface.
+- User interface to specify file system labels.
 - Improvements at unattended installation.
-  - Support to select individual software packages (beyond patterns).
+  - Configuration of SUSE Customer Center extensions
+  - Selection of individual software packages (beyond patterns).
   - Support for AutoYaST/SUSE-specific URLs.
   - Automatically search for the configuration (profile) at same locations as AutoYaST.
   - New configuration section analogous to the `<files />` AutoYaST element.
 
 ## Agama 14 (~ April 21st)
 
-- Welcome screen for local installation.
-- Deal with multiple real-time clocks.
+- Use Wayland instead of X11 at Agama-live (the default installation media).
+- Handling of self-signed certificates for RMT and SCC proxy.
+- User interface for managing extensions.
+- Revamped user interface for network configuration.
+- Enhancements on remote operation using the command-line interface.
+- Changes at LVM management
+  - Improvements in the user interface.
+  - Handling of the LVM devices file.
 - Improvements at unattended installation.
-  - Importing ask-lists from AutoYaST profiles (at least partially).
-  - Defining MD RAIDs at the `storage` section.
-  - Configuring DASD, zFCP and iSCSI.
-  - Services management.
+  - Configuration of iSCSI connections.
+  - Definition of network bridges.
+  - Configurable timeout and extra boot arguments for boot loader.
+
+## Agama 15 (~ May 26th)
+
+- Allow to solve conflicts for patterns at the user interface.
 - Enhancements at the command-line interface
   - Implement a `monitor` command.
   - Finish support to interact remotely.
   - Usability improvements.
+- Improvements at unattended installation.
+  - Importing ask-lists from AutoYaST profiles (at least partially).
+  - Setting network VLANs.
+  - Defining MD RAIDs at the `storage` section.
+  - Configuring DASD and zFCP.
+  - Managing services.
 
 ## Mid term plans (~ September)
 
+- Welcome screen for local installation.
+- Reorganize the commands `config` and `profile` at the command-line interface.
 - Ability to adjust some simple settings related to security.
 - Basic management of Kdump configuration.
-- Use Wayland instead of X11 at Agama-live (the default installation media).
+- Deal with multiple real-time clocks.
 - Improvements in network configuration.
   - Usability fixes of the user interface.
   - Ability to configure DNS search domains per interface.
@@ -66,7 +65,6 @@ page offers an overview on the current state of the ever-changing development pl
 - Re-evaluate some aspects of storage handling.
   - Support for GPT IDs (fstab-less systems).
   - Reconsider version of RAID metadata.
-  - Support for LVM use of system/devices.
   - Better logic for automatically calculated file system sizes.
 - iSCSI offloading and better support for iBFT.
 - Automatically import the registration code from a USB device.
