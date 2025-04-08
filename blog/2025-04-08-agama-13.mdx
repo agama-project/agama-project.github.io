@@ -19,7 +19,7 @@ to implement - the ability to set a name for the machine (ie. hostname) during i
 naked truth is that it took us some time to open that can of worms because it is a rather
 complicated topic.
 
-First of all, there is nothing like an unique hostname since a machine can have different
+First of all, there is nothing like a unique hostname since a machine can have different
 names depending on the network interface used to interact with it. Moreover, those names can be
 static or transient and there are several mechanisms to set or modify them with relatively complex
 precedence rules in several situations.
@@ -52,7 +52,7 @@ The new interface is still a bit rough around the edges but already allows to de
 volume groups with any number of logical volumes. Agama will automatically calculate all the final
   sizes both for the logical volumes and for the partitions needed to host the LVM physical volumes.
 
-## Register extensions from SUSE Customer Center {#extensions}
+## Register extensions from the SUSE Customer Center {#extensions}
 
 The possibilities offered by default by any (open)SUSE Linux distribution can be extended adding
 extra repositories. In the case of enterprise-grade products like SLES that means activating
@@ -79,7 +79,7 @@ that can be added to any installation of SUSE Linux Enterprise Server thanks to 
 }
 ```
 
-As you already know. Adding a feature to the Agama configuration implies it can be used during
+As you already know, adding a feature to the Agama configuration implies it can be used during
 unattended installation and also on interactive installations using the command-line interface. But
 it does not imply such a feature will be automatically available at the web user interface of Agama.
 
@@ -87,7 +87,7 @@ In the case of registering extensions, we are already working to make it possibl
 for Agama 14, expected to be released by the end of April. That is not the case for another of the
 features we recently added to the Agama configuration.
 
-## Selection of individual packages to install {#packages}
+## Selecting individual packages to install {#packages}
 
 Similar to the `product` section, Agama 13 also extends the `software` one with new possibilities.
 In addition to the previously available list of patterns, now it is also possible to specify a list
@@ -111,7 +111,7 @@ As you may know, one of the goals of Agama is to provide a seamless transition f
 implies being able to read the configuration for the unattended installation from the same locations
 that AutoYaST can handle.
 
-The configuration is usually indicated by an URL that is passed to the installer. But AutoYaST URLs
+The configuration is usually indicated by a URL that is passed to the installer. But AutoYaST URLs
 are one of a kind - they support all kind of non-standard schemes like `device://` or `label://`, each
 of them with their own AutoYaST-specific semantic.
 
@@ -147,7 +147,7 @@ The first file found is used as the profile, starting the installation right awa
 
 ## Deploy files during installation {#files}
 
-Going further into the role of Agama as an AutoYaST successor, you may now that AutoYaST allows
+Going further into the role of Agama as an AutoYaST successor, you may know that AutoYaST allows
 to deploy complete configuration files using the `<files />` element. Just like scripts, it is
 possible to embed the file content in the profile or, if preferred, to retrieve it from a remote
 location.
