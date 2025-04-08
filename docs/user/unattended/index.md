@@ -108,5 +108,14 @@ sudo agama config show > profile.json
 ## Starting the installation
 
 To start an unattended installation process, you need to tell Agama where to find the profile. When
-using the Live ISO, you must use the `inst.auto` boot option. Please, check the [boot
-options](../boot_options/index.md) for further information.
+using the Live ISO, you must use the `inst.auto` boot option. Please, check the
+[boot options](../boot_options/index.md) for further information.
+
+If you do not specify any profile, Agama will automatically search for it in a few predefined
+locations. Agama expects a file named `autoinst.jsonnet`, `autoinst.json` or `autoinst.xml` (in that
+order) to be located on:
+
+- The root of a file system named `OEMDRV`.
+- Or the root (`/`) of the installation environment.
+
+The first file found is used as the profile, starting the installation right away.
