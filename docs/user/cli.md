@@ -149,7 +149,7 @@ Schema is available at /usr/share/agama-cli/profile.schema.json
 
 ###### **Arguments:**
 
-- `<PATH>` — Local path to the JSON file to validate
+- `<URL_OR_PATH>` — JSON file, URL or path or `-` for standard input
 
 ## `agama profile evaluate`
 
@@ -161,7 +161,7 @@ For an example of Jsonnet-based profile, see https://github.com/openSUSE/agama/b
 
 ###### **Arguments:**
 
-- `<PATH>` — Path to jsonnet file
+- `<URL_OR_PATH>` — Jsonnet file, URL or path or `-` for standard input
 
 ## `agama profile import`
 
@@ -169,12 +169,11 @@ Process autoinstallation profile and loads it into agama
 
 This is top level command that do all autoinstallation processing beside starting installation. Unless there is a need to inject additional commands between processing use this command instead of set of underlying commands.
 
-**Usage:** `agama profile import <URL> [DIR]`
+**Usage:** `agama profile import <URL>`
 
 ###### **Arguments:**
 
 - `<URL>` — Profile's URL. Supports the same schemas than te "download" command plus AutoYaST specific ones. Supported files are json, jsonnet, sh for Agama profiles and ERB, XML, and rules/classes directories for AutoYaST support
-- `<DIR>` — Specific directory where all processing happens. By default it uses a temporary directory
 
 ## `agama questions`
 
