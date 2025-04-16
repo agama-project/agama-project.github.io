@@ -268,8 +268,14 @@ This section is supported.
 | `reg_server_cert`                  | planned   |                             |                                                        |
 | `reg_server_cert_fingerprint`      | planned   |                             |                                                        |
 | `reg_server_cert_fingerprint_type` | planned   |                             |                                                        |
-| `addons`                           | planned   |                             |                                                        |
+| `addons`                           | yes       | `product.addons[]`          | The addon version value is optional, see details below.|
 | `slp_discovery`                    | planned   |                             |                                                        |
+
+If the addon version is not specified in the Agama installation profile it is
+automatically found in the list of the available addons on the server.
+It is mandatory only when the addon is available in multiple versions to
+explicitly select which one to install. In AutoYaST the version was always
+mandatory.
 
 ## timezone
 
