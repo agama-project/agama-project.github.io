@@ -273,7 +273,6 @@ This section is supported.
 
 If the addon version is not specified in the Agama installation profile it is
 automatically found in the list of the available addons on the server.
-
 It is mandatory only when the addon is available in multiple versions to
 explicitly select which one to install. In AutoYaST the version was always
 mandatory.
