@@ -1,35 +1,35 @@
-# Command-line interface reference
+# Command-line reference
 
 This document contains the help content for the `agama` command-line program.
 
 **Command Overview:**
 
-- [`agama`↴](#agama)
-- [`agama config`↴](#agama-config)
-- [`agama config show`↴](#agama-config-show)
-- [`agama config load`↴](#agama-config-load)
-- [`agama config edit`↴](#agama-config-edit)
-- [`agama probe`↴](#agama-probe)
-- [`agama install`↴](#agama-install)
-- [`agama profile`↴](#agama-profile)
-- [`agama profile autoyast`↴](#agama-profile-autoyast)
-- [`agama profile validate`↴](#agama-profile-validate)
-- [`agama profile evaluate`↴](#agama-profile-evaluate)
-- [`agama profile import`↴](#agama-profile-import)
-- [`agama questions`↴](#agama-questions)
-- [`agama questions mode`↴](#agama-questions-mode)
-- [`agama questions answers`↴](#agama-questions-answers)
-- [`agama questions list`↴](#agama-questions-list)
-- [`agama questions ask`↴](#agama-questions-ask)
-- [`agama logs`↴](#agama-logs)
-- [`agama logs store`↴](#agama-logs-store)
-- [`agama logs list`↴](#agama-logs-list)
-- [`agama auth`↴](#agama-auth)
-- [`agama auth login`↴](#agama-auth-login)
-- [`agama auth logout`↴](#agama-auth-logout)
-- [`agama auth show`↴](#agama-auth-show)
-- [`agama download`↴](#agama-download)
-- [`agama finish`↴](#agama-finish)
+* [`agama`↴](#agama)
+* [`agama config`↴](#agama-config)
+* [`agama config show`↴](#agama-config-show)
+* [`agama config load`↴](#agama-config-load)
+* [`agama config edit`↴](#agama-config-edit)
+* [`agama probe`↴](#agama-probe)
+* [`agama install`↴](#agama-install)
+* [`agama profile`↴](#agama-profile)
+* [`agama profile autoyast`↴](#agama-profile-autoyast)
+* [`agama profile validate`↴](#agama-profile-validate)
+* [`agama profile evaluate`↴](#agama-profile-evaluate)
+* [`agama profile import`↴](#agama-profile-import)
+* [`agama questions`↴](#agama-questions)
+* [`agama questions mode`↴](#agama-questions-mode)
+* [`agama questions answers`↴](#agama-questions-answers)
+* [`agama questions list`↴](#agama-questions-list)
+* [`agama questions ask`↴](#agama-questions-ask)
+* [`agama logs`↴](#agama-logs)
+* [`agama logs store`↴](#agama-logs-store)
+* [`agama logs list`↴](#agama-logs-list)
+* [`agama auth`↴](#agama-auth)
+* [`agama auth login`↴](#agama-auth-login)
+* [`agama auth logout`↴](#agama-auth-logout)
+* [`agama auth show`↴](#agama-auth-show)
+* [`agama download`↴](#agama-download)
+* [`agama finish`↴](#agama-finish)
 
 ## `agama`
 
@@ -39,18 +39,32 @@ This program allows inspecting or changing Agama's configuration, handling insta
 
 Please, use the "help" command to learn more.
 
-**Usage:** `agama <COMMAND>`
+**Usage:** `agama [OPTIONS] <COMMAND>`
 
 ###### **Subcommands:**
 
-- `config` — Inspect or change the installation settings
-- `probe` — Analyze the system
-- `install` — Start the system installation
-- `profile` — Manage auto-installation profiles (retrieving, applying, etc.)
-- `questions` — Handle installer questions
-- `logs` — Collect the installer logs
-- `auth` — Authenticate with Agama's server
-- `download` — Download file from given URL
+* `config` — Inspect or change the installation settings
+* `probe` — Analyze the system
+* `install` — Start the system installation
+* `profile` — Manage auto-installation profiles (retrieving, applying, etc.)
+* `questions` — Handle installer questions
+* `logs` — Collect the installer logs
+* `auth` — Authenticate with Agama's server
+* `download` — Download file from given URL
+* `finish` — Finish the installation
+
+###### **Options:**
+
+* `--host <HOST>` — URI pointing to Agama's remote host.
+
+   Examples: https://my-server.lan my-server.local localhost:10443
+
+  Default value: `http://localhost`
+* `--insecure` — Whether to accept invalid (self-signed, ...) certificates or not
+
+  Default value: `false`
+
+
 
 ## `agama config`
 
@@ -64,9 +78,11 @@ If you want to change any configuration value, you can load a profile (complete 
 
 ###### **Subcommands:**
 
-- `show` — Generate an installation profile with the current settings
-- `load` — Read and load a profile from the standard input
-- `edit` — Edit and update installation option using an external editor
+* `show` — Generate an installation profile with the current settings
+* `load` — Read and load a profile from the standard input
+* `edit` — Edit and update installation option using an external editor
+
+
 
 ## `agama config show`
 
@@ -78,11 +94,15 @@ The output of command can be used as input for the "agama config load".
 
 **Usage:** `agama config show`
 
+
+
 ## `agama config load`
 
 Read and load a profile from the standard input
 
 **Usage:** `agama config load`
+
+
 
 ## `agama config edit`
 
@@ -96,7 +116,9 @@ If an editor is not specified, it honors the EDITOR environment variable. It fal
 
 ###### **Options:**
 
-- `-e`, `--editor <EDITOR>` — Editor command (including additional arguments if needed)
+* `-e`, `--editor <EDITOR>` — Editor command (including additional arguments if needed)
+
+
 
 ## `agama probe`
 
@@ -106,15 +128,19 @@ In Agama's jargon, the term 'probing' refers to the process of 'analyzing' the s
 
 **Usage:** `agama probe`
 
+
+
 ## `agama install`
 
 Start the system installation.
 
-This command starts the installation process. Beware it is a destructive operation because it will set up the storage devices, install the packages, etc.
+This command starts the installation process.  Beware it is a destructive operation because it will set up the storage devices, install the packages, etc.
 
 When the preconditions for the installation are not met, it informs the user and returns, making no changes to the system.
 
 **Usage:** `agama install`
+
+
 
 ## `agama profile`
 
@@ -124,10 +150,12 @@ Manage auto-installation profiles (retrieving, applying, etc.)
 
 ###### **Subcommands:**
 
-- `autoyast` — Download the autoyast profile and print resulting json
-- `validate` — Validate a profile using JSON Schema
-- `evaluate` — Evaluate a profile, injecting the hardware information from D-Bus
-- `import` — Process autoinstallation profile and loads it into agama
+* `autoyast` — Download the autoyast profile and print resulting json
+* `validate` — Validate a profile using JSON Schema
+* `evaluate` — Evaluate a profile, injecting the hardware information from D-Bus
+* `import` — Process autoinstallation profile and loads it into agama
+
+
 
 ## `agama profile autoyast`
 
@@ -137,7 +165,9 @@ Download the autoyast profile and print resulting json
 
 ###### **Arguments:**
 
-- `<URL>` — AutoYaST profile's URL. Any AutoYaST scheme, ERB and rules/classes are supported. all schemas that autoyast supports
+* `<URL>` — AutoYaST profile's URL. Any AutoYaST scheme, ERB and rules/classes are supported. all schemas that autoyast supports
+
+
 
 ## `agama profile validate`
 
@@ -145,11 +175,13 @@ Validate a profile using JSON Schema
 
 Schema is available at /usr/share/agama-cli/profile.schema.json
 
-**Usage:** `agama profile validate <PATH>`
+**Usage:** `agama profile validate <URL_OR_PATH>`
 
 ###### **Arguments:**
 
-- `<URL_OR_PATH>` — JSON file, URL or path or `-` for standard input
+* `<URL_OR_PATH>` — JSON file, URL or path or `-` for standard input
+
+
 
 ## `agama profile evaluate`
 
@@ -157,11 +189,13 @@ Evaluate a profile, injecting the hardware information from D-Bus
 
 For an example of Jsonnet-based profile, see https://github.com/openSUSE/agama/blob/master/rust/agama-lib/share/examples/profile.jsonnet
 
-**Usage:** `agama profile evaluate <PATH>`
+**Usage:** `agama profile evaluate <URL_OR_PATH>`
 
 ###### **Arguments:**
 
-- `<URL_OR_PATH>` — Jsonnet file, URL or path or `-` for standard input
+* `<URL_OR_PATH>` — Jsonnet file, URL or path or `-` for standard input
+
+
 
 ## `agama profile import`
 
@@ -173,7 +207,9 @@ This is top level command that do all autoinstallation processing beside startin
 
 ###### **Arguments:**
 
-- `<URL>` — Profile's URL. Supports the same schemas than te "download" command plus AutoYaST specific ones. Supported files are json, jsonnet, sh for Agama profiles and ERB, XML, and rules/classes directories for AutoYaST support
+* `<URL>` — Profile's URL. Supports the same schemas as the "download" command plus AutoYaST specific ones. Supported files are json, jsonnet, sh for Agama profiles and ERB, XML, and rules/classes directories for AutoYaST support
+
+
 
 ## `agama questions`
 
@@ -187,10 +223,12 @@ This command allows answering such questions directly from the command-line.
 
 ###### **Subcommands:**
 
-- `mode` — Set the mode for answering questions
-- `answers` — Load predefined answers
-- `list` — Prints the list of questions that are waiting for an answer in JSON format
-- `ask` — Reads a question definition in JSON from stdin and prints the response when it is answered
+* `mode` — Set the mode for answering questions
+* `answers` — Load predefined answers
+* `list` — Prints the list of questions that are waiting for an answer in JSON format
+* `ask` — Reads a question definition in JSON from stdin and prints the response when it is answered
+
+
 
 ## `agama questions mode`
 
@@ -200,14 +238,16 @@ Set the mode for answering questions
 
 ###### **Arguments:**
 
-- `<VALUE>`
+* `<VALUE>`
 
   Possible values:
-
   - `interactive`:
     Ask the user and block the installation
   - `non-interactive`:
     Do not block the installation
+
+
+
 
 ## `agama questions answers`
 
@@ -221,7 +261,9 @@ Please check Agama documentation for more details and examples: https://github.c
 
 ###### **Arguments:**
 
-- `<PATH>` — Path to a file containing the answers in YAML format
+* `<PATH>` — Path to a file containing the answers in JSON format
+
+
 
 ## `agama questions list`
 
@@ -229,11 +271,15 @@ Prints the list of questions that are waiting for an answer in JSON format
 
 **Usage:** `agama questions list`
 
+
+
 ## `agama questions ask`
 
 Reads a question definition in JSON from stdin and prints the response when it is answered
 
 **Usage:** `agama questions ask`
+
+
 
 ## `agama logs`
 
@@ -245,8 +291,10 @@ The installer logs are stored in a compressed archive for further inspection. Th
 
 ###### **Subcommands:**
 
-- `store` — Collect and store the logs in a tar archive
-- `list` — List the logs to collect
+* `store` — Collect and store the logs in a tar archive
+* `list` — List the logs to collect
+
+
 
 ## `agama logs store`
 
@@ -256,14 +304,17 @@ Collect and store the logs in a tar archive
 
 ###### **Options:**
 
-- `-v`, `--verbose` — Verbose output
-- `-d`, `--destination <DESTINATION>` — Path to destination directory and, optionally, the archive file name. The extension will be added automatically
+* `-d`, `--destination <DESTINATION>` — Path to destination directory and, optionally, the archive file name. The extension will be added automatically
+
+
 
 ## `agama logs list`
 
 List the logs to collect
 
 **Usage:** `agama logs list`
+
+
 
 ## `agama auth`
 
@@ -279,9 +330,11 @@ You can logout at any time by using the "auth logout" command, although this com
 
 ###### **Subcommands:**
 
-- `login` — Authenticate with Agama's server and store the token
-- `logout` — Deauthenticate by removing the token
-- `show` — Print the used token to the standard output
+* `login` — Authenticate with Agama's server and store the token
+* `logout` — Deauthenticate by removing the token
+* `show` — Print the used token to the standard output
+
+
 
 ## `agama auth login`
 
@@ -291,11 +344,15 @@ This command tries to get the password from the standard input. If it is not the
 
 **Usage:** `agama auth login`
 
+
+
 ## `agama auth logout`
 
 Deauthenticate by removing the token
 
 **Usage:** `agama auth logout`
+
+
 
 ## `agama auth show`
 
@@ -303,36 +360,44 @@ Print the used token to the standard output
 
 **Usage:** `agama auth show`
 
+
+
 ## `agama download`
 
 Download file from given URL
 
 The purpose of this command is to download files using AutoYaST supported schemas (e.g. device:// or relurl://). It can be used to download additional scripts, configuration files and so on. You can use it for downloading Agama autoinstallation profiles. However, unless you need additional processing, the "agama profile import" is recommended. If you want to convert an AutoYaST profile, use "agama profile autoyast".
 
-**Usage:** `agama download <URL>`
+**Usage:** `agama download <URL> <DESTINATION>`
 
 ###### **Arguments:**
 
-- `<URL>` — URL pointing to file for download
+* `<URL>` — URL pointing to file for download
+* `<DESTINATION>` — File name
+
+
 
 ## `agama finish`
 
-Finish the installation rebooting the system by default
+Finish the installation
 
 **Usage:** `agama finish [METHOD]`
 
 ###### **Arguments:**
 
-- `<METHOD>` — Action to be done at the end of the installation
+* `<METHOD>` — What to do after finishing the installation. Possible values:
 
-Possible values:
+   stop - do not reboot and the Agama backend continues running.
 
-- `stop`:
-  Stop the installation at its end, at the "Congratulations! [Reboot]" screen,
-  leaving the backend running
-- `reboot` (default):
-  Reboot into the installed system
-- `halt`:
-  Halt the installed machine
-- `poweroff`:
-  Poweroff the installed machine
+   reboot - reboot into the installed system.
+
+   halt - halt the installed machine.
+
+   poweroff - power off the installed machine.
+
+  Default value: `reboot`
+
+
+
+---
+NOTE: This documentation is generated. Run `cargo xtask markdown` to update it.
