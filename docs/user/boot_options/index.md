@@ -51,10 +51,10 @@ first one can be removed anytime.
   No checks of dependencies and no validation is currently provided. Multiple entries are allowed,
   but each of them is handled separately on its own.
 
-```text
-inst.dud=https://download.opensuse.org/some-project/some.rpm
-inst.dud=label://UPDATES/package.rpm
-```
+  ```text
+  inst.dud=https://download.opensuse.org/some-project/some.rpm
+  inst.dud=label://UPDATES/package.rpm
+  ```
 
 - `inst.info`
   Points to info file that contains additional Agama settings. It is useful when you want to provide
