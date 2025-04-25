@@ -38,23 +38,30 @@ first one can be removed anytime.
   inst.config_url=usb:///agama.yaml
   ```
 
+- `inst.copy_network`: whether the NetworkManager persistent system connections should be copied to
+  the target system at the end of the installation or not. The copy is enabled by default.
+
+  ```text
+  inst.copy_network=0
+  ```
+
 - `inst.dud`
   Allows to patch or extend the Live Media by pointing to so called Driver Update. It currently
   supports only RPM packages. See more about supported URLs at [URLs section](/docs/user/urls).
   No checks of dependencies and no validation is currently provided. Multiple entries are allowed,
   but each of them is handled separately on its own.
 
-```text
-inst.dud=https://download.opensuse.org/some-project/some.rpm
-inst.dud=label://UPDATES/package.rpm
-```
+  ```text
+  inst.dud=https://download.opensuse.org/some-project/some.rpm
+  inst.dud=label://UPDATES/package.rpm
+  ```
 
 - `inst.info`
   Points to info file that contains additional Agama settings. It is useful when you want to provide
   more options for Agama and typing them during boot is not possible.
 
   ```text
-  agama.info=ftp://myserver/devel.info
+  inst.info=ftp://myserver/devel.info
   ```
 
   :::note
