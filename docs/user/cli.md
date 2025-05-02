@@ -92,7 +92,11 @@ It is possible that many configuration settings do not have a value. Those setti
 
 The output of command can be used as input for the "agama config load".
 
-**Usage:** `agama config show`
+**Usage:** `agama config show [OPTIONS]`
+
+###### **Options:**
+
+* `-o`, `--output <FILE_PATH>` — Save the output here (goes to stdout if not given)
 
 
 
@@ -100,8 +104,11 @@ The output of command can be used as input for the "agama config load".
 
 Read and load a profile from the standard input
 
-**Usage:** `agama config load`
+**Usage:** `agama config load URL_OR_PATH`
 
+###### **Arguments:**
+
+* `<URL_OR_PATH>` — JSON file, URL or path or `-` for standard input
 
 
 ## `agama config edit`
@@ -158,6 +165,12 @@ Schema is available at /usr/share/agama-cli/profile.schema.json
 ## `agama config generate`
 
 Generate and print a native Agama JSON configuration from any kind and location.
+
+**Usage:** `agama config generate [OPTIONS]`
+
+###### **Options:**
+
+* `-o`, `--output <FILE_PATH>` — Save the output here (goes to stdout if not given)
 
 Kinds:
 - JSON
@@ -335,12 +348,15 @@ Download file from given URL
 
 The purpose of this command is to download files using AutoYaST supported schemas (e.g. device:// or relurl://). It can be used to download additional scripts, configuration files and so on. You can use it for downloading Agama autoinstallation profiles. However, unless you need additional processing, the "agama profile import" is recommended. If you want to convert an AutoYaST profile, use "agama profile autoyast".
 
-**Usage:** `agama download <URL> <DESTINATION>`
+**Usage:** `agama download [OPTIONS] <URL>`
+
+###### **Options:**
+
+* `-o`, `--output <FILE_PATH>` — Save the output here (goes to stdout if not given)
 
 ###### **Arguments:**
 
 * `<URL>` — URL pointing to file for download
-* `<DESTINATION>` — File name
 
 
 
