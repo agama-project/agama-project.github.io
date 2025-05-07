@@ -92,7 +92,11 @@ It is possible that many configuration settings do not have a value. Those setti
 
 The output of command can be used as input for the "agama config load".
 
-**Usage:** `agama config show`
+**Usage:** `agama config show [OPTIONS]`
+
+###### **Options:**
+
+* `-o`, `--output <FILE_PATH>` — Save the output here (goes to stdout if not given)
 
 
 
@@ -100,8 +104,11 @@ The output of command can be used as input for the "agama config load".
 
 Read and load a profile from the standard input
 
-**Usage:** `agama config load`
+**Usage:** `agama config load URL_OR_PATH`
 
+###### **Arguments:**
+
+* `<URL_OR_PATH>` — JSON file, URL or path or `-` for standard input
 
 
 ## `agama config edit`
@@ -142,73 +149,46 @@ When the preconditions for the installation are not met, it informs the user and
 
 
 
-## `agama profile`
-
-Manage auto-installation profiles (retrieving, applying, etc.)
-
-**Usage:** `agama profile <COMMAND>`
-
-###### **Subcommands:**
-
-* `autoyast` — Download the autoyast profile and print resulting json
-* `validate` — Validate a profile using JSON Schema
-* `evaluate` — Evaluate a profile, injecting the hardware information from D-Bus
-* `import` — Process autoinstallation profile and loads it into agama
-
-
-
-## `agama profile autoyast`
-
-Download the autoyast profile and print resulting json
-
-**Usage:** `agama profile autoyast <URL>`
-
-###### **Arguments:**
-
-* `<URL>` — AutoYaST profile's URL. Any AutoYaST scheme, ERB and rules/classes are supported. all schemas that autoyast supports
-
-
-
-## `agama profile validate`
+## `agama config validate`
 
 Validate a profile using JSON Schema
 
 Schema is available at /usr/share/agama-cli/profile.schema.json
 
-**Usage:** `agama profile validate <URL_OR_PATH>`
+**Usage:** `agama config validate <URL_OR_PATH>`
 
 ###### **Arguments:**
 
 * `<URL_OR_PATH>` — JSON file, URL or path or `-` for standard input
 
 
+## `agama config generate`
 
-## `agama profile evaluate`
+Generate and print a native Agama JSON configuration from any kind and location.
 
-Evaluate a profile, injecting the hardware information from D-Bus
+**Usage:** `agama config generate [OPTIONS]`
+
+###### **Options:**
+
+* `-o`, `--output <FILE_PATH>` — Save the output here (goes to stdout if not given)
+
+Kinds:
+- JSON
+- Jsonnet, injecting the hardware information from D-Bus (WTF D-Bus??)
+- AutoYaST profile, including ERB and rules/classes
+Locations:
+- path
+- URL (inlcuding AutoYaST specific schemes)
+
 
 For an example of Jsonnet-based profile, see https://github.com/openSUSE/agama/blob/master/rust/agama-lib/share/examples/profile.jsonnet
 
-**Usage:** `agama profile evaluate <URL_OR_PATH>`
+
+**Usage:** `agama config generate <URL_OR_PATH>`
 
 ###### **Arguments:**
 
-* `<URL_OR_PATH>` — Jsonnet file, URL or path or `-` for standard input
-
-
-
-## `agama profile import`
-
-Process autoinstallation profile and loads it into agama
-
-This is top level command that do all autoinstallation processing beside starting installation. Unless there is a need to inject additional commands between processing use this command instead of set of underlying commands.
-
-**Usage:** `agama profile import <URL>`
-
-###### **Arguments:**
-
-* `<URL>` — Profile's URL. Supports the same schemas as the "download" command plus AutoYaST specific ones. Supported files are json, jsonnet, sh for Agama profiles and ERB, XML, and rules/classes directories for AutoYaST support
-
+* `<URL_OR_PATH>` — file, URL or path or `-` for standard input
 
 
 ## `agama questions`
@@ -368,12 +348,15 @@ Download file from given URL
 
 The purpose of this command is to download files using AutoYaST supported schemas (e.g. device:// or relurl://). It can be used to download additional scripts, configuration files and so on. You can use it for downloading Agama autoinstallation profiles. However, unless you need additional processing, the "agama profile import" is recommended. If you want to convert an AutoYaST profile, use "agama profile autoyast".
 
-**Usage:** `agama download <URL> <DESTINATION>`
+**Usage:** `agama download [OPTIONS] <URL>`
+
+###### **Options:**
+
+* `-o`, `--output <FILE_PATH>` — Save the output here (goes to stdout if not given)
 
 ###### **Arguments:**
 
 * `<URL>` — URL pointing to file for download
-* `<DESTINATION>` — File name
 
 
 
