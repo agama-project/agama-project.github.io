@@ -12,9 +12,22 @@ Agama. In some cases, you might find a table with the following columns:
 - Agama: name of the Agama element.
 - Comment: any comment or reason about the element.
 
-## files
+## add-on
 
 There are plans to support this section in the future.
+
+## files
+
+This section is supported.
+
+| AutoYaST           | Supported | Agama               | Notes                                                              |
+| ------------------ | --------- | ------------------- | ------------------------------------------------------------------ |
+| `file_path`        | yes       | `files.destination` | Creating directories by using trailing slash is not yet supported. |
+| `file_contents`    | yes       | `files.content`     |                                                                    |
+| `file_location`    | yes       | `files.url`         |                                                                    |
+| `file_owner`       | yes       |                     | In agama it is split to files.user and files.group                 |
+| `file_permissions` | yes       |                     |                                                                    |
+| `file_script`      | planned   |                     |                                                                    |
 
 ## iscsi-client
 
@@ -56,7 +69,6 @@ This section is supported.
 | ------------------------- | --------- | ----- | ----------------------------------- |
 | `backend`                 | no        |       | Only NetworkManager is supported.   |
 | `dhcp_options`            | no        |       |                                     |
-| `dns`                     | no        |       |                                     |
 | `ipv6`                    | yes       |       | It affects `method4` and `method6`. |
 | `keep_install_network`    | no        |       |                                     |
 | `managed`                 | no        |       |                                     |
@@ -68,10 +80,21 @@ This section is supported.
 | `strict_IP_check_timeout` | no        |       |                                     |
 | `virt_bridge_proposal`    | no        |       |                                     |
 
+### networking/dns
+
+This section is supported.
+
+| AutoYaST             | Supported | Agama                                  | Notes                      |
+| -------------------- | --------- | -------------------------------------- | -------------------------- |
+| `dhcp_hostname`      | no        |                                        |                            |
+| `hostname`           | yes       | `hostname.static`                      |                            |
+| `nameservers`        | yes       | `network.connections[].nameservers`    | Copied to each connection. |
+| `resolv_conf_policy` | no        |                                        |                            |
+| `searchlist`         | yes       | `network.connections[].dns_searchlist` | Copied to each connection. |
+
 ### networking/interfaces[]
 
-This section is supported. It corresponds to Agama `connections`, but the format
-is not exactly the same.
+This section is supported. It corresponds to Agama `connections`, but the format is not exactly the same.
 
 | AutoYaST                       | Supported | Agama                                | Notes                                            |
 | ------------------------------ | --------- | ------------------------------------ | ------------------------------------------------ |
@@ -145,8 +168,7 @@ is not exactly the same.
 
 ## proxy
 
-There are plans to support this section in the future. Meanwhile set the proxy
-using the kernels' command line.
+There are plans to support this section in the future. Meanwhile set the proxy using the kernels' command line.
 
 ## scripts
 
@@ -156,45 +178,11 @@ This section is supported.
 
 This section is supported.
 
-| AutoYaST        | Supported | Agama                | Notes                                 |
-| --------------- | --------- | -------------------- | ------------------------------------- |
-| `filename`      | yes       | `scripts.pre[].name` |                                       |
-| `location`      | yes       | `scripts.pre[].url`  |                                       |
-| `source`        | yes       | `scripts.pre[].body` |                                       |
-| `interpreter`   | no        |                      | Use the shebang line in your scripts. |
-| `feedback`      | no        |                      |                                       |
-| `feedback_type` | no        |                      |                                       |
-| `debug`         | no        |                      |                                       |
-| `notification`  | no        |                      |                                       |
-| `param-list`    | no        |                      |                                       |
-| `rerun`         | no        |                      |                                       |
-
-### scripts/postpartitioning-scripts[]
-
-This section is supported.
-
-| AutoYaST        | Supported | Agama                             | Notes                                 |
-| --------------- | --------- | --------------------------------- | ------------------------------------- |
-| `filename`      | yes       | `scripts.postPartitioning[].name` |                                       |
-| `location`      | yes       | `scripts.postPartitioning[].url`  |                                       |
-| `source`        | yes       | `scripts.postPartitioning[].body` |                                       |
-| `interpreter`   | no        |                                   | Use the shebang line in your scripts. |
-| `feedback`      | no        |                                   |                                       |
-| `feedback_type` | no        |                                   |                                       |
-| `debug`         | no        |                                   |                                       |
-| `notification`  | no        |                                   |                                       |
-| `param-list`    | no        |                                   |                                       |
-| `rerun`         | no        |                                   |                                       |
-
-### scripts/chroot-scripts[]
-
-This section is supported.
-
 | AutoYaST        | Supported | Agama                   | Notes                                 |
 | --------------- | --------- | ----------------------- | ------------------------------------- |
-| `filename`      | yes       | `scripts.chroot[].name` |                                       |
-| `location`      | yes       | `scripts.chroot[].url`  |                                       |
-| `source`        | yes       | `scripts.chroot[].body` |                                       |
+| `filename`      | yes       | `scripts.pre[].name`    |                                       |
+| `location`      | yes       | `scripts.pre[].url`     |                                       |
+| `source`        | yes       | `scripts.pre[].content` |                                       |
 | `interpreter`   | no        |                         | Use the shebang line in your scripts. |
 | `feedback`      | no        |                         |                                       |
 | `feedback_type` | no        |                         |                                       |
@@ -203,38 +191,71 @@ This section is supported.
 | `param-list`    | no        |                         |                                       |
 | `rerun`         | no        |                         |                                       |
 
+### scripts/postpartitioning-scripts[]
+
+This section is supported.
+
+| AutoYaST        | Supported | Agama                                | Notes                                 |
+| --------------- | --------- | ------------------------------------ | ------------------------------------- |
+| `filename`      | yes       | `scripts.postPartitioning[].name`    |                                       |
+| `location`      | yes       | `scripts.postPartitioning[].url`     |                                       |
+| `source`        | yes       | `scripts.postPartitioning[].content` |                                       |
+| `interpreter`   | no        |                                      | Use the shebang line in your scripts. |
+| `feedback`      | no        |                                      |                                       |
+| `feedback_type` | no        |                                      |                                       |
+| `debug`         | no        |                                      |                                       |
+| `notification`  | no        |                                      |                                       |
+| `param-list`    | no        |                                      |                                       |
+| `rerun`         | no        |                                      |                                       |
+
+### scripts/chroot-scripts[]
+
+This section is supported.
+
+| AutoYaST        | Supported | Agama                      | Notes                                 |
+| --------------- | --------- | -------------------------- | ------------------------------------- |
+| `filename`      | yes       | `scripts.chroot[].name`    |                                       |
+| `location`      | yes       | `scripts.chroot[].url`     |                                       |
+| `source`        | yes       | `scripts.chroot[].content` |                                       |
+| `interpreter`   | no        |                            | Use the shebang line in your scripts. |
+| `feedback`      | no        |                            |                                       |
+| `feedback_type` | no        |                            |                                       |
+| `debug`         | no        |                            |                                       |
+| `notification`  | no        |                            |                                       |
+| `param-list`    | no        |                            |                                       |
+| `rerun`         | no        |                            |                                       |
+
 ### scripts/post-scripts[]
 
 This section is supported.
 
-| AutoYaST        | Supported | Agama                 | Notes                                 |
-| --------------- | --------- | --------------------- | ------------------------------------- |
-| `filename`      | yes       | `scripts.init[].name` |                                       |
-| `location`      | yes       | `scripts.init[].url`  |                                       |
-| `source`        | yes       | `scripts.init[].body` |                                       |
-| `interpreter`   | no        |                       | Use the shebang line in your scripts. |
-| `feedback`      | no        |                       |                                       |
-| `feedback_type` | no        |                       |                                       |
-| `debug`         | no        |                       |                                       |
-| `notification`  | no        |                       |                                       |
-| `param-list`    | no        |                       |                                       |
-| `rerun`         | no        |                       |                                       |
+| AutoYaST        | Supported | Agama                    | Notes                                 |
+| --------------- | --------- | ------------------------ | ------------------------------------- |
+| `filename`      | yes       | `scripts.init[].name`    |                                       |
+| `location`      | yes       | `scripts.init[].url`     |                                       |
+| `source`        | yes       | `scripts.init[].content` |                                       |
+| `interpreter`   | no        |                          | Use the shebang line in your scripts. |
+| `feedback`      | no        |                          |                                       |
+| `feedback_type` | no        |                          |                                       |
+| `debug`         | no        |                          |                                       |
+| `notification`  | no        |                          |                                       |
+| `param-list`    | no        |                          |                                       |
+| `rerun`         | no        |                          |                                       |
 
 ### scripts/init-scripts[]
 
 This section is supported.
 
-| AutoYaST   | Supported | Agama                 | Notes |
-| ---------- | --------- | --------------------- | ----- |
-| `filename` | yes       | `scripts.init[].name` |       |
-| `location` | yes       | `scripts.init[].url`  |       |
-| `source`   | yes       | `scripts.init[].body` |       |
-| `rerun`    | no        |                       |       |
+| AutoYaST   | Supported | Agama                    | Notes |
+| ---------- | --------- | ------------------------ | ----- |
+| `filename` | yes       | `scripts.init[].name`    |       |
+| `location` | yes       | `scripts.init[].url`     |       |
+| `source`   | yes       | `scripts.init[].content` |       |
+| `rerun`    | no        |                          |       |
 
 ## services-manager
 
-There are plans to support this section in the future. Meanwhile you can use
-post-installation scripts to handle these cases.
+There are plans to support this section in the future. Meanwhile you can use post-installation scripts to handle these cases.
 
 ## software
 
@@ -246,7 +267,7 @@ This section is supported.
 | `install_recommended` | no        |                       |              |
 | `instsource`          | no        |                       |              |
 | `kernel`              | no        |                       |              |
-| `packages[]`          | planned   |                       |              |
+| `packages[]`          | yes       | `software.packages[]` |              |
 | `post-packages[]`     | no        |                       |              |
 | `patterns[]`          | yes       | `software.patterns[]` |              |
 | `products[]`          | yes       | `software.id`         |              |
@@ -258,24 +279,18 @@ This section is supported.
 
 This section is supported.
 
-| AutoYaST                           | Supported | Agama                       | Notes                                                  |
-| ---------------------------------- | --------- | --------------------------- | ------------------------------------------------------ |
-| `do_registration`                  | yes       |                             | The whole suse_register section is ignored if "false". |
-| `email`                            | yes       | `product.registrationEmail` |                                                        |
-| `install_updates`                  | no        |                             |                                                        |
-| `reg_code`                         | yes       | `product.registrationCode`  |                                                        |
-| `reg_server`                       | planned   |                             |                                                        |
-| `reg_server_cert`                  | planned   |                             |                                                        |
-| `reg_server_cert_fingerprint`      | planned   |                             |                                                        |
-| `reg_server_cert_fingerprint_type` | planned   |                             |                                                        |
-| `addons`                           | yes       | `product.addons[]`          | The addon version value is optional, see details below.|
-| `slp_discovery`                    | planned   |                             |                                                        |
-
-If the addon version is not specified in the Agama installation profile it is
-automatically found in the list of the available addons on the server.
-It is mandatory only when the addon is available in multiple versions to
-explicitly select which one to install. In AutoYaST the version was always
-mandatory.
+| AutoYaST                           | Supported | Agama                                    | Notes                                                                    |
+| ---------------------------------- | --------- | ---------------------------------------- | ------------------------------------------------------------------------ |
+| `do_registration`                  | yes       |                                          | The whole suse_register section is ignored if "false".                   |
+| `email`                            | yes       | `product.registrationEmail`              |                                                                          |
+| `install_updates`                  | no        |                                          |                                                                          |
+| `reg_code`                         | yes       | `product.registrationCode`               |                                                                          |
+| `reg_server`                       | planned   |                                          |                                                                          |
+| `reg_server_cert`                  | no        |                                          |                                                                          |
+| `reg_server_cert_fingerprint`      | yes       | `security.sslCertificates[].fingerprint` |                                                                          |
+| `reg_server_cert_fingerprint_type` | yes       | `security.sslCertificates[].algorithm`   |                                                                          |
+| `addons[]`                         | yes       | `product.addons[]`                       | Does not check the dependencies, it registers addons in the given order. |
+| `slp_discovery`                    | planned   |                                          |                                                                          |
 
 ## timezone
 
@@ -300,10 +315,8 @@ This section is supported. Only the root and the first user are considered.
 
 ## Unsupported sections
 
-The following sections are not supported and we do not plan to support them in
-the future.
+The following sections are not supported and there are no plans to support them in the future.
 
-- `add-on`
 - `audit-laf`
 - `auth-client`
 - `configuration_management`
