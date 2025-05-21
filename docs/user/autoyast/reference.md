@@ -16,6 +16,44 @@ Agama. In some cases, you might find a table with the following columns:
 
 There are plans to support this section in the future.
 
+## bootloader
+
+This section is supported.
+
+| AutoYaST      | Supported | Agama | Notes |
+| ------------- | --------- | ----- | ----- |
+| `device_map`  | no        |       |       |
+| `loader_type` | no        |       |       |
+
+### bootloader/global
+
+This section is supported.
+
+| AutoYaST            | Supported | Agama                          | Notes |
+| ------------------- | --------- | ------------------------------ | ----- |
+| `activate`          | no        |                                |       |
+| `append`            | yes       | `bootloader.extraKernelParams` |       |
+| `boot_boot`         | no        |                                |       |
+| `boot_custom`       | no        |                                |       |
+| `boot_extended`     | no        |                                |       |
+| `boot_mbr`          | no        |                                |       |
+| `boot_root`         | no        |                                |       |
+| `cpu_mitigations`   | no        |                                |       |
+| `generic_mbr`       | no        |                                |       |
+| `gfxmode`           | no        |                                |       |
+| `os_prober`         | no        |                                |       |
+| `password`          | no        |                                |       |
+| `suse_btrfs`        | no        |                                |       |
+| `serial`            | no        |                                |       |
+| `secure_boot`       | no        |                                |       |
+| `terminal`          | no        |                                |       |
+| `timeout`           | yes       | `bootloader.timeout`           |       |
+| `trusted_boot`      | no        |                                |       |
+| `update_nvram`      | no        |                                |       |
+| `vgamode`           | no        |                                |       |
+| `xen_append`        | no        |                                |       |
+| `xen_kernel_append` | no        |                                |       |
+
 ## files
 
 This section is supported.
@@ -255,7 +293,35 @@ This section is supported.
 
 ## services-manager
 
-There are plans to support this section in the future. Meanwhile you can use post-installation scripts to handle these cases.
+This section is supported. Automatically converted into post-installation script
+
+| AutoYaST         | Supported | Agama | Notes |
+| ---------------- | --------- | ----- | ----- |
+| `default_target` | yes       |       |       |
+
+### services-manager/enable
+
+This section is supported.
+
+| AutoYaST  | Supported | Agama | Notes |
+| --------- | --------- | ----- | ----- |
+| `service` | yes       |       |       |
+
+### services-manager/disable
+
+This section is supported.
+
+| AutoYaST  | Supported | Agama | Notes |
+| --------- | --------- | ----- | ----- |
+| `service` | yes       |       |       |
+
+### services-manager/on_demand
+
+This section is supported.
+
+| AutoYaST  | Supported | Agama | Notes |
+| --------- | --------- | ----- | ----- |
+| `service` | yes       |       |       |
 
 ## software
 
