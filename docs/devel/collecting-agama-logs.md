@@ -33,7 +33,23 @@ See section
 below.
 
 
-### Wait for the right time
+### Waiting for the right time
+
+Of course it's important to pick the right time to collect the logs; they are
+typically needed for a bug report, so they should be collected when the
+problematic part happened, not before, so the logs actually contain the
+relevant information.
+
+If the installation works all the way to the end, that's easy: Wait until the
+"reboot now" page appears and then collect the logs.
+
+If there is a crash during the installation, and you can still access a shell
+(xterm or text console), do it after the crash.
+
+If the whole live system hangs or crashes at a random point, it's tricky; then
+you may have to use boot parameters to enable an ssh session from the outside,
+log in via that ssh session and hope for the best (i.e. that your ssh session
+remains useable).
 
 
 
