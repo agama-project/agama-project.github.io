@@ -29,7 +29,7 @@ Agama live session terminates, or when the installation boots (or tries to
 boot) into the freshly installed system.
 
 See section
-[Saving the Logs to a Permanent Location](./collecting-agama-logs#saving-the-logs-to-a-permanent-location)
+[saving the logs to a permanent location](./collecting-agama-logs#saving-the-logs-to-a-permanent-location)
 below.
 
 
