@@ -3,7 +3,7 @@
 ## Getting Agama logs from an installed system
 
 If the installation was successful and you can boot into the newly installed
-system and log in, get the Agama logs from `/var/log/agama/installation`.
+system and log in, get the Agama logs from `/var/log/agama-installation`.
 
 
 ## The "agama logs store" command
