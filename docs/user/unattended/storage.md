@@ -8,11 +8,6 @@ The general concepts regarding configuration of storage devices with Agama are e
 [corresponding subsection](../interactive/storage.md) of the interactive installation documentation.
 It is recommended to read that section before diving into the details below.
 
-:::warning Under development
-This document mentions some options that may still not be available in the current
-implementation of Agama.
-:::
-
 ## Unattended installation using the legacy AutoYaST mode
 
 Most Agama profiles contain a `storage` section with the configuration settings that are detailed in
@@ -47,8 +42,6 @@ like this, with all subsections being optional.
   "drives": [ ... ],
   "volumeGroups": [ ... ],
   "mdRaids": [ ... ],
-  "btrfsRaids": [ ... ],
-  "nfsMounts": [ ... ]
   "boot": { ... }
 }
 ```
@@ -57,11 +50,11 @@ Thus, a `storage` section can contain several entries describing how to configur
 storage devices and some extra entries (currently only `boot`) to setup some general aspects that
 influence the final layout. Check the Agama JSON schema for a more formal definition.
 
-Each volume group, RAID, bcache device or NFS share can represent a new logical device to be created
-or an existing device from the system to be processed. Entries below `drives` represent devices
-that can be used as regular disks. That includes removable and fixed disks, SD cards, DASD or zFCP
-devices, iSCSI disks, multipath devices, etc. Those entries always correspond to devices that can be
-found at the system, since Agama cannot create that kind of devices.
+Each volume group or software RAID can represent a new logical device to be created or an existing
+device from the system to be processed. Entries below `drives` represent devices that can be used as
+regular disks. That includes removable and fixed disks, SD cards, DASD or zFCP devices, iSCSI disks,
+multipath devices, etc. Those entries always correspond to devices that can be found at the system,
+since Agama cannot create that kind of devices.
 
 In fact, a single entry can represent several devices from the system. That is explained in depth at
 the section "searching existing devices" of this document.
@@ -198,7 +191,8 @@ that partition (after encrypting it) to allocate two file systems.
 }
 ```
 
-Agama can also manage MD RAID arrays represented as entries at the `mdRaids` collection.
+Agama can also manage software-defined MD RAID arrays represented as entries at the `mdRaids`
+collection.
 
 ```
 {
@@ -217,33 +211,30 @@ Agama can also manage MD RAID arrays represented as entries at the `mdRaids` col
 }
 ```
 
-In addition to traditional MD RAIDs, multi-device Btrfs file systems can also be defined as part of
-the `btrfsRaids` section.
+The `devices` property is used to specify the devices that act as members of the RAID.
 
-```
-{
-  "alias": "...",
-  "search": { ... },
-  "dataRaidlevel": "...",
-  "metaDataRaidLevel": "..." ,
-  "devices": [ ... ],
-  "label": "...",
-  "mkfsOptions": { ... },
-  "subvolumePrefix": "...",
-  "subvolumes": [ ... ],
-  "snapshots": ...,
-  "quotas": ...,
-  "delete": ...
-}
-```
-
-Last but not least, NFS shares can be mounted as entries at `nfsMounts`.
-
-```
-{
-  "alias": "...",
-  "path": "...",
-  "mount": "..."
+```json
+"storage": {
+  "drives": [
+    {
+      "search": "/dev/sda",
+      "partitions": [
+        { "alias": "sda-40", "size": "40 GiB" }
+      ]
+    },
+    {
+      "search": "/dev/sdb",
+      "partitions": [
+        { "alias": "sdb-40", "size": "40 GiB" }
+      ]
+    }
+  ],
+  "mdRaids": [
+    {
+      "devices": [ "sda-40", "sdb-40" ],
+      "level": "raid0"
+    }
+  ]
 }
 ```
 
@@ -257,33 +248,25 @@ If a description matches several devices, the same operations will be applied to
 all. That's useful in several situations like applying the same partitioning schema to several disks
 or deleting all partitions of a disk that match a given criteria.
 
-Matching is performed using a `search` subsection like described below, although not all the
-capabilities are fully implemented and some aspects of the format may change during the
-implementation phase.
+Matching is performed using a `search` subsection like described below. By default, all devices in
+the scope fitting the conditions will be matched. The number of device matches can be limited using
+`max`.
 
-By default, all devices in the scope fitting the conditions will be matched. The number of device
-matches can be limited using `max`. The following example shows how several `search` sections could
-be used to find the three biggest disks in the system, delete all Linux partitions bigger than 1 GiB
-within them and create new partitions of type RAID.
+The following example shows how several `search` sections could be used to find three disks that are
+big enough, delete one of their partitions identified by the number on its name and create new
+partitions of type RAID.
 
 ```json
 "storage": {
   "drives": [
     {
       "search": {
-        "sort": { "property": "sizeKib", "order": "desc" },
+        "condition": { "size": { "greater": "1 TiB" } },
         "max": 3
       },
       "partitions": [
         {
-          "search": {
-            "condition": {
-              "and": [
-                { "property": "id", "value": "linux" },
-                { "property": "sizeGib", "value": 1, "operator": "greater" }
-              ]
-            }
-          },
+          "search": { "condition": { "number": 1 } },
           "delete": true
         },
         {
@@ -299,9 +282,10 @@ within them and create new partitions of type RAID.
 
 The example also serves to illustrate the scope of each search. That is, the devices from the system
 that are considered as possible candidates. That obviously depends on the place in the profile of
-the `search` section. A `search` section inside the description of an MD RAID will only match MD
-devices and a `search` section inside the `partitions` subsection of that RAID description will only
-match partitions of RAIDs that have matched the conditions of the most external `search`.
+the `search` section. A `search` section inside the description of an MD RAID will only match
+software RAID devices and a `search` section inside the `partitions` subsection of that RAID
+description will only match partitions of RAIDs that have matched the conditions of the most
+external `search`.
 
 A given device can never match two different sections of the Agama profile. When several sections
 at the same level contain a search subsection, devices are matched in the order the sections appear
@@ -312,24 +296,24 @@ on the profile.
   "drives": [
     {
       "search": {
-        "sort": { "property": "sizeKib", "order": "desc" },
+        "condition": { "size": { "greater": "1 TiB" } },
         "max": 1
       },
-      "alias": "biggest"
+      "alias": "first-big-drive"
     },
     {
       "search": {
-        "sort": { "property": "sizeKib", "order": "desc" },
+        "condition": { "size": { "greater": "1 TiB" } },
         "max": 1
       },
-      "alias": "secondBiggest"
+      "alias": "second-big-drive"
     }
   ]
 }
 ```
 
 An empty search will match all devices in the scope, so the following example would delete all the
-partitions of the chosen disk.
+partitions of the chosen disk. But it only will work if the disk indeed contains partitions.
 
 ```json
 "storage": {
@@ -345,9 +329,7 @@ partitions of the chosen disk.
 
 If there is not a single system device matching the scope and the conditions of a given search, then
 `ifNotFound` comes into play. If the value is "skip", the device definition is ignored. If it's
-"error" the whole process is aborted. The value "create", which cannot be used for a drive, will
-cause the `search` section to be ignored if no device matches. As a consequence, a new logical
-device (partition, LVM, etc.) will be created.
+"error" the whole process is aborted.
 
 Entries on `drives` are different to all other subsections describing devices because drives can
 only be matched to existing devices, they cannot be simply created. If `search` is omitted for a
@@ -356,7 +338,6 @@ drive, it will be considered to contain the following one.
 ```json
 {
   "search": {
-    "sort": { "property": "name" },
     "max": 1,
     "ifNotFound": "error"
   }
@@ -374,7 +355,8 @@ section can simply contain the device name.
 ```
 
 On the other hand, the string "\*" allows to match all the devices from the current context, if
-there is any. In other words, the two following search sections are equivalent.
+there is any. In other words, the two following search sections are equivalent. This is specially
+useful to match all partitions or logical volumes in a device, no matter whether there is any.
 
 ```json
 { "search": "*" }
@@ -410,29 +392,30 @@ Aliases can be used for that purpose as shown in this example.
 ```
 
 If a section that matches several existing devices contains an alias, that alias will be considered
-to be a reference to all the devices. As a consequence, this two examples are equivalent.
+to be a reference to all the devices. As a consequence, this two examples are equivalent, assuming
+we are certain that at least two disks in the system meet the condition.
 
 ```json
 "storage": {
   "drives": [
     {
       "search": {
-        "sort": { "property": "sizeKib", "order": "desc" },
+        "condition": { "size": { "greater": "1 TiB" } },
         "max": 1,
       },
-      "alias": "biggest"
+      "alias": "firstBig"
     },
     {
       "search": {
-        "sort": { "property": "sizeKib", "order": "desc" },
+        "condition": { "size": { "greater": "1 TiB" } },
         "max": 1,
       },
-      "alias": "secondBiggest"
+      "alias": "secondBig"
     }
   ],
   "mdRaids": [
     {
-      "devices": [ "biggest", "secondBiggest" ],
+      "devices": [ "firstBig", "secondBig" ],
       "level": "raid0"
     }
   ]
@@ -442,9 +425,8 @@ to be a reference to all the devices. As a consequence, this two examples are eq
   "drives": [
     {
       "search": {
-        "sort": { "property": "sizeKib", "order": "desc" },
+        "condition": { "size": { "greater": "1 TiB" } },
         "max": 2,
-        "min": 2
       },
       "alias": "big"
     }
@@ -478,61 +460,11 @@ If the size is completely omitted for a device that already exists (ie. combined
 then Agama would act as if both min and max limits would have been set to "current" (which implies
 the partition or logical volume will not be resized).
 
-Moreover, if the size is omitted for a device that will be created, Agama will determine the size
-limits when possible. There are basically two kinds of situations in which that automatic size
-calculation can be performed.
-
-On the one hand, the device may directly contain a `filesystem` entry specifying a mount point.
-Agama will then use the settings of the product to set the size limits. In Agama Jargon, the
-"product" is the operating system being installed. And each product specifies the default size
-ranges for its relevant file systems like "/", "swap", "/home", etc.
-
-On the other hand, the size limits of some devices can be omitted if they can be inferred from other
-related devices following some rules.
-
-- For an MD RAID defined on top of new partitions, it is possible to specify the size of all the
-  partitions that will become members of the RAID but is also possible to specify the desired size
-  for the resulting MD RAID and then the size limits of each partition will be automatically
-  inferred with a small margin of error of a few MiBs.
-- Something similar happens with a partition that acts as the **only** physical volume of a new LVM
-  volume group. Specifying the sizes of the logical volumes could be enough, the size limits of the
-  underlying partition will match the necessary values to make the logical volumes fit. In this
-  case the calculated partition size is fully accurate.
-- The two previous scenarios can be combined. For a new MD RAID that acts as the **only** physical
-  volume of a new LVM volume group, the sizes of the logical volumes can be used to precisely
-  determine what should be the size of the MD and, based on that, what should be the almost
-  exact size of the underlying new partitions defined to act as members of the RAID.
-
-The two described mechanisms to automatically determine size limits can be combined. Even creating
-a configuration with no explicit sizes at all like the following example.
-
-```json
-"storage": {
-  "drives": [
-    {
-      "partitions": [
-        { "alias": "pv" }
-       ]
-    }
-  ],
-  "volumeGroups": [
-    {
-      "name": "system",
-      "physicalVolumes": [ "pv" ],
-      "logicalVolumes": [
-        { "filesystem": { "path": "/" } },
-        { "filesystem": { "path": "swap" } }
-      ]
-    }
-  ]
-}
-```
-
-Assuming the product configuration specifies a root filesystem with a minimum size of 5 GiB and a
-max of 20 GiB and sets that the swap must have a size equivalent to the RAM on the system, then
-those values would be applied to the logical volumes and the partition with alias "pv" would be
-sized accordingly, taking into account all the overheads and roundings introduced by the different
-technologies like LVM or the used partition table type.
+If the size is omitted for a device that will be created, Agama can determine the size limits
+as long as the device contains a `filesystem` entry specifying a mount point. In that case, Agama
+will use the settings of the product to set the size limits. In Agama Jargon, the "product" is the
+operating system being installed. And each product specifies the default size ranges for its
+relevant file systems like "/", "swap", "/home", etc.
 
 ## Partitions Needed for Booting
 
@@ -588,8 +520,9 @@ Deletion can be achieved with the corresponding `delete` flag or the alternative
 If any of those flags are active for a partition, it makes no sense to specify any other usage
 (like declaring a file system on it).
 
-The following example deletes the partition with the label "root" in all cases and, if needed, keeps
-deleting other partitions as needed to make space for the new partition of 30 GiB.
+The following example deletes the partition with the number 1 (according to the partition name) in
+all cases and, if needed, keeps deleting other partitions as needed to make space for the new
+partition of 30 GiB.
 
 ```json
 "storage": {
@@ -598,7 +531,7 @@ deleting other partitions as needed to make space for the new partition of 30 Gi
       "partitions": [
         {
           "search": {
-            "condition": { "property": "fsLabel", "value": "root" }
+            "condition": { "number": 1 }
           },
           "delete": true
         },
@@ -630,7 +563,7 @@ found) devices if `size` is completely omitted.
       "partitions": [
         {
           "search": {
-            "condition": { "property": "fsLabel", "value": "reuse" }
+            "condition": { "number": 1 }
           },
           "size": { "min": "current", "max": "current" }
         }
@@ -641,7 +574,8 @@ found) devices if `size` is completely omitted.
 ```
 
 Other combinations can be used to specify how a device could be resized if possible. See the
-following examples with explanatory filesystem labels.
+following examples with explanatory filesystem labels. Note the condition `fsLabel` is actually
+not implemented yet.
 
 ```json
 "storage": {
@@ -650,25 +584,25 @@ following examples with explanatory filesystem labels.
       "partitions": [
         {
           "search": {
-            "condition": { "property": "fsLabel", "value": "shrinkIfNeeded" }
+            "condition": { "fsLabel": "shrinkIfNeeded" }
           },
           "size": { "min": 0, "max": "current" }
         },
         {
           "search": {
-            "condition": { "property": "fsLabel", "value": "resizeToFixedSize" }
+            "condition": { "fsLabel": "resizeToFixedSize" }
           },
           "size": "15 GiB"
         },
         {
           "search": {
-            "condition": { "property": "fsLabel", "value": "resizeByRange" }
+            "condition": { "fsLabel": "resizeByRange" }
           },
           "size": { "min": "10 GiB", "max": "50 GiB" }
         },
         {
           "search": {
-            "condition": { "property": "fsLabel", "value": "growAsMuchAsPossible" }
+            "condition": { "fsLabel": "growAsMuchAsPossible" }
           },
           "size": { "min": "current" }
         },
@@ -695,82 +629,6 @@ space first by shrinking the partitions and deleting them only if shrinking is n
           "deleteIfNeeded": true
         }
       ]
-    }
-  ]
-}
-```
-
-## Generating Partitions as MD RAID members
-
-MD arrays can be configured to explicitly use a set of devices by adding their aliases to the
-`devices` property.
-
-```json
-"storage": {
-  "drives": [
-    {
-      "search": "/dev/sda",
-      "partitions": [
-        { "alias": "sda-40", "size": "40 GiB" }
-      ]
-    },
-    {
-      "search": "/dev/sdb",
-      "partitions": [
-        { "alias": "sdb-40", "size": "40 GiB" }
-      ]
-    }
-  ],
-  "mdRaids": [
-    {
-      "devices": [ "sda-40", "sdb-40" ],
-      "level": "raid0"
-    }
-  ]
-}
-```
-
-The partitions acting as members can be automatically generated by simply indicating the target
-disks that will hold the partitions. For that, the `devices` section must contain a `generate`
-entry.
-
-```json
-"storage": {
-  "drives": [
-    { "search": "/dev/sda", "alias": "sda" },
-    { "search": "/dev/sdb", "alias": "sdb" },
-  ],
-  "mdRaids": [
-    {
-      "devices": [
-        {
-          "generate": {
-            "targetDisks": ["sda", "sdb" ],
-            "size": "40 GiB"
-          }
-        }
-      ]
-      "level": "raid0"
-    }
-  ]
-}
-```
-
-As explained at the section about sizes, it's also possible to set the size for the new RAID letting
-Agama calculate the corresponding sizes of the partitions used as members. That allows to use the
-short syntax for `generate`.
-
-```json
-"storage": {
-  "drives": [
-    { "search": "/dev/sda", "alias": "sda" },
-    { "search": "/dev/sdb", "alias": "sdb" },
-  ],
-  "mdRaids": [
-    {
-      "devices": [ { "generate": ["sda", "sdb" ] } ],
-      "level": "raid0",
-      "size": "40 GiB"
     }
   ]
 }
@@ -861,30 +719,6 @@ The _mandatory_ keyword can be used for only generating the mandatory partitions
       "logicalVolumes": [
         { "generate": "mandatory" }
       ]
-    }
-  ]
-}
-```
-
-The _default_ and _mandatory_ keywords can also be used to generate a set of formatted MD arrays.
-Assuming the default volumes are "/", "/home" and "swap", the following snippet would generate three
-RAIDs of the appropriate sizes and the corresponding six partitions needed to support them.
-
-```json
-"storage": {
-  "drives": [
-    { "search": "/dev/sda", "alias": "sda" },
-    { "search": "/dev/sdb", "alias": "sdb" },
-  ],
-  "mdRaids": [
-    {
-      "generate": {
-        "mdRaids": "default",
-        "level": "raid0",
-        "devices": [
-          { "generate": ["sda", "sdb"] }
-        ]
-      }
     }
   ]
 }
