@@ -5,10 +5,7 @@ storage setup and shows how the web interface can be used to configure the relat
 settings.
 
 :::warning Under development
-Bear in mind that some of the mentioned features may be already available and fully working as
-described while others may still be incomplete in the current version of Agama.
-
-Since the interface is in constant evolution, the screenshots are not a faithfull representation
+Since the interface is in constant evolution, the screenshots may not be a faithfull representation
 of the current look & feel.
 :::
 
@@ -82,16 +79,11 @@ to reuse existing file systems, among many other things.
 
 ![Using another disk for booting and reusing /home](/img/user/storage-two-disks.png)
 
-## Usage of LVM and software RAID
+## Usage of LVM
 
-Adding LVM and RAID will be done using the same interface.
+Adding new LVM volume groups is done using the same interface.
 
-![Adding LVM and RAID](/img/user/storage-add-device.png)
-
-:::warning Under development
-The support to define new LVM volume groups and its logical volumes will be introduced soon.
-Configuration of RAID and more advanced LVM setups will come in a not so close future.
-:::
+![Adding an LVM volume group](/img/user/storage-add-lvm.png)
 
 Obviously, the file systems created on an LVM volume group will be created as logical volumes
 analogous to the partitions of the disk case. Once again, it is possible to specify a loose
@@ -105,14 +97,6 @@ The disks in which the LVM is set are also visible as part of the configuration,
 to tweak aspects like what to do with existing partitions or to define which disk will be used to
 create the additional partitions needed for booting.
 
-It is also possible to be more concrete and specify some existing devices to be used as physical
-volumes for any new LVM volume group.
-
-Defining a new RAID will be done in a similar way from the same general user interface. Of course,
-it will be possible to combine LVM and RAID. That will make it possible to configure an LVM setup
-on top of a mirrored RAID without explicitly creating any partition, delegating to Agama the
-creation of all the intermediate data structures.
-
 ## Configuration of partitions needed for booting
 
 One of the main features of the Agama storage setup is its ability to automatically determine any extra
@@ -123,7 +107,7 @@ algorithm can create those partitions or reuse existing ones that are already in
 user wants to keep them. The behavior of that feature can be tweaked using the corresponding entry
 at the advanced options menu.
 
-![Choosing how to make space](/img/user/storage-boot.png)
+![Choosing the disk to create boot partitions](/img/user/storage-boot.png)
 
 ## A note about transactional systems
 
@@ -145,14 +129,16 @@ installation).
 The current logic to calculate those default settings is intentionally simplistic - just trying to
 install into a single disk with the default product strategy to find space (eg. wiping the content
 of the disk) and using the other default sizes and settings of the product (eg. Btrfs snapshots).
+If that first attempt fails to calculate a valid storage setup and the system contains several
+disks, Agama will try again with the same settings on another disk. Up to a total of five attempts
+on as many different disks.
 
 That is an important difference with YaST, which tries really hard to find a configuration that
 makes the installation possible even if that implies completely modifying the default settings (eg.
-going for minimal sizes, disabling Btrfs snapshots and removing separate partitions) and making
-attempts on every single disk (or combination of disks) in the system.
+going for minimal sizes, disabling Btrfs snapshots and removing separate partitions) in addition to
+trying different disks (or even combinations of disks).
 
 The goal of the Agama approach is to provide a more consistent experience that makes the user part
 of the decision making process and aware of the changes introduced at the configuration. Adding some
-extra capabilities to that initial attempt (eg. trying on several disks or adjusting some very
-visible parameters) is not fully discarded for the future, subject to finding the right way to make
-those decisions obvious to the users.
+automatic adjustments for some clearly visible settings is not fully discarded for the future,
+subject to finding the right way to make those automatic decisions obvious to the users.
