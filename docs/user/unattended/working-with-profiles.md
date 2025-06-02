@@ -9,7 +9,7 @@ through the `inst.auto` boot option. In an ideal work, Agama should get the prof
 installation without your intervention.
 
 However, getting your profile right is not always easy. For that reason, it might be interesting to
-learn how to work with profiles using [Agama's commad-line interface](/.cli). This tool is a
+learn how to work with profiles using [Agama's commad-line interface](../cli). This tool is a
 valuable help when you are writing or debugging your profile, and it allows validating, loading and
 exporting a profile.
 
@@ -18,7 +18,7 @@ exporting a profile.
 Before jumping into the usage of the command-line interface, let's have a look at the regular way of
 starting the unattended installation. To tell Agama where to find the profile, you usually set the
 `inst.auto` [boot option](../boot_options). You can use any of the
-[URLs that Agama supports](./urls).
+[URLs that Agama supports](../urls).
 
 If you do not specify any profile, Agama will automatically search for it in a few predefined
 locations. Agama expects a file named `autoinst.jsonnet`, `autoinst.json` or `autoinst.xml` (in that

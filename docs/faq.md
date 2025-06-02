@@ -80,11 +80,11 @@ But there are also some caveats. Bear in mind that Agama is focused on the insta
 further configuration to other tools. Therefore it includes less features and there are some
 sections you can find in an AutoYaST profile that are ignored by Agama.
 
-You can find further details in the [AutoYaST support section](/docs/user/autoyast).
+You can find further details in the [AutoYaST support section](/docs/user/unattended/autoyast).
 
 ## Will Agama replace YaST as the main installer for SUSE Linux?
 
-Although nothing is set in stone, that is the plan for SUSE Linux Enterprise Server 16. 
+Although nothing is set in stone, that is the plan for SUSE Linux Enterprise Server 16.
 
 ## Will Agama replace YaST as the main installer for openSUSE distributions?
 
@@ -93,4 +93,3 @@ There are no concrete plans in that regard.
 The YaST Team works in close collaboration with several openSUSE contributors to make sure Agama can
 install openSUSE Tumbleweed, openSUSE MicroOS and the first prototypes of Leap 16.0. But there is
 no concrete roadmap for the adoption of Agama as an endorsed installer for those distributions.
-
