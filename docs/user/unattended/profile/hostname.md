@@ -1,3 +1,7 @@
+---
+sidebar_position: 10
+---
+
 # Hostname
 
 Traditionally, the hostname is considered part of the network configuration. However, although

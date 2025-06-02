@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # Additional software
 
 Depending on the [product you are installing](./product), Agama will select a set of patterns and

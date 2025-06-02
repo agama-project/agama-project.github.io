@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 6
 ---
 
 # Running scripts
@@ -12,10 +12,8 @@ Agama allows execute scripts at the following points of the installation process
 
 This section describes how to specify a script and goes through some use-cases.
 
-:::note
-You can compare Agama scripts to the AutoYaST ones in the [scripts section](../autoyast/reference.md#scripts)
-of the backward compatibility documentation.
-:::
+:::note You can compare Agama scripts to the AutoYaST ones in the
+[scripts section](../autoyast/reference.md#scripts) of the backward compatibility documentation. :::
 
 ## Scripts definition
 
@@ -54,9 +52,8 @@ the three scripts types, and each key can contain a list of scripts.
 }
 ```
 
-:::note
-JSON does not allow multiline strings, so it might be better to use Jsonnet instead. However, you
-need to pay attention to the indentation, because it matters.
+:::note JSON does not allow multiline strings, so it might be better to use Jsonnet instead.
+However, you need to pay attention to the indentation, because it matters.
 
 If you prefer JSON, you can write the `\n` to separate lines.
 
@@ -87,17 +84,14 @@ Check the following sections to find out the differences between the script type
 The pre-installation scripts are executed before the system is analyzed. They are useful for
 enabling hardware, tweaking the installation media, etc.
 
-:::warning
-Unlike AutoYaST, the pre-installation scripts cannot modify the current profile. We recommend using
-Jsonnet to build a dynamic profile. If you need something that behaves exactly like AutoYaST, you can
-still use an AutoYaST profile with its own pre-scripts section.
-:::
+:::warning Unlike AutoYaST, the pre-installation scripts cannot modify the current profile. We
+recommend using Jsonnet to build a dynamic profile. If you need something that behaves exactly like
+AutoYaST, you can still use an AutoYaST profile with its own pre-scripts section. :::
 
 ## Post-partitioning scripts
 
-The post-partitioning scripts are executed during the installation, after the storage is
-set up. A typical use case is to create configuration files that can modify the behavior of
-the RPM scripts.
+The post-partitioning scripts are executed during the installation, after the storage is set up. A
+typical use case is to create configuration files that can modify the behavior of the RPM scripts.
 
 ## Post-installation scripts
 
@@ -108,8 +102,8 @@ scripts have an additional option, `chroot`, that determines _where_ to run:
 - On the installation media (`chroot` is set to `false`), which is the behavior by default. You can
   find the installed system mounted at `/mnt`.
 - On the installed system (`chroot` is set to `true`). Beware that systemd is not running on the
-  installed system. For that reason, some commands might not work. If that's a problem, check the init
-  scripts.
+  installed system. For that reason, some commands might not work. If that's a problem, check the
+  init scripts.
 
 ## Init scripts
 

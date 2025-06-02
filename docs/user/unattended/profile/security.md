@@ -1,3 +1,7 @@
+---
+sidebar_position: 8
+---
+
 # Security
 
 The security section is expected to contain a set of options to configure security-related aspects

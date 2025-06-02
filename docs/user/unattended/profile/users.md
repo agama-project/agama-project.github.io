@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 5
 ---
 
 # Users and authentication
@@ -67,8 +67,8 @@ Make sure the selected hashing method is supported by the target system, differe
 support different set of methods.
 
 :::warning
-Do not use any DES or MD5 based algorithms, these are considered insecure. Check `man 5 crypt`
-manual page for details about the hashing methods and their strength.
+Do not use any DES or MD5 based algorithms, these are considered insecure. Check
+`man 5 crypt` manual page for details about the hashing methods and their strength.
 :::
 
 Alternatively you can use the `openssl passwd -6` command. This generates a SHA-512 password hash,

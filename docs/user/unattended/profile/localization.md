@@ -1,3 +1,7 @@
+---
+sidebar_position: 9
+---
+
 # Localization
 
 The `localization` settings allows to specify the locale, the keyboard layout and the timezone of
