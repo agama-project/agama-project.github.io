@@ -43,7 +43,7 @@ process:
 1. Fetch the profile from the given URL.
 2. Evaluate the Jsonnet code to generate the final JSON file. If you are using
    [files](./profile/files) or [scripts](./profile/scripts), any relative URL will be resolved in
-   this stage.
+   this stage. It will use the URL of the profile as the base URL.
 3. Load the JSON file into the Agama service.
 
 These steps are handled by the `agama config generate` (steps 1 and 2) and `agama config load`
@@ -67,6 +67,13 @@ use the web user interface to check that everything looks as you expect. If you 
 installation from the command-line, you can issue the `agama install` command.
 
 :::
+
+If you are using relative URLs (for instance, within the [files](./files) or the
+[scripts](./scripts) section), the `agama config load` might not work as you expect. As
+`agama config load` only receives a piece of JSON, it does not know which is the base URL and it
+will use, as a fallback, the path to the working directory (the one where you are executing the
+command from). For that reason, it is usually a good idea to pre-process the profile using the
+`agama config generate` command.
 
 ## Validating a profile
 

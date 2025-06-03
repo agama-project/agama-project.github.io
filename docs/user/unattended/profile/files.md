@@ -23,6 +23,17 @@ file from), the permissions, the owner and the destination of the file.
 - `user`: user owner of the file (`"root"` by default).
 - `group`: group owner of the file (`"root"` by default).
 
+:::note Working with relative URLs
+
+If you use the `inst.auto` boot option to specify the URL of the profile, any relative URL will use
+the URL of the profile as its base.
+
+However, loading the profile using the `agama config load` will not work in the same way.
+Check the [Manually loading a profile](../working-with-profiles#manually-loading-a-profile) section
+for further information.
+
+:::
+
 ## Example
 
 The example below adds a welcome message to the system and registers a new user by deploying a file

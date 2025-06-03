@@ -73,8 +73,20 @@ All scripts share the same elements:
 - `name`: a name to identify the script. It makes it easier to find the script logs.
 - `content`: the content of the script. It is important to include the _shebang_ as the first line
   of the script.
-- `url`: alternatively to the `content`, you can define a URL to download the script. The scripts
-  are downloaded and written to the disk after the profile is imported.
+- `url`: alternatively to the `content`, you can define a URL to fetch the file from. The scripts
+  are downloaded and written to the disk when loading the profile. In addition to the
+  [supported URLs](../../urls) you can use a URL relative to the profile (e.g., "/my-script.sh").
+
+:::note Working with relative URLs
+
+If you use the `inst.auto` boot option to specify the URL of the profile, any relative URL will use
+the URL of the profile as its base.
+
+However, loading the profile using the `agama config load` will not work in the same way. Check the
+[Manually loading a profile](../working-with-profiles#manually-loading-a-profile) section for
+further information.
+
+:::
 
 Check the following sections to find out the differences between the script types.
 
