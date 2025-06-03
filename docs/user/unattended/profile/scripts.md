@@ -4,7 +4,7 @@ sidebar_position: 6
 
 # Running scripts
 
-Agama allows execute scripts at the following points of the installation process:
+Agama allows to execute scripts at the following points of the installation process:
 
 - Previous to any installation work (pre-installation scripts).
 - After the system is installed (post-installation scripts).

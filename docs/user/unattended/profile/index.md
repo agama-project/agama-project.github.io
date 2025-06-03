@@ -12,7 +12,7 @@ which is a superset of JSON. It brings a few advantages:
 - Support for comments and multi-line values.
 - Constructs for generating dynamic content.
 
-Let's have a look to an example to get an idea. The followin profile is rather small: it just
+Let's have a look to an example to get an idea. The following profile is rather small: it just
 instructs Agama to install Tumbleweed and defines a first user so you can log in.
 
 ```jsonnet
@@ -28,9 +28,9 @@ instructs Agama to install Tumbleweed and defines a first user so you can log in
 }
 ```
 
-Reading throught the following sections you can learn about which configuration values are
-supported. The documentation includes several examples to make it easier to write your own profiles.
-Alternatively, you can check the
+Reading throught the following sections you can find the supported configuration values. The
+documentation includes several examples to make it easier to write your own profiles. Alternatively,
+you can check the
 [JSON Schema](https://github.com/openSUSE/agama/blob/master/rust/agama-lib/share/profile.schema.json)
 to learn about the supported elements.
 

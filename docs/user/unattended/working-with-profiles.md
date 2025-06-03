@@ -27,7 +27,8 @@ order) to be located on:
 - The root of a file system named `OEMDRV`.
 - Or the root (`/`) of the installation environment.
 
-The first file found is used as the profile, starting the installation right away.
+The first file found is used as the profile, starting the installation right away. If no profile is
+found, Agama will fall back to the interactive installation.
 
 Keep reading if you want to learn more about how profiles are processed.
 
@@ -106,3 +107,6 @@ terminal, generate the file by running the following command:
 ```console
 agama config show > profile.json
 ```
+
+Bear in mind that using `agama config show` you might discover some options that are not available
+using the web-based user interface.

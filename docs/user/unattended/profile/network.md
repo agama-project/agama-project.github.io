@@ -110,7 +110,7 @@ supports the following fields:
 
 ### Bridges
 
-To create a bridge you need to include a `bridge` section which, among other optional settings, it
+To create a bridge you need to include a `bridge` section which, among other optional settings,
 includes the list of ports to connect.
 
 ```jsonnet
@@ -118,7 +118,7 @@ includes the list of ports to connect.
   network: {
     connetions: [
       {
-        id: "Bridge 0",
+        id: "Bridge #0",
         interface: "br0",
         bridge: {
           ports: ["eth0", "eth1"]
@@ -146,15 +146,15 @@ About the `bridge` section, it can include:
 
 ### Bonding
 
-To create a bridge you need to include a `bond` section which, among other optional settings, it
-includes the list of ports to connect.
+To create a bond you need to include a `bond` section which, among other optional settings, includes
+the list of ports to connect.
 
 ```jsonnet
 {
   network: {
     connetions: [
       {
-        id: "Bond 0",
+        id: "Bond #0",
         interface: "bond0",
         bond: {
           ports: ["eth0", "eth1"],

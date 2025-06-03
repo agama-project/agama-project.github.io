@@ -19,5 +19,5 @@ At this point, it is possible to set the `static` and the `transient` hostnames.
 ```
 
 To learn the difference between both hostnames, make sure to check the
-[hostnamectl documentation](https://manpages.opensuse.org/Tlmbleweed/systemd/hostnamectl.1.en.html).
+[hostnamectl documentation](https://manpages.opensuse.org/Tumbleweed/systemd/hostnamectl.1.en.html).
 If you are in doubt, you most probably want to set (if any) the `static` hostname.

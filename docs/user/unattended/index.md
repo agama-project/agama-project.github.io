@@ -7,7 +7,7 @@ sidebar_position: 2
 Agama is able to install a system without user interaction. The user provides a definition of the
 system, known as a "profile", that describes how the system should look like (partitioning,
 networking, software selection, etc.) and Agama takes care of installing the system. This approach
-might sound familiar to AutoYaST users, right?
+might sound familiar to AutoYaST users.
 
 Agama uses [Jsonnet](https://jsonnet.org/), a superset of JSON, which allows writing readable and
 concise profiles. The example below instructs Agama to install _Tumbleweed_ and create a first user
