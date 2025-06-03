@@ -26,7 +26,7 @@ file from), the permissions, the owner and the destination of the file.
 ## Example
 
 The example below adds a welcome message to the system and registers a new user by deploying a file
-in `/etc
+in `/etc/issue.d`:
 
 ```jsonnet
 {
@@ -52,7 +52,9 @@ in `/etc
 Although the intention is to work with text files, Agama does not impose any limitation of the kind
 of files you can deploy. So using a URL to a binary file should work too.
 
-:::note
-Unlike AutoYaST, Agama does not allow to generate the file using an script. For that use
-case, you might use the [scripts](./scripts) section.
+:::note Generating a file using a script
+
+Unlike AutoYaST, Agama does not allow to generate the file using an script. For that use case, you
+might use the [scripts](./scripts) section.
+
 :::

@@ -17,8 +17,10 @@ It supports the following elements:
 
 ```jsonnet
 {
-  language: "de_DE.UTF-8",
-  keyboard: "de",
-  timezone: "Europe/Berlin"
+  localization: {
+    language: "de_DE.UTF-8",
+    keyboard: "de",
+    timezone: "Europe/Berlin"
+  }
 }
 ```

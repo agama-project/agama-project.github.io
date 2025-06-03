@@ -4,7 +4,7 @@ sidebar_position: 8
 
 # Security
 
-The security section is expected to contain a set of options to configure security-related aspects
+The `security` section is expected to contain a set of options to configure security-related aspects
 of the system (e.g., enabling remote access). However, at this time, it just allows to define a
 collections of SSL certificates to trust.
 
@@ -14,7 +14,7 @@ It is not unusual to install the system using your own infrastructure. For insta
 to use a set of mirrored repositories instead of the original ones.
 
 For those cases, Agama allows to define a list of SSL certificates to trust. The list should contain
-the _fingreprint_ and the _algorithm_ of each certificate.
+the _fingerprint_ and the _algorithm_ of each certificate.
 
 ```jsonnet
 {

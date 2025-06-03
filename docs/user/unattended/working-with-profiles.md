@@ -11,7 +11,7 @@ installation without your intervention.
 However, getting your profile right is not always easy. For that reason, it might be interesting to
 learn how to work with profiles using [Agama's commad-line interface](../cli). This tool is a
 valuable help when you are writing or debugging your profile, and it allows validating, loading and
-exporting a profile.
+exporting a profile from a running Agama instance.
 
 ## Starting the installation
 
@@ -41,37 +41,47 @@ by Agama internals. For that reason, we might consider that loading a profile is
 process:
 
 1. Fetch the profile from the given URL.
-1. Evaluate the Jsonnet code and resolve relative URLs, generating the final JSON file.
-1. Load the JSON file into the Agama service.
+2. Evaluate the Jsonnet code to generate the final JSON file. If you are using
+   [files](./profile/files) or [scripts](./profile/scripts), any relative URL will be resolved in
+   this stage.
+3. Load the JSON file into the Agama service.
 
 These steps are handled by the `agama config generate` (steps 1 and 2) and `agama config load`
 (step 3) subcommands.
 
 ```console
-agama config generate http://example.lan/agama.jsonnet > agama.json
-agama config load < agama.json
+$ agama config generate http://example.lan/agama.jsonnet > agama.json
+$ agama config load < agama.json
 ```
 
 Or if you prefer, you can use this one-liner:
 
 ```
-agama config generate http://example.lan/agama.jsonnet | agama config load
+$ agama config generate http://example.lan/agama.jsonnet | agama config load
 ```
 
 :::tip `agama config load` does not start the installation
 
-The `agama config load` just loads the configuration. You can use the web user interface to check
-that everything looks as you expect.
+The `agama config load` just loads the configuration but it does not start the installation. You can
+use the web user interface to check that everything looks as you expect. If you want to start the
+installation from the command-line, you can issue the `agama install` command.
 
 :::
 
 ## Validating a profile
 
-You can validate a JSON profile using the command-line tool. Bear in mind that you can only validate
-JSON profiles, not Jsonnet ones.
+You can validate a JSON profile using the command-line tool.
 
 ```console
-agama config validate my-profile.json
+$ agama config validate my-profile.json
+```
+
+Bear in mind that you can only validate JSON profiles, not Jsonnet ones. So if you have a Jsonnet
+file, you need to convert it to JSON using the `agama config generate` subcommand.
+
+```console
+$ agama config generate my-profile.jsonnet > my-profile.json
+$ agama config validate my-profile.json
 ```
 
 :::note Automatic validation

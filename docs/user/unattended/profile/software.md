@@ -16,12 +16,8 @@ This section supports two keys:
 
 ```
 {
-  patterns: [
-    "gnome", "office"
-  ],
-  packages: [
-    "neovim", "emacs"
-  ]
+  patterns: ["gnome", "office"],
+  packages: ["neovim", "emacs"]
 }
 ```
 

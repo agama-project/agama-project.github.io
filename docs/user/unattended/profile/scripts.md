@@ -12,9 +12,6 @@ Agama allows execute scripts at the following points of the installation process
 
 This section describes how to specify a script and goes through some use-cases.
 
-:::note You can compare Agama scripts to the AutoYaST ones in the
-[scripts section](../autoyast/reference.md#scripts) of the backward compatibility documentation. :::
-
 ## Scripts definition
 
 User scripts are defined in the `scripts` section of the Agama profile. There is a key for each of
@@ -52,8 +49,10 @@ the three scripts types, and each key can contain a list of scripts.
 }
 ```
 
-:::note JSON does not allow multiline strings, so it might be better to use Jsonnet instead.
-However, you need to pay attention to the indentation, because it matters.
+:::note Better use Jsonnet for profiles containing scripts
+
+JSON does not allow multiline strings, so it might be better to use Jsonnet instead. However, you
+need to pay attention to the indentation, because it matters.
 
 If you prefer JSON, you can write the `\n` to separate lines.
 
@@ -84,9 +83,13 @@ Check the following sections to find out the differences between the script type
 The pre-installation scripts are executed before the system is analyzed. They are useful for
 enabling hardware, tweaking the installation media, etc.
 
-:::warning Unlike AutoYaST, the pre-installation scripts cannot modify the current profile. We
-recommend using Jsonnet to build a dynamic profile. If you need something that behaves exactly like
-AutoYaST, you can still use an AutoYaST profile with its own pre-scripts section. :::
+:::warning Pre-installation scripts cannot modify the current profile
+
+Unlike AutoYaST, the pre-installation scripts cannot modify the current profile. We recommend using
+Jsonnet to build a dynamic profile. If you need something that behaves exactly like AutoYaST, you
+can still use an AutoYaST profile with its own pre-scripts section.
+
+:::
 
 ## Post-partitioning scripts
 

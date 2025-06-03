@@ -14,16 +14,16 @@ For a successful installation, one of the following conditions must be met:
 - A password or an SSH public key is defined for the `root` user.
 - A first user is defined.
 
-## `root`
+## `root` user
 
 The `root` section allows to specify an authentication method for the `root` user.
 
-```json
+```jsonnet
 {
-  "root": {
-    "sshPublicKey": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPj/J1N38v/7Gbxz5A6jiSBhLbUwrJOVlBxDQhuW8tvg user@example.net",
-    "hashedPassword": true,
-    "password": "$y$j9T$qGMrxRmEHUV3kCXQAywcP1$g4n4.O2tUf2Dq9CJTohTb4/HJ9Wdzr2Z33MD8srkPV1"
+  root: {
+    sshPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPj/J1N38v/7Gbxz5A6jiSBhLbUwrJOVlBxDQhuW8tvg user@example.net",
+    hashedPassword: true,
+    password: "$y$j9T$qGMrxRmEHUV3kCXQAywcP1$g4n4.O2tUf2Dq9CJTohTb4/HJ9Wdzr2Z33MD8srkPV1"
   }
 }
 ```
@@ -34,17 +34,17 @@ The following fields are supported:
 - `hashedPassword`: whether the `password` is hashed (`true`) or not (`false` or undefined).
 - `sshPublicKey`: SSH public key to be copied to the `/root/.ssh/authorized_keys` file.
 
-## `user`
+## First user
 
 The `user` section defines a first user:
 
-```json
+```jsonnet
 {
-  "user": {
-    "fullName": "Jane Doe",
-    "userName": "jane.doe",
-    "hashedPassword": false,
-    "password": "123456"
+  user: {
+    fullName: "Jane Doe",
+    userName: "jane.doe",
+    hashedPassword: false,
+    password: "123456"
   }
 }
 ```
@@ -67,8 +67,10 @@ Make sure the selected hashing method is supported by the target system, differe
 support different set of methods.
 
 :::warning
-Do not use any DES or MD5 based algorithms, these are considered insecure. Check
-`man 5 crypt` manual page for details about the hashing methods and their strength.
+
+Do not use any DES or MD5 based algorithms, these are considered insecure. Check `man 5 crypt`
+manual page for details about the hashing methods and their strength.
+
 :::
 
 Alternatively you can use the `openssl passwd -6` command. This generates a SHA-512 password hash,

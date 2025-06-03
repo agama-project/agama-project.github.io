@@ -6,14 +6,14 @@ sidebar_position: 2
 
 A profile defines which options to use during installation: which product to install, localization
 settings, partitioning schema, etc. Agama profiles are written in [Jsonnet](https://jsonnet.org/)
-which is a superset of JSON. However, it brings a few advantages:
+which is a superset of JSON. It brings a few advantages:
 
 - More relaxed syntax which makes it easier to read and write.
 - Support for comments and multi-line values.
 - Constructs for generating dynamic content.
 
-The following example is rather minimal: it just instructs Agama to install Tumbleweed and defines a
-first user so you can log in.
+Let's have a look to an example to get an idea. The followin profile is rather small: it just
+instructs Agama to install Tumbleweed and defines a first user so you can log in.
 
 ```jsonnet
 {
