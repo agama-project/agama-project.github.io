@@ -68,8 +68,8 @@ installation from the command-line, you can issue the `agama install` command.
 
 :::
 
-If you are using relative URLs (for instance, within the [files](./files) or the
-[scripts](./scripts) section), the `agama config load` might not work as you expect. As
+If you are using relative URLs (for instance, within the [files](./profile/files) or the
+[scripts](./profile/scripts) section), the `agama config load` might not work as you expect. As
 `agama config load` only receives a piece of JSON, it does not know which is the base URL and it
 will use, as a fallback, the path to the working directory (the one where you are executing the
 command from). For that reason, it is usually a good idea to pre-process the profile using the
