@@ -113,14 +113,13 @@ supports the following fields:
 To create a bridge you need to include a `bridge` section which, among other optional settings, it
 includes the list of ports to connect.
 
-// TODO: is the "id" the interface name?
-
 ```jsonnet
 {
   network: {
     connetions: [
       {
-        id: "br0",
+        id: "Bridge 0",
+        interface: "br0",
         bridge: {
           ports: ["eth0", "eth1"]
         }
@@ -130,16 +129,33 @@ includes the list of ports to connect.
 }
 ```
 
+The `interface` element specifies the device name for the bridge while the `id` is the connection
+name.
+
+About the `bridge` section, it can include:
+
+- `ports`: a list of interfaces or connections IDs which will be part of the bridge.
+- `stp`: whether the
+  [Spanning Tree Protocol (STP)](https://es.wikipedia.org/wiki/Spanning_Tree_Protocol) should be
+  enabled.
+- `forwardDelay`: STP forward delay, in seconds.
+- `priority`: STP priority. It is represented by a number equal or greater than zero. Lower values
+  are "better".
+- `maxAge`: STP maximum message, in seconds.
+- `helloTime`: STP hello time, in seconds.
+
 ### Bonding
 
-The `bond` section allows defining a bond device specifying the devices (ports) that are involved.
+To create a bridge you need to include a `bond` section which, among other optional settings, it
+includes the list of ports to connect.
 
 ```jsonnet
 {
   network: {
     connetions: [
       {
-        id: "bond0",
+        id: "Bond 0",
+        interface: "bond0",
         bond: {
           ports: ["eth0", "eth1"],
           mode: "active-backup",
@@ -151,7 +167,10 @@ The `bond` section allows defining a bond device specifying the devices (ports) 
 }
 ```
 
-The supported fields are:
+The `interface` element specifies the device name for the bonding while the `id` is the connection
+name.
+
+The `bond` section can contain:
 
 - `ports`: devices to be included in the bond.
 - `mode`: bond mode. Possible values: `balance-rr` (default), `active-backup`, `balance-xor`,
