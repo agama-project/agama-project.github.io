@@ -5,7 +5,7 @@ sidebar_position: 1
 # Working with profiles
 
 To start an unattended installation, you just need to tell Agama where to find the profile, usually
-through the `inst.auto` boot option. In an ideal work, Agama should get the profile and perform the
+through the `inst.auto` boot option. In an ideal world, Agama should get the profile and perform the
 installation without your intervention.
 
 However, getting your profile right is not always easy. For that reason, it might be interesting to
