@@ -32,7 +32,7 @@ In addition to those schemes, Agama supports a set of specific ones which can be
 The typical protocols are enough for most use cases. However, more specific URLs can be handy in
 many situations. For instance, instead of serving your profile through HTTP, you could just put it
 on a USB stick and tell Agama about it with `usb:///profile.json`. Agama would search on all your
-USB devices for the profile to use. Cool, right?
+USB devices for the profile to use.
 
 Let's have a look to the different kind of URLs that Agama offers.
 
