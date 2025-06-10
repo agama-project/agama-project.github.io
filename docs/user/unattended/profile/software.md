@@ -34,18 +34,18 @@ This section supports three keys:
 The `software` section allows you to define custom repositories using a list under
 the `extraRepositories` key. Each repository in the list can have the following properties:
 
-* **`alias`** (string, mandatory): A unique identifier for the repository.
-* **`url`** (string, mandatory): The repository's URL, recognized by `libzypp`.
-* **`priority`** (integer): Sets the priority for using this repository. A lower number means higher
+ `alias`: A unique identifier for the repository. Mandatory property.
+ `url`: The repository's URL, recognized by `libzypp`. Mandatory property.
+ `priority`: Sets the priority for using this repository. A lower number means higher
   precedence. If you don't specify this, it'll use the same default priority as other repositories.
-* **`name`** (string): A user-friendly name for the repository. If omitted, it defaults to
+ `name` (string): A user-friendly name for the repository. If omitted, it defaults to
   the `alias`.
-* **`productDir`** (string): A path to a specific product related to the URL. This is mainly used
+ `productDir`: A path to a specific product related to the URL. This is mainly used
   for multi-product media and isn't used by default.
-* **`enabled`** (boolean): Controls whether the repository is active. This is handy for
+ `enabled`: Controls whether the repository is active. This is handy for
   pre-defining repositories you plan to enable later. By default, repositories are enabled.
-* **`allowUnsigned`** (boolean): If set to `true`, the repository will be accepted even if it lacks
+ `allowUnsigned`: If set to `true`, the repository will be accepted even if it lacks
   a GPG signature. This can be useful for your own repositories. It's not set by default.
-* **`gpgFingerprints`** (list of strings): A list of accepted GPG fingerprints for the repository.
+ `gpgFingerprints`: A list of accepted GPG fingerprints for the repository.
   This is helpful if the repository is signed by a GPG key not included in your installation medium.
   This list is empty by default.
