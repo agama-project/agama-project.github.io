@@ -48,7 +48,7 @@ Please, use the "help" command to learn more.
 * `questions` — Handle installer questions
 * `logs` — Collect the installer logs
 * `auth` — Authenticate with Agama's server
-* `download` — Download file from given URL
+* `download` — Download file from a given (AutoYaST) URL
 * `finish` — Finish the installation
 * `monitor` — Monitors the Agama service
 * `events` — Display Agama events
@@ -118,7 +118,7 @@ Read and load a profile
 
 Validate a profile using JSON Schema
 
-Schema is available at /usr/share/agama-cli/profile.schema.json TODO: Validation is automatic
+Schema is available at /usr/share/agama-cli/profile.schema.json Note: validation is always done as part of all other "agama config" commands.
 
 **Usage:** `agama config validate <URL_OR_PATH>`
 
@@ -343,9 +343,9 @@ Print the used token to the standard output
 
 ## `agama download`
 
-Download file from given URL
+Download file from a given (AutoYaST) URL
 
-The purpose of this command is to download files using AutoYaST supported schemas (e.g. device://). It can be used to download additional scripts, configuration files and so on. You can use it for downloading Agama autoinstallation profiles. However, unless you need additional processing, the "agama config generate" is recommended. If you want to convert an AutoYaST profile, use "agama config generate".
+The purpose of this command is to download files using AutoYaST supported schemas (e.g. device://). It can be used to download additional scripts, configuration files and so on. You can use it for downloading Agama autoinstallation profiles. If you want to convert an AutoYaST profile, use "agama config generate".
 
 **Usage:** `agama download <URL> <DESTINATION>`
 
