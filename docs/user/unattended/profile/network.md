@@ -47,7 +47,9 @@ list of `connections` where you can define as many as needed.
 }
 ```
 
-If you are familiar with _NetworkManager_, the connection concept will not be new for you.
+If you are familiar with _[NetworkManager][NM]_, the connection concept will not be new for you.
+
+[NM]: https://www.networkmanager.dev/docs/
 
 For each type of connection, you might need a different set of fields. However, there are many of
 them that are common to any type of connection. Those fields include the connection identifier, the
@@ -116,7 +118,7 @@ includes the list of ports to connect.
 ```jsonnet
 {
   network: {
-    connetions: [
+    connections: [
       {
         id: "Bridge #0",
         interface: "br0",
@@ -152,7 +154,7 @@ the list of ports to connect.
 ```jsonnet
 {
   network: {
-    connetions: [
+    connections: [
       {
         id: "Bond #0",
         interface: "bond0",
