@@ -8,14 +8,11 @@ This document contains the help content for the `agama` command-line program.
 * [`agama config`↴](#agama-config)
 * [`agama config show`↴](#agama-config-show)
 * [`agama config load`↴](#agama-config-load)
+* [`agama config validate`↴](#agama-config-validate)
+* [`agama config generate`↴](#agama-config-generate)
 * [`agama config edit`↴](#agama-config-edit)
 * [`agama probe`↴](#agama-probe)
 * [`agama install`↴](#agama-install)
-* [`agama profile`↴](#agama-profile)
-* [`agama profile autoyast`↴](#agama-profile-autoyast)
-* [`agama profile validate`↴](#agama-profile-validate)
-* [`agama profile evaluate`↴](#agama-profile-evaluate)
-* [`agama profile import`↴](#agama-profile-import)
 * [`agama questions`↴](#agama-questions)
 * [`agama questions mode`↴](#agama-questions-mode)
 * [`agama questions answers`↴](#agama-questions-answers)
@@ -30,6 +27,8 @@ This document contains the help content for the `agama` command-line program.
 * [`agama auth show`↴](#agama-auth-show)
 * [`agama download`↴](#agama-download)
 * [`agama finish`↴](#agama-finish)
+* [`agama monitor`↴](#agama-monitor)
+* [`agama events`↴](#agama-events)
 
 ## `agama`
 
@@ -46,12 +45,13 @@ Please, use the "help" command to learn more.
 * `config` — Inspect or change the installation settings
 * `probe` — Analyze the system
 * `install` — Start the system installation
-* `profile` — Manage auto-installation profiles (retrieving, applying, etc.)
 * `questions` — Handle installer questions
 * `logs` — Collect the installer logs
 * `auth` — Authenticate with Agama's server
-* `download` — Download file from given URL
+* `download` — Download file from a given (AutoYaST) URL
 * `finish` — Finish the installation
+* `monitor` — Monitors the Agama service
+* `events` — Display Agama events
 
 ###### **Options:**
 
@@ -79,7 +79,9 @@ If you want to change any configuration value, you can load a profile (complete 
 ###### **Subcommands:**
 
 * `show` — Generate an installation profile with the current settings
-* `load` — Read and load a profile from the standard input
+* `load` — Read and load a profile
+* `validate` — Validate a profile using JSON Schema
+* `generate` — Generate and print a native Agama JSON configuration from any kind and location.
 * `edit` — Edit and update installation option using an external editor
 
 
@@ -92,15 +94,61 @@ It is possible that many configuration settings do not have a value. Those setti
 
 The output of command can be used as input for the "agama config load".
 
-**Usage:** `agama config show`
+**Usage:** `agama config show [OPTIONS]`
+
+###### **Options:**
+
+* `-o`, `--output <FILE_PATH>` — Save the output here (goes to stdout if not given)
 
 
 
 ## `agama config load`
 
-Read and load a profile from the standard input
+Read and load a profile
 
-**Usage:** `agama config load`
+**Usage:** `agama config load [URL_OR_PATH]`
+
+###### **Arguments:**
+
+* `<URL_OR_PATH>` — JSON file: URL or path or `-` for standard input
+
+
+
+## `agama config validate`
+
+Validate a profile using JSON Schema
+
+Schema is available at /usr/share/agama-cli/profile.schema.json Note: validation is always done as part of all other "agama config" commands.
+
+**Usage:** `agama config validate <URL_OR_PATH>`
+
+###### **Arguments:**
+
+* `<URL_OR_PATH>` — JSON file, URL or path or `-` for standard input
+
+
+
+## `agama config generate`
+
+Generate and print a native Agama JSON configuration from any kind and location.
+
+Kinds:
+- JSON
+- Jsonnet, injecting the hardware information
+- AutoYaST profile, including ERB and rules/classes
+
+Locations:
+- path
+- URL (including AutoYaST specific schemes)
+
+For an example of Jsonnet-based profile, see
+https://github.com/openSUSE/agama/blob/master/rust/agama-lib/share/examples/profile.jsonnet
+
+**Usage:** `agama config generate [URL_OR_PATH]`
+
+###### **Arguments:**
+
+* `<URL_OR_PATH>` — JSON file: URL or path or `-` for standard input
 
 
 
@@ -139,75 +187,6 @@ This command starts the installation process.  Beware it is a destructive operat
 When the preconditions for the installation are not met, it informs the user and returns, making no changes to the system.
 
 **Usage:** `agama install`
-
-
-
-## `agama profile`
-
-Manage auto-installation profiles (retrieving, applying, etc.)
-
-**Usage:** `agama profile <COMMAND>`
-
-###### **Subcommands:**
-
-* `autoyast` — Download the autoyast profile and print resulting json
-* `validate` — Validate a profile using JSON Schema
-* `evaluate` — Evaluate a profile, injecting the hardware information from D-Bus
-* `import` — Process autoinstallation profile and loads it into agama
-
-
-
-## `agama profile autoyast`
-
-Download the autoyast profile and print resulting json
-
-**Usage:** `agama profile autoyast <URL>`
-
-###### **Arguments:**
-
-* `<URL>` — AutoYaST profile's URL. Any AutoYaST scheme, ERB and rules/classes are supported. all schemas that autoyast supports
-
-
-
-## `agama profile validate`
-
-Validate a profile using JSON Schema
-
-Schema is available at /usr/share/agama-cli/profile.schema.json
-
-**Usage:** `agama profile validate <URL_OR_PATH>`
-
-###### **Arguments:**
-
-* `<URL_OR_PATH>` — JSON file, URL or path or `-` for standard input
-
-
-
-## `agama profile evaluate`
-
-Evaluate a profile, injecting the hardware information from D-Bus
-
-For an example of Jsonnet-based profile, see https://github.com/openSUSE/agama/blob/master/rust/agama-lib/share/examples/profile.jsonnet
-
-**Usage:** `agama profile evaluate <URL_OR_PATH>`
-
-###### **Arguments:**
-
-* `<URL_OR_PATH>` — Jsonnet file, URL or path or `-` for standard input
-
-
-
-## `agama profile import`
-
-Process autoinstallation profile and loads it into agama
-
-This is top level command that do all autoinstallation processing beside starting installation. Unless there is a need to inject additional commands between processing use this command instead of set of underlying commands.
-
-**Usage:** `agama profile import <URL>`
-
-###### **Arguments:**
-
-* `<URL>` — Profile's URL. Supports the same schemas as the "download" command plus AutoYaST specific ones. Supported files are json, jsonnet, sh for Agama profiles and ERB, XML, and rules/classes directories for AutoYaST support
 
 
 
@@ -364,15 +343,15 @@ Print the used token to the standard output
 
 ## `agama download`
 
-Download file from given URL
+Download file from a given (AutoYaST) URL
 
-The purpose of this command is to download files using AutoYaST supported schemas (e.g. device:// or relurl://). It can be used to download additional scripts, configuration files and so on. You can use it for downloading Agama autoinstallation profiles. However, unless you need additional processing, the "agama profile import" is recommended. If you want to convert an AutoYaST profile, use "agama profile autoyast".
+The purpose of this command is to download files using AutoYaST supported schemas (e.g. device://). It can be used to download additional scripts, configuration files and so on. You can use it for downloading Agama autoinstallation profiles. If you want to convert an AutoYaST profile, use "agama config generate".
 
 **Usage:** `agama download <URL> <DESTINATION>`
 
 ###### **Arguments:**
 
-* `<URL>` — URL pointing to file for download
+* `<URL>` — URL reference pointing to file for download. If a relative URL is provided, it will be resolved against the current working directory
 * `<DESTINATION>` — File name
 
 
@@ -396,6 +375,26 @@ Finish the installation
    poweroff - power off the installed machine.
 
   Default value: `reboot`
+
+
+
+## `agama monitor`
+
+Monitors the Agama service
+
+**Usage:** `agama monitor`
+
+
+
+## `agama events`
+
+Display Agama events
+
+**Usage:** `agama events [OPTIONS]`
+
+###### **Options:**
+
+* `-p`, `--pretty` — Display the events in a more human-readable way
 
 
 
