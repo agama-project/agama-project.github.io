@@ -6,6 +6,34 @@ If the installation was successful and you can boot into the newly installed
 system and log in, get the Agama logs from `/var/log/agama-installation`.
 
 
+## From the Agama web UI
+
+From a running Agama installation, use the `(v)` (circle with a down arrow) in
+the top right corner to get the "Installer" menu, then "Download logs".
+
+
+### Local installation
+
+In a local installation (i.e. running the installer web user interface on the
+same machine that you are installing), this will create a logs tarball in
+`/root/Downloads/agama-logs.tar.gz`. But that is on a RAM disk; you need to
+copy it to a permanent location, i.e. over the network or to a USB stick or SD
+card. See section
+[saving the logs to a permanent location](./collecting-agama-logs#saving-the-logs-to-a-permanent-location)
+below.
+
+If you used "Show downloads", and you get stuck in the "downloads" window, use
+the "Organize" menu, then the last item "Close" (or `Ctrl`+`W`) to go back to
+the normal Agama window.
+
+
+### Remote installation
+
+In a remote installation (i.e. if you connected a web browser running on your
+normal workstation computer to the machine that you are installing), the logs
+tarball is downloaded directly to the download directory on your workstation.
+
+
 ## The "agama logs store" command
 
 In a running Agama live ISO (i.e. when booted from the installation ISO), use
