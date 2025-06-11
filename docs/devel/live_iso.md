@@ -106,13 +106,13 @@ You can define the password directly on the boot command line. There are two opt
 You can enter your password during boot in an interactive session. Again, there
 are two options:
 
-- Use `live.password_dialog` boot option to start an interactive dialog during the boot process.
+- Use `live.password_dialog=1` boot option to start an interactive dialog during the boot process.
   This uses a nice dialog for entering and confirming the password. However, in some situations the
   full screen dialog might not be displayed correctly or some messages might be displayed over it. In
   that case you might use the `Ctrl+L` key shortcut to refresh the screen. If it still does not work
   then try using the other option below.
 
-- Use `live.password_systemd` boot option to ask for the password in a simple prompt. This is
+- Use `live.password_systemd=1` boot option to ask for the password in a simple prompt. This is
   similar to the option above, but the advantage is that this solution does not use a full screen
   dialog but a single line prompt so it should work better in special environments like a serial
   console.
