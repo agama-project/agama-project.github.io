@@ -252,21 +252,23 @@ Matching is performed using a `search` subsection like described below. By defau
 the scope fitting the conditions will be matched. The number of device matches can be limited using
 `max`.
 
-The following example shows how several `search` sections could be used to find three disks that are
-big enough, delete one of their partitions identified by the number on its name and create new
-partitions of type RAID.
+The following example shows how several `search` sections could be used to find the three biggest
+disks in the system, delete all partitions bigger than 1 GiB within them and create new partitions
+of type RAID.
 
 ```json
 "storage": {
   "drives": [
     {
       "search": {
-        "condition": { "size": { "greater": "1 TiB" } },
+        "sort": { "size": "desc" },
         "max": 3
       },
       "partitions": [
         {
-          "search": { "condition": { "number": 1 } },
+          "search": {
+            "condition": { "size": { "greater": "1 GiB" } }
+          },
           "delete": true
         },
         {
@@ -296,17 +298,17 @@ on the profile.
   "drives": [
     {
       "search": {
-        "condition": { "size": { "greater": "1 TiB" } },
+        "sort": { "size": "desc" },
         "max": 1
       },
-      "alias": "first-big-drive"
+      "alias": "biggest"
     },
     {
       "search": {
-        "condition": { "size": { "greater": "1 TiB" } },
+        "sort": { "size": "desc" },
         "max": 1
       },
-      "alias": "second-big-drive"
+      "alias": "secondBiggest"
     }
   ]
 }
@@ -338,6 +340,7 @@ drive, it will be considered to contain the following one.
 ```json
 {
   "search": {
+    "sort": "name",
     "max": 1,
     "ifNotFound": "error"
   }
@@ -393,29 +396,29 @@ Aliases can be used for that purpose as shown in this example.
 
 If a section that matches several existing devices contains an alias, that alias will be considered
 to be a reference to all the devices. As a consequence, this two examples are equivalent, assuming
-we are certain that at least two disks in the system meet the condition.
+there are at least two disks in the system.
 
 ```json
 "storage": {
   "drives": [
     {
       "search": {
-        "condition": { "size": { "greater": "1 TiB" } },
+        "sort": { "size": "desc" },
         "max": 1,
       },
-      "alias": "firstBig"
+      "alias": "biggest"
     },
     {
       "search": {
-        "condition": { "size": { "greater": "1 TiB" } },
+        "sort": { "size": "desc" },
         "max": 1,
       },
-      "alias": "secondBig"
+      "alias": "secondBiggest"
     }
   ],
   "mdRaids": [
     {
-      "devices": [ "firstBig", "secondBig" ],
+      "devices": [ "biggest", "secondBiggest" ],
       "level": "raid0"
     }
   ]
@@ -425,7 +428,7 @@ we are certain that at least two disks in the system meet the condition.
   "drives": [
     {
       "search": {
-        "condition": { "size": { "greater": "1 TiB" } },
+        "sort": { "size": "desc" },
         "max": 2,
       },
       "alias": "big"
