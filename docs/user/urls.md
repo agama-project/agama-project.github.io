@@ -90,8 +90,10 @@ hd:/sles.jsonnet?devices=/dev/sr0
 dvd:/autoinst.xml?devices=sr1
 ```
 
-:::note Prefer `device` to `cd`, `dvd` or `hd` Given that `cd`, `dvd` and `hd` do not offer any
-advantage, using `device` might be a better option. :::
+:::note
+Prefer `device` to `cd`, `dvd` or `hd` Given that `cd`, `dvd` and `hd` do not offer any
+advantage, using `device` might be a better option.
+:::
 
 ### Not supported yet
 
