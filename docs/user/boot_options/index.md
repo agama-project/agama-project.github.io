@@ -46,15 +46,22 @@ first one can be removed anytime.
   ```
 
 - `inst.dud`
-  Allows to patch or extend the Live Media by pointing to so called Driver Update. It currently
-  supports only RPM packages. See more about supported URLs at [URLs section](/docs/user/urls).
-  No checks of dependencies and no validation is currently provided. Multiple entries are allowed,
-  but each of them is handled separately on its own.
+  Applies a Driver Update (DUD) to the installation environment. A DUD can be used to patch
+  or extend the installer. Supported formats include RPM packages and special DUD archives
+  created with [mkdud](https://github.com/openSUSE/mkdud).
+
+  You can specify this parameter multiple times; each entry is processed independently.
+  If the DUD is located on a network, you must also add the `rd.neednet` boot option.
+  For more details on supported URL formats, see the [URLs section](/docs/user/urls).
 
   ```text
-  inst.dud=https://download.opensuse.org/some-project/some.rpm
+  inst.dud=https://download.opensuse.org/some-project/some.rpm rd.neednet
   inst.dud=label://UPDATES/package.rpm
   ```
+
+  :::warning
+  This option does not perform any dependency checks or signature validation on the provided update.
+  :::
 
 - `inst.info`
   Points to info file that contains additional Agama settings. It is useful when you want to provide
