@@ -27,6 +27,13 @@ In addition to those schemes, Agama supports a set of specific ones which can be
 - [`label`](#label) for finding files in a file system with a given label.
 - [`cd`, `dvd`, `hd`](#cd-dvd-and-hd) for finding files on specific devices (prefer `device`).
 
+## Relative references
+
+For `"scripts"` and `"files"` in the Agama JSON config, the `"url"` property
+can be a relative reference, where the resolution base is the URL of the containing config.
+
+This is a replacement for the ~~`relurl`~~ scheme used in AutoYaST.
+
 ## Agama specific schemes
 
 The typical protocols are enough for most use cases. However, more specific URLs can be handy in
@@ -97,7 +104,7 @@ advantage, using `device` might be a better option.
 
 ### Not supported yet
 
-The `repo://` and `relurl://` URLs are not supported yet, but there are plans to implement them.
+The `repo://` URLs are not supported yet, but there are plans to implement them.
 
 [^1]: Agama relies on [curl](https://curl.se/) to support generic protocols (network protocols and
     `file://`). So it might happen that some protocol is supported "by accident". However, only the
