@@ -8,13 +8,15 @@ Depending on the [product you are installing](./product), Agama will select a se
 patterns and packages to install. However, it is possible to add your own list of repositories,
 patterns and packages using the `software` section.
 
-This section supports three keys:
+This section supports following keys:
 
 - `patterns`: list of patterns to install (e.g., `gnome`, `kde`, `fips`, etc.). You can find a list
   of patterns for your distribution using `zypper se --type pattern`.
 - `packages`: list of packages to install (e.g., `neovim`).
 - `extraRepositories`: list of additional repositories that will be used as installation source. See
   the [User-defined repositories](#user-defined-repositories) for further information.
+- `onlyRequired`: flag that sets if agama should install only mandatory dependencies or also
+  optional one. If omited, it will use libzypp defaults which is false.
 
 ```jsonnet
 {
@@ -27,7 +29,8 @@ This section supports three keys:
         url: "https://download.opensuse.org/repositories/games/openSUSE_Tumbleweed/",
         gpgFingerprints: ["AEF1 EE83 0A27 90AB ABC2 CDA2 8F91 B0E6 C862 B42C"]
       }
-    ]
+    ],
+    onlyRequired: false
   }
 }
 ```
