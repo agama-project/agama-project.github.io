@@ -94,6 +94,10 @@ options at the end of the `linux` line.
   inst.finish=poweroff
   ```
 
+- `inst.install`: on unattended mode, Agama automatically starts the installation after reading the
+  profile. However, if you set `inst.install` to `0`, Agama stops after reading the configuration,
+  giving the user a chance to review the installation options before proceeding.
+
 - `live.password` and `live.password_hash`: sets the `root` password of the live system.
   `live.password` accepts a plain text password, while `live.password_hash` is expected to receive a
   hashed password, which is more secure. The disadvantage of a hashed password is that it is quite
