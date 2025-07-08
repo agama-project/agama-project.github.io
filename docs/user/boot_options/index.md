@@ -8,23 +8,7 @@ Agama Live ISO behavior can be altered using the kernel command line at boot tim
 architectures that support Grub, you need to modify the `agama-installer` entry adding the boot
 options at the end of the `linux` line.
 
-:::note It may be easier
-
-We must admit that it is not as convenient as it was when using Linuxrc and YaST. However, we rely
-on [dracut](https://manpages.opensuse.org/Tumbleweed/dracut/dracut.8.en.html) now that it is easier
-to extend.
-
-:::
-
-:::warning
-
-Originally `agama.` prefix used to be used for Agama related kernel boot options. This is obsolete
-now as we started to use more generic `inst.` prefix now. For now both prefixes can be used but
-support for the first one can be removed anytime.
-
-:::
-
-- `inst.auto`: Tells the installer to use the profile in the given URL to start an unattended
+- `inst.auto`: tells the installer to use the profile in the given URL to start an unattended
   installation. Check the [URLs section](/docs/user/urls) to learn more about which URLs Agama
   supports.
 
@@ -49,7 +33,7 @@ support for the first one can be removed anytime.
   inst.copy_network=0
   ```
 
-- `inst.dud` Applies a Driver Update (DUD) to the installation environment. A DUD can be used to
+- `inst.dud`: applies a Driver Update (DUD) to the installation environment. A DUD can be used to
   patch or extend the installer. Supported formats include RPM packages and special DUD archives
   created with [mkdud](https://github.com/openSUSE/mkdud).
 
@@ -62,13 +46,10 @@ support for the first one can be removed anytime.
   inst.dud=label://UPDATES/package.rpm
   ```
 
-  :::warning
+  Beware that this option does not perform any dependency checks or signature validation on the
+  provided update.
 
-  This option does not perform any dependency checks or signature validation on the provided update.
-
-  :::
-
-- `inst.info` Points to info file that contains additional Agama settings. It is useful when you
+- `inst.info`: points to info file that contains additional Agama settings. It is useful when you
   want to provide more options for Agama and typing them during boot is not possible.
 
   ```text
@@ -87,13 +68,7 @@ support for the first one can be removed anytime.
   inst.register_url=http://rmt.example.net
   ```
 
-  :::note
-
-  HTTPS is not supported yet.
-
-  :::
-
-- `inst.install_url` Override the default `installation_url` set in the product files
+- `inst.install_url`: overrides the default `installation_url` set in the product files
   [here](https://github.com/openSUSE/agama/tree/master/products.d) by passing the `inst.install_url`
   parameter as a boot option in the bootloader. This is particularly useful for any pre-production
   testing in openQA.
@@ -108,7 +83,7 @@ support for the first one can be removed anytime.
 
   :::
 
-- `inst.finish` During an unattended installation, if the installation is completed successfully
+- `inst.finish`: during an unattended installation, if the installation is completed successfully
   then the installer will reboot into the target system by default (`reboot`). This behavior can be
   modified allowing to `halt` or `poweroff` the machine at the end of the installation. In addition
   to the three values corresponding to systemd commands, the value `stop` will pause at the final
@@ -119,7 +94,7 @@ support for the first one can be removed anytime.
   inst.finish=poweroff
   ```
 
-- `live.password` and `live.password_hash` Set the `root` password of the live system.
+- `live.password` and `live.password_hash`: sets the `root` password of the live system.
   `live.password` accepts a plain text password, while `live.password_hash` is expected to receive a
   hashed password, which is more secure. The disadvantage of a hashed password is that it is quite
   long and is not easy to type it into the boot prompt manually. It makes sense in environments
@@ -137,7 +112,7 @@ support for the first one can be removed anytime.
 
   :::
 
-- `live.password_dialog` Start an interactive dialog during the boot process. This uses a nice
+- `live.password_dialog`: start an interactive dialog during the boot process. This uses a nice
   dialog for entering and confirming the password. However, in some situations the full screen
   dialog might not be displayed correctly or some messages might be displayed over it. In that case
   you might use the `Ctrl+L` key shortcut to refresh the screen. If it still does not work then try
@@ -148,7 +123,7 @@ support for the first one can be removed anytime.
   live.password_dialog=1
   ```
 
-- `live.password_systemd` Ask for a password using a simple prompt. This is similar to the option
+- `live.password_systemd`: asks for a password using a simple prompt. This is similar to the option
   above, but the advantage is that this solution does not use a full screen dialog but a single line
   prompt so it should work better in special environments like a serial console.
 
@@ -170,15 +145,3 @@ support for the first one can be removed anytime.
   ```text
   systemd.unit=multi-user.target
   ```
-
-<!-- TODO: move this tip to a better place -->
-
-:::tip Technical tip
-
-When the installation system boots, the agama-proxy-setup service will read the proxy URL to be used
-from the kernel command line options or through the dracut ask prompt configuration file writing it
-to the /etc/sysconfig/proxy. After that the microOS Tools setup-systemd-proxy-env systemd service
-will make the proxy variables from that file available to all the systemd units writing a systemd
-config file with all the variables as Environment ones.
-
-:::
