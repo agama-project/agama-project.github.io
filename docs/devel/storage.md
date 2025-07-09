@@ -13,7 +13,7 @@ That is especially useful for development purposes. In particular, setting the f
 variables for the Agama service will allow to emulate a system with any storage setup.
 
 ```shell
-YAST_TEST_MODE=1
+YAST_STORAGE_TEST_MODE=1
 YAST_DEVICEGRAPH_FILE=/path/to/a/devicegraph.xml
 ```
 
