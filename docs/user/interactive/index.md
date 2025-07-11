@@ -17,8 +17,8 @@ the installation workflow.
 ### Product selection
 
 Agama allows installing several SUSE and openSUSE-based distributions. The [openSUSE-based
-image](/download) image includes [openSUSE Tumbleweed](https://www.opensuse.org/#Tumbleweed),
-[openSUSE Leap 16.0 Alpha](https://www.opensuse.org/#Leap) and [openSUSE Micro
+image](/download) image includes [Tumbleweed](https://www.opensuse.org/#Tumbleweed),
+[Leap 16.0 Beta](https://get.opensuse.org/leap/16.0/), [Leap Micro 6.2 Beta](https://en.opensuse.org/Portal:Leap_Micro), [Slowroll](https://en.opensuse.org/Portal:Slowroll), [Kalpa](https://kalpadesktop.org/) and [openSUSE Micro
 OS](https://get.opensuse.org/microos/).
 
 It is noteworthy to mention that the product selection does not only determine which software we
