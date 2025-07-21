@@ -34,6 +34,23 @@ can be a relative reference, where the resolution base is the URL of the contain
 
 This is a replacement for the ~~`relurl`~~ scheme used in AutoYaST.
 
+For example, if the configuration below is retrieved from
+`https://example.com/machines/sles16.jsonnet`, it refers to
+`https://example.com/machines/scripts/snapshot.sh`.
+
+```jsonnet
+{
+  scripts: {
+    postPartitioning: [
+      {
+        name: "snapshot",
+        url: "scripts/snapshot.sh"
+      }
+    ]
+  }
+}
+```
+
 ## Agama specific schemes
 
 The typical protocols are enough for most use cases. However, more specific URLs can be handy in
