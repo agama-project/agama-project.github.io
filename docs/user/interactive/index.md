@@ -59,6 +59,17 @@ Finally, at the top right corner, there is an icon that displays the localizatio
 installer itself. It is important to know that changing them would not have effect on the installed
 system (use the **Localization** section instead).
 
+### Registration
+
+If a product must be registered (e.g., SUSE Linux Enterprise Server 16), then a **Registration**
+section is offered. In that section, the product can be registered through the SUSE Customer Center
+server or specifying a custom registration server ([RMT](https://documentation.suse.com/en-us/sles/15-SP7/html/SLES-all/rmt-overview.html) or SCC proxy).
+
+![Product registration](/img/user/registration.png)
+
+The product will be registered using the hostname configured in the **Hostname** section. Note that
+the hostname cannot be changed after registering the product.
+
 ### Localization
 
 This section allows to select the language, keyboard layout and timezone that the system you are
