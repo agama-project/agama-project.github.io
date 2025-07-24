@@ -70,6 +70,7 @@ IPv4/IPv6 configuration, some device parameters, etc.
 - `ignoreAutoDns`: whether DNS options provided via DHCP are ignored or not.
 - `status`: the wanted status for the connection. It can be `up`, `down`, or `removed`.
 - `autoconnect`: whether the connection should be automatically activated.
+- `persistent`: whether the connection should be kept after the installation or not.
 - `match`: define a criteria to select the device to apply the connection to.
 
 These are the common fields to any kind of connection. Now, if you want to set up a bridge, you need
@@ -178,3 +179,36 @@ The `bond` section can contain:
 - `mode`: bond mode. Possible values: `balance-rr` (default), `active-backup`, `balance-xor`,
   `broadcast`, `802.3ad`, `balance-tlb`, `balance-alb`.
 - `options`: additional options.
+
+### VLAN
+
+To create a VLAN you need to include a `vlan` section supporting the following fields:
+
+- `id`: The VLAN identifier that the interface should be assigned. An integer from the 0 to 4094
+  range.
+- `parent`: The parent interface name from which the VLAN should be created.
+- `protocol`: The VLAN protofol to use for encapsulation. Possible values: `802.1Q` (default),
+  `802.1ad`.
+
+```jsonnet
+{
+  network: {
+    connections: [
+      {
+        "id": "vlan10",
+        "method4": "manual",
+        "method6": "disabled",
+        "status": "up",
+        "persistent": true,
+        "addresses": ["192.168.1.28/24"],
+        "gateway4": "192.168.1.1",
+        "nameservers": ["192.168.1.1"],
+        "vlan": {
+          "id": 10,
+          "parent": "eth0"
+        }
+      }
+    ]
+  }
+}
+```

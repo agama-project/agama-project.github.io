@@ -12,6 +12,12 @@ Agama allows to execute scripts at the following points of the installation proc
 
 This section describes how to specify a script and goes through some use-cases.
 
+:::note `inst.script`
+
+For a more general script feature wrapping the whole installation process, see [Fully scripted installation](../inst-script).
+
+:::
+
 ## Scripts definition
 
 User scripts are defined in the `scripts` section of the Agama profile. There is a key for each of

@@ -17,8 +17,8 @@ the installation workflow.
 ### Product selection
 
 Agama allows installing several SUSE and openSUSE-based distributions. The [openSUSE-based
-image](/download) image includes [openSUSE Tumbleweed](https://www.opensuse.org/#Tumbleweed),
-[openSUSE Leap 16.0 Alpha](https://www.opensuse.org/#Leap) and [openSUSE Micro
+image](/download) image includes [Tumbleweed](https://www.opensuse.org/#Tumbleweed),
+[Leap 16.0 Beta](https://get.opensuse.org/leap/16.0/), [Leap Micro 6.2 Beta](https://en.opensuse.org/Portal:Leap_Micro), [Slowroll](https://en.opensuse.org/Portal:Slowroll), [Kalpa](https://kalpadesktop.org/) and [openSUSE Micro
 OS](https://get.opensuse.org/microos/).
 
 It is noteworthy to mention that the product selection does not only determine which software we
@@ -58,6 +58,17 @@ product, as discussed above.
 Finally, at the top right corner, there is an icon that displays the localization settings for the
 installer itself. It is important to know that changing them would not have effect on the installed
 system (use the **Localization** section instead).
+
+### Registration
+
+If a product must be registered (e.g., SUSE Linux Enterprise Server 16), then a **Registration**
+section is offered. In that section, the product can be registered through the SUSE Customer Center
+server or specifying a custom registration server ([RMT](https://documentation.suse.com/en-us/sles/15-SP7/html/SLES-all/rmt-overview.html) or SCC proxy).
+
+![Product registration](/img/user/registration.png)
+
+The product will be registered using the hostname configured in the **Hostname** section. Note that
+the hostname cannot be changed after registering the product.
 
 ### Localization
 
