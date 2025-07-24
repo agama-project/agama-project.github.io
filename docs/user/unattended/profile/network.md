@@ -229,8 +229,8 @@ one specially when it is already applied to an specific interface.
       },
       {
         "id": "enp1s0",
-        "interface": "enp1s0"
-        "status": "up",
+        "interface": "enp1s0",
+        "status": "up"
       }
     ]
   }
