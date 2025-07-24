@@ -37,17 +37,39 @@ options at the end of the `linux` line.
   patch or extend the installer. Supported formats include RPM packages and special DUD archives
   created with [mkdud](https://github.com/openSUSE/mkdud).
 
-  You can specify this parameter multiple times; each entry is processed independently. If the DUD
-  is located on a network, you must also add the `rd.neednet` boot option. For more details on
-  supported URL formats, see the [URLs section](/docs/user/urls).
+  You can specify this parameter multiple times; each entry is processed independently. For more
+  details on supported URL formats, see the [URLs section](/docs/user/urls).
 
   ```text
-  inst.dud=https://download.opensuse.org/some-project/some.rpm rd.neednet
+  inst.dud=https://download.opensuse.org/some-project/some.rpm
   inst.dud=label://UPDATES/package.rpm
   ```
 
   Beware that this option does not perform any dependency checks or signature validation on the
   provided update.
+
+- `inst.dud_insecure`: ignores SSL/TLS problems like a self-signed certificate when downloading the
+  DUD image from an HTTPS server
+
+  :::danger[Security]
+
+  Disabling SSL/TLS checks is a security risk! An attacker could easily tamper the downloaded DUD
+  image and could inject a malicious code into the system or install vulnerable packages!
+
+  :::
+
+- `inst.dud_packages.gpg`: this allows ignoring the package GPG signature problems with the
+  `inst.dud_packages.gpg=0` option when installing the packages to the target system.
+
+  Applies only to the DUD packages, the GPG problems for the other packages are still detected and
+  reported.
+
+  :::danger[Security]
+
+  Installing unknown packages is a security risk! Malicious code might be easily installed in
+  your system!
+
+  :::
 
 - `inst.info`: points to info file that contains additional Agama settings. It is useful when you
   want to provide more options for Agama and typing them during boot is not possible.
