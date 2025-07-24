@@ -121,7 +121,7 @@ includes the list of ports to connect.
   network: {
     connections: [
       {
-        id: "Bridge #0",
+        id: "Bridge0",
         interface: "br0",
         bridge: {
           ports: ["eth0", "eth1"]
@@ -157,7 +157,7 @@ the list of ports to connect.
   network: {
     connections: [
       {
-        id: "Bond #0",
+        id: "Bond0",
         interface: "bond0",
         bond: {
           ports: ["eth0", "eth1"],
@@ -207,6 +207,30 @@ To create a VLAN you need to include a `vlan` section supporting the following f
           "id": 10,
           "parent": "eth0"
         }
+      }
+    ]
+  }
+}
+```
+
+## Deleting network connections
+
+As commented in previous sections, the `status` field allows to bring `up`, `down` or even `remove`
+an existing connection. It might be useful to delete an existing connection before creating a new
+one specially when it is already applied to an specific interface.
+
+```json
+{
+  "network": {
+    "connections": [
+      {
+        "id": "default",
+        "status": "removed"
+      },
+      {
+        "id": "enp1s0",
+        "interface": "enp1s0",
+        "status": "up"
       }
     ]
   }
