@@ -27,7 +27,8 @@
     "raw-loader": "^4.0.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-responsive-carousel": "^3.2.23"
+    "react-responsive-carousel": "^3.2.23",
+    "xbytes": "^1.9.1"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.6.3",
