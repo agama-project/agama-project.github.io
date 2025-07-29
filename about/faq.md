@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 4
 ---
 
 # Frequently Asked Questions
@@ -40,7 +40,7 @@ can also be accessed from any device which has a browser.
 
 Unlike the YaST wizard, which forces the user to go through some sequential steps to configure every
 aspect of the system, the Agama interface offers a simpler workflow that is described at the
-[interactive installation guide](/docs/user/interactive) (screenshots included!).
+[interactive installation guide](/docs/overview/webui) (screenshots included!).
 
 We consider this interface as the best alternative for most of the use cases, replacing the
 use of VNC or a text-based interface over SSH.
@@ -57,7 +57,7 @@ in many convenient and flexible ways.
 There is currently no direct replacement for the YaST Expert Partitioner. All the capabilities are
 still there and can be used from the unattended installation. It is also planned to offer most
 capabilities of the Expert Partitioner at the web interface, but with a different approach. Check
-the [documentation about storage](/docs/user/interactive/storage) for more details.
+the [documentation about storage](/docs/user/storage) for more details.
 
 ## What about unattended installation?
 

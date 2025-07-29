@@ -1,3 +1,7 @@
+---
+sidebar_position: 8
+---
+
 # Configuration of storage devices
 
 This section describes some general aspects of the planned features for Agama regarding
@@ -55,7 +59,7 @@ developed.
 Every change to any of the configuration options will result in an immediate re-calculation of the
 section that presents the result. As already mentioned, the configuration options are identical to
 the case of unattended installation (see detailed description at the [corresponding
-section](../unattended/profile/storage)), although the user interface presents more clearly the
+section](./unattended/profile/storage)), although the user interface presents more clearly the
 relationship between those settings and the system being used for installation.
 
 ![Selecting a device for installation](/img/user/storage-device.png)
@@ -67,7 +71,7 @@ storage configuration. For example, there is not support yet for representing RA
 If a given configuration is not manageable by the web interface, then the storage section shows a
 message explaining the situation and offers to reset to the default settings. Such an alert is
 always shown if the loaded configuration uses [the legacy AutoYaST
-mode](../unattended/profile/storage#unattended-installation-using-the-legacy-autoyast-mode).
+mode](./unattended/profile/storage#unattended-installation-using-the-legacy-autoyast-mode).
 :::
 
 There are several interactive elements allowing to control several aspects of the installation.

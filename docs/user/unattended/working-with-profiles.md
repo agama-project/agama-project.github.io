@@ -13,25 +13,6 @@ learn how to work with profiles using [Agama's commad-line interface](../cli). T
 valuable help when you are writing or debugging your profile, and it allows validating, loading and
 exporting a profile from a running Agama instance.
 
-## Starting the installation
-
-Before jumping into the usage of the command-line interface, let's have a look at the regular way of
-starting the unattended installation. To tell Agama where to find the profile, you usually set the
-`inst.auto` [boot option](../boot_options). You can use any of the
-[URLs that Agama supports](../urls).
-
-If you do not specify any profile, Agama will automatically search for it in a few predefined
-locations. Agama expects a file named `autoinst.jsonnet`, `autoinst.json` or `autoinst.xml` (in that
-order) to be located on:
-
-- The root of a file system named `OEMDRV`.
-- Or the root (`/`) of the installation environment.
-
-The first file found is used as the profile, starting the installation right away. If no profile is
-found, Agama will fall back to the interactive installation.
-
-Keep reading if you want to learn more about how profiles are processed.
-
 ## Manually loading a profile
 
 An Agama profile is written in Jsonnet, which is a superset of JSON. It means that any valid JSON
@@ -47,8 +28,9 @@ process:
    this stage. It will use the URL of the profile as the base URL.
 3. Load the JSON file into the Agama service.
 
-These steps are handled by the `agama config generate` (steps 1 and 2) and `agama config load`
-(step 3) subcommands.
+The whole process is automatically performed by Agama when `inst.auto` is used. Internally, the
+mentioned steps are handled by the `agama config generate` (steps 1 and 2) and `agama config load`
+(step 3) subcommands. Thus, the process can be replicated manually.
 
 ```console
 $ agama config generate http://example.lan/agama.jsonnet > agama.json

@@ -65,14 +65,22 @@ const config: Config = {
       // },
       items: [
         {
-          href: "/about",
-          label: "About",
+          to: '/about',
           position: "left",
+          activeBaseRegex: `/about`,
+          label: "About",
         },
         {
           type: "docSidebar",
-          sidebarId: "tutorialSidebar",
           position: "left",
+          sidebarId: "introSidebar",
+          // label: "Guide", "Introduction", "Overview", "Start"
+          label: "Get started",
+        },
+        {
+          type: "docSidebar",
+          position: "left",
+          sidebarId: "docsSidebar",
           label: "Documentation",
         },
         {
@@ -86,9 +94,11 @@ const config: Config = {
           position: "left",
         },
         {
-          href: "https://github.com/agama-project/agama",
-          label: "GitHub",
-          position: "right",
+          type: "docSidebar",
+          position: "left",
+          sidebarId: "devSidebar",
+          label: "Development",
+          position: "right"
         },
       ],
     },
@@ -99,16 +109,16 @@ const config: Config = {
           title: "Docs",
           items: [
             {
-              label: "User",
+              label: "Get started",
+              to: "/docs/overview",
+            },
+            {
+              label: "User documentation",
               to: "/docs/user",
             },
             {
               label: "Development",
               to: "/docs/devel",
-            },
-            {
-              label: "FAQ",
-              to: "/docs/faq",
             },
           ],
         },
@@ -131,10 +141,6 @@ const config: Config = {
             {
               label: "Blog",
               to: "/blog",
-            },
-            {
-              label: "Roadmap",
-              to: "/docs/roadmap",
             },
             {
               label: "YaST blog",
@@ -175,6 +181,15 @@ const config: Config = {
       "docusaurus-lunr-search",
       { maxHits: 10, disableVersioning: true, highlightResult: true },
     ],
+    [
+      'content-docs',
+      {
+        id: 'about',
+        path: 'about',
+        routeBasePath: 'about',
+        sidebarPath: './sidebarsAbout.js',
+      } satisfies DocsOptions,
+    ]
   ],
 };
 

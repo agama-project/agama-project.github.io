@@ -1,21 +1,13 @@
-# What is Agama?
+---
+sidebar_position: 2
+---
 
-Agama is a new Linux installer born in the core of the [YaST](https://yast.opensuse.org/) team. It
-is designed to offer re-usability, integration with third party tools and the possibility to
-build advanced user interfaces over it.
+# Mission and scope
 
-It offers an HTTP API to control and monitor the whole installation process and comes with two user
-interfaces: a modern web front-end and a powerful command-line tool.
+Agama is a Linux installer intended as the evolution of YaST. But it is not designed as a direct
+replacement for all the YaST functionality. Instead, it comes with an important mindset change.
 
-Agama can perform interactive and unattended installations, making it possible even to mix both
-approaches with any combination of manual work and automation.
-
-Agama reuses many of the principles and internal components of (Auto)YaST, ensuring it can handle
-a similar number of architectures and technologies. It also offers a high level of backwards
-compatibility with AutoYaST for unattended installations, being often able to act as a drop-in
-replacement.
-
-## A Linux Installer...
+## A Linux installer...
 
 From a very simplistic and high level view, there are basically two methods to deploy a
 Linux operating system - using a pre-built image and performing an installation.
@@ -33,7 +25,7 @@ an installer can always be used to deploy a new Linux system through some genera
 
 Agama turns that process into a seamless experience.
 
-## ... and Just an Installer
+## ... and just an installer
 
 Unlike its predecessor YaST, known for been both a Linux installer and a general configuration
 tool, Agama focuses on system installation.
@@ -46,8 +38,3 @@ As such, Agama is not present at the final installed system and minimizes overla
 general configuration tools.
 
 ![Deploy and configuration tools](/img/deploy-configure.png)
-
-## More Details
-
-If you need more information about what Agama can do, the plans for the future, how it compares to
-YaST or the level of compatibity with AutoYaST, check the [Frequenly Asked Questions](/docs/faq).

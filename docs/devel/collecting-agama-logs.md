@@ -81,7 +81,7 @@ remains useable).
 
 
 
-## How to get a shell
+## How to get a shell {#shell}
 
 ### Starting an xterm
 
