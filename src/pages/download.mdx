@@ -1,19 +1,4 @@
-import Link from "@docusaurus/Link";
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 import DownloadLinks from "@site/src/components/DownloadLinks";
-
-export const HelpLinks = ({ dvdHelp, usbHelp }) => (
-  <div className="flex-container">
-    <Link className="button button--primary" to={usbHelp}>
-      Prepare a USB stick
-    </Link>
-    <Link className="button button--secondary" to={dvdHelp}>
-      Burn a DVD
-    </Link>
-  </div>
-);
 
 # Official Agama Live ISO
 
@@ -45,30 +30,23 @@ Obviously, use the checksum that corresponds to the downloaded ISO.
 
 ## Create a bootable medium
 
-Once you have the ISO, it is time to [create a bootable USB
-stick](https://en.opensuse.org/SDB:Live_USB_stick) (recommended) or [burn a
-DVD](https://en.opensuse.org/SDB:Download_help#Using_Linux).
+Once you have the ISO, it is time to create a bootable USB stick (recommended) or burn a DVD. Follow
+the documentation for your operating system below.
 
-<Tabs className="unique-tabs">
-  <TabItem value="linux" label="From Linux" default>
-    <HelpLinks
-      dvdHelp="https://en.opensuse.org/SDB:Download_help#Using_Linux"
-      usbHelp="https://en.opensuse.org/SDB:Live_USB_stick"
-    />
-  </TabItem>
-  <TabItem value="windows" label="From Windows" default>
-    <HelpLinks
-      dvdHelp="https://en.opensuse.org/SDB:Download_help#Using_Microsoft_Windows"
-      usbHelp="https://en.opensuse.org/SDB:Create_a_Live_USB_stick_using_Windows"
-    />
-  </TabItem>
-  <TabItem value="osx" label="From OS X" default>
-    <HelpLinks
-      dvdHelp="https://en.opensuse.org/SDB:Download_help#Using_MacOS_X_.2810.3_and_above.29"
-      usbHelp="https://en.opensuse.org/SDB:Create_a_Live_USB_stick_using_Mac_OS_x"
-    />
-  </TabItem>
-</Tabs>
+### Linux
+
+[Prepare an USB stick from Linux](https://en.opensuse.org/SDB:Live_USB_stick)<br/>
+[Burn a DVD from Linux](https://en.opensuse.org/SDB:Download_help#Using_Linux)
+
+### Windows
+
+[Prepare an USB stick from Windows](https://en.opensuse.org/SDB:Create_a_Live_USB_stick_using_Windows)<br/>
+[Burn a DVD from Windows](https://en.opensuse.org/SDB:Download_help#Using_Microsoft_Windows)
+
+### OS X
+
+[Prepare an USB stick from OS X](https://en.opensuse.org/SDB:Create_a_Live_USB_stick_using_Mac_OS_x)<br/>
+[Burn a DVD from OS X](https://en.opensuse.org/SDB:Download_help#Using_MacOS_X_.2810.3_and_above.29)
 
 ## Start the installation
 
