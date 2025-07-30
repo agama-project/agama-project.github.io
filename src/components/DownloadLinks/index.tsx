@@ -67,8 +67,8 @@ export default function DownloadLinks(): JSX.Element {
   const corsProxy = "https://corsproxy-kcuoblmnuq-uc.a.run.app/";
 
   const loadData = () => {
-    // if the data is not loaded in 2 seconds then display the generic links
-    const timer = setTimeout(() => !files && setFiles([]), 2000);
+    // if the data is not loaded in 5 seconds then display the generic links
+    const timer = setTimeout(() => !files && setFiles([]), 5000);
     // download data from the OBS server
     fetch(corsProxy)
       .then((response) => response.json())
