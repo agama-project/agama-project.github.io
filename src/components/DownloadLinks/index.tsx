@@ -1,21 +1,21 @@
 import React, { JSX, useEffect, useState } from "react";
 import xbytes from "xbytes";
 
-/* architecture header */
+// architecture header
 const ArchHeader = ({ arch }): JSX.Element => (
   <h3 id={`download-${arch}`}>{arch}</h3>
 );
 
-/* progress indicator */
+// progress indicator
 const Loading = (): JSX.Element => (
   <p>
     <em>Loading data...</em>
   </p>
 );
 
-/* show a download link for a specified architecture */
-/*  arch - the architecture name */
-/*  files - data downloaded from OBS */
+// show a download link for a specified architecture
+//  arch - the architecture name
+//  files - data downloaded from OBS
 const DownloadLink = ({ arch, files }): JSX.Element => {
   const file = files?.find((f) => f.name.includes(arch));
   // base URL where the images are located
@@ -25,7 +25,7 @@ const DownloadLink = ({ arch, files }): JSX.Element => {
   return (
     <p>
       {file ? (
-        /* found matching image, display the versioned link and the image size */
+        // found matching image, display the versioned link and the image size
         <>
           <a href={`${url}/${file.name}`}>{file.name}</a>
           {" ("}
@@ -34,7 +34,7 @@ const DownloadLink = ({ arch, files }): JSX.Element => {
           {")"}
         </>
       ) : (
-        /* download failed or missing data, display a generic static link without version */
+        // download failed or missing data, display a generic static link without version
         <a href={`${url}/agama-installer.${arch}-openSUSE.iso`}>
           {`agama-installer.${arch}-openSUSE.iso`}
         </a>
@@ -51,6 +51,7 @@ const DownloadLink = ({ arch, files }): JSX.Element => {
   );
 };
 
+// show download links for all supported architectures
 export default function DownloadLinks(): JSX.Element {
   // this variable contains the downloaded data from OBS
   //   undefined => data not loaded yet (display loading status)
