@@ -32,14 +32,8 @@ export const DownloadLink = ({arch, files}) => {
 
   return (
     <p>
-      { /* download failed or missing data, display a generic static link without version */ }
-      { !file &&
-        <a href={`${url}/agama-installer.${arch}-openSUSE.iso`}>
-          {`agama-installer.${arch}-openSUSE.iso`}
-        </a>
-      }
-      { /* found matching image, display the versioned link and the image size */ }
-      { file &&
+      { file ?
+        /* found matching image, display the versioned link and the image size */
         <>
           <a href={`${url}/${file.name}`}>
             {file.name}
@@ -49,16 +43,20 @@ export const DownloadLink = ({arch, files}) => {
           { xbytes(file.size, {fixed: 1}) }
           { ")" }
         </>
-      }
-      <br/>
-      { !file &&
-        <a href={`${url}/agama-installer.${arch}-openSUSE.iso.sha256`}>
-          {`agama-installer.${arch}-openSUSE.iso.sha256`}
+        :
+        /* download failed or missing data, display a generic static link without version */
+        <a href={`${url}/agama-installer.${arch}-openSUSE.iso`}>
+          {`agama-installer.${arch}-openSUSE.iso`}
         </a>
       }
-      { file &&
+      <br/>
+      { file ?
         <a href={`${url}/${file.name}.sha256`}>
           {`${file.name}.sha256`}
+        </a>
+        :
+        <a href={`${url}/agama-installer.${arch}-openSUSE.iso.sha256`}>
+          {`agama-installer.${arch}-openSUSE.iso.sha256`}
         </a>
       }
     </p>
