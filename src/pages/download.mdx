@@ -1,61 +1,22 @@
-import Link from "@docusaurus/Link";
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
-export const ISOLinks = ({ arch }) => (
-  <div className="flex-container">
-    <Link
-      className="button button--primary"
-      to={`https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/agama-installer.${arch}-openSUSE.iso`}
-    >
-      ISO
-    </Link>
-    <Link
-      className="button button--secondary"
-      to={`https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/agama-installer.${arch}-openSUSE.iso.sha256`}
-    >
-      Checksum
-    </Link>
-  </div>
-);
-
-export const HelpLinks = ({ dvdHelp, usbHelp }) => (
-  <div className="flex-container">
-    <Link className="button button--primary" to={usbHelp}>
-      Prepare a USB stick
-    </Link>
-    <Link className="button button--secondary" to={dvdHelp}>
-      Burn a DVD
-    </Link>
-  </div>
-);
+import DownloadLinks from "@site/src/components/DownloadLinks";
 
 # Official Agama Live ISO
 
 Agama **is a multi-product installer**. It means that you can install different distributions using
 a single medium. In close collaboration with the openSUSE project, the current image allows
 installing [openSUSE Tumbleweed](https://www.opensuse.org/#Tumbleweed), [openSUSE Leap 16.0
-Alpha](https://www.opensuse.org/#Leap), [openSUSE Micro OS](https://get.opensuse.org/microos/) and
+](https://www.opensuse.org/#Leap), [openSUSE Micro OS](https://get.opensuse.org/microos/) and
 [openSUSE Slowroll](https://en.opensuse.org/Portal:Slowroll) (experimental).
 
 ## Download the Agama Live ISO
 
-The first step is to download the ISO image that matches your architecture.
+Download the ISO image that matches the architecture of your machine. The `*.sha256` files contain a
+checksum of the ISO file so you can verify that the image was downloaded correctly, see the
+instructions below.
 
-<Tabs className="unique-tabs">
-  <TabItem value="x86_64" label="x86_64" default>
-    <ISOLinks arch="x86_64" />
-  </TabItem>
-  <TabItem value="aarch64" label="aarch64">
-    <ISOLinks arch="aarch64" />
-  </TabItem>
-  <TabItem value="ppc64le" label="ppc64le">
-    <ISOLinks arch="ppc64le" />
-  </TabItem>
-  <TabItem value="s390x" label="s390x">
-    <ISOLinks arch="s390x" />
-  </TabItem>
-</Tabs>
+<DownloadLinks />
+
+### Verifying the downloaded image
 
 You might want to check whether the ISO was correctly downloaded. If that's the case, you can
 download the checksum file too and use the
@@ -65,34 +26,27 @@ download the checksum file too and use the
 sha256sum -c agama-installer.x86_64-openSUSE.iso.sha256
 ```
 
-Obviously, use the checksum that correponds with the downloaded ISO.
+Obviously, use the checksum that corresponds to the downloaded ISO.
 
 ## Create a bootable medium
 
-Once you have the ISO, it is time to [create a bootable USB
-stick](https://en.opensuse.org/SDB:Live_USB_stick) (recommended) or [burn a
-DVD](https://en.opensuse.org/SDB:Download_help#Using_Linux).
+Once you have the ISO, it is time to create a bootable USB stick (recommended) or burn a DVD. Follow
+the documentation for your operating system below.
 
-<Tabs className="unique-tabs">
-  <TabItem value="linux" label="From Linux" default>
-    <HelpLinks
-      dvdHelp="https://en.opensuse.org/SDB:Download_help#Using_Linux"
-      usbHelp="https://en.opensuse.org/SDB:Live_USB_stick"
-    />
-  </TabItem>
-  <TabItem value="windows" label="From Windows" default>
-    <HelpLinks
-      dvdHelp="https://en.opensuse.org/SDB:Download_help#Using_Microsoft_Windows"
-      usbHelp="https://en.opensuse.org/SDB:Create_a_Live_USB_stick_using_Windows"
-    />
-  </TabItem>
-  <TabItem value="osx" label="From OS X" default>
-    <HelpLinks
-      dvdHelp="https://en.opensuse.org/SDB:Download_help#Using_MacOS_X_.2810.3_and_above.29"
-      usbHelp="https://en.opensuse.org/SDB:Create_a_Live_USB_stick_using_Mac_OS_x"
-    />
-  </TabItem>
-</Tabs>
+### Linux
+
+[Prepare an USB stick from Linux](https://en.opensuse.org/SDB:Live_USB_stick)<br/>
+[Burn a DVD from Linux](https://en.opensuse.org/SDB:Download_help#Using_Linux)
+
+### Windows
+
+[Prepare an USB stick from Windows](https://en.opensuse.org/SDB:Create_a_Live_USB_stick_using_Windows)<br/>
+[Burn a DVD from Windows](https://en.opensuse.org/SDB:Download_help#Using_Microsoft_Windows)
+
+### OS X
+
+[Prepare an USB stick from OS X](https://en.opensuse.org/SDB:Create_a_Live_USB_stick_using_Mac_OS_x)<br/>
+[Burn a DVD from OS X](https://en.opensuse.org/SDB:Download_help#Using_MacOS_X_.2810.3_and_above.29)
 
 ## Start the installation
 
