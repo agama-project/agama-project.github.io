@@ -67,7 +67,7 @@ You can redefine the whole regular installation process using the `inst.script` 
 option](../user/boot_options), which can even be used repeatedly.
 
 ```
-inst.auto=http://mydomain.org/custom-installation.sh
+inst.script=http://mydomain.org/custom-installation.sh
 ```
 
 Agama will download the file, make it executable and run it. It is suggested to run these commands
