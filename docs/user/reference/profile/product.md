@@ -101,6 +101,6 @@ If you are using HTTPS, you might be interested in the
 :::note Using a boot argument
 
 Alternatively, you can specify the registration URL setting the
-[`register_url` boot argument](/docs/user/boot_options).
+[`register_url` boot argument](../boot_options).
 
 :::

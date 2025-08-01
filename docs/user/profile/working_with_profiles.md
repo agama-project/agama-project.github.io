@@ -4,33 +4,13 @@ sidebar_position: 1
 
 # Working with profiles
 
-To start an unattended installation, you just need to tell Agama where to find the profile, usually
-through the `inst.auto` boot option. In an ideal world, Agama should get the profile and perform the
-installation without your intervention.
+Configuration profiles are key for [unattended installation](/docs/overview/unattended) and to
+perform [advanced configuration](/docs/overview/cli) of Agama. However, getting your profile
+right is not always easy.
 
-However, getting your profile right is not always easy. For that reason, it might be interesting to
-learn how to work with profiles using [Agama's commad-line interface](../cli). This tool is a
-valuable help when you are writing or debugging your profile, and it allows validating, loading and
-exporting a profile from a running Agama instance.
-
-## Starting the installation
-
-Before jumping into the usage of the command-line interface, let's have a look at the regular way of
-starting the unattended installation. To tell Agama where to find the profile, you usually set the
-`inst.auto` [boot option](../boot_options). You can use any of the
-[URLs that Agama supports](../urls).
-
-If you do not specify any profile, Agama will automatically search for it in a few predefined
-locations. Agama expects a file named `autoinst.jsonnet`, `autoinst.json` or `autoinst.xml` (in that
-order) to be located on:
-
-- The root of a file system named `OEMDRV`.
-- Or the root (`/`) of the installation environment.
-
-The first file found is used as the profile, starting the installation right away. If no profile is
-found, Agama will fall back to the interactive installation.
-
-Keep reading if you want to learn more about how profiles are processed.
+Fortunatelly, Agama's command-line interface offers [several commands](/docs/user/reference/cli) to
+validate, load and export configurations, becoming a very valuable tool for writing and debugging
+your profile.
 
 ## Manually loading a profile
 
@@ -43,12 +23,13 @@ process:
 
 1. Fetch the profile from the given URL.
 2. Evaluate the Jsonnet code to generate the final JSON file. If you are using
-   [files](./profile/files) or [scripts](./profile/scripts), any relative URL will be resolved in
-   this stage. It will use the URL of the profile as the base URL.
+   [files](../reference/profile/files) or [scripts](../reference/profile/scripts), any relative URL
+   will be resolved in this stage. It will use the URL of the profile as the base URL.
 3. Load the JSON file into the Agama service.
 
-These steps are handled by the `agama config generate` (steps 1 and 2) and `agama config load`
-(step 3) subcommands.
+The whole process is automatically performed by Agama when `inst.auto` is used. Internally, the
+mentioned steps are handled by the `agama config generate` (steps 1 and 2) and `agama config load`
+(step 3) subcommands. Thus, the process can be replicated manually.
 
 ```console
 $ agama config generate http://example.lan/agama.jsonnet > agama.json
@@ -69,11 +50,11 @@ installation from the command-line, you can issue the `agama install` command.
 
 :::
 
-If you are using relative URLs (for instance, within the [files](./profile/files) or the
-[scripts](./profile/scripts) section), the `agama config load` might not work as you expect. As
-`agama config load` only receives a piece of JSON, it does not know which is the base URL and it
-will use, as a fallback, the path to the working directory (the one where you are executing the
-command from). For that reason, it is usually a good idea to pre-process the profile using the
+If you are using relative URLs (for instance, within the [files](../reference/profile/files) or the
+[scripts](../reference/profile/scripts) section), the `agama config load` might not work as you
+expect. As `agama config load` only receives a piece of JSON, it does not know which is the base URL
+and it will use, as a fallback, the path to the working directory (the one where you are executing
+the command from). For that reason, it is usually a good idea to pre-process the profile using the
 `agama config generate` command.
 
 ## Validating a profile

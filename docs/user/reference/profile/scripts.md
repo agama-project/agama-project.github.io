@@ -14,7 +14,8 @@ This section describes how to specify a script and goes through some use-cases.
 
 :::note `inst.script`
 
-For a more general script feature wrapping the whole installation process, see [Fully scripted installation](../inst-script).
+For a more general script feature wrapping the whole installation process, see [Fully scripted
+installation](/docs/overview/unattended#fully-scripted-installation) at the starter's guide.
 
 :::
 
@@ -81,7 +82,7 @@ All scripts share the same elements:
   of the script.
 - `url`: alternatively to the `content`, you can define a URL to fetch the file from. The scripts
   are downloaded and written to the disk when loading the profile. In addition to the
-  [supported URLs](../../urls) you can use a URL relative to the profile (e.g., "/my-script.sh").
+  [supported URLs](../urls) you can use a URL relative to the profile (e.g., "/my-script.sh").
 
 :::note Working with relative URLs
 
@@ -89,8 +90,8 @@ If you use the `inst.auto` boot option to specify the URL of the profile, any re
 the URL of the profile as its base.
 
 However, loading the profile using the `agama config load` will not work in the same way. Check the
-[Manually loading a profile](../working-with-profiles#manually-loading-a-profile) section for
-further information.
+[Manually loading a profile](../../profile/working_with_profiles#manually-loading-a-profile) section
+for further information.
 
 :::
 

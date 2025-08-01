@@ -1,4 +1,4 @@
-# Collecting Agama logs
+# Collecting logs
 
 ## Getting Agama logs from an installed system
 
@@ -19,7 +19,7 @@ same machine that you are installing), this will create a logs tarball in
 `/root/Downloads/agama-logs.tar.gz`. But that is on a RAM disk; you need to
 copy it to a permanent location, i.e. over the network or to a USB stick or SD
 card. See section
-[saving the logs to a permanent location](./collecting-agama-logs#saving-the-logs-to-a-permanent-location)
+[saving the logs to a permanent location](#saving-the-logs-to-a-permanent-location)
 below.
 
 If you used "Show downloads", and you get stuck in the "downloads" window, use
@@ -45,7 +45,7 @@ agama logs store
 
 It will tell you the exact path and filename where it stored the logs.
 
-See also the [agama logs store command line reference](../user/cli#agama-logs-store).
+See also the [agama logs store command line reference](../reference/cli#agama-logs-store).
 
 
 
@@ -57,7 +57,7 @@ Agama live session terminates, or when the installation boots (or tries to
 boot) into the freshly installed system.
 
 See section
-[saving the logs to a permanent location](./collecting-agama-logs#saving-the-logs-to-a-permanent-location)
+[saving the logs to a permanent location](#saving-the-logs-to-a-permanent-location)
 below.
 
 
@@ -81,7 +81,7 @@ remains useable).
 
 
 
-## How to get a shell
+## How to get a shell {#shell}
 
 ### Starting an xterm
 

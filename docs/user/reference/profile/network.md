@@ -17,7 +17,7 @@ you do not have a DHCP server and you need to set up the network so Agama can fe
 configuration.
 
 The rest of this section explains how to configure the network using an Agama profile. For the boot
-options, please check the [boot options section](/docs/user/boot_options).
+options, please check the [boot options section](../boot_options).
 
 ## Defining network connections
 
