@@ -29,18 +29,18 @@ example instructing Agama to install _Tumbleweed_ and create a first user so you
 ```
 
 It is possible to define the storage layout, which software to install, the network configuration,
-etc. Check the [profile format](../user/unattended/profile) section of Agama's user documentation to
+etc. Check the [profile format](../user/profile) section of Agama's user documentation to
 learn more.
 
 It is worth to mention that, although Agama defines its own profile format, it is able to partially
-handle AutoYaST profiles. Check the [AutoYaST support section](../user/unattended/autoyast) for
+handle AutoYaST profiles. Check the [AutoYaST support section](../user/profile/autoyast) for
 further information.
 
 ## Starting the installation
 
 Once you have your first profile, you just need to boot an Agama Live ISO telling Agama where to find
-the profile. That can be done setting the `inst.auto` [boot option](../user/boot_options). You can use
-any of the [URLs that Agama supports](../user/urls).
+the profile. That can be done setting the `inst.auto` [boot option](../user/reference/boot_options).
+You can use any of the [URLs that Agama supports](../user/reference/urls).
 
 ```
 inst.auto=http://mydomain.org/tumbleweed.jsonnet
@@ -58,13 +58,13 @@ found, Agama will fall back to the interactive installation.
 
 ## Fully scripted installation
 
-Specifying [custom scripts](../user/unattended/profile/scripts) at the profile and using Jsonnet can
+Specifying [custom scripts](../user/reference/profile/scripts) at the profile and using Jsonnet can
 provide a great level of flexibility to define complex rules that are evaluated during the
 installation process.  But sometimes that may not be enough and you may want to go one step further
 in order to implement a complex decision making process.
 
 You can redefine the whole regular installation process using the `inst.script` [boot
-option](../user/boot_options), which can even be used repeatedly.
+option](../user/reference/boot_options), which can even be used repeatedly.
 
 ```
 inst.script=http://mydomain.org/custom-installation.sh

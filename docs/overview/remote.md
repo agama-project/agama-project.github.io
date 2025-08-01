@@ -28,5 +28,5 @@ ssh root@agama.local
 ```
 
 If you want to know more about the mDNS support, please check the [remote access
-documentation](../user/remote.md).
+documentation](../user/guides/remote.md).
 

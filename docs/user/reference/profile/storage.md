@@ -5,7 +5,7 @@ sidebar_position: 1
 # Storage configuration
 
 The general concepts regarding configuration of storage devices with Agama are exposed at the
-[corresponding subsection](../../storage.md) of the interactive installation documentation.
+[corresponding subsection](/docs/user/guides/storage) of the interactive installation documentation.
 It is recommended to read that section before diving into the details below.
 
 ## Unattended installation using the legacy AutoYaST mode

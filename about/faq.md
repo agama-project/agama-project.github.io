@@ -49,7 +49,7 @@ use of VNC or a text-based interface over SSH.
 
 The approach to text-mode (console) installation is also different from YaST. Instead of offering a
 pseudo-graphical interface that mimics the graphical one, Agama features a powerful
-[command-line interface](/docs/user/cli) that allows to drive and monitor the installation process
+[command-line interface](/docs/overview/cli) that allows to drive and monitor the installation process
 in many convenient and flexible ways.
 
 ## Where is the Expert Partitioner?
@@ -57,7 +57,7 @@ in many convenient and flexible ways.
 There is currently no direct replacement for the YaST Expert Partitioner. All the capabilities are
 still there and can be used from the unattended installation. It is also planned to offer most
 capabilities of the Expert Partitioner at the web interface, but with a different approach. Check
-the [documentation about storage](/docs/user/storage) for more details.
+the [documentation about storage](/docs/user/guides/storage) for more details.
 
 ## What about unattended installation?
 
@@ -68,7 +68,7 @@ The installation process can be partially or totally automated and driven by:
   - Any third party tool like [Uyuni](https://www.uyuni-project.org/) through the HTTP interface.
   - Any combination of the three previous methods.
 
-For more information see the [unattended installation guide](/docs/user/unattended).
+For more information see the [unattended installation guide](/docs/overview/unattended).
 
 ## Can I use my existing AutoYaST profiles and infrastructure?
 
@@ -80,7 +80,7 @@ But there are also some caveats. Bear in mind that Agama is focused on the insta
 further configuration to other tools. Therefore it includes less features and there are some
 sections you can find in an AutoYaST profile that are ignored by Agama.
 
-You can find further details in the [AutoYaST support section](/docs/user/unattended/autoyast).
+You can find further details in the [AutoYaST support section](/docs/user/profile/autoyast).
 
 ## Will Agama replace YaST as the main installer for SUSE Linux?
 

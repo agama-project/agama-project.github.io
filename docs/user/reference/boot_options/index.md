@@ -9,7 +9,7 @@ architectures that support Grub, you need to modify the `agama-installer` entry 
 options at the end of the `linux` line.
 
 - `inst.auto`: tells the installer to use the profile in the given URL to start an unattended
-  installation. Check the [URLs section](/docs/user/urls) to learn more about which URLs Agama
+  installation. Check the [URLs section](./urls) to learn more about which URLs Agama
   supports.
 
   ```text
@@ -38,7 +38,7 @@ options at the end of the `linux` line.
   created with [mkdud](https://github.com/openSUSE/mkdud).
 
   You can specify this parameter multiple times; each entry is processed independently. For more
-  details on supported URL formats, see the [URLs section](/docs/user/urls).
+  details on supported URL formats, see the [URLs section](./urls).
 
   ```text
   inst.dud=https://download.opensuse.org/some-project/some.rpm

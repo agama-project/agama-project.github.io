@@ -34,5 +34,5 @@ you can check the
 [JSON Schema](https://github.com/openSUSE/agama/blob/master/rust/agama-lib/share/profile.schema.json)
 to learn about the supported elements.
 
-If you are interested in the dynamic bits, you can check the [Writing a dynamic profile](./dynamic)
-section.
+If you are interested in the dynamic bits, you can check the [Writing a dynamic
+profile](../profile/dynamic) section.

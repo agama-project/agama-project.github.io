@@ -17,9 +17,9 @@ command-line only to tweak those aspects of the configuration that cannot be man
 The first step to use the Agama command-line tools from the Agama Live installation media is to open
 a Linux console session as the user `root`. The easiest way to do show is to switch to one of the
 text consoles, for example pressing `Ctrl`+`Alt`+`F1`. Then you can log in as `root` using any
-password you may have setup [during boot](../user/boot_options) or just typing the password you
-can find right above the login prompt. Notice that this password is freshly generated; it's different
-each time the live system is booted.
+password you may have setup [during boot](../user/reference/boot_options) or just typing the
+password you can find right above the login prompt. Notice that this password is freshly generated;
+it's different each time the live system is booted.
 
 Once you are logged as `root`, you have the `agama` command at your disposal.
 
@@ -37,7 +37,7 @@ You can switch back and forth between the graphical console and several text con
 combinations like `Ctrl`+`Alt`+`F1` or `Ctrl`+`Alt`+`F2`...  `Ctrl`+`Alt`+`F7`. The graphical
 interface can usually be found at the second console or at the seventh, depending whether the live
 system is based on Wayland or X.Org. You can learn more about text consoles in the [corresponding
-section](../devel/collecting-agama-logs.md#shell) of the document about collecting installation
+section](../user/guides/collecting_logs.md#shell) of the document about collecting installation
 logs.
 
 ## Remote access to the command-line tools
@@ -147,7 +147,7 @@ and then saving the file and quitting the editor.
 
 Of course, it is also possible to express the configuration in the more dynamic (and usually more
 convenient) Jsonnet format, but that requires some previous processing that is better described at
-the [corresponding section](../user/unattended/working-with-profiles) of Agama's user documentation.
+the [corresponding section](../user/profile/working_with_profiles) of Agama's user documentation.
 
 ## Driving the whole installation process
 
@@ -163,5 +163,5 @@ agama finish
 ```
 
 There are many other commands that can be useful. All of them are described at the [command-line
-reference](../user/cli).
+reference](../user/reference/cli).
 

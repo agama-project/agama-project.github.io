@@ -98,7 +98,7 @@ shrinking the current partitions.
 ![Overview of the storage configuration page](/img/user/storage-overview.png)
 
 But Agama's storage user interface offers many more options that are described on its own [separate
-document](/docs/user/storage.md). Nevertheless, similar to the case of the **Network** area
+document](/docs/user/guides/storage). Nevertheless, similar to the case of the **Network** area
 described [above](#network), the full Agama potential (like creating software MD RAIDs) is currently
 only accesible using the unattended installation or the command-line interface.
 
