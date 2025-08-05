@@ -10,7 +10,7 @@ information in case of system failures.
 Early Kdump configuration can be done integrating a [post-installation
 script](../reference/profile/scripts) at the Agama configuration. That allows to execute some
 commands within the chrooted environment of the installed system. Let's see an example using a
-Jsonnet profile (more readable than pure JSON).
+Jsonnet profile (more readable than plain JSON).
 
 ```jsonnet
 {
@@ -85,7 +85,7 @@ If you are using Agama interactively, the [corresponding section](../../overview
 starter's guide explains how to use a partial profile to configure settings that are not available
 at the web user interface. That can be used to setup our kdump `post` script. Simply save the
 `scripts` section into a separate file (e.g., `kdump_config.jsonnet` or `kdump_config.json` if
-you prefer pure JSON).
+you prefer plain JSON).
 
 ```jsonnet
 {
