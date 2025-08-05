@@ -5,6 +5,15 @@ on:
     # Review gh actions docs if you want to further define triggers, paths, etc
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
 
+# Only simple read access is needed for the test deployment
+permissions:
+  contents: read
+
+# Allow one concurrent deployment
+concurrency:
+  group: "test-pages"
+  cancel-in-progress: true
+
 jobs:
   test-deploy:
     name: Test deployment
