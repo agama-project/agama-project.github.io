@@ -79,8 +79,9 @@ copy them to the live image (under the `updates` directory of the kernel modules
 the old version of the replaced modules if needed.
 
 If you want to make sure that a module is unloaded (e.g., because it is a dependency of an updated
-module) or loaded, you can add its name to the `module.order` file. Agama will unload those modules
-in reverse order and it will make sure that systemd loads them when booting the live system.
+module) or loaded, you can add its name (withouth the suffix `.ko*`) to the `module.order` file.
+Agama will unload those modules in reverse order and it will make sure that systemd loads them when
+booting the live system.
 
 ## Running scripts
 
