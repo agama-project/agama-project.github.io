@@ -93,11 +93,46 @@ are two reasons for this:
 
 However, you can run scripts (and do many more things) if you include a partial Agama profile as
 part of the update. Place the file (`autoinst.jsonnet`, `autoinst.json` or `autoinst.xml`) in the
-`inst-sys` directory. It will be copied and automatically processed by Agama later.
-
-Please, refer to the
-[Starting the installation](/docs/overview/unattended#starting-the-installation) for further
+`inst-sys` directory. It will be copied and automatically processed by Agama later. Please, refer to
+the [Starting the installation](/docs/overview/unattended#starting-the-installation) for further
 information.
+
+Following this approach, you could use an `autoinst.jsonnet` file containing as many scripts as you
+want:
+
+```jsonnet
+{
+  scripts: {
+    pre: [
+      {
+        name: "script.sh",
+        content: |||
+          #!/usr/bin/bash
+
+          echo "Running at the beginning of the installation"
+        |||
+    ]
+  }
+}
+```
+
+Or, if you prefer, you could use a separate file for the script:
+
+```jsonnet
+{
+  scripts: {
+    pre: [
+      {
+        name: "script.sh",
+        url: "script.sh"
+      }
+    ]
+  }
+}
+```
+
+Of course, combining a Driver Update Disk with an Agama profile enables you to do more things that
+just running a script (e.g., selecting a package for installation).
 
 ## Skipping security checks
 
