@@ -75,8 +75,12 @@ want to add packages that are not in the distribution, you might need to
 ### Adding or updating kernel modules
 
 The `modules` directory of your Driver Update Disk might contain a set of kernel modules. Agama will
-copy them to the live image. If a `module.order` file is found, Agama will unload the modules listed
-in that file (in the given order) and it will make sure they are loaded later by systemd.
+copy them to the live image (under the `updates` directory of the kernel modules path), unloading
+the old version of the replaced modules if needed.
+
+If you want to make sure that a module is unloaded (e.g., because it is a dependency of an updated
+module) or loaded, you can add its name to the `module.order` file. Agama will unload those modules
+in reverse order and it will make sure that systemd loads them when booting the live system.
 
 ## Running scripts
 
