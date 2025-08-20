@@ -72,7 +72,7 @@ If the installation works all the way to the end, that's easy: Wait until the
 "reboot now" page appears and then collect the logs.
 
 If there is a crash during the installation, and you can still access a shell
-(xterm or text console), do it after the crash.
+(a text console), do it after the crash.
 
 If the whole live system hangs or crashes at a random point, it's tricky; then
 you may have to use boot parameters to enable an ssh session from the outside,
@@ -83,43 +83,12 @@ remains useable).
 
 ## How to get a shell {#shell}
 
-### Starting an xterm
-
-From a running graphical Agama session, you can start an `xterm` terminal
-window with a root shell session. At the time of this writing, the key
-combination was `Ctrl`+`Alt`+`T` (for "Terminal").
-
-If you click outside of that xterm, it may disappear behind the active Agama
-window. Use `Alt`+`Tab` (maybe repeatedly) to fetch it to the foreground again.
-
-When done, you can close the xterm with the `[x]` close button at its top right
-corner or with the `exit` command or with `Ctrl`+`D`.
-
-
-#### Setting the keyboard layout in the xterm
-
-You will still have the US keyboard layout (QWERTY) if you haven't set a
-different one in the installer settings in Agama. You can load a national
-variant with the `setxkbmap` command:
-
-```
-setxkbmap de
-```
-(for the German keyboard)
-
-```
-setxkbmap fr
-```
-(for the French keyboard)
-
-or `it` for Italian, `cz` for Czech etc.
-
 
 ### Switching to a text console
 
 If you are running Agama in graphical mode on the system console, you can
-switch to one of the text consoles with `Ctrl`+`Alt`+`F1` or `Ctrl`+`Alt`+`F2`
-...  `Ctrl`+`Alt`+`F6.`
+switch a text console (no password needed)  with `Ctrl`+`Alt`+`F8`.
+
 
 Then log in as "root" and use the password just above the login prompt. Notice
 that this password is freshly generated; it's different each time the live
@@ -136,7 +105,7 @@ characters may be on different keys.
 
 #### Back to the graphical session
 
-Use `Ctrl`+`Alt`+`F7` or just `Alt`+`F7` to get back to the graphical session.
+Use `Ctrl`+`Alt`+`F2` or just `Alt`+`F2` to get back to the graphical session.
 
 
 #### VirtualBox etc.: On-screen keyboard
