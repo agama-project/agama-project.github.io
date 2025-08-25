@@ -11,7 +11,10 @@ patterns and packages using the `software` section.
 This section supports following keys:
 
 - `patterns`: list of patterns to install (e.g., `gnome`, `kde`, `fips`, etc.). You can find a list
-  of patterns for your distribution using `zypper se --type pattern`.
+  of patterns for your distribution using `zypper se --type pattern`. If you specify a list of
+  patterns, pre-selected patterns (e.g., `selinux`) will not get installed unless they are included
+  in the list. If you just want to add a set of patterns to the default selection, check the
+  [Adding and removing patterns](#adding-and-removing-patterns) section.
 - `packages`: list of packages to install (e.g., `neovim`).
 - `extraRepositories`: list of additional repositories that will be used as installation source. See
   the [User-defined repositories](#user-defined-repositories) for further information.
@@ -31,6 +34,44 @@ This section supports following keys:
       }
     ],
     onlyRequired: false
+  }
+}
+```
+
+## Adding and removing patterns
+
+If you specify a list of patterns, pre-selected patterns like `selinux` will not get installed
+unless they are included in the list. So the following list will disable `selinux`:
+
+```jsonnet
+{
+  software: {
+    patterns: ["gnome", "office"]
+  }
+}
+```
+
+If you want to keep the pre-selected patterns, it might be better to use the `add` key:
+
+```jsonnet
+{
+  software: {
+    patterns: {
+      add: ["gnome", "office"]
+    }
+  }
+}
+```
+
+Additionally, there is an special `remove` that it is useful when you want to remove an specific set
+of patterns:
+
+```jsonnet
+{
+  software: {
+    patterns: {
+      remove: ["selinux"]
+    }
   }
 }
 ```
