@@ -9,12 +9,14 @@ architectures that support Grub, you need to modify the `agama-installer` entry 
 options at the end of the `linux` line.
 
 - `inst.auto`: tells the installer to use the profile in the given URL to start an unattended
-  installation. Check the [URLs section](./urls) to learn more about which URLs Agama
-  supports.
+  installation. Check the [URLs section](./urls) to learn more about which URLs Agama supports.
 
   ```text
   inst.auto=http://mydomain.org/tumbleweed.jsonnet
   ```
+
+- `inst.auto_insecure`: ignores SSL/TLS problems like a self-signed certificate when downloading the
+  profile.
 
 - `inst.config_url`: it uses the file at the given URL as the new Agama configuration. Please, do
   not confuse this file with an unattended installation profile. See
@@ -66,8 +68,8 @@ options at the end of the `linux` line.
 
   :::danger[Security]
 
-  Installing unknown packages is a security risk! Malicious code might be easily installed in
-  your system!
+  Installing unknown packages is a security risk! Malicious code might be easily installed in your
+  system!
 
   :::
 
@@ -137,6 +139,13 @@ options at the end of the `linux` line.
   avoids accidentally using the default password from the medium.
 
   :::
+
+- `inst.script`: specify the URL of an installation script that will run during boot. This script
+  could do some preparation work or even tweak the installation workflow using Agama's command-line
+  interface. The `inst.auto` option, is given, will be processed after this script runs.
+
+- `inst.script_insecure`: ignores SSL/TLS problems like a self-signed certificate when downloading
+  the installation script.
 
 - `live.password_dialog`: start an interactive dialog during the boot process. This uses a nice
   dialog for entering and confirming the password. However, in some situations the full screen
