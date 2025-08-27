@@ -132,6 +132,27 @@ just adding or removing certain patterns.
 }
 ```
 
+But sometimes it is Agama who wants to ask something to the user. For example, when it finds an
+encrypted device and needs the password to inspect its content. If that happens, Agama's user
+interface can show a dialog for the user to provide the answer. But there are more options to
+communicate those answers to Agama, like using the command `agama questions` to load a file
+containing answers. Agama 17 introduces a third way - the new `questions` section at the JSON
+configuration. Again, let's illustrate it with an example.
+
+```json
+{
+  "questions": {
+    "policy": "auto",
+    "answers": [
+      {
+        "class": "storage.luks_activation",
+        "password": "nots3cr3t"
+      }
+    ]
+  }
+}
+```
+
 ## Improvements for unattended installation {#unattended}
 
 Users of unattended installation will of course benefit from the mentioned new options added to the
