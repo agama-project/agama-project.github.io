@@ -142,7 +142,7 @@ options at the end of the `linux` line.
 
 - `inst.script`: specify the URL of an installation script that will run during boot. This script
   could do some preparation work or even tweak the installation workflow using Agama's command-line
-  interface. The `inst.auto` option, is given, will be processed after this script runs.
+  interface. The `inst.auto` option, if given, will be processed after this script runs.
 
 - `inst.script_insecure`: ignores SSL/TLS problems like a self-signed certificate when downloading
   the installation script.
