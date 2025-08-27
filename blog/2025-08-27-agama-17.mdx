@@ -39,9 +39,9 @@ reached - one step at a time.
 Apart from reorganizing the information, the new user interface offers the possibility to directly
 use a disk (or a pre-existing RAID device) without creating partitions.
 
-There is also a new option to re-scan the system in case new hardware devices has been plugged, new
-logical devices (line RAIDs or LVM volume groups) has been created or the user needs a second chance
-to introduce an encryption password.
+There is also a new option to re-scan the system in case new hardware devices has been plugged in, new
+logical devices (line RAIDs or LVM volume groups) have been created or the user needs a second chance
+to enter an encryption password.
 
 ![New options at the storage user interface](../static/img/blog/2025-08-27/rescan.png)
 
@@ -73,10 +73,10 @@ Previous versions of Agama did not manage that situation correctly. Agama always
 configuration of the default LSM for the product (SELinux in the mentioned cases).
 
 Now the configuration of the LSM is based on the software selection. At the end of the installation
-process, Agama configures the installed security module. If several ones are installed Agama
+process, Agama configures the installed security module. If several ones are installed, Agama
 configures one of them, with the default one having precedence over the other candidates.
 
-## New options at the JSON configuration {#unattended}
+## New options in the JSON configuration {#unattended}
 
 As most of our readers know, the best way to access the full potential of Agama is to use a JSON (or
 Jsonnet) configuration. That goes far beyond the options offered by the web interface and is the
@@ -132,7 +132,7 @@ just adding or removing certain patterns.
 }
 ```
 
-But sometimes it is Agama who wants to ask something to the user. For example, when it finds an
+But sometimes it is Agama that wants to ask something to the user. For example, when it finds an
 encrypted device and needs the password to inspect its content. If that happens, Agama's user
 interface can show a dialog for the user to provide the answer. But there are more options to
 communicate those answers to Agama, like using the command `agama questions` to load a file
@@ -155,18 +155,18 @@ configuration. Again, let's illustrate it with an example.
 
 ## Improvements for unattended installation {#unattended}
 
-Users of unattended installation will of course benefit from the mentioned new options added to the
+Users of the unattended installation will of course benefit from the mentioned new options added to the
 JSON configuration. But the improvements for automated installations go beyond that.
 
-On the one hand, Agama does not longer proceed silently when it fails to fetch or process a
+On the one hand, Agama does not longer proceed silently if it fails to fetch or process a
 configuration provided via the `inst.auto` boot argument. Instead, this new version displays an
-error message asking the user whether to retry. If the user decides to not retry, Agama does not
+error message asking the user whether or not to retry. If the user decides to not retry, Agama does not
 start the auto-installation process. This is just a first step in the right direction, in the future
 Agama will offer better diagnostics and the possibility to specify a new URL.
 
 On the other hand, the new boot arguments `inst.auto_insecure` and `inst.script_insecure` allow to
 disable the SSL checks when fetching the configuration or the installation script for an unattended
-installation. That simplifies setting up the corresponding infrastructure at controlled
+installation. That simplifies setting up the corresponding infrastructure in controlled
 environments.
 
 ## More possibilities to patch the installer {#dud}
@@ -194,12 +194,12 @@ self-signed certificate) when fetching updates.
 
 ## The family grows {#leap-micro}
 
-As you know, Agama allows to install different distributions that are called "products" at Agama's
+As you know, Agama allows to install different distributions that are called "products" in Agama's
 jargon. Recently Lubos Kocman contributed a [new product
 definition](https://github.com/agama-project/agama/pull/2527) for openSUSE Leap 6.2. That means you
-will know find a new option at the initial page that allows to select the distribution to install.
+will now find a new option at the initial page that allows to select the distribution to install.
 
-Welcome aboard Leap Micro!
+Welcome aboard, Leap Micro!
 
 ## Web page reorganization {#doc}
 
@@ -211,7 +211,7 @@ sections. The second one is at an early stage, but we are already working on gro
 and more content. Of course, contributions are more than welcome.
 
 As a drawback, many of the links you may have from previous sources may now be broken. We rearranged
-the content a lot and it was not feasibly to define a redirection for every moved piece of
+the content a lot and it was not feasible to define a redirection for every moved piece of
 information. Sorry about that.
 
 ## We keep moving {#conclusion}
