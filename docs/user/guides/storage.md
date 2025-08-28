@@ -1,15 +1,9 @@
 # Interactive storage configuration
 
-This section describes some general aspects of the planned features for Agama regarding
-storage setup and shows how the web interface can be used to configure the related
-settings.
+This section describes some general aspects of Agama regarding storage setup and shows how the web 
+interface can be used to configure the related settings.
 
-:::warning Under development
-Since the interface is in constant evolution, the screenshots may not be a faithfull representation
-of the current look & feel.
-:::
-
-## The general approach
+## The general approach {#approach}
 
 Agama uses the same algorithm and similar configurations for both interactive and unattended
 installations, combining capabilities of the traditional YaST proposal (usually known as Guided
@@ -32,10 +26,10 @@ parameters, usage of Btrfs snapshots...) and would calculate appropriate sizes f
 partitions. The user can decide at any point to override any of the automatic values (eg. specifying
 a size range for a partition) or to go back to the automatic mode for that particular setting.
 
-Something similar happens with complex structures like LVM, that can be specified in a quite loosely
-way, as explained below.
+Something similar happens with complex structures like LVM, which do not necessarily need to be
+described exhaustively.
 
-## Overall description of the Storage page
+## Overall description of the Storage page {#overview}
 
 Agama does not offer a direct replacement for the YaST Expert Partitioner. Although creating such a
 tool is not discarded for the future, the Agama web interface should be enough to cover most of the
@@ -48,7 +42,7 @@ result of applying those settings to the current system.
 
 The configuration defines which devices to use and how, which new logical devices to create
 (eg. LVM) and where to allocate (or reuse) the file systems of the new operating system.
-The result is currenty represented as a list of planned actions and a table representing the final
+The result is currently represented as a list of planned actions and a table representing the final
 state of the affected devices. In the long term, a better alternative to show the result could be
 developed.
 
@@ -62,7 +56,7 @@ relationship between those settings and the system being used for installation.
 
 :::warning Under development
 The current user interface does not support all the possibilities that can be expressed by an Agama
-storage configuration. For example, there is not support yet for representing RAID devices.
+storage configuration. For example, there is not support yet for defining new RAID devices.
 
 If a given configuration is not manageable by the web interface, then the storage section shows a
 message explaining the situation and offers to reset to the default settings. Such an alert is
@@ -79,7 +73,7 @@ to reuse existing file systems, among many other things.
 
 ![Using another disk for booting and reusing /home](/img/user/storage-two-disks.png)
 
-## Usage of LVM
+## Usage of LVM {#lvm}
 
 Adding new LVM volume groups is done using the same interface.
 
@@ -94,10 +88,40 @@ and roundings introduced by the different technologies like LVM or the used part
 ![A simple LVM setup](/img/user/storage-simple-lvm.png)
 
 The disks in which the LVM is set are also visible as part of the configuration, so it is possible
-to tweak aspects like what to do with existing partitions or to define which disk will be used to
-create the additional partitions needed for booting.
+to create additional partitions out of the LVM, to tweak what to do with existing partitions or to
+define which disk will be used to create the additional partitions needed for booting.
 
-## Configuration of partitions needed for booting
+## Using existing partitions {#reuse-partitions}
+
+When defining a new partition or modifying an previous definition, it is possible to indicate that
+an existing partition must be used, instead of creating a new one.
+
+![Choosing an existing partition](/img/user/storage-reuse-partition.png)
+
+In some cases, it is possible to keep the existing file system at that partition and simply mount it
+in the indicated location of the new system. Of course, there is always the option to just reuse the
+partition itself but format it again with a new file system.
+
+![Choosing what to do with an existing partition](/img/user/storage-reuse-filesystem.png)
+
+Needless to say, re-used partitions will not be deleted (or even resized), no matter what is the
+general action chosen to find space in the disk.
+
+## Full device without partitions {#direct-disk}
+
+When no partitions are defined on a given disk, it is possible to click "Not configured yet"
+to either define partitions (new or re-used ones) or to indicate the whole disk should be directly
+formatted as a whole, with no partition table. Of course, if the disk is already directly formatted,
+the existing file system can be simply mounted.
+
+![Directly use a disk](/img/user/storage-format-disk.png)
+
+Directly formatting or mounting a device is useful in many situations. For example, in a system in
+which some software RAIDs have been defined before the installation and the user wants to format
+those RAID devices. In that regard, software RAIDs are treated as regular disks by the Agama user
+interface.
+
+## Configuration of partitions needed for booting {#boot}
 
 One of the main features of the Agama storage setup is its ability to automatically determine any extra
 partition that may be needed for booting the new system, like PReP, EFI, Zipl or any other described
@@ -109,7 +133,20 @@ at the advanced options menu.
 
 ![Choosing the disk to create boot partitions](/img/user/storage-boot.png)
 
-## A note about transactional systems
+## Analyze the system and update the information {#rescan}
+
+Sometimes the storage setup of the system changes after the installer has done its initial analysis.
+New hardware devices can be plugged in and new logical devices (like RAIDs or LVM volume groups) can
+be created. Or maybe nothing has changed but the user needs a second chance to enter the encryption
+password for an existing device that was skipped during the initial system probing.
+
+![Rescan devices](/img/user/storage-rescan.png)
+
+The option "Rescan devices" allows to trigger a new system analysis. If the current storage
+configuration still makes sense after reading the devices, such a configuration will be kept
+adapting the result.
+
+## A note about transactional systems {#transactional}
 
 Agama is able to install transactional distributions like openSUSE MicroOS. There will be no option
 at the Agama configuration to set whether the root file system of the installed system should be
@@ -119,7 +156,7 @@ of the product (ie. the operating system) to install.
 
 ![Information about transactional system](/img/user/storage-transactional.png)
 
-## The initial proposal
+## The initial proposal {#initial}
 
 Defining the file systems is essential for installing the system, so Agama always makes an attempt
 with an initial configuration before the user has had any opportunity to specify the settings (in
