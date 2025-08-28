@@ -26,8 +26,8 @@ parameters, usage of Btrfs snapshots...) and would calculate appropriate sizes f
 partitions. The user can decide at any point to override any of the automatic values (eg. specifying
 a size range for a partition) or to go back to the automatic mode for that particular setting.
 
-Something similar happens with complex structures like LVM, that can be specified in a quite loosely
-way, as explained below.
+Something similar happens with complex structures like LVM, which do not necessarily need to be
+described exhaustively.
 
 ## Overall description of the Storage page {#overview}
 
@@ -136,7 +136,7 @@ at the advanced options menu.
 ## Analyze the system and update the information {#rescan}
 
 Sometimes the storage setup of the system changes after the installer has done its initial analysis.
-New hardware devices can be plugged in and new logical devices (line RAIDs or LVM volume groups) can
+New hardware devices can be plugged in and new logical devices (like RAIDs or LVM volume groups) can
 be created. Or maybe nothing has changed but the user needs a second chance to enter the encryption
 password for an existing device that was skipped during the initial system probing.
 
