@@ -52,7 +52,8 @@ Each answer object can have the following properties:
   - `class`: a unique identifier for the question (e.g., `"storage.activate_multipath"`).
   - `text`: the full text of the question.
   - `answer`: the value to be used as the answer.
-  - `password`: use this instead of `answer` for questions that require a password.
+  - `password`: an additional field that is required for questions that also need a password, such
+    as `storage.luks_activation` with `decrypt` answer.
   - `data`: an optional object with additional key-value pairs to match the question.
 
 The installer will attempt to match a question to an answer by checking the `class`, `text`, and `data` properties.
