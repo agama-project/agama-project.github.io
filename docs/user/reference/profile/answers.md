@@ -79,6 +79,14 @@ the values for the specified properties are identical. For example, a question m
 
 :::
 
+:::warning
+
+The `Retry` value for the `answer` property could get the installation into an infinity loop. Avoid
+using `Retry` if you are not totally sure that the question is going to success at some point. In
+the future, this problem could be overcome by defining a maximum number of attempts.
+
+:::
+
 -----
 
 ## Supported question classes
