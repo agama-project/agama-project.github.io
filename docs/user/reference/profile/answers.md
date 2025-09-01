@@ -4,15 +4,19 @@ sidebar_position: 13
 
 # Automatically answering questions
 
-Agama allows you to automate the process of answering questions during an unattended installation. This feature is crucial for creating truly hands-off Agama Profiles, as it eliminates the need for user interaction when the installer encounters a choice or requires specific input.
+Agama allows you to automate the process of answering questions during an unattended installation.
+This feature is crucial for creating truly hands-off Agama Profiles, as it eliminates the need for
+user interaction when the installer encounters a choice or requires specific input.
 
-This section explains how to define policies for answering questions and provides a list of the question classes you can configure.
+This section explains how to define policies for answering questions and provides a list of the
+question classes you can configure.
 
 -----
 
 ## Configuring automatic answers
 
-Automatic answers are configured within the `questions` key of your Agama Profile. This object has two two main properties: `policy` and `answers`.
+Automatic answers are configured within the `questions` key of your Agama Profile. This object has
+two two main properties: `policy` and `answers`.
 
 ```json
 {
@@ -38,14 +42,20 @@ Automatic answers are configured within the `questions` key of your Agama Profil
 
 ## The `policy` property
 
-The `policy` property determines the default behavior for questions the installer encounters. It's a string with two possible values:
+The `policy` property determines the default behavior for questions the installer encounters. It's a
+string with two possible values:
 
-  * **`"user"`** (default): The installer will use any pre-defined answers from the `answers` list. If a question is encountered that does not have a matching answer, the installer will ask the user for a response.
-  * **`"auto"`**: The installer will use any pre-defined answers from the `answers` list. If a question is encountered that does not have a matching answer, the installer will automatically select the default value for that question. If there's no default, the installation will fail.
+  * **`"user"`** (default): The installer will use any pre-defined answers from the `answers` list.
+  If a question is encountered that does not have a matching answer, the installer will ask the user
+  for a response.
+  * **`"auto"`**: The installer will use any pre-defined answers from the `answers` list. If a
+  question is encountered that does not have a matching answer, the installer will automatically
+  select the default value for that question. If there's no default, the installation will fail.
 
 ## The `answers` property
 
-The `answers` property is an array of objects, where each object represents a pre-defined answer for a specific question.
+The `answers` property is an array of objects, where each object represents a pre-defined answer for
+a specific question.
 
 Each answer object can have the following properties:
 
@@ -56,11 +66,16 @@ Each answer object can have the following properties:
     as `storage.luks_activation` with `decrypt` answer.
   - `data`: an optional object with additional key-value pairs to match the question.
 
-The installer will attempt to match a question to an answer by checking the `class`, `text`, and `data` properties.
+The installer will attempt to match a question to an answer by checking the `class`, `text`, and
+`data` properties.
 
 :::note Partial data matching
 
-The installer performs a **partial match** on the `data` object. If your answer's `data` entry contains a subset of the properties in the question's data, it will still be considered a match if the values for the specified properties are identical. For example, a question might contain `{ "id": "123", "checksum": "abc", "name": "file.txt" }`, but you only need to specify `{ "checksum": "abc" }` to match it.
+The installer performs a **partial match** on the `data` object. If your answer's `data` entry
+contains a subset of the properties in the question's data, it will still be considered a match if
+the values for the specified properties are identical. For example, a question might contain
+`{ "id": "123", "checksum": "abc", "name": "file.txt" }`, but you only need to specify
+`{ "checksum": "abc" }` to match it.
 
 :::
 
@@ -68,7 +83,8 @@ The installer performs a **partial match** on the `data` object. If your answer'
 
 ## Supported question classes
 
-The following table lists the possible question classes, their descriptions, and the data you can use to match them.
+The following table lists the possible question classes, their descriptions, and the data you can
+use to match them.
 
 | Class | Description | Possible Answers | Available Data |
 | :--- | :--- | :--- | :--- |
