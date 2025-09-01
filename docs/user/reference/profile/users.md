@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# Users and authentication
+# User and root
 
 There are two sections related to users and authentication in an Agama profile:
 

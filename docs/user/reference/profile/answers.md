@@ -2,7 +2,7 @@
 sidebar_position: 14
 ---
 
-# Automatically answering questions
+# Questions
 
 Agama allows you to automate the process of answering questions during an unattended installation.
 This feature is crucial for creating truly hands-off Agama profiles, as it eliminates the need for

@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Products and registration
+# Product
 
 The `product` section is a mandatory. It specifies which product (distribution) you want to install.
 For the SUSE Linux Enteprise family of products, it allows registering the system, activating

@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# Network configuration
+# Network
 
 Together with the storage set up, the network configuration is probably the most complex area. Agama
 needs to cover many different requirements that, in some cases, conflict with each other.

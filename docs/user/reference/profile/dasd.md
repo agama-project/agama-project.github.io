@@ -2,7 +2,7 @@
 sidebar_position: 9
 ---
 
-# DASD Device Management
+# DASD
 
 Agama allows you to manage DASD (Direct Access Storage Device) activation and deactivation during an unattended installation. This feature is configured within the `dasd` section using the `devices` key.
 

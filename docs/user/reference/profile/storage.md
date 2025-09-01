@@ -2,7 +2,7 @@
 sidebar_position: 8
 ---
 
-# Storage configuration
+# Storage
 
 The general concepts regarding configuration of storage devices with Agama are exposed at the
 [corresponding subsection](/docs/user/guides/storage) of the interactive installation documentation.

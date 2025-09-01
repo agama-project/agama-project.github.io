@@ -2,7 +2,7 @@
 sidebar_position: 7
 ---
 
-# Bootloader configuration
+# Bootloader
 
 Agama offers a reduced set of settings to change the bootloader configuration, although it is able
 to set it up correctly in many situations and architectures.
