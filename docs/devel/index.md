@@ -5,7 +5,7 @@ sidebar_position: 1
 # Development resources
 
 The development process is currently coordinated using Agama's [repository at
-Github](https://github.com/agama-project/agama").
+Github](https://github.com/agama-project/agama).
 
 This section contains a lot of technical information about Agama development. The [Agama's
 architecture](./architecture.md) offers a nice overview about the project and it might be a good
