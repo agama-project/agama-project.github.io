@@ -1,8 +1,8 @@
 ---
-sidebar_position: 13
+sidebar_position: 10
 ---
 
-# Managing zFCP devices
+# zFCP
 
 Agama provides functionality to activate zFCP (Fibre Channel Protocol) disks as part of an unattended installation. This feature is configured within the `zfcp` section of your configuration, specifically under the `devices` key.
 

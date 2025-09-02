@@ -1,8 +1,8 @@
 ---
-sidebar_position: 7
+sidebar_position: 13
 ---
 
-# Copying files
+# Files
 
 In many cases, you might need to copy some files to the installed system. This feature is especially
 useful when you want to tweak your system configuration (for instance, dropping a file to

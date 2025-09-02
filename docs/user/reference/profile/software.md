@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 6
 ---
 
-# Additional software
+# Software
 
 Depending on the [product you are installing](./product), Agama will select a set of repositories,
 patterns and packages to install. However, it is possible to add your own list of repositories,
