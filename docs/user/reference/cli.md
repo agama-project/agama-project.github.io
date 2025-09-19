@@ -2,6 +2,9 @@
 
 This document contains the help content for the `agama` command-line program.
 
+For an overview on how that command-line interface can be used to configure Agama and drive the
+installation process, check the [corresponding section](/docs/overview/cli) of the starter's guide.
+
 **Command Overview:**
 
 * [`agama`↴](#agama)
