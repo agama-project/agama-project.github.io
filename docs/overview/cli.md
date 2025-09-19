@@ -93,6 +93,10 @@ agama config load secret.json
 At that point, if you browse to the **Authentication** section of the web interface and click on the
 icon to reveal the password, you could see it was effectively updated!
 
+Needless to say, the loaded JSON document can contain a full Agama configuration or only a partial
+one like in the example. In the latter case, the settings corresponding to the omitted sections
+will not be modified.
+
 Of course, you can also rely on other tools to simplify the process, for example something like this
 would save you from manually creating the JSON file.
 
