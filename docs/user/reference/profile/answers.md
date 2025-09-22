@@ -26,14 +26,14 @@ two main properties: `policy` and `answers`.
       {
         "class": "storage.activate_multipath",
         "answer": "yes",
-        "data": {
-          "device": "/dev/sda"
-        }
       },
       {
         "class": "storage.luks_activation",
         "answer": "decrypt",
         "password": "my-secret-password"
+        "data": {
+          "device": "/dev/sda22"
+        }
       }
     ]
   }
