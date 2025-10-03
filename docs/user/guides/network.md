@@ -94,4 +94,4 @@ through a systemd network link file.
 ## PXE Server Documentation
 
 For more information about setting up a PXE Boot Server on SUSE Linux Enterprise Server
-16.0 refer to [this guide](https://susedoc.github.io/doc-modular/main/html/SLE-PXE-server/index.html).
+16.0 refer to [this guide](https://susedoc.github.io/doc-modular/main/html/SLES-PXE-server/).
