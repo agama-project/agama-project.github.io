@@ -36,18 +36,20 @@ For Agama specific options check the [boot options](https://agama-project.github
 
 It already requires network configuration enforcing rd.neednet=1.
 
-- `root=live:[http://192.168.0.1/agama/boot/x86_64/squashfs.img](http://192.168.0.1/agama/boot/x86_64/squashfs.img) ip=dhcp`
+- `root=live:http://192.168.0.1/agama/boot/x86_64/squashfs.img ip=dhcp`
 
-  sets the Squashfs image or iso to be fetched by the livenet dracut module
+  Sets the Squashfs image or iso to be fetched by the livenet dracut module
 
-- `inst.installer_url=[http://192.168.0.1/agama/install/x86_84](http://192.168.0.1/agama/install/x86_84)`
+- `inst.install_url=http://192.168.0.1/agama/install/x86_84`
 
-  sets the repositories to be used by the installer instead of the ones defined
-  in the product definition
+  Sets the repositories to be used by the installer instead of the ones defined
+  in the product definition.
+
+  **Note:** For an online installation with a registered product does not make sense.
 
 ### Network configuration
 
-Network will be configured by dracut only if really required so, options like `root=live:<URL>` already requires it but not all of them do so, therefore, to ensure the network is configured by dracut set rd.neednet=1.
+Network will be configured by dracut only if really required so, kernel boot options like `root=live:<URL>` already requires it but not all the kernel options (e.g., `inst.install_url`) do so, therefore, to ensure the network is configured by dracut set rd.neednet=1.
 
 **Note:** If an explicit network configuration is given using the `ip=` parameter Agama will disable the NetworkManager DHCP autosetup when starting the installer and mark the nm-initrd-generator generated connections to be persisted after the installation by default. To disable the copy of network the `inst.copy_network=0` parameter is available.
 
@@ -92,4 +94,4 @@ through a systemd network link file.
 ## PXE Server Documentation
 
 For more information about setting up a PXE Boot Server on SUSE Linux Enterprise Server
-16.0 refer to [this guide](https://susedoc.github.io/doc-modular/main/html/SLE-PXE-server/index.html]).
+16.0 refer to [this guide](https://susedoc.github.io/doc-modular/main/html/SLE-PXE-server/index.html).
