@@ -51,7 +51,7 @@ It already requires network configuration enforcing rd.neednet=1.
 
 Network will be configured by dracut only if really required so, kernel boot options like `root=live:<URL>` already requires it but not all the kernel options (e.g., `inst.install_url`) do so, therefore, to ensure the network is configured by dracut set rd.neednet=1.
 
-**Note:** If an explicit network configuration is given using the `ip=` parameter Agama will disable the NetworkManager DHCP autosetup when starting the installer and mark the nm-initrd-generator generated connections to be persisted after the installation by default. To disable the copy of network the `inst.copy_network=0` parameter is available.
+:::note If an explicit network configuration is given using the `ip=` parameter Agama will disable the NetworkManager DHCP autosetup when starting the installer and mark the nm-initrd-generator generated connections to be persisted after the installation by default. To disable the copy of network the `inst.copy_network=0` parameter is available.
 
 ### DHCP configuration
 
@@ -88,7 +88,7 @@ Network will be configured by dracut only if really required so, kernel boot opt
 
 - `ifname=bootnet:AA:BB:CC:DD:EE:FF ip=bootnet:dhcp rd.neednet=1`
 
-**Note:** Agama will persist the renamed interface after the installation
+:::note Agama will persist the renamed interface after the installation
 through a systemd network link file.
 
 ## PXE server documentation
