@@ -34,7 +34,7 @@ For Agama specific options check the [boot options](https://agama-project.github
 
 ### Specify the installer image location
 
-It already requires network configuration enforcing rd.neednet=1.
+It already requires network configuration enforcing `rd.neednet=1`.
 
 - `root=live:http://192.168.0.1/agama/boot/x86_64/squashfs.img ip=dhcp`
 
@@ -49,7 +49,7 @@ It already requires network configuration enforcing rd.neednet=1.
 
 ### Network configuration
 
-Network will be configured by dracut only if really required so, kernel boot options like `root=live:<URL>` already requires it but not all the kernel options (e.g., `inst.install_url`) do so, therefore, to ensure the network is configured by dracut set rd.neednet=1.
+Network will be configured by dracut only if really required so, kernel boot options like `root=live:<URL>` already requires it but not all the kernel options (e.g., `inst.install_url`) do so, therefore, to ensure the network is configured by dracut set `rd.neednet=1`.
 
 :::note If an explicit network configuration is given using the `ip=` parameter Agama will disable the NetworkManager DHCP autosetup when starting the installer and mark the nm-initrd-generator generated connections to be persisted after the installation by default. To disable the copy of network the `inst.copy_network=0` parameter is available.
 
