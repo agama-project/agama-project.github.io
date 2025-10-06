@@ -117,6 +117,7 @@ target system.
 
   Agama will persist the renaming of the interface after the installation
   through a systemd network link file (e.g., `/etc/systemd/network/10-agama-ifname-bootnet.link`).
+
   The file can be removed using a [post-installation script](/docs/user/reference/profile/scripts.md#post-installation-scripts)
   at the Agama configuration.
 
