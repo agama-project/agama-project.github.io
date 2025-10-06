@@ -27,19 +27,18 @@ for SLES can be found at [PXE Server](#pxe-server-documentation).
 There are some important changes that affect the installation workflow and
 specially the [kernel boot options](#kernel-boot-options).
 
-- Linuxrc is not included and [dracut](https://man7.org/linux/man-pages/man7/dracut.cmdline.7.html)
-  takes care of booting the installer.
+- Linuxrc is not included and [dracut][]. takes care of booting the installer.
 - NetworkManager is the default network backend.
 
 We tried to provide some [compatibility with Linuxrc options](https://agama-project.github.io/docs/user/reference/boot_options/linuxrc_compatibility)
-but we recommend migrating to [dracut](https://man7.org/linux/man-pages/man7/dracut.cmdline.7.html)
-specific ones because not all the use cases are supported.
+but we recommend migrating to [dracut][] specific ones because not all the use
+cases are supported.
 
 ## Kernel boot options
 
 As there is no Linuxrc anymore, the options given as kernel parameters should
-be replaced by [dracut](https://man7.org/linux/man-pages/man7/dracut.cmdline.7.html)
-specific ones like the network configuration and the installer sources.
+be replaced by [dracut][] specific ones like the network configuration and the
+installer sources.
 
 For Agama specific options check the [boot options](https://agama-project.github.io/docs/user/reference/boot_options)
 section.
@@ -50,8 +49,7 @@ It already requires network configuration enforcing `rd.neednet=1`.
 
 - `root=live:http://192.168.0.1/boot/images/agama/x86_64/squashfs.img ip=dhcp`
 
-  Sets the SquashFS image or ISO to be fetched by the livenet
-  [dracut](https://man7.org/linux/man-pages/man7/dracut.cmdline.7.html) module
+  Sets the SquashFS image or ISO to be fetched by the livenet [dracut][] module.
 
 - `inst.install_url=http://192.168.0.1/install/agama/x86_84`
 
@@ -61,12 +59,11 @@ It already requires network configuration enforcing `rd.neednet=1`.
 
 ### Network configuration
 
-Network will be configured by [dracut](https://man7.org/linux/man-pages/man7/dracut.cmdline.7.html)
-only if really required so, there are some kernel boot options like `root=live:<URL>`
-that already requires or enforces the network to be configured, but not all
-the kernel options (e.g., `inst.install_url`, `ip`) do so, therefore, to ensure
-the network is configured by [dracut](https://man7.org/linux/man-pages/man7/dracut.cmdline.7.html)
-set `rd.neednet=1`.
+Network will be configured by [dracut][] only if really required so, there are
+some kernel boot options like `root=live:<URL>` that already requires or
+enforces the network to be configured, but not all the kernel options
+(e.g., `inst.install_url`, `ip`) do so, therefore, to ensure the network is
+configured by [dracut][] set `rd.neednet=1`.
 
 :::warning
 
@@ -129,3 +126,5 @@ target system.
 
 For more information about setting up a PXE Boot Server on SUSE Linux
 Enterprise Server 16.0 refer to [this guide](https://susedoc.github.io/doc-modular/main/html/SLES-PXE-server/).
+
+[dracut]: https://man7.org/linux/man-pages/man7/dracut.cmdline.7.html
