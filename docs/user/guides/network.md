@@ -53,8 +53,8 @@ It already requires network configuration enforcing `rd.neednet=1`.
 
 - `inst.install_url=http://192.168.0.1/install/agama/x86_84`
 
-  Sets the repositories to be used by the installer instead of the ones defined
-  in the product definition. It is not necessary in case of an online
+  Sets the repositories to be used by the installer instead of the defaults
+  repositories for the selected product. It is not necessary in case of an online
   installation with a registered product.
 
 ### Network configuration
