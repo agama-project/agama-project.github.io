@@ -48,12 +48,12 @@ section.
 
 It already requires network configuration enforcing `rd.neednet=1`.
 
-- `root=live:http://192.168.0.1/agama/boot/x86_64/squashfs.img ip=dhcp`
+- `root=live:http://192.168.0.1/boot/images/agama/x86_64/squashfs.img ip=dhcp`
 
   Sets the SquashFS image or ISO to be fetched by the livenet
   [dracut](https://man7.org/linux/man-pages/man7/dracut.cmdline.7.html) module
 
-- `inst.install_url=http://192.168.0.1/agama/install/x86_84`
+- `inst.install_url=http://192.168.0.1/install/agama/x86_84`
 
   Sets the repositories to be used by the installer instead of the ones defined
   in the product definition. It is not necessary in case of an online
