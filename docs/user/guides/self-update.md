@@ -28,7 +28,7 @@ skipped and the system uses the original installer without changing anything.
 
 ## Workflow
 
-The self-update step runs very early in the process, it runs in the initramfs
+The self-update step runs very early in the process. It runs in the initramfs
 system before switching the root to full installer root image. The advantage is
 that it can update the installer or other services without need for restarting
 them. This ensures that the services are already started in the updated
