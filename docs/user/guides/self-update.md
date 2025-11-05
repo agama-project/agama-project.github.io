@@ -20,7 +20,7 @@ self-update:
 - The included packages on the Full installation medium (to install updated.
   packages register your system)
 
-## Disabling
+## Disabling the self-update
 
 The self update process is enabled by default, but it can be explicitly disabled
 by using the `inst.self_update=0` boot option. With this option it is completely
