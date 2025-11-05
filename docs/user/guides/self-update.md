@@ -48,7 +48,7 @@ versions. That's especially important for the security fixes.
   if there is some dependency issue blocking the update then it fails
   without changing anything.
 
-- If contacting the SCC server fails or it returns empty response then the
+- If contacting the SCC server fails or it returns an empty response then the
   self-update uses a builtin fallback repository URL which should be the same as
   the repository returned by SCC.
   
