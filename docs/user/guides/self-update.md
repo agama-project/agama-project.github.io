@@ -8,7 +8,7 @@ starting the installation to fix some problems or allow adding new features.
 
 ## Limitations
 
-The self update process can update most of the components present on the
+The self-update process can update most of the components present on the
 installation medium. It can update the installer with dependent libraries and
 tools, add new languages, etc...
 
