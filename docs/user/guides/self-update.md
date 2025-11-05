@@ -126,7 +126,7 @@ features.
 Using any options below decreases the security of the self-update process
 and potentially can even make the system vulnerable to security attacks!
 
-Use the options with caution! While using these options in a trusted network
+Use these options with caution! While using these options in a trusted network
 could be acceptable, they should be avoided when accessing the resources on the
 internet.
 
