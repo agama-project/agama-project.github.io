@@ -44,7 +44,7 @@ versions. That's especially important for the security fixes.
   running installation system to newer versions available in the self-update
   repository.
 
-- The dependencies are evaluated so the dependent packages are updated as well,
+- The dependencies are evaluated so dependent packages are updated as well.
   if there is some dependency issue blocking the update then it fails
   without changing anything.
 
