@@ -95,7 +95,7 @@ in the URL.
 A custom self-update repository can be used with the `inst.self_update=<URL>`
 boot option. In this case the SCC step is skipped and the specified repository
 is directly used as the self-update source. When using a custom repository you
-might need to use some less strict security checks, see the security section
+might need to use some less strict security checks. See the security section
 below.
 
 ## RMT
