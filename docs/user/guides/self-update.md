@@ -45,7 +45,7 @@ versions. That's especially important for the security fixes.
   repository.
 
 - The dependencies are evaluated so dependent packages are updated as well.
-  if there is some dependency issue blocking the update then it fails
+  If there is some dependency issue blocking the update then it fails
   without changing anything.
 
 - If contacting the SCC server fails or it returns an empty response then the
