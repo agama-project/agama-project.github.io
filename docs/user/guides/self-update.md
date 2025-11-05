@@ -17,7 +17,7 @@ self-update:
 
 - The boot loader on the medium, the used Linux kernel and the initramfs image.
 - The self-update process itself.
-- The included packages on the Full installation medium (to install updated
+- The included packages on the Full installation medium (to install updated.
   packages register your system)
 
 ## Disabling
