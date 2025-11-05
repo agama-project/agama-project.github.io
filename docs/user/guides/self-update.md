@@ -136,7 +136,7 @@ Currently these boot options are supported:
 
 - `inst.self_update_ssl=0` ignore the SSL certificate problems when contacting
   the registration server and when downloading packages from the self-update
-  repository via HTTPS protocol. This option is needed when using an RMT server
+  repository via the HTTPS protocol. This option is needed when using an RMT server
   with a self-signed certificate.  
   *Note: This is basically almost the same as using the insecure HTTP protocol,
   which means that the authenticity of the remote server is not verified.*
