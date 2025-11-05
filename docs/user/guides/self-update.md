@@ -16,7 +16,7 @@ However, there are several parts of the system which cannot be updated by the
 self-update:
 
 - The boot loader on the medium, the used Linux kernel and the initramfs image.
-- The self-update process itself
+- The self-update process itself.
 - The included packages on the Full installation medium (to install updated
   packages register your system)
 
