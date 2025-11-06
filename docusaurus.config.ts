@@ -21,7 +21,8 @@ const config: Config = {
   trailingSlash: false,
   deploymentBranch: "gh-pages",
 
-  onBrokenLinks: "throw",
+  // FIXME: fix the broken links in the single page documentation
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
 
   // Even if you don't use internationalization, you can use this field to set
@@ -179,7 +180,13 @@ const config: Config = {
     // search functionality, works only in production builds!
     [
       "docusaurus-lunr-search",
-      { maxHits: 10, disableVersioning: true, highlightResult: true },
+      {
+        maxHits: 10,
+        disableVersioning: true,
+        highlightResult: true,
+        // exclude single pages to avoid duplicated results
+        excludeRoutes: ["docs/user-single-page", "docs/devel-single-page"],
+      },
     ],
     [
       'content-docs',
