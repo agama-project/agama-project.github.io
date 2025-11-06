@@ -5,8 +5,7 @@ editor. However, some editors provide automatic validation and code completion
 (suggesting the keys or values to use) which makes editing much easier.
 
 The most common editor which supports validation and code completion is the
-[VSCode IDE](https://code.visualstudio.com/), but there are [some
-more](https://json-schema.org/tools?query=&sortBy=name&sortOrder=ascending&groupBy=toolingTypes&licenses=&languages=&drafts=&toolingTypes=&environments=&showObsolete=false&supportsBowtie=false#editor).
+[VSCode IDE](https://code.visualstudio.com/), but there are some more.
 
 ## Specifying the profile schema
 
