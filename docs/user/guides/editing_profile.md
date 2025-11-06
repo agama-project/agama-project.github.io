@@ -1,6 +1,6 @@
 # Editing autoinstallation profile
 
-The autoinstallation profile uses a JSON format which you can write in any text
+The auto-installation profile uses a JSON format which you can write in any text
 editor. However, some editors provide automatic validation and code completion
 (suggesting the keys or values to use) which makes editing much easier.
 
