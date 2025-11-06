@@ -10,7 +10,7 @@ more](https://json-schema.org/tools?query=&sortBy=name&sortOrder=ascending&group
 
 ## Specifying the profile schema
 
-Unlike the XML format the JSON format does not natively support referencing the
+Unlike the XML format, JSON does not natively support referencing the
 used validation schema. But some editors support unofficial schema specification
 using the `$schema` key which can point to the URL with the schema definition.
 
