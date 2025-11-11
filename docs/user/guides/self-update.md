@@ -66,6 +66,17 @@ If the self-update fails or you want to simply run the process again then
 manually restart the self-update service using the `systemctl restart
 live-self-update` command.
 
+But when restarting the self-update in the running root image (when the
+installer is already running) the updated services need to be manually restarted
+to take effect. That depends on which packages were updated, check the output of
+the self-update service to see the list of updated packages and restart the
+relevant services.
+
+When restarting the self-update in the initramfs emergency shell invoked by the
+`rd.break` boot option no restart should be needed because the updated installer
+and the services are not running yet and they will be started later in the
+already updated versions.
+
 ## Network configuration
 
 By default the network is automatically configured with DHCP protocol. If a
@@ -152,6 +163,14 @@ Currently these boot options are supported:
   installing packages with unknown GPG signatures or even broken or modified
   packages. This is very insecure and if possible should be avoided.
 
+## Live ISO package index
+
+The Live ISO contains the `/LiveOS/.packages.gz` file with list of packages
+included in the root image. This is a static file and includes the packages in
+the original image before running the self-update. After running the self-update
+some packages might be updated but the file is obviously not updated. If you
+need to get the included packages with updates run the `rpm -qa` command.
+
 ## Debugging
 
 Here are some hints what to do if the self-update process fails:
@@ -161,3 +180,19 @@ Here are some hints what to do if the self-update process fails:
 - `journalctl -t live-self-update` - show the log with details of the
   self-update run
 - `systemctl restart live-self-update` - start the self-update process again
+
+The self-update process creates several helper files in the
+`/run/live-self-update` subdirectory. They are not deleted at the end because
+they could be helpful when diagnosing problems:
+
+- `result` - contains the exit code of the main self-update script. On success
+  it contains the `0` value, on error it contains a non-zero exit code. When the
+  self-update is disabled the file is not created.
+- `skip` - flag file, if it exists the self-update was disabled with the
+  `inst.self_update=0` boot option.
+- `server_response` - contains the raw response from the SCC or RMT registration
+  server in JSON format.
+- `reg_repos` - contains the self-update repository URL from the SCC or RMT
+  server, it is extracted from the `server_response` file.
+- `repositories` - contains the custom self-update repository URL obtained from
+  the boot command line.
