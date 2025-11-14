@@ -39,7 +39,7 @@ page offers an overview on the current state of the ever-changing development pl
 
 ## Agama 20 (~ March 19th)
 
-- Dedicated setting to configure remote access to the installed system (ssh, Cockpit, etc.)
+- Dedicated setting to configure remote access to the installed system (SSH, Cockpit, etc.)
 - Better error reporting and handling for invalid profiles and other configuration errors.
 - Improvements in the installation of transactional systems like openSUSE Kalpa or SLE Micro.
 - Web-based graphical user interface: enhancements in the management of file systems including
