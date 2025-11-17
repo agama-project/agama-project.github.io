@@ -66,6 +66,9 @@ Please, use the "help" command to learn more.
 * `--insecure` — Whether to accept invalid (self-signed, ...) certificates or not
 
   Default value: `false`
+* `--local` — Some commands could be able to work even without connection to the agama server
+
+  Default value: `false`
 
 
 
@@ -123,11 +126,17 @@ Validate a profile using JSON Schema
 
 Schema is available at /usr/share/agama-cli/profile.schema.json Note: validation is always done as part of all other "agama config" commands.
 
-**Usage:** `agama config validate <URL_OR_PATH>`
+**Usage:** `agama config validate [OPTIONS] <URL_OR_PATH>`
 
 ###### **Arguments:**
 
 * `<URL_OR_PATH>` — JSON file, URL or path or `-` for standard input
+
+###### **Options:**
+
+* `--local` — Run subcommands (if possible) in local mode - without trying to connect to remote agama server
+
+  Default value: `false`
 
 
 
