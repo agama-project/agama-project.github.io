@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Profile format
 
 A profile defines which options to use during installation: which product to install, localization
