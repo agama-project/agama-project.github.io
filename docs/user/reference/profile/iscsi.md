@@ -26,7 +26,8 @@ iSCSI target and can contain the following properties (only the first four are m
  * `address`: IP address (or hostname) of the target.
  * `port`: TCP port.
  * `name`: iSCSI name of the target.
- * `interface`: iSCSI interface to use, not to be confused with the network interface.
+ * `interface`: iSCSI interface to use, not to be confused with the network interface. It can be
+   "default" or the name of any interface defined at `/var/lib/iscsi/ifaces/`.
  * `startup`: The startup mode for the iSCSI node. The possible values are 'onboot', 'manual' and
    'automatic'.
  * `authByTarget`: Optional pair of username and password, used if CHAP authentication should be
@@ -37,8 +38,8 @@ iSCSI target and can contain the following properties (only the first four are m
 ## iSCSI authentication
 
 When performing discovery and login operations, an iSCSI system can be optionally configured to
-request authentication between controllers (targets) and hosts (initiators) using CHAP (Challenge
-Handshake Authentication Protocol). There are three options:
+request authentication between targets and initiators using CHAP (Challenge Handshake Authentication
+Protocol). There are three options:
 
 - No authentication. No usernames or passwords are needed.
 - CHAP authentication performed by the target. The target authenticates the initiator by sending it
