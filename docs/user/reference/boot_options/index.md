@@ -73,6 +73,11 @@ options at the end of the `linux` line.
 
   :::
 
+- `inst.self_update=0`: (since SLE16/QU0) disable the installer self-update. See more details and
+  the other self-update related boot options (`inst.self_update_ssl=0`,
+  `inst.self_update_unsigned_repo=1`, `inst.self_update_import_key=1` and `inst.self_update_gpg=0`)
+  in the [Self-update guide](../../guides/self-update.md).
+
 - `inst.info`: points to info file that contains additional Agama settings. It is useful when you
   want to provide more options for Agama and typing them during boot is not possible.
 
