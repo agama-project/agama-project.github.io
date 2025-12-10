@@ -56,7 +56,7 @@ For that, a JSON configuration containing the following settings must be loaded.
 }
 ```
 
-Read [the profile format reference](../reference/profile/answers) for more info about specifying
+Read [the profile format reference](../reference/profile/questions) for more info about specifying
 answers at the Agama configuration.
 
 Also check the starter's guide if you need any clarification regarding how to load an Agama
