@@ -71,10 +71,86 @@ IPv4/IPv6 configuration, some device parameters, etc.
 - `status`: the wanted status for the connection. It can be `up`, `down`, or `removed`.
 - `autoconnect`: whether the connection should be automatically activated.
 - `persistent`: whether the connection should be kept after the installation or not.
-- `match`: define a criteria to select the device to apply the connection to.
+- `match`: define a criteria to select the device to apply the connection to. See
+  [Device matching](#device-matching) for more details.
 
 These are the common fields to any kind of connection. Now, if you want to set up a bridge, you need
 to add a `bridge` section; for a Wi-Fi connection, you need a `wireless` section; and so on.
+
+### Device matching
+
+The `match` section allows you to specify to which device a connection should be applied to.
+This is based on the _NetworkManager_ `match` setting (see the [NetworkManager documentation](https://networkmanager.dev/docs/api/latest/nm-settings-dbus.html)
+for the full list of supported properties).
+
+For instance, you can match a device by its name:
+
+```jsonnet
+{
+  network: {
+    connections: [
+      {
+        id: "Wired connection 1",
+        match: {
+          "interface": ["eth0"]
+        }
+      }
+    ]
+  }
+}
+```
+
+By its driver:
+
+```jsonnet
+{
+  network: {
+    connections: [
+      {
+        id: "Wired connection 1",
+        match: {
+          driver: ["e1000e"]
+        }
+      }
+    ]
+  }
+}
+```
+
+Or by its PCI path:
+
+```jsonnet
+{
+  network: {
+    connections: [
+      {
+        id: "Wired connection 1",
+        match: {
+          path: ["pci-0000:04:00.0"]
+        }
+      }
+    ]
+  }
+}
+```
+
+You can also use wildcards (globs) in the values. For example, to match any
+interface starting with `eth` or `ens`:
+
+```jsonnet
+{
+  network: {
+    connections: [
+      {
+        id: "Ethernet",
+        match: {
+          "interface": ["eth*", "ens*"]
+        }
+      }
+    ]
+  }
+}
+```
 
 ### Wi-Fi networks
 
