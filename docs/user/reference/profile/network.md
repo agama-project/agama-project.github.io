@@ -80,8 +80,7 @@ to add a `bridge` section; for a Wi-Fi connection, you need a `wireless` section
 ### Device matching
 
 The `match` section allows you to specify to which device a connection should be applied to.
-This is based on the _NetworkManager_ `match` setting (see the [NetworkManager documentation](https://networkmanager.dev/docs/api/latest/nm-settings-dbus.html)
-for the full list of supported properties).
+This is based on the _NetworkManager_ `match` setting (see the [NetworkManager documentation](https://networkmanager.dev/docs/api/latest/nm-settings-dbus.html)).
 
 For instance, you can match a device by its name:
 
