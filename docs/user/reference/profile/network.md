@@ -91,7 +91,7 @@ For instance, you can match a device by its name:
       {
         id: "Wired connection 1",
         match: {
-          "interface": ["eth0"]
+          interface: ["eth0"]
         }
       }
     ]
@@ -143,7 +143,7 @@ interface starting with `eth` or `ens`:
       {
         id: "Ethernet",
         match: {
-          "interface": ["eth*", "ens*"]
+          interface: ["eth*", "ens*"]
         }
       }
     ]
