@@ -4,67 +4,82 @@ sidebar_position: 3
 
 # Writing a dynamic profile
 
-It is not unusual that you need to write a profile that adapts dynamically to the underlying system.
-For instance, you might want Agama to take some decisions depending on the hardware of the system
-you are installing.
+One of the benefits of using Jsonnet instead of JSON is that you can write dynamic configurations
+that change at runtime depending on the available hardware information[^1]. For example, you might
+want to set the size of your swap depending on the available phyisical memory or to tweak the
+configuration when running on a given architecture.
 
-Fortunately, Jsonnet can work as a templating language and it offers many structures that allow
-generating data. For that reason, Agama injects the hardware information that you can process using
-the powerful [Jsonnet standard library](https://jsonnet.org/ref/stdlib.html).
+Jsonnet can work as a templating language and it offers many structures that allow generating data.
+For that reason, Agama injects the hardware information that you can process using the powerful
+[Jsonnet standard library](https://jsonnet.org/ref/stdlib.html).
 
-You can access to the hardware information by importing the `hw.libsonnet` library, as you can see
-in the example below.
+Agama takes the hardware information from the `lshw -json` command. The output is a JSON document
+that you can access from your configuration including the following line at the top of the file:
 
 ```jsonnet
-// There are included also helpers to search this hardware tree. To see helpers check
-// "/usr/share/agama-cli/agama.libsonnet"
 local agama = import 'hw.libsonnet';
+```
 
-// Find the biggest disk which is suitable for installing the system.
-local findBiggestDisk(disks) =
-  local sizedDisks = std.filter(function(d) std.objectHas(d, 'size'), disks);
-  local sorted = std.sort(sizedDisks, function(x) -x.size);
-  sorted[0].logicalname;
+The `agama` object holds the hardware information under the `lshw` key (`agama.lshw`). Additionally,
+it offers
+[some helpers](https://github.com/agama-project/agama/blob/master/rust/share/agama.libsonnet) to
+make traversing the hardware information tree easier:
 
-// Find how much physical memory system has.
-local memory = agama.findByID(agama.lshw, 'memory').size;
+- `selectByClass`: allows to find an object by its class.
+- `selectByID`: allows to find an object by its ID.
 
+For instance, if you want to find amount of memory on the system you are installing, you can use
+this code:
+
+```jsonnet
+local hw = import 'hw.libsonnet';
+local memory = findByID(agama.lshw, 'memory').size;
+```
+
+In this case, `findByID` would return the object with the `memory` ID, where you can find the size
+of the physical memory (note the `size` key):
+
+```json
 {
-  product: {
-    id: if memory < 8000000000 then 'MicroOS' else 'Tumbleweed',
-  },
-  user: {
-    fullName: 'Jane Doe',
-    userName: 'jane.doe',
-    password: '123456',
-  },
-  root: {
-    password: 'nots3cr3t',
-    sshPublicKey: '...',
-  },
-  storage: {
-    boot: {
-      configure: true,
-      device: 'boot',
-    },
-    drives: [
-      {
-        search: findBiggestDisk(agama.selectByClass(agama.lshw, 'disk')),
-        alias: 'boot',
-      },
-    ],
-  },
+  "id": "memory",
+  "class": "memory",
+  "claimed": true,
+  "handle": "DMI:0001",
+  "description": "System Memory",
+  "physid": "1",
+  "slot": "System board or motherboard",
+  "units": "bytes",
+  "size": 17179869184
 }
 ```
 
-Agama ships a few helpers to make it easier to search for the information you need from the hardware
-tree. See
-[agama.libsonnet](https://github.com/agama-project/agama/blob/master/rust/share/agama.libsonnet) for
-further details.
+Then, you can use the value wherever you need like the example below:
 
-:::tip Getting hardware information
+```jsonnet
+local hw = import 'hw.libsonnet';
+local memory = findByID(agama.lshw, 'memory').size;
 
-You can inspect the available data by installing the `lshw` package and running the following
-command: `lshw -json`.
+{
+  storage: {
+    drives: [{
+      search: '/dev/vda',
+      partitions: [{
+        filesystem: { path: '/' },
+        size: { min: '10 GiB' },
+      },
+      {
+        filesystem: { path: 'swap' },
+        size: memory * 2,
+      }
+    ],
+  }]
+}
+```
 
-:::
+If you still miss the AutoYaST pre-scripts, you might be interested in the `inst.script` boot
+option. Check the [boot options](../reference/boot_options) for further information.
+
+[^1]:
+    In AutoYaST, you would do that via
+    [pre-scripts](https://doc.opensuse.org/projects/autoyast/#pre-install-scripts) or
+    [Embedded Ruby](https://doc.opensuse.org/projects/autoyast/#erb-templates).
