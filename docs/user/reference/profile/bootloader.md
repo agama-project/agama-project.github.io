@@ -14,6 +14,9 @@ These options are defined in the `bootloader` section.
   default entry. Unlike AutoYaST, the timeout should be a positive number. If you want the
   bootloader to stop indefinitely, just set `stopOnBootMenu` to `true`.
 - `extraKernelParams`: additional kernel parameters.
+- `updateNvram`: defines whether the installer should modify the NVRAM (Non-Volatile RAM) to
+  update the boot order or entries. If set to `false`, the NVRAM remains untouched, which is useful
+  for preserving existing boot managers or specific firmware configurations.
 
 ```
 {
