@@ -127,6 +127,14 @@ options at the end of the `linux` line.
   profile. However, if you set `inst.install` to `0`, Agama stops after reading the configuration,
   giving the user a chance to review the installation options before proceeding.
 
+- `fips`: this is a standard Linux kernel parameter. When set to `1`, the installer starts in
+  FIPS-enabled mode. Additionally, Agama will use this as a trigger to propose the installed system
+  to be FIPS-compliant.
+
+  ```text
+  fips=1
+  ```
+
 - `live.password` and `live.password_hash`: sets the `root` password of the live system.
   `live.password` accepts a plain text password, while `live.password_hash` is expected to receive a
   hashed password, which is more secure. The disadvantage of a hashed password is that it is quite
