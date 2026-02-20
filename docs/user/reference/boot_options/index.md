@@ -18,16 +18,6 @@ options at the end of the `linux` line.
 - `inst.auto_insecure`: ignores SSL/TLS problems like a self-signed certificate when downloading the
   profile.
 
-- `inst.config_url`: it uses the file at the given URL as the new Agama configuration. Please, do
-  not confuse this file with an unattended installation profile. See
-  [URL handling in the installer](https://github.com/yast/yast-installation/blob/master/doc/url.md)
-  to find more details about the supported URLs.
-
-  ```text
-  inst.config_url=http://192.168.122.1/my-agama.yaml
-  inst.config_url=usb:///agama.yaml
-  ```
-
 - `inst.copy_network`: whether the NetworkManager persistent system connections should be copied to
   the target system at the end of the installation or not. The copy is enabled by default.
 
