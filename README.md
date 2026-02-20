@@ -151,3 +151,15 @@ from the first comment.
 
 Of course it is possible to change the mapping later, e.g. let the Giscus create a new discussion
 automatically and later pin it to the blog using its ID.
+
+## Versioning
+
+If you document a new feature added in some specific Agama release or if you want to mark some
+features as deprecated or removed then use the `<Since>`, `<Deprecated>` or `<RemovedIn>` custom
+components.
+
+```md
+import { Since } from "@site/src/components/Badge";
+...
+`foo` <Since version="16.1"/>: configuration option for ...
+```
