@@ -21,7 +21,7 @@ will install, but it may affect other aspects like the system's partitioning.
 Tumbleweed](/img/user/product-selection.png)
 
 Some products may offer different installation modes (for instance, a "standard" or an
-"immutable" mode, the latter providing an immutable system with transactional updates). If the
+"immutable" mode, the latter providing an **immutable OS** with **transactional updates**). If the
 selected product supports multiple modes, choosing one is mandatory to proceed with the
 installation.
 

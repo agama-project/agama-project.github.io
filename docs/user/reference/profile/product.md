@@ -5,7 +5,7 @@ sidebar_position: 1
 # Product
 
 The `product` section is mandatory. It specifies which product (distribution) you want to install.
-For the SUSE Linux Enteprise family of products, it allows registering the system, activating
+For the SUSE Linux Enterprise family of products, it allows registering the system, activating
 extensions, etc.
 
 If you want to select patterns and packages for installation, check the [software](./software)
@@ -25,7 +25,7 @@ To select the product, you need to specify its identifier (ID).
 
 Here is the list of known products:
 
-- `SLES`: SUSE Linux Enteprise Server.
+- `SLES`: SUSE Linux Enterprise Server.
 - `SLES_SAP`: SUSE Linux Enterprise Server for SAP Applications.
 - `Tumbleweed`: Tumbleweed.
 - `Slowroll`: Slowroll.
@@ -37,13 +37,14 @@ Beware that which products are available depend on the installation image you ar
 ## Product mode
 
 Some products support different installation modes. The mode can change how the product behaves,
-for instance, enabling an immutable mode with transactional updates.
+for instance, enabling an **immutable OS** with **transactional updates**.
 
 The supported values depend on the product. For instance, `SLES` supports `standard` and
 `immutable` modes.
 
 In an unattended installation profile, the `mode` key is optional for backward compatibility; if
-omitted, the product will use its traditional default behavior.
+omitted, the product will use its traditional default behavior. However, it is preferred to
+explicitly specify the desired mode.
 
 ```jsonnet
 {
@@ -58,7 +59,7 @@ omitted, the product will use its traditional default behavior.
 
 :::note Only for SUSE Linux Enterprise
 
-Product registration is only available for the SUSE Linux Enteprise family of products.
+Product registration is only available for the SUSE Linux Enterprise family of products.
 
 :::
 

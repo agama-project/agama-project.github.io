@@ -148,13 +148,13 @@ adapting the result.
 
 ## A note about systems with transactional updates {#transactional}
 
-Agama is able to install immutable distributions like openSUSE MicroOS. By default, the nature
-of the system (immutable vs traditional) is determined by the selection of the product (ie. the
-operating system) to install.
+Agama is able to install distributions with **transactional updates**, like openSUSE MicroOS. By
+default, the nature of the system (**immutable OS** vs. **traditional OS**) is determined by the
+selection of the product (i.e., the operating system) to install.
 
 However, some products allow overriding this behavior using the product modes.
 For instance, SLES can be installed in either `standard` or `immutable` mode (providing an
-immutable system with transactional updates).
+**immutable OS** with **transactional updates**).
 
 ![Information about systems with transactional updates](/img/user/storage-transactional.png)
 
