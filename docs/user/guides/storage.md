@@ -146,16 +146,6 @@ The option "Rescan devices" allows to trigger a new system analysis. If the curr
 configuration still makes sense after reading the devices, such a configuration will be kept
 adapting the result.
 
-## A note about transactional systems {#transactional}
-
-Agama is able to install transactional distributions like openSUSE MicroOS. There will be no option
-at the Agama configuration to set whether the root file system of the installed system should be
-transactional (also known as "immutable") or not. Since the implications go beyond the file system
-settings, the nature of the system (transactional vs read-write) will be determined by the selection
-of the product (ie. the operating system) to install.
-
-![Information about transactional system](/img/user/storage-transactional.png)
-
 ## The initial proposal {#initial}
 
 Defining the file systems is essential for installing the system, so Agama always makes an attempt
