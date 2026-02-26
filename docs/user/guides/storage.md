@@ -146,18 +146,6 @@ The option "Rescan devices" allows to trigger a new system analysis. If the curr
 configuration still makes sense after reading the devices, such a configuration will be kept
 adapting the result.
 
-## A note about systems with transactional updates {#transactional}
-
-Agama is able to install distributions with **transactional updates**, like openSUSE MicroOS. By
-default, the nature of the system (**immutable OS** vs. **traditional OS**) is determined by the
-selection of the product (i.e., the operating system) to install.
-
-However, some products allow overriding this behavior using the product modes.
-For instance, SLES can be installed in either `standard` or `immutable` mode (providing an
-**immutable OS** with **transactional updates**).
-
-![Information about systems with transactional updates](/img/user/storage-transactional.png)
-
 ## The initial proposal {#initial}
 
 Defining the file systems is essential for installing the system, so Agama always makes an attempt
