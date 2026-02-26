@@ -16,7 +16,7 @@ file from), the permissions, the owner and the destination of the file.
 - `content`: the content of the file.
 - `url`: alternatively to the `content`, you can define a URL to fetch the file from. The files are
   downloaded and written to the disk at the end of the installation. In addition to the
-  [supported URLs](../urls) you can use a URL relative to the profile (e.g., "/motd").
+  [supported URLs](../urls) you can use a URL relative to the profile (e.g., "motd").
 - `destination`: the location of the file in the installed system.
 - `permissions`: a string describing the file permissions in numeric mode (e.g.: `"0640"`). By
   default it is set to `"0644"`).
@@ -43,7 +43,7 @@ in `/etc/issue.d`:
 {
   files: [
     {
-      url: "/motd",
+      url: "motd",
       destination: "/etc/issue.d/welcome.issue",
       permissions: "0644",
     },
