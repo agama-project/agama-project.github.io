@@ -20,6 +20,11 @@ will install, but it may affect other aspects like the system's partitioning.
 ![Product selection screen offering openSUSE Leap, MicroOS and
 Tumbleweed](/img/user/product-selection.png)
 
+Some products may offer different installation modes (for instance, a "standard" or an
+"immutable" mode, the latter providing an immutable system with transactional updates). If the
+selected product supports multiple modes, choosing one is mandatory to proceed with the
+installation.
+
 You can change the product later if you change your mind, but you should carefully check the
 configuration as some values can be reset.
 

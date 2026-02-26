@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Product
 
-The `product` section is a mandatory. It specifies which product (distribution) you want to install.
+The `product` section is mandatory. It specifies which product (distribution) you want to install.
 For the SUSE Linux Enteprise family of products, it allows registering the system, activating
 extensions, etc.
 
@@ -33,6 +33,26 @@ Here is the list of known products:
 - `MicroOS`: openSUSE Micro OS.
 
 Beware that which products are available depend on the installation image you are using.
+
+## Product mode
+
+Some products support different installation modes. The mode can change how the product behaves,
+for instance, enabling an immutable mode with transactional updates.
+
+The supported values depend on the product. For instance, `SLES` supports `standard` and
+`immutable` modes.
+
+In an unattended installation profile, the `mode` key is optional for backward compatibility; if
+omitted, the product will use its traditional default behavior.
+
+```jsonnet
+{
+  product: {
+    id: "SLES",
+    mode: "immutable"
+  }
+}
+```
 
 ## Registering a product
 

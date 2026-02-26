@@ -148,11 +148,13 @@ adapting the result.
 
 ## A note about transactional systems {#transactional}
 
-Agama is able to install transactional distributions like openSUSE MicroOS. There will be no option
-at the Agama configuration to set whether the root file system of the installed system should be
-transactional (also known as "immutable") or not. Since the implications go beyond the file system
-settings, the nature of the system (transactional vs read-write) will be determined by the selection
-of the product (ie. the operating system) to install.
+Agama is able to install transactional distributions like openSUSE MicroOS. By default, the nature
+of the system (transactional vs traditional) is determined by the selection of the product (ie. the
+operating system) to install.
+
+However, some products allow overriding this behavior using the product modes.
+For instance, SLES can be installed in either `standard` or `immutable` mode (providing an
+immutable system with transactional updates).
 
 ![Information about transactional system](/img/user/storage-transactional.png)
 
