@@ -12,7 +12,8 @@
 
 .success {
   color: #fff;
-  background-color: #3e8635;
+  /* SUSE Jungle Green color */
+  background-color: #30ba78;
 }
 
 .danger {
@@ -22,10 +23,12 @@
 
 .warning {
   color: #151515;
-  background-color: #f0ab00;
+  /* SUSE Persimmon color */
+  background-color: #fe7c3f;
 }
 
 .info {
   color: #fff;
-  background-color: #0066cc;
+  /* SUSE Waterhole color */
+  background-color: #2453ff;
 }
