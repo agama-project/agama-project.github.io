@@ -1,0 +1,34 @@
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 30px;
+}
+
+.success {
+  color: #fff;
+  /* SUSE Jungle Green color */
+  background-color: #30ba78;
+}
+
+.danger {
+  color: #fff;
+  background-color: #c9190b;
+}
+
+.warning {
+  color: #151515;
+  /* SUSE Persimmon color */
+  background-color: #fe7c3f;
+}
+
+.info {
+  color: #fff;
+  /* SUSE Waterhole color */
+  background-color: #2453ff;
+}
