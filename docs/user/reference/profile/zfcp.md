@@ -32,7 +32,11 @@ Use this section to explicitly define disks. This is required if the controller 
 * **`wwpn`**: The World Wide Port Name of the storage server port (e.g., `"0x500507630300c562"`).
 * **`lun`**: The Logical Unit Number of the specific disk volume (e.g., `"0x4010403300000000"`).
 
-> **Note:** If you define a disk in `devices` but forget to list its controller in `controllers`, Agama will automatically activate the controller for you.
+:::note
+
+If you define a disk in `devices` but forget to list its controller in `controllers`, Agama will automatically activate the controller for you.
+
+:::
 
 ## Example Configuration
 
