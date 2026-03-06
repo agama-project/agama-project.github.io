@@ -496,11 +496,10 @@ specified, Agama will take the location of the root file system as a reference.
 }
 ```
 
-## Keeping an Existing File System or Encryption Layer
+## Keeping an Existing File System
 
-The entries for both `encryption` and `filesystem` contain a flag `reuse` with a default value of
-false. It can be used in combination with `search` to specify the device must not be re-encrypted
-or re-formatted.
+The `filesystem` entries contain a flag `reuseIfPossible` with a default value of false. It can be
+used in combination with `search` to specify the device must not be re-formatted.
 
 ## Deleting and Shrinking Existing Devices
 
