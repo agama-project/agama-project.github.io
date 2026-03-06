@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Network
 
-Together with the storage set up, the network configuration is probably the most complex area. Agama
+Along with the storage setup, the network configuration is probably the most complex area. Agama
 needs to cover many different requirements that, in some cases, conflict with each other.
 
 To set up the network, you can:
@@ -12,9 +12,9 @@ To set up the network, you can:
 - Specify the network configuration at boot time, so it is set up even before Agama starts.
 - Define the configuration as part of the Agama profile.
 
-But, in some cases, you might be also want to combine both approaches. A typical scenario is when
+In some cases, you might also want to combine both approaches. A typical scenario is when
 you do not have a DHCP server and you need to set up the network so Agama can fetch the
-configuration.
+profile.
 
 The rest of this section explains how to configure the network using an Agama profile. For the boot
 options, please check the [boot options section](../boot_options).
@@ -51,41 +51,121 @@ If you are familiar with _[NetworkManager][NM]_, the connection concept will not
 
 [NM]: https://www.networkmanager.dev/docs/
 
-For each type of connection, you might need a different set of fields. However, there are many of
-them that are common to any type of connection. Those fields include the connection identifier, the
+For each type of connection, you might need a different set of fields. However, many
+of them are common to any type of connection. Those fields include the connection identifier, the
 IPv4/IPv6 configuration, some device parameters, etc.
 
-- `id`: connection identifier.
-- `method4` and `method6`: IPv4 and IPV6 configuration method. Possible values are `auto` (usually
-  DHCP), `manual`, `link-local` and `disabled` (default).
-- `interface`: the name of the network interface to bound to this connection. If it is not
-  specified, NetworkManager will select one.
-- `macAddress`: MAC address to asign. It can be a MAC address or one of the following values:
-  `preserve`, `permanent`, `random` or `stable`.
-- `mtu`: connection MTU.
-- `gateway4` and `gateway6`: gateway address for IPv4 and IPv6.
+- `id`: Human-readable unique connection identifier.
+- `method4` and `method6`: IPv4 and IPv6 configuration method. Possible values are `auto` (usually
+  DHCP), `manual`, `link-local`, and `disabled` (default).
+- `interface`: The name of the network interface to bind to this connection. If it is not
+  specified, the connection could be applied to any device if there is no conflict with other match
+  settings like the `macAddress` or the `match` fields.
+- `macAddress`: The MAC address of the network interface to bind to this connection.
+- `customMacAddress`: MAC address to assign. It can be a MAC address or one of the following values:
+  `preserve`, `permanent`, `random`, or `stable`.
+- `mtu`: Connection MTU.
+- `gateway4` and `gateway6`: Gateway address for IPv4 and IPv6.
 - `addresses`: IP addresses. They can be IPv4 and/or IPv6.
-- `nameservers`: name servers IP addresses (IPv4 and/or IPV6).
+- `nameservers`: Name servers' IP addresses (IPv4 and/or IPv6).
 - `dnsSearchlist`: DNS domains to search.
-- `ignoreAutoDns`: whether DNS options provided via DHCP are ignored or not.
-- `status`: the wanted status for the connection. It can be `up`, `down`, or `removed`.
-- `autoconnect`: whether the connection should be automatically activated.
-- `persistent`: whether the connection should be kept after the installation or not.
-- `match`: define a criteria to select the device to apply the connection to.
+- `ignoreAutoDns`: Whether DNS options provided via DHCP are ignored or not.
+- `status`: The wanted status for the connection. It can be `up`, `down`, or `removed`.
+- `autoconnect`: Whether the connection should be automatically activated.
+- `persistent`: Whether the connection should be kept after the installation or not.
+- `match`: Define criteria to select the device to apply the connection to. See
+  [Device matching](#device-matching) for more details.
 
 These are the common fields to any kind of connection. Now, if you want to set up a bridge, you need
 to add a `bridge` section; for a Wi-Fi connection, you need a `wireless` section; and so on.
+
+### Device matching
+
+While the `interface` or the `macAddress` fields are used to match a specific interface
+based on its name or MAC address, the `match` section allows you to match multiple
+devices using name, driver, PCI, or kernel criteria.
+
+This is based on the _NetworkManager_ `match` setting (see the [NetworkManager documentation](https://networkmanager.dev/docs/api/latest/nm-settings-dbus.html)).
+
+For instance, you can match a device by its name:
+
+```jsonnet
+{
+  network: {
+    connections: [
+      {
+        id: "Wired connection 1",
+        match: {
+          interface: ["eth0"]
+        }
+      }
+    ]
+  }
+}
+```
+
+By its driver:
+
+```jsonnet
+{
+  network: {
+    connections: [
+      {
+        id: "Wired connection 1",
+        match: {
+          driver: ["e1000e"]
+        }
+      }
+    ]
+  }
+}
+```
+
+Or by its PCI path:
+
+```jsonnet
+{
+  network: {
+    connections: [
+      {
+        id: "Wired connection 1",
+        match: {
+          path: ["pci-0000:04:00.0"]
+        }
+      }
+    ]
+  }
+}
+```
+
+You can also use wildcards (globs) in the values. For example, to match any
+interface starting with `eth` or `ens`:
+
+```jsonnet
+{
+  network: {
+    connections: [
+      {
+        id: "Ethernet",
+        match: {
+          interface: ["eth*", "ens*"]
+        }
+      }
+    ]
+  }
+}
+```
 
 ### Wi-Fi networks
 
 To connect to a Wi-Fi network, you need to include a `wireless` section in the connection. It
 supports the following fields:
 
-- `ssid`: network SSID.
-- `security`: security method/key management. Possible values are `none` (default), `owe`,
-  `ieee8021x`, `wpa-psk`, `sae`, `wpa-eap` and `wpa-eap-suite-b192`.
-- `password`: password to connect to the network.
-- `mode`: wireless mode. Possible values are: `infrastructure` (default), `adhoc`, `mesh` and `ap`.
+- `ssid`: Network SSID.
+- `security`: Security method/key management. Possible values are `none` (default), `owe`,
+  `ieee8021x`, `wpa-psk`, `sae`, `wpa-eap`, and `wpa-eap-suite-b192`.
+- `password`: Password to connect to the network.
+- `mode`: Wireless mode. Possible values are: `infrastructure` (default), `adhoc`, `mesh`, and `ap`.
 
 ```jsonnet
 {
@@ -113,7 +193,7 @@ supports the following fields:
 
 ### Bridges
 
-To create a bridge you need to include a `bridge` section which, among other optional settings,
+To create a bridge, you need to include a `bridge` section which, among other optional settings,
 includes the list of ports to connect.
 
 ```jsonnet
@@ -135,21 +215,21 @@ includes the list of ports to connect.
 The `interface` element specifies the device name for the bridge while the `id` is the connection
 name.
 
-About the `bridge` section, it can include:
+The `bridge` section can include:
 
-- `ports`: a list of interfaces or connections IDs which will be part of the bridge.
-- `stp`: whether the
+- `ports`: A list of interfaces or connections IDs which will be part of the bridge.
+- `stp`: Whether the
   [Spanning Tree Protocol (STP)](https://es.wikipedia.org/wiki/Spanning_Tree_Protocol) should be
   enabled.
 - `forwardDelay`: STP forward delay, in seconds.
-- `priority`: STP priority. It is represented by a number equal or greater than zero. Lower values
+- `priority`: STP priority. It is represented by a number equal to or greater than zero. Lower values
   are "better".
-- `maxAge`: STP maximum message, in seconds.
+- `maxAge`: STP maximum message age, in seconds.
 - `helloTime`: STP hello time, in seconds.
 
 ### Bonding
 
-To create a bond you need to include a `bond` section which, among other optional settings, includes
+To create a bond, you need to include a `bond` section which, among other optional settings, includes
 the list of ports to connect.
 
 ```jsonnet
@@ -175,19 +255,18 @@ name.
 
 The `bond` section can contain:
 
-- `ports`: devices to be included in the bond.
-- `mode`: bond mode. Possible values: `balance-rr` (default), `active-backup`, `balance-xor`,
+- `ports`: Devices to be included in the bond.
+- `mode`: Bond mode. Possible values: `balance-rr` (default), `active-backup`, `balance-xor`,
   `broadcast`, `802.3ad`, `balance-tlb`, `balance-alb`.
-- `options`: additional options.
+- `options`: Additional options.
 
 ### VLAN
 
-To create a VLAN you need to include a `vlan` section supporting the following fields:
+To create a VLAN, you need to include a `vlan` section supporting the following fields:
 
-- `id`: The VLAN identifier that the interface should be assigned. An integer from the 0 to 4094
-  range.
+- `id`: The VLAN identifier (an integer from 0 to 4094).
 - `parent`: The parent interface name from which the VLAN should be created.
-- `protocol`: The VLAN protofol to use for encapsulation. Possible values: `802.1Q` (default),
+- `protocol`: The VLAN protocol to use for encapsulation. Possible values: `802.1Q` (default),
   `802.1ad`.
 
 ```jsonnet
@@ -195,17 +274,17 @@ To create a VLAN you need to include a `vlan` section supporting the following f
   network: {
     connections: [
       {
-        "id": "vlan10",
-        "method4": "manual",
-        "method6": "disabled",
-        "status": "up",
-        "persistent": true,
-        "addresses": ["192.168.1.28/24"],
-        "gateway4": "192.168.1.1",
-        "nameservers": ["192.168.1.1"],
-        "vlan": {
-          "id": 10,
-          "parent": "eth0"
+        id: "vlan10",
+        method4: "manual",
+        method6: "disabled",
+        status: "up",
+        persistent: true,
+        addresses: ["192.168.1.28/24"],
+        gateway4: "192.168.1.1",
+        nameservers: ["192.168.1.1"],
+        vlan: {
+          id: 10,
+          parent: "eth0"
         }
       }
     ]
@@ -215,22 +294,22 @@ To create a VLAN you need to include a `vlan` section supporting the following f
 
 ## Deleting network connections
 
-As commented in previous sections, the `status` field allows to bring `up`, `down` or even `remove`
-an existing connection. It might be useful to delete an existing connection before creating a new
-one specially when it is already applied to an specific interface.
+As mentioned in previous sections, the `status` field allows bringing a connection `up`, `down`, or even `remove`
+an existing one. It might be useful to delete an existing connection before creating a new
+one, especially when it is already applied to a specific interface.
 
-```json
+```jsonnet
 {
-  "network": {
-    "connections": [
+  network: {
+    connections: [
       {
-        "id": "default",
-        "status": "removed"
+        id: "default",
+        status: "removed"
       },
       {
-        "id": "enp1s0",
-        "interface": "enp1s0",
-        "status": "up"
+        id: "enp1s0",
+        interface: "enp1s0",
+        status: "up"
       }
     ]
   }
