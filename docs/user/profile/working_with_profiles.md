@@ -5,8 +5,8 @@ sidebar_position: 1
 # Working with profiles
 
 Configuration profiles are key for [unattended installation](/docs/overview/unattended) and to
-perform [advanced configuration](/docs/overview/cli) of Agama. However, getting your profile
-right is not always easy.
+perform [advanced configuration](/docs/overview/cli) of Agama. However, getting your profile right
+is not always easy.
 
 Fortunatelly, Agama's command-line interface offers [several commands](/docs/user/reference/cli) to
 validate, load and export configurations, becoming a very valuable tool for writing and debugging
@@ -59,7 +59,8 @@ the command from). For that reason, it is usually a good idea to pre-process the
 
 ## Validating a profile
 
-You can validate a JSON profile using the command-line tool.
+Agama relies on [JSON Schema](https://json-schema.org/) for profiles validation. The easiest way is
+to use Agama's command-line tool.
 
 ```console
 $ agama config validate my-profile.json
@@ -78,6 +79,16 @@ $ agama config validate my-profile.json
 All of the `agama config` subcommands validate the profile automatically.
 
 :::
+
+If you do not have a running instance of Agama, you can perform a local validation adding the
+`--local` switch.
+
+```console
+$ agama config validate --local my-profile.json
+```
+
+Alternatively, you can use any JSON Schema validator using the schemas shipped in the `agama-common`
+package.
 
 ### Exporting a profile
 
