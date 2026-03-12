@@ -104,12 +104,12 @@ options at the end of the `linux` line.
 
   :::
 
-- `inst.finish`: during an unattended installation, if the installation is completed successfully
-  then the installer will reboot into the target system by default (`reboot`). This behavior can be
-  modified allowing to `halt` or `poweroff` the machine at the end of the installation. In addition
-  to the three values corresponding to systemd commands, the value `stop` will pause at the final
-  "Congratulations! [Reboot]" screen, allowing you to extract logs. An interactive installation is
-  not affected by this parameter.
+- `inst.finish`: allows to change the behavior of Agama when the installation finishes.
+  - `stop`: do nothing (default for the interactive installation). Agama web user interface
+    shows a button to reboot the system and gives you a chance to download the logs.
+  - `reboot`: reboots the system (default for the unattended installation).
+  - `halt`: halts the system.
+  - `poweroff`: powers the system off.
 
   ```text
   inst.finish=poweroff
