@@ -115,6 +115,16 @@ options at the end of the `linux` line.
   inst.finish=poweroff
   ```
 
+- `inst.solver_testcase=1`: <Since version="16.1"/> Always save a solver test case. By default the
+  solver testcase is saved only on failure, this option forces saving the solver testcase also on
+  success. This is useful for debugging package dependency problems. The solver testcase is saved to
+  `/run/agama/testcase` directory and is included in the logs created by the `agama logs store`
+  command.
+
+  If the `ZYPP_FULLLOG=1` boot option is set then the solver testcase is automatically created by
+  libzypp in the `/var/log/YaST2/autoTestcase` directory and the `inst.solver_testcase` option is
+  ignored.
+
 - `inst.install`: on unattended mode, Agama automatically starts the installation after reading the
   profile. However, if you set `inst.install` to `0`, Agama stops after reading the configuration,
   giving the user a chance to review the installation options before proceeding.
@@ -164,6 +174,26 @@ options at the end of the `linux` line.
   live.password_systemd=1
   ```
 
+- `inst.listen_on`: <Since version="16.1"/> By default the Agama installer can be accessed using all
+  network interfaces present in the machine. But for increased security it is possible to limit
+  access only to particular network interfaces or it is possible to completely disable remote
+  access.
+  - `inst.listen_on=localhost` - listen only on loop back (localhost) device. This disables remote
+    access, the Agama installer can be accessed only locally.
+  - `inst.listen_on=<ip>` - listen on the specified IP address. Both IPv4 and IPv6 addresses are
+    supported. It is possible to use multiple IP addresses separated by comma. Addresses not
+    matching any network interface in the system are ignored.
+  - `inst.listen_on=<interface>` - listen on the specified network interface. Multiple interfaces
+    can be separated by comma, not found interfaces are ignored. Example: `inst.listen_on=eth2`
+  - `inst.listen_on=all` - listen on all network interfaces (allow local and remote access). This is
+    the default behavior, added just for completeness.
+
+  The Agama installer can be always accessed locally, even in cases when specifying an IP address or
+  an network interface.
+
+  Note: For disabling other network services (like SSH) use the standard `systemd.mask` boot option,
+  see more details below.
+
 - `proxy`: sets up a network proxy. The supported proxy URL format is
   `protocol://[user[:password]@]host[:port]`.
 
@@ -176,4 +206,12 @@ options at the end of the `linux` line.
 
   ```text
   systemd.unit=multi-user.target
+  ```
+
+- `systemd.mask`: standard way to disable a systemd unit during boot. Can be used to disable some
+  default services started in the Live ISO. For example if you want to disable the SSH server use
+  this boot option:
+
+  ```text
+  systemd.mask=sshd.service
   ```
