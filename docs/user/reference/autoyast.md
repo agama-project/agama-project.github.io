@@ -385,7 +385,7 @@ This section is supported. Only the root and the first user are considered.
 | `fullName`        | yes       | `user.fullName`       |                                                                |
 | `password`        | yes       | `user.password`       |                                                                |
 | `encrypted`       | yes       | `user.hashedPassword` | If set to true, it uses "hashedPassword" instead of "password" |
-| `authorized_keys` | yes       | `root.sshPublicKey`   | It only considers a single key.                                |
+| `authorized_keys` | yes       | `root.sshPublicKey`   |                                                                |
 
 ## Unsupported sections
 
