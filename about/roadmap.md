@@ -7,24 +7,7 @@ sidebar_position: 3
 Agama is a project under constant development and priorities are re-evaluated every few weeks. This
 page offers an overview on the current state of the ever-changing development plans.
 
-## Agama 18 (latest released version)
-
-- Installer self-update functionality for SLE 16.
-- Improved initialization of iBFT.
-- Support for installing alpha versions of SLE 16.1.
-- Removed support to install openSUSE Kalpa, since Agama offers too many configuration possibilities.
-- Officially dropped support for i586 (at least in the short term).
-- Web-based graphical user interface:
-    - Rearranged information in the storage configuration page.
-    - Allow sorting devices by name or size when choosing a disk.
-    - Improved handling of wired connections.
-    - Enhanced interface to manage DASD devices.
-- Profile-based (unattended) installation:
-    - Ability to validate a JSON profile locally, with no Agama instance running.
-    - Allow to add and remove patterns to install, in addition to replacing the full list.
-    - Support to manage answers to Agama questions directly in the profile.
-
-## Agama 19 (~ March 16th)
+## Agama 19 (latest released version)
 
 - Architectural revamp:
     - New improved version of the HTTP API, to be supported through the whole lifecyle of
@@ -50,33 +33,41 @@ page offers an overview on the current state of the ever-changing development pl
 - Some other internal components also rewriten in Rust.
 - Support to install SLE in standard or immutable modes.
 - Honor the boot argument `inst.finish` also in interactive installation.
+- Ability to configure DNS search domains per interface.
 - Improve the experience when installing over existing MD RAIDs (detection of boot device).
 
 ## Agama 20 (~ April 13th)
 
+- Improved usability of the command-line tools.
 - Better error reporting and handling for invalid profiles and other configuration errors.
-- Improvements in the installation of transactional systems like openSUSE Kalpa or SLE Micro.
-- Support to select which boot loader to install: grub2 or systemd-boot (and maybe also grub2-bls).
-- Agama-live installation media:
-    - Disable remote web-server access during installation.
+- Improvements when installing a system in immutable mode.
+- Initial support for different boot loaders like systemd-boot.
 - Web-based graphical user interface:
     - Possibility to reuse pre-existing LVM volume groups.
-    - More understandable configuration of multi-disk LVM volume groups.
+    - Management of non-ethernet network connections like bonding, bridges or VLAN.
     - Usability fixes for the network configuration.
+- Profile-based (unattended) installation:
+    - Customize APQNs and key type when defining PAES-encrypted volumes.
+- Agama-live installation media:
+    - Disable remote web-server access during installation.
 
 ## Agama 21 (~ May 15th)
 
 - Dedicated setting to configure remote access to the installed system (SSH, Cockpit, etc.)
-- Web-based graphical user interface: enhancements in the management of file systems including
-  labels, formatting and mounting options, etc.
-- Profile-based (unattended) installation: more possibilities for the `search` option in the
-  `storage` section.
+- Compatibility with several boot loaders including at least Grub2 and systemd-boot.
+- Web-based graphical user interface:
+    - Improved software section.
+    - A more guided desktop selection for openSUSE.
+    - More understandable configuration of multi-disk LVM volume groups.
+    - Enhancements in the management of file systems including labels, formatting and mounting
+      options, etc.
+- Profile-based (unattended) installation:
+  - More possibilities for the `search` option in the `storage` section.
 
 ## Mid term plans (summer 2026)
 
-- Improved desktop selection for openSUSE.
+- Usability improvements downloading the installer logs and configuration
 - Support for NVMeOF.
-- Ability to configure DNS search domains per interface.
 - Profile-based (unattended) installation:
     - Allow to configure a password for the boot loader.
     - More convenient encryption settings.
