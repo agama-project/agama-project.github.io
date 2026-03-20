@@ -27,7 +27,9 @@ installation are built on top of that generic API.
 
 But previous versions of Agama were full of quirks that didn't allow us to define an API that
 would match our quality standards as a solid foundation to build a simple but comprehensive
-installer. Agama 19 represents a quite significant architectural overhaul, needed to leave all those
+installer. Agama 19 represents a quite significant architectural overhaul (see
+[#2951](https://github.com/agama-project/agama/pull/2951) and
+[#2998](https://github.com/agama-project/agama/pull/2998)), needed to leave all those
 quirks behind and to define mechanisms that can be the cornerstone for any future development.
 
 Of course, such a drastic change opens the door for potential bugs. Your testing, feedback and kind
@@ -45,29 +47,36 @@ interface or the Agama command-line tools.
 
 Having a better API enabled us to adjust the web user interface to be closer to our original vision.
 We still have a long way to go in our road to a fully usable interface but the new navigation
-experience, based on a better overview page and a more useful confirmation dialog, sets the direction
+experience, based on a better overview page and a more useful confirmation dialog (see
+[#2988](https://github.com/agama-project/agama/pull/2988),
+[#3009](https://github.com/agama-project/agama/pull/3009) and
+[#3025](https://github.com/agama-project/agama/pull/3025)), sets the direction
 to follow.
 
 ![Agama overview page](../static/img/blog/2026-03-20/overview.png)
 
 Although most configuration sections remain similar to previous versions of Agama, we plan to revamp
-some of them. The process has already started for the sections to configure iSCSI, DASD, zFCP and
-network.
+some of them. The process has already started for the sections to configure
+[iSCSI](https://github.com/agama-project/agama/pull/3064),
+[DASD](https://github.com/agama-project/agama/pull/3128),
+[zFCP](https://github.com/agama-project/agama/pull/3235) and
+[network](https://github.com/agama-project/agama/pull/2929).
 
 Regarding network, there are two important changes. On the one hand, now the user interface
-dynamicaly reacts to changes in the underlying system. For instance, when a new cable is plugged in
-or when a new WiFi adapter is connected. On the other hand, now it is possible to define new
+dynamicaly reacts to changes in the underlying system (see [#3285](https://github.com/agama-project/agama/pull/3285)).
+For instance, when a new cable is plugged in or when a new WiFi adapter is connected. On the other hand,
+now it is possible to define new
 ethernet connections. That is very relevant in installation scenarios with several network adapters
 that need to be configured in different ways. For example, where one network is used to access
 storage devices and another one is used to reach the installation repositories.
 
 ![New network section](../static/img/blog/2026-03-20/network.png)
 
-The web user interface also got a new option to download the current installer configuration in the
-JSON format used by the Agama command line tools and for unattended installation. That is the first
-step to turn the web interface into a useful learning and prototyping tool for more advanced
-scenarios, although this new functionality could benefit from several usability improvements. Stay
-tuned.
+The web user interface also got a new option to [download](https://github.com/agama-project/agama/pull/3256)
+the current installer configuration in the JSON format used by the Agama command line tools and for
+unattended installation. That is the first step to turn the web interface into a useful learning
+and prototyping tool for more advanced scenarios, although this new functionality could benefit from
+several usability improvements. Stay tuned.
 
 ![Downloading Agama configuration](../static/img/blog/2026-03-20/config.png)
 
@@ -90,18 +99,22 @@ that is out of the scope of Agama.
 
 Thus, we decided to use the architectural revamp as an opportunity to replace those YaST parts with
 simpler implementations that will allow us to evolve faster in the future. Agama 19 includes its own
-management of users and, even more important and ambitious, its own management of software including
-the registration of SUSE Linux Enterprise and associated products and extensions.
+management of [users](https://github.com/agama-project/agama/pull/2937) and, even more important and
+ambitious, its own management of [software](https://github.com/agama-project/agama/pull/1829) including
+the registration of SUSE Linux Enterprise and associated products and extensions (see
+[#2915](https://github.com/agama-project/agama/pull/2915),
+[#2978](https://github.com/agama-project/agama/pull/2978) and
+[#2982](https://github.com/agama-project/agama/pull/2982)).
 
 ## Installation modes {#modes}
 
 But Agama 19 does not only bring restructuring and rewrites, it also comes with a bunch of new
 functionality, like the new ability to install some distributions in different so-called
-installation modes.
+installation modes (see [#3086](https://github.com/agama-project/agama/pull/3086)).
 
 When installing the experimental pre-releases of SLES 16.1 or the corresponding version of SLES for
-SAP Applications, now it is possible to select between the Standard and the Immutable modes. See the
-following screenshot for details.
+SAP Applications (see [#3146](https://github.com/agama-project/agama/pull/3146)), now it is possible
+to select between the Standard and the Immutable modes. See the following screenshot for details.
 
 ![Installation modes for SLES 16.1](../static/img/blog/2026-03-20/modes.png)
 
@@ -117,29 +130,32 @@ Agama that are, at least for now, only accessible using the JSON configuration. 
 features available for users of the command-line interface and of unattended installations.
 
 Probably, the most awaited of those new features is the ability to install into an existing LVM
-volume group. When doing so, it is possible to create new logical volumes within the pre-existing
-volume group and it is also possible to reuse, delete or resize the existing logical volumes. Agama
-19 even allows to add new physical volumes to an existing volume group as part of the process. Most
-of those capabilities will soon be added to the web user interface.
+volume group (see [#3210](https://github.com/agama-project/agama/pull/3210)). When doing so, it is
+possible to create new logical volumes within the pre-existing volume group and it is also possible
+to reuse, delete or resize the existing logical volumes. Agama 19 even allows to add new physical
+volumes to an existing volume group as part of the process. Most of those capabilities will soon be
+added to the web user interface.
 
-We also extended the configuration of the boot loader with a new setting `updateNvram` that, when
-disabled, prevents the boot loader updates of the persistent RAM (NVRAM). That is an expert feature
-that was requested by several users to handle broken firmwares or network setups.
+We also extended the configuration of the boot loader with a new setting `updateNvram` (see
+[#3185](https://github.com/agama-project/agama/pull/3185)) that, when disabled, prevents the boot
+loader updates of the persistent RAM (NVRAM). That is an expert feature that was requested by
+several users to handle broken firmwares or network setups.
 
-Last but not least, now it is possible to specify several SSH public keys to authenticate the root
-user and also to use SSH keys as authentication mechanism for the non-root user created by Agama.
+Last but not least, now it is possible to specify [several SSH public keys](https://github.com/agama-project/agama/pull/3274)
+to authenticate the root user and also to use SSH keys as authentication mechanism for the non-root
+user created by Agama.
 
 ## Many changes in the installation media {#media}
 
 As you can see, Agama 19 is quite a significant release. But there is room for many things in four
 months, even to work beyond Agama itself. During this time we also incorporated several changes to
-the live ISO that most of you use to execute Agama.
+the live ISO that most of you use to execute Agama (see [#3192](https://github.com/agama-project/agama/pull/3192)).
 
 Those changes include several improvements in the boot menu (like better support for serial
 console or adapted timeouts), dropping the "Boot from Disk" option in most architectures,
 unifying the location of kernel and initramfs between the different architectures and a new boot
-argument `live.net_config_tui=1` to trigger `nmtui` (an interactive network configuration tool) before
-Agama starts.
+argument `live.net_config_tui=1` (see [#2923](https://github.com/agama-project/agama/pull/2923)) to trigger
+`nmtui` (an interactive network configuration tool) before Agama starts.
 
 ## Back to regular speed {#conclusion}
 
