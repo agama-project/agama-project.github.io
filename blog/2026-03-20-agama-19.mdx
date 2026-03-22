@@ -27,10 +27,11 @@ installation are built on top of that generic API.
 
 But previous versions of Agama were full of quirks that didn't allow us to define an API that
 would match our quality standards as a solid foundation to build a simple but comprehensive
-installer. Agama 19 represents a quite significant architectural overhaul (see
+installer. Agama 19 represents a quite significant architectural overhaul, needed to leave all those
+quirks behind and to define mechanisms that can be the cornerstone for any future development
+(see
 [#2951](https://github.com/agama-project/agama/pull/2951) and
-[#2998](https://github.com/agama-project/agama/pull/2998)), needed to leave all those
-quirks behind and to define mechanisms that can be the cornerstone for any future development.
+[#2998](https://github.com/agama-project/agama/pull/2998)).
 
 Of course, such a drastic change opens the door for potential bugs. Your testing, feedback and kind
 bug reports will help us to consolidate the new mechanisms in upcoming Agama versions.
@@ -47,11 +48,12 @@ interface or the Agama command-line tools.
 
 Having a better API enabled us to adjust the web user interface to be closer to our original vision.
 We still have a long way to go in our road to a fully usable interface but the new navigation
-experience, based on a better overview page and a more useful confirmation dialog (see
+experience, based on a better overview page and a more useful confirmation dialog, sets the direction
+to follow
+(see
 [#2988](https://github.com/agama-project/agama/pull/2988),
 [#3009](https://github.com/agama-project/agama/pull/3009) and
-[#3025](https://github.com/agama-project/agama/pull/3025)), sets the direction
-to follow.
+[#3025](https://github.com/agama-project/agama/pull/3025)).
 
 ![Agama overview page](../static/img/blog/2026-03-20/overview.png)
 
@@ -63,8 +65,10 @@ some of them. The process has already started for the sections to configure
 [network](https://github.com/agama-project/agama/pull/2900).
 
 Regarding network, there are two important changes. On the one hand, now the user interface
-dynamicaly reacts to changes in the underlying system (see [#3285](https://github.com/agama-project/agama/pull/3285)).
-For instance, when a new cable is plugged in or when a new WiFi adapter is connected. On the other hand,
+dynamicaly reacts to changes in the underlying system.
+For instance, when a new cable is plugged in or when a new WiFi adapter is connected
+(see [#3285](https://github.com/agama-project/agama/pull/3285)).
+On the other hand,
 now it is possible to define new
 ethernet connections. That is very relevant in installation scenarios with several network adapters
 that need to be configured in different ways. For example, where one network is used to access
@@ -72,7 +76,7 @@ storage devices and another one is used to reach the installation repositories.
 
 ![New network section](../static/img/blog/2026-03-20/network.png)
 
-The web user interface also got a new option to [download](https://github.com/agama-project/agama/pull/3256)
+The web user interface also got a [new option to download](https://github.com/agama-project/agama/pull/3256)
 the current installer configuration in the JSON format used by the Agama command line tools and for
 unattended installation. That is the first step to turn the web interface into a useful learning
 and prototyping tool for more advanced scenarios, although this new functionality could benefit from
@@ -110,10 +114,10 @@ the registration of SUSE Linux Enterprise and associated products and extensions
 
 But Agama 19 does not only bring restructuring and rewrites, it also comes with a bunch of new
 functionality, like the new ability to install some distributions in different so-called
-installation modes (see [#3086](https://github.com/agama-project/agama/pull/3086)).
+[installation modes](https://github.com/agama-project/agama/pull/3086).
 
 When installing the experimental pre-releases of SLES 16.1 or the corresponding version of SLES for
-SAP Applications (see [#3146](https://github.com/agama-project/agama/pull/3146)), now it is possible
+SAP Applications, now it is possible
 to select between the Standard and the Immutable modes. See the following screenshot for details.
 
 ![Installation modes for SLES 16.1](../static/img/blog/2026-03-20/modes.png)
@@ -149,10 +153,12 @@ user created by Agama.
 
 As you can see, Agama 19 is quite a significant release. But there is room for many things in four
 months, even to work beyond Agama itself. During this time we also incorporated several changes to
-the live ISO that most of you use to execute Agama (see [#3192](https://github.com/agama-project/agama/pull/3192)).
+the live ISO that most of you use to execute Agama.
 
-Those changes include several improvements in the boot menu (like better support for serial
-console or adapted timeouts), dropping the "Boot from Disk" option in most architectures,
+Those changes include several improvements in the boot menu (like better support for [serial
+console](https://github.com/agama-project/agama/pull/3192)
+or [adapted timeouts](https://github.com/agama-project/agama/pull/3185)),
+dropping the "Boot from Disk" option in most architectures,
 unifying the location of kernel and initramfs between the different architectures and a new boot
 argument `live.net_config_tui=1` (see [#2923](https://github.com/agama-project/agama/pull/2923)) to trigger
 `nmtui` (an interactive network configuration tool) before Agama starts.
