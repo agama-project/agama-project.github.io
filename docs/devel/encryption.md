@@ -10,8 +10,8 @@ If the server and the client run in the same machine, the communication can be d
 HTTPS. However, if the server and the client are on different machines, **HTTPS is mandatory**. In
 such case all HTTP requests are automatically redirected to HTTPS[^redirect].
 
-The same applies principle applies to the WebSocket, which is encrypted in case
-of remote installations.
+The same applies principle applies to the WebSocket, which is encrypted in case of remote
+installations.
 
 [^redirect]: The client gets a response with code 308 (permanent redirect).
 
@@ -26,6 +26,5 @@ as you can see on the screenshot below.
 
 ![Displaying the SSL certificate's fingerprint in the console](./img/certificate-fingerprint.png)
 
-:::warning
-There is no easy way yet to inject your own certificate when using Agama's live medium, although the
-`agama-web-server` command provides options to set the certificate and its key.
+:::warning There is no easy way yet to inject your own certificate when using Agama's live medium,
+although the `agama-web-server` command provides options to set the certificate and its key.

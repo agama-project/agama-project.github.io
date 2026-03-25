@@ -7,10 +7,10 @@ information in case of system failures.
 
 ## Kdump configuration
 
-Early Kdump configuration can be done integrating a [post-installation
-script](../reference/profile/scripts) at the Agama configuration. That allows to execute some
-commands within the chrooted environment of the installed system. Let's see an example using a
-Jsonnet profile (more readable than plain JSON).
+Early Kdump configuration can be done integrating a
+[post-installation script](../reference/profile/scripts) at the Agama configuration. That allows to
+execute some commands within the chrooted environment of the installed system. Let's see an example
+using a Jsonnet profile (more readable than plain JSON).
 
 ```jsonnet
 {
@@ -43,20 +43,22 @@ Jsonnet profile (more readable than plain JSON).
 
 Let's break down the commands within the `content` of the `post` script:
 
-  * `#!/usr/bin/bash`: Shebang line, ensuring the script is executed with bash.
-  * `zypper -n in kdump`: This command uses `zypper` (SUSE's package manager) to install the `kdump` package. The `-n` flag stands for "non-interactive" and assumes "yes" to any prompts, which is essential for unattended installations.
-  * `systemctl enable kdump-commandline.service`: This enables an auxiliary service that is crucial
-    for setting up Kdump parameters from the kernel command line during boot.
-  * `systemctl enable kdump.service`: This enables the main Kdump service, which manages the Kdump
-    daemon responsible for capturing and saving crash dumps.
-  * `kdumptool commandline -u`: This updates the bootloader configuration to ensure it contains the
-    proper kernel command-line arguments with recommended values.
+- `#!/usr/bin/bash`: Shebang line, ensuring the script is executed with bash.
+- `zypper -n in kdump`: This command uses `zypper` (SUSE's package manager) to install the `kdump`
+  package. The `-n` flag stands for "non-interactive" and assumes "yes" to any prompts, which is
+  essential for unattended installations.
+- `systemctl enable kdump-commandline.service`: This enables an auxiliary service that is crucial
+  for setting up Kdump parameters from the kernel command line during boot.
+- `systemctl enable kdump.service`: This enables the main Kdump service, which manages the Kdump
+  daemon responsible for capturing and saving crash dumps.
+- `kdumptool commandline -u`: This updates the bootloader configuration to ensure it contains the
+  proper kernel command-line arguments with recommended values.
 
 ## Integrate the configuration into your installation
 
 If you are performing an unattended installation, simply merge the `scripts` section from the
-provided snippet into your existing Agama configuration profile. The following example shows how
-to do that using a JSON profile.
+provided snippet into your existing Agama configuration profile. The following example shows how to
+do that using a JSON profile.
 
 ```json
 {
@@ -84,8 +86,8 @@ to do that using a JSON profile.
 If you are using Agama interactively, the [corresponding section](../../overview/cli) of the
 starter's guide explains how to use a partial profile to configure settings that are not available
 at the web user interface. That can be used to setup our kdump `post` script. Simply save the
-`scripts` section into a separate file (e.g., `kdump_config.jsonnet` or `kdump_config.json` if
-you prefer plain JSON).
+`scripts` section into a separate file (e.g., `kdump_config.jsonnet` or `kdump_config.json` if you
+prefer plain JSON).
 
 ```jsonnet
 {
@@ -129,8 +131,8 @@ verify that kdump is enabled and configured correctly:
 
     Both services should be `active (exited)` or `active (running)`.
 
-2.  **Verify Kdump Kernel Parameter:**
-    Check the kernel command line to ensure `crashkernel=` allocation is present.
+2.  **Verify Kdump Kernel Parameter:** Check the kernel command line to ensure `crashkernel=`
+    allocation is present.
 
     ```bash
     cat /proc/cmdline
@@ -138,8 +140,8 @@ verify that kdump is enabled and configured correctly:
 
     You should see an entry like `crashkernel=<size>M@<offset>`.
 
-3.  **Test Kdump (Optional, on a non-production system):**
-    To confirm Kdump functionality, you can intentionally trigger a kernel crash. **Do not do this on a production system.**
+3.  **Test Kdump (Optional, on a non-production system):** To confirm Kdump functionality, you can
+    intentionally trigger a kernel crash. **Do not do this on a production system.**
 
     ```bash
     echo c | sudo tee /proc/sysrq-trigger

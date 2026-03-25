@@ -19,10 +19,10 @@ to implement - the ability to set a name for the machine (ie. hostname) during i
 naked truth is that it took us some time to open that can of worms because it is a rather
 complicated topic.
 
-First of all, there is nothing like a unique hostname since a machine can have different
-names depending on the network interface used to interact with it. Moreover, those names can be
-static or transient and there are several mechanisms to set or modify them with relatively complex
-precedence rules in several situations.
+First of all, there is nothing like a unique hostname since a machine can have different names
+depending on the network interface used to interact with it. Moreover, those names can be static or
+transient and there are several mechanisms to set or modify them with relatively complex precedence
+rules in several situations.
 
 One of those mentioned mechanisms, already available at previous versions of the Agama-Live
 installation media, was specifying the `hostname=` boot argument. In Agama 13 we extended that with
@@ -39,29 +39,29 @@ releases of Agama.
 ## Installing on LVM {#lvm}
 
 Another feature that got a preliminary user interface at Agama 13 is the ability to install using
-[LVM](https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)) (Logical Volume Manager).
+[LVM](<https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)>) (Logical Volume Manager).
 
 As you may know, it was already possible to define LVM volume groups and logical volumes at the
-`storage` section of the Agama configuration that can be used both in unattended installation and
-in the command-line interface. Agama 13 provides a first integration of that functionality into the
-web user interface.
+`storage` section of the Agama configuration that can be used both in unattended installation and in
+the command-line interface. Agama 13 provides a first integration of that functionality into the web
+user interface.
 
 ![Web interface to configure LVM](../static/img/blog/2025-04-08/lvm.png)
 
 The new interface is still a bit rough around the edges but already allows to define one or more
 volume groups with any number of logical volumes. Agama will automatically calculate all the final
-  sizes both for the logical volumes and for the partitions needed to host the LVM physical volumes.
+sizes both for the logical volumes and for the partitions needed to host the LVM physical volumes.
 
 ## Register extensions from the SUSE Customer Center {#extensions}
 
 The possibilities offered by default by any (open)SUSE Linux distribution can be extended adding
-extra repositories. In the case of enterprise-grade products like SLES that means activating
-add-ons and extensions, which may be subject to some registration process before being available
-for installation.
+extra repositories. In the case of enterprise-grade products like SLES that means activating add-ons
+and extensions, which may be subject to some registration process before being available for
+installation.
 
-For that purpose, the product configuration at Agama 13 was extended with the option `addon`.
-The following example shows how that could be used to register the High Availability extension
-that can be added to any installation of SUSE Linux Enterprise Server thanks to the
+For that purpose, the product configuration at Agama 13 was extended with the option `addon`. The
+following example shows how that could be used to register the High Availability extension that can
+be added to any installation of SUSE Linux Enterprise Server thanks to the
 [SUSE Customer Center](https://scc.suse.com/).
 
 ```json
@@ -83,8 +83,8 @@ As you already know, adding a feature to the Agama configuration implies it can 
 unattended installation and also on interactive installations using the command-line interface. But
 it does not imply such a feature will be automatically available at the web user interface of Agama.
 
-In the case of registering extensions, we are already working to make it possible via the web UI
-for Agama 14, expected to be released by the end of April. That is not the case for another of the
+In the case of registering extensions, we are already working to make it possible via the web UI for
+Agama 14, expected to be released by the end of April. That is not the case for another of the
 features we recently added to the Agama configuration.
 
 ## Selecting individual packages to install {#packages}
@@ -97,7 +97,7 @@ of individual packages, not necessarily contained on any pattern.
 {
   "software": {
     "patterns": ["gnome_desktop"],
-    "packages": ["vim"],
+    "packages": ["vim"]
   }
 }
 ```
@@ -112,13 +112,14 @@ implies being able to read the configuration for the unattended installation fro
 that AutoYaST can handle.
 
 The configuration is usually indicated by a URL that is passed to the installer. But AutoYaST URLs
-are one of a kind - they support all kind of non-standard schemes like `device://` or `label://`, each
-of them with their own AutoYaST-specific semantic.
+are one of a kind - they support all kind of non-standard schemes like `device://` or `label://`,
+each of them with their own AutoYaST-specific semantic.
 
 Agama now supports URLs starting with `device:`, `usb:`, `label:`, `HD:`, `DVD:` and `cd:`. You can
-know more about those special schemas at the [corresponding page](https://agama-project.github.io/docs/user/urls)
-of the Agama documentation site. Support for well-known URL schemas (like `file:`, `http:`, etc.)
-is still implemented using [curl](https://curl.se/) under the hood.
+know more about those special schemas at the
+[corresponding page](https://agama-project.github.io/docs/user/urls) of the Agama documentation
+site. Support for well-known URL schemas (like `file:`, `http:`, etc.) is still implemented using
+[curl](https://curl.se/) under the hood.
 
 :::warning
 
@@ -131,14 +132,14 @@ standard output, which is now used to inform the user about the searching proces
 ## Automated search of unattended configuration {#oemdrv}
 
 And talking about searching, you may know that AutoYaST is able to find the auto-installation
-profile at several predefined locations, even if no URL was explicitly specified by the user.
-As part of our effort to make Agama an almost-direct replacement for AutoYaST we implemented a
-very similar functionality.
+profile at several predefined locations, even if no URL was explicitly specified by the user. As
+part of our effort to make Agama an almost-direct replacement for AutoYaST we implemented a very
+similar functionality.
 
 If Agama is started in automatic mode but no configuration (profile) is specified, Agama will
 automatically search for it in the same pre-defined locations used by AutoYaST. In those cases,
-Agama expects a file named `autoinst.jsonnet`, `autoinst.json` or `autoinst.xml` (in that
-order) to be located on:
+Agama expects a file named `autoinst.jsonnet`, `autoinst.json` or `autoinst.xml` (in that order) to
+be located on:
 
 - The root of a file system with the label `OEMDRV`.
 - Or the root (`/`) of the installation environment.
@@ -147,10 +148,9 @@ The first file found is used as the profile, starting the installation right awa
 
 ## Deploy files during installation {#files}
 
-Going further into the role of Agama as an AutoYaST successor, you may know that AutoYaST allows
-to deploy complete configuration files using the `<files />` element. Just like scripts, it is
-possible to embed the file content in the profile or, if preferred, to retrieve it from a remote
-location.
+Going further into the role of Agama as an AutoYaST successor, you may know that AutoYaST allows to
+deploy complete configuration files using the `<files />` element. Just like scripts, it is possible
+to embed the file content in the profile or, if preferred, to retrieve it from a remote location.
 
 Of course, we decided Agama should offer the same functionality that you can see in action in the
 following example.
@@ -196,8 +196,8 @@ During the implementation of this feature we also decided to rename the attribut
 
 ## We keep moving {#conclusion}
 
-We are already working at Agama 14, that will provide new functionality and will improve some of
-the features introduced at Agama 13. Meanwhile do not hesitate to give Agama a try using our
+We are already working at Agama 14, that will provide new functionality and will improve some of the
+features introduced at Agama 13. Meanwhile do not hesitate to give Agama a try using our
 [latest Live ISO images](https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/).
 
 As always can contact us at the [Agama project at GitHub](https://github.com/agama-project/agama)

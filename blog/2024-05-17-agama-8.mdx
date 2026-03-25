@@ -3,23 +3,23 @@ date: 2024-05-17 08:00:00 +00:00
 title: Releasing version 8
 description: Goodbye Cockpit, hello HTTP interface
 tags:
-- release
+  - release
 ---
 
 The YaST Team is back with more news about [Agama](https://github.com/agama-project/agama). On our
-[previous post](2024-02-08-year-of-agama.mdx) we exposed the first two steps of
-our roadmap for 2024: a more powerful user interface for the storage setup and a new Cockpit-free
-architecture with a better API for external callers. Now we are proud to announce Agama 8,
-delivering initial versions of both features.
+[previous post](2024-02-08-year-of-agama.mdx) we exposed the first two steps of our roadmap for
+2024: a more powerful user interface for the storage setup and a new Cockpit-free architecture with
+a better API for external callers. Now we are proud to announce Agama 8, delivering initial versions
+of both features.
 
 {/* truncate */}
 
 ## The great architectural change {#architecture}
 
-As explained at the mentioned blog post and detailed at [this Github
-discussion](https://github.com/agama-project/agama/discussions/1000), we got powerful reasons to rethink
-Agama's architecture, getting rid of Cockpit and switching from D-Bus to HTTP as main communication
-protocol between the different Agama components.
+As explained at the mentioned blog post and detailed at
+[this Github discussion](https://github.com/agama-project/agama/discussions/1000), we got powerful
+reasons to rethink Agama's architecture, getting rid of Cockpit and switching from D-Bus to HTTP as
+main communication protocol between the different Agama components.
 
 The changes are useful to integrate Agama into bigger solutions and are obviously beneficial for
 remote or unattended installations. But turns out they also improved dramatically Agama's start-up
@@ -59,10 +59,11 @@ team worked on some areas like:
 
 Even more important, we also got several improvements contributed by volunteer developers out of the
 regular YaST Team at SUSE. On the one hand, Nagender Rao
-[improved](https://github.com/agama-project/agama/pull/1007) the form to edit a file system. On the other
-hand, Balsa Asanovic continues growing his already impressive contribution to Agama with
-[better visualization](https://github.com/agama-project/agama/pull/886) of the installation issues and
-[enhancements](https://github.com/agama-project/agama/pull/1122) in the interface to create a user.
+[improved](https://github.com/agama-project/agama/pull/1007) the form to edit a file system. On the
+other hand, Balsa Asanovic continues growing his already impressive contribution to Agama with
+[better visualization](https://github.com/agama-project/agama/pull/886) of the installation issues
+and [enhancements](https://github.com/agama-project/agama/pull/1122) in the interface to create a
+user.
 
 ## See it in action {#testing}
 
@@ -72,9 +73,9 @@ translating is not the only way to contribute to the project. You can also test 
 feedback. Moreover, that is the best way to get a glimpse of all the possibilities regarding the new
 interface to configure the storage setup and all the other changes mentioned above.
 
-The easiest way to get your hands on Agama 8 is to download one of the [Agama Live ISO testing
-images](https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/) and
-boot it on a virtual or bare-metal machine. Bear in mind this is one of the most experimental
+The easiest way to get your hands on Agama 8 is to download one of the
+[Agama Live ISO testing images](https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/)
+and boot it on a virtual or bare-metal machine. Bear in mind this is one of the most experimental
 pre-releases of Agama ever, since we wanted it to be tested at as many scenarios as possible after
 the big architectural change. Do not hesitate to report any misbehavior that is still not
 [tracked](https://github.com/agama-project/agama/issues?q=is%3Aissue+is%3Aopen+label%3Abug).
@@ -87,10 +88,10 @@ expect to acomplish a rather significative reorganization of the web interface a
 some of the features that were left behind in the switch to the new architehocture.
 
 If everything goes as expected, that's the version you will see in action at the two sessions the
-YaST Team will hold at [openSUSE Conference 2024](https://events.opensuse.org/conferences/oSC24).
-If you will not be there or simply don't want to wait, you can always reach us at the [YaST
-Development mailing list](https://lists.opensuse.org/archives/list/yast-devel@lists.opensuse.org/),
-our `#yast` channel at [Libera.chat](https://libera.chat/) or the [Agama project at
-GitHub](https://github.com/agama-project/agama).
+YaST Team will hold at [openSUSE Conference 2024](https://events.opensuse.org/conferences/oSC24). If
+you will not be there or simply don't want to wait, you can always reach us at the
+[YaST Development mailing list](https://lists.opensuse.org/archives/list/yast-devel@lists.opensuse.org/),
+our `#yast` channel at [Libera.chat](https://libera.chat/) or the
+[Agama project at GitHub](https://github.com/agama-project/agama).
 
 Have a lot of fun!

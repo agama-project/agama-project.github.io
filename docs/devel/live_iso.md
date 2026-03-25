@@ -9,9 +9,10 @@ system. However, the most expected way of using Agama is by running it on a live
 
 ## Sources
 
-The Live ISO sources are maintained in the [Agama's repository live/
-subdirectory](https://github.com/openSUSE/agama/tree/master/live). See more details in the
-[live/README.md](https://github.com/openSUSE/agama/blob/master/live/README.md) documentation.
+The Live ISO sources are maintained in the
+[Agama's repository live/ subdirectory](https://github.com/openSUSE/agama/tree/master/live). See
+more details in the [live/README.md](https://github.com/openSUSE/agama/blob/master/live/README.md)
+documentation.
 
 ## Live ISO requirements
 
@@ -23,22 +24,18 @@ A live ISO for running Agama should provide the following software:
 - A browser to locally render the Agama web UI.
 - Optionally, repository packages of the products to install.
 
-:::note
-If no browser is included, then the installation has to be remotely performed by using a browser
-from another machine. This would be the typical case for s390x installations.
-:::
+:::note If no browser is included, then the installation has to be remotely performed by using a
+browser from another machine. This would be the typical case for s390x installations. :::
 
-:::warning
-These days the packages repositories are not included, so the installation requires Internet
-connection to download the packages of the product to install.
-:::
+:::warning These days the packages repositories are not included, so the installation requires
+Internet connection to download the packages of the product to install. :::
 
 ## Agama Live ISO (_only for development and testing_)
 
-The Agama project provides a [live ISO
-image](https://build.opensuse.org/package/show/systemsmanagement:Agama:Devel/agama-installer) for
-testing purposes and it is intended to be used for developers only. It has some limitations and it
-is not optimized for production usage.
+The Agama project provides a
+[live ISO image](https://build.opensuse.org/package/show/systemsmanagement:Agama:Devel/agama-installer)
+for testing purposes and it is intended to be used for developers only. It has some limitations and
+it is not optimized for production usage.
 
 ### Description
 
@@ -58,21 +55,16 @@ is not optimized for production usage.
 
 ## Experimental self-update
 
-:::warning
-This feature is experimental and untested!
-:::
+:::warning This feature is experimental and untested! :::
 
-The Agama packages on the Live ISO can be automatically updated from the [OBS Devel
-project](https://build.opensuse.org/project/show/systemsmanagement:Agama:Devel).
+The Agama packages on the Live ISO can be automatically updated from the
+[OBS Devel project](https://build.opensuse.org/project/show/systemsmanagement:Agama:Devel).
 
-- Use the `inst.self_update` boot parameter to run the self-update
-  automatically during boot.
+- Use the `inst.self_update` boot parameter to run the self-update automatically during boot.
 - Or run the `agama-self-update` script anytime later in a running Live system.
 
-:::note
-After updating the packages the Agama servers need to be restarted. This will reset all you current
-Agama settings, you will need to start from scratch!
-:::
+:::note After updating the packages the Agama servers need to be restarted. This will reset all you
+current Agama settings, you will need to start from scratch! :::
 
 ## The access password
 
@@ -103,14 +95,13 @@ You can define the password directly on the boot command line. There are two opt
 
 ### Interactive input
 
-You can enter your password during boot in an interactive session. Again, there
-are two options:
+You can enter your password during boot in an interactive session. Again, there are two options:
 
 - Use `live.password_dialog` boot option to start an interactive dialog during the boot process.
   This uses a nice dialog for entering and confirming the password. However, in some situations the
-  full screen dialog might not be displayed correctly or some messages might be displayed over it. In
-  that case you might use the `Ctrl+L` key shortcut to refresh the screen. If it still does not work
-  then try using the other option below.
+  full screen dialog might not be displayed correctly or some messages might be displayed over it.
+  In that case you might use the `Ctrl+L` key shortcut to refresh the screen. If it still does not
+  work then try using the other option below.
 
 - Use `live.password_systemd` boot option to ask for the password in a simple prompt. This is
   similar to the option above, but the advantage is that this solution does not use a full screen
@@ -154,10 +145,8 @@ If you want to remove the password setting from the ISO image then run:
 tagmedia --remove-tag live_password agama.iso
 ```
 
-:::danger
-The image usually already contains some other tags, like the checksums for verifying the medium
-integrity. Do not touch them!
-:::
+:::danger The image usually already contains some other tags, like the checksums for verifying the
+medium integrity. Do not touch them! :::
 
 ### Random password as a fallback
 
@@ -199,10 +188,9 @@ and then enter the password on the command line prompt.
 Alternatively you can use the `openssl passwd` command from the openSSL package. It offers less
 encryption methods but on the other hand it should be basically installed in every system.
 
-:::warning
-By default it uses a weak encryption method (DES or MD5 depending on the OpenSSL version) so you
-should always provide an additional encryption method parameter to select a stronger encryption!
-:::
+:::warning By default it uses a weak encryption method (DES or MD5 depending on the OpenSSL version)
+so you should always provide an additional encryption method parameter to select a stronger
+encryption! :::
 
 To create a SHA512 hash for your password run
 

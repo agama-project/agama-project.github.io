@@ -1,14 +1,14 @@
 # Interactive storage configuration
 
-This section describes some general aspects of Agama regarding storage setup and shows how the web 
+This section describes some general aspects of Agama regarding storage setup and shows how the web
 interface can be used to configure the related settings.
 
 ## The general approach {#approach}
 
 Agama uses the same algorithm and similar configurations for both interactive and unattended
 installations, combining capabilities of the traditional YaST proposal (usually known as Guided
-Setup) and the AutoYaST profile. Those configurations can be specified using the web interface
-or through a JSON-based configuration profile.
+Setup) and the AutoYaST profile. Those configurations can be specified using the web interface or
+through a JSON-based configuration profile.
 
 Agama can work with very detailed descriptions on how the storage setup must look like, analogous to
 the specifications produced by YaST's Expert Partitioner or the AutoYaST profile which both include
@@ -40,28 +40,27 @@ result of applying those settings to the current system.
 
 ![Overview of the storage configuration page](/img/user/storage-overview.png)
 
-The configuration defines which devices to use and how, which new logical devices to create
-(eg. LVM) and where to allocate (or reuse) the file systems of the new operating system.
-The result is currently represented as a list of planned actions and a table representing the final
-state of the affected devices. In the long term, a better alternative to show the result could be
-developed.
+The configuration defines which devices to use and how, which new logical devices to create (eg.
+LVM) and where to allocate (or reuse) the file systems of the new operating system. The result is
+currently represented as a list of planned actions and a table representing the final state of the
+affected devices. In the long term, a better alternative to show the result could be developed.
 
 Every change to any of the configuration options will result in an immediate re-calculation of the
 section that presents the result. As already mentioned, the configuration options are identical to
-the case of unattended installation (see detailed description at the [corresponding
-section](../reference/profile/storage)), although the user interface presents more clearly the
-relationship between those settings and the system being used for installation.
+the case of unattended installation (see detailed description at the
+[corresponding section](../reference/profile/storage)), although the user interface presents more
+clearly the relationship between those settings and the system being used for installation.
 
 ![Selecting a device for installation](/img/user/storage-device.png)
 
-:::warning Under development
-The current user interface does not support all the possibilities that can be expressed by an Agama
-storage configuration. For example, there is not support yet for defining new RAID devices.
+:::warning Under development The current user interface does not support all the possibilities that
+can be expressed by an Agama storage configuration. For example, there is not support yet for
+defining new RAID devices.
 
 If a given configuration is not manageable by the web interface, then the storage section shows a
 message explaining the situation and offers to reset to the default settings. Such an alert is
-always shown if the loaded configuration uses [the legacy AutoYaST
-mode](../reference/profile/storage#unattended-installation-using-the-legacy-autoyast-mode).
+always shown if the loaded configuration uses
+[the legacy AutoYaST mode](../reference/profile/storage#unattended-installation-using-the-legacy-autoyast-mode).
 :::
 
 There are several interactive elements allowing to control several aspects of the installation.
@@ -109,8 +108,8 @@ general action chosen to find space in the disk.
 
 ## Full device without partitions {#direct-disk}
 
-When no partitions are defined on a given disk, it is possible to click "Not configured yet"
-to either define partitions (new or re-used ones) or to indicate the whole disk should be directly
+When no partitions are defined on a given disk, it is possible to click "Not configured yet" to
+either define partitions (new or re-used ones) or to indicate the whole disk should be directly
 formatted as a whole, with no partition table. Of course, if the disk is already directly formatted,
 the existing file system can be simply mounted.
 
@@ -123,13 +122,13 @@ interface.
 
 ## Configuration of partitions needed for booting {#boot}
 
-One of the main features of the Agama storage setup is its ability to automatically determine any extra
-partition that may be needed for booting the new system, like PReP, EFI, Zipl or any other described
-at the [corresponding YaST
-document](https://github.com/yast/yast-storage-ng/blob/master/doc/boot-requirements.md). The
-algorithm can create those partitions or reuse existing ones that are already in the system if the
-user wants to keep them. The behavior of that feature can be tweaked using the corresponding entry
-at the advanced options menu.
+One of the main features of the Agama storage setup is its ability to automatically determine any
+extra partition that may be needed for booting the new system, like PReP, EFI, Zipl or any other
+described at the
+[corresponding YaST document](https://github.com/yast/yast-storage-ng/blob/master/doc/boot-requirements.md).
+The algorithm can create those partitions or reuse existing ones that are already in the system if
+the user wants to keep them. The behavior of that feature can be tweaked using the corresponding
+entry at the advanced options menu.
 
 ![Choosing the disk to create boot partitions](/img/user/storage-boot.png)
 
@@ -149,16 +148,16 @@ adapting the result.
 ## The initial proposal {#initial}
 
 Defining the file systems is essential for installing the system, so Agama always makes an attempt
-with an initial configuration before the user has had any opportunity to specify the settings (in
-an interactive installation) or if the user has omitted the storage configuration (in an unattended
+with an initial configuration before the user has had any opportunity to specify the settings (in an
+interactive installation) or if the user has omitted the storage configuration (in an unattended
 installation).
 
 The current logic to calculate those default settings is intentionally simplistic - just trying to
 install into a single disk with the default product strategy to find space (eg. wiping the content
-of the disk) and using the other default sizes and settings of the product (eg. Btrfs snapshots).
-If that first attempt fails to calculate a valid storage setup and the system contains several
-disks, Agama will try again with the same settings on another disk. Up to a total of five attempts
-on as many different disks.
+of the disk) and using the other default sizes and settings of the product (eg. Btrfs snapshots). If
+that first attempt fails to calculate a valid storage setup and the system contains several disks,
+Agama will try again with the same settings on another disk. Up to a total of five attempts on as
+many different disks.
 
 That is an important difference with YaST, which tries really hard to find a configuration that
 makes the installation possible even if that implies completely modifying the default settings (eg.

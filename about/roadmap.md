@@ -10,25 +10,25 @@ page offers an overview on the current state of the ever-changing development pl
 ## Agama 19 (latest released version)
 
 - Architectural revamp:
-    - New improved version of the HTTP API, to be supported through the whole lifecyle of
-      SLE 16.X and the corresponding openSUSE Leap versions.
-    - More consistent handling of iSCSI and DASD between web UI and JSON profile.
-    - Both official user interfaces (web and command-line) fully adapted to the new HTTP API.
-    - Improvements in the i18n architecture of Agama.
+  - New improved version of the HTTP API, to be supported through the whole lifecyle of SLE 16.X and
+    the corresponding openSUSE Leap versions.
+  - More consistent handling of iSCSI and DASD between web UI and JSON profile.
+  - Both official user interfaces (web and command-line) fully adapted to the new HTTP API.
+  - Improvements in the i18n architecture of Agama.
 - Web-based graphical user interface:
-    - More useful overview page.
-    - Improved navigation.
-    - Option to easily download the current installer configuration.
-    - Possibility to add or remove network connections.
+  - More useful overview page.
+  - Improved navigation.
+  - Option to easily download the current installer configuration.
+  - Possibility to add or remove network connections.
 - Profile-based (unattended) installation:
-    - Possibility to reuse pre-existing LVM structures.
-    - New option to prevent the boot loader update of the persistent RAM (NVRAM).
-    - Support to specify SSH public keys for the non-root user.
+  - Possibility to reuse pre-existing LVM structures.
+  - New option to prevent the boot loader update of the persistent RAM (NVRAM).
+  - Support to specify SSH public keys for the non-root user.
 - Agama-live installation media:
-    - Unified kernel and initramfs location among architectures.
-    - Several improvements in the boot menu.
-    - Dropped the option "Boot from Disk” on all archs except legacy (non-UEFI) x86.
-    - New boot option `live.net_config=1` to interactively configure network settings during boot.
+  - Unified kernel and initramfs location among architectures.
+  - Several improvements in the boot menu.
+  - Dropped the option "Boot from Disk” on all archs except legacy (non-UEFI) x86.
+  - New boot option `live.net_config=1` to interactively configure network settings during boot.
 - Both software management and users management reimplemented to not longer rely on YaST.
 - Some other internal components also rewriten in Rust.
 - Support to install SLE in standard or immutable modes.
@@ -43,24 +43,24 @@ page offers an overview on the current state of the ever-changing development pl
 - Improvements when installing a system in immutable mode.
 - Initial support for different boot loaders like systemd-boot.
 - Web-based graphical user interface:
-    - Possibility to reuse pre-existing LVM volume groups.
-    - Management of non-ethernet network connections like bonding, bridges or VLAN.
-    - Usability fixes for the network configuration.
+  - Possibility to reuse pre-existing LVM volume groups.
+  - Management of non-ethernet network connections like bonding, bridges or VLAN.
+  - Usability fixes for the network configuration.
 - Profile-based (unattended) installation:
-    - Customize APQNs and key type when defining PAES-encrypted volumes.
+  - Customize APQNs and key type when defining PAES-encrypted volumes.
 - Agama-live installation media:
-    - Disable remote web-server access during installation.
+  - Disable remote web-server access during installation.
 
 ## Agama 21 (~ May 15th)
 
 - Dedicated setting to configure remote access to the installed system (SSH, Cockpit, etc.)
 - Compatibility with several boot loaders including at least Grub2 and systemd-boot.
 - Web-based graphical user interface:
-    - Improved software section.
-    - A more guided desktop selection for openSUSE.
-    - More understandable configuration of multi-disk LVM volume groups.
-    - Enhancements in the management of file systems including labels, formatting and mounting
-      options, etc.
+  - Improved software section.
+  - A more guided desktop selection for openSUSE.
+  - More understandable configuration of multi-disk LVM volume groups.
+  - Enhancements in the management of file systems including labels, formatting and mounting
+    options, etc.
 - Profile-based (unattended) installation:
   - More possibilities for the `search` option in the `storage` section.
 
@@ -69,8 +69,8 @@ page offers an overview on the current state of the ever-changing development pl
 - Usability improvements downloading the installer logs and configuration
 - Support for NVMeOF.
 - Profile-based (unattended) installation:
-    - Allow to configure a password for the boot loader.
-    - More convenient encryption settings.
+  - Allow to configure a password for the boot loader.
+  - More convenient encryption settings.
 
 ## Long term plans (end of 2026)
 

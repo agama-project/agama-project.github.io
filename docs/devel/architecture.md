@@ -46,7 +46,6 @@ With this overview in mind, let's have a closer look to each of the components.
 On the server side, Agama is composed by the following pieces:
 
 - **Agama server**: from a user's perspective, this is the core of Agama. It is responsible for:
-
   - Implementing (part of) the installation logic. A good share of this logic is delegated to
     **Agama YaST**.
   - Offering an HTTP and WebSocket (HTTP/WS) interface.
@@ -64,8 +63,8 @@ On the server side, Agama is composed by the following pieces:
 
 On the client side, these are the main components:
 
-- **Web user interface**: Agama's graphical user interface. The **Agama web
-  server** makes this React application available to browsers.
+- **Web user interface**: Agama's graphical user interface. The **Agama web server** makes this
+  React application available to browsers.
 
 - **Command-Line Interface (`agama-cli`)**: it allows interaction with Agama and drives the
   auto-installation process.

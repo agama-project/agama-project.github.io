@@ -12,13 +12,11 @@ Agama. In some cases, you might find a table with the following columns:
 - Agama: name of the Agama element.
 - Comment: any comment or reason about the element.
 
-:::warning
-AutoYaST support is not fully defined yet, which means that we might add support for more sections
-in the future even if we do not plan to do so now. However, we will do our best to keep this
-document up to date.
+:::warning AutoYaST support is not fully defined yet, which means that we might add support for more
+sections in the future even if we do not plan to do so now. However, we will do our best to keep
+this document up to date.
 
-Please, let us know if you miss support for any section.
-:::
+Please, let us know if you miss support for any section. :::
 
 ## add-on
 
@@ -140,7 +138,8 @@ This section is supported.
 
 ### networking/interfaces[]
 
-This section is supported. It corresponds to Agama `connections`, but the format is not exactly the same.
+This section is supported. It corresponds to Agama `connections`, but the format is not exactly the
+same.
 
 | AutoYaST                       | Supported | Agama                                | Notes                                            |
 | ------------------------------ | --------- | ------------------------------------ | ------------------------------------------------ |
@@ -214,7 +213,8 @@ This section is supported. It corresponds to Agama `connections`, but the format
 
 ## proxy
 
-There are plans to support this section in the future. Meanwhile set the proxy using the kernels' command line.
+There are plans to support this section in the future. Meanwhile set the proxy using the kernels'
+command line.
 
 ## scripts
 

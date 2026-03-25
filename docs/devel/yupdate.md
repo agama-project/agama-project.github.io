@@ -5,8 +5,9 @@ sidebar_position: 8
 # Patching Agama Live ISO
 
 The Agama installer allows patching itself directly from the GitHub sources or from your local Git
-checkout using the [yupdate
-script](https://github.com/yast/yast-installation/blob/master/bin/yupdate). See more details in the
+checkout using the
+[yupdate script](https://github.com/yast/yast-installation/blob/master/bin/yupdate). See more
+details in the
 [yupdate documentation](https://github.com/yast/yast-installation/blob/master/doc/yupdate.md).
 
 This patching only works when running from a live medium. You can also patch the standard YaST
@@ -14,10 +15,8 @@ modules included in the installer if needed.
 
 The goal is to provide an easy way for testing fixes or new features for the end users or testers.
 
-:::warning
-This guide does not cover patching the Rust code. Given the amount of disk space that the compiler
-takes, you must build the binary on a different machine.
-:::
+:::warning This guide does not cover patching the Rust code. Given the amount of disk space that the
+compiler takes, you must build the binary on a different machine. :::
 
 ## Patching from GitHub
 
@@ -82,11 +81,9 @@ means the configured settings will be lost.
 
 To activate the changes in the web front-end you need to reload the page in the browser.
 
-:::warning
-_In the Firefox browser you need to use the `Ctrl+F5` combination for reloading the page,
+:::warning _In the Firefox browser you need to use the `Ctrl+F5` combination for reloading the page,
 this uses full reload ignoring the cache. Plain `F5` uses cached files and will not reflect the
-update on the server!_
-:::
+update on the server!_ :::
 
 In some special cases you might need to do some additional actions manually, the update script might
 not handle all corner cases.

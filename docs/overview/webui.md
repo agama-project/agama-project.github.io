@@ -9,10 +9,12 @@ the installation workflow.
 
 ## Product selection {#product}
 
-Agama allows installing several SUSE and openSUSE-based distributions. The [openSUSE-based
-image](/download) image includes [Tumbleweed](https://www.opensuse.org/#Tumbleweed),
-[Leap 16.0 Beta](https://get.opensuse.org/leap/16.0/), [Leap Micro 6.2 Beta](https://en.opensuse.org/Portal:Leap_Micro), [Slowroll](https://en.opensuse.org/Portal:Slowroll), [Kalpa](https://kalpadesktop.org/) and [openSUSE Micro
-OS](https://get.opensuse.org/microos/).
+Agama allows installing several SUSE and openSUSE-based distributions. The
+[openSUSE-based image](/download) image includes [Tumbleweed](https://www.opensuse.org/#Tumbleweed),
+[Leap 16.0 Beta](https://get.opensuse.org/leap/16.0/),
+[Leap Micro 6.2 Beta](https://en.opensuse.org/Portal:Leap_Micro),
+[Slowroll](https://en.opensuse.org/Portal:Slowroll), [Kalpa](https://kalpadesktop.org/) and
+[openSUSE Micro OS](https://get.opensuse.org/microos/).
 
 It is noteworthy to mention that the product selection does not only determine which software we
 will install, but it may affect other aspects like the system's partitioning.
@@ -20,10 +22,9 @@ will install, but it may affect other aspects like the system's partitioning.
 ![Product selection screen offering openSUSE Leap, MicroOS and
 Tumbleweed](/img/user/product-selection.png)
 
-Some products may offer different installation modes (for instance, a "standard" or an
-"immutable" mode, the latter providing an **immutable OS** with **transactional updates**). If the
-selected product supports multiple modes, choosing one is mandatory to proceed with the
-installation.
+Some products may offer different installation modes (for instance, a "standard" or an "immutable"
+mode, the latter providing an **immutable OS** with **transactional updates**). If the selected
+product supports multiple modes, choosing one is mandatory to proceed with the installation.
 
 You can change the product later if you change your mind, but you should carefully check the
 configuration as some values can be reset.
@@ -63,8 +64,8 @@ use of the freedom of movements provided by the Agama interface.
 ## Authentication {#authentication}
 
 Most likely you need a mechanism to access the system once it is installed. And we already know
-Agama forces us to setup some authentication before proceeding with the installation. So let's
-start by inspecting that area. 
+Agama forces us to setup some authentication before proceeding with the installation. So let's start
+by inspecting that area.
 
 There Agama offers you to set up a `root` authentication method (a password or a public key) and/or
 to create a dedicated user. As mentioned, it is mandatory to do any before starting the
@@ -79,22 +80,21 @@ take a look to the different areas of the Agama interface before proceeding.
 ## Network {#network}
 
 Agama makes it easy to adjust your network configuration. It allows setting up wired and wireless
-devices, specifying the mode (DHCP/manual), IP addresses, name servers, etc. Advanced
-connections types, like bridges or bonds, does not have support in the user interface yet. However,
-it is a matter of time that they get added, given that Agama supports many of them during an
+devices, specifying the mode (DHCP/manual), IP addresses, name servers, etc. Advanced connections
+types, like bridges or bonds, does not have support in the user interface yet. However, it is a
+matter of time that they get added, given that Agama supports many of them during an
 [unattended installation](./unattended.md) or using the [command-line interface](./cli.md).
 
-:::warning Network changes are applied instantly
-Beware that network configuration changes are applied instantly. So you must be careful when
-adjusting the network configuration on a remote installation.
-:::
+:::warning Network changes are applied instantly Beware that network configuration changes are
+applied instantly. So you must be careful when adjusting the network configuration on a remote
+installation. :::
 
 ![Network settings including wired and wireless devices](/img/user/network.png)
 
 ## Storage {#storage}
 
-Setting up the different file systems and their corresponding logical devices -like partitions,
-LVM volumes or RAIDs- is one of the most complex aspects of the installation.
+Setting up the different file systems and their corresponding logical devices -like partitions, LVM
+volumes or RAIDs- is one of the most complex aspects of the installation.
 
 The starting point at the Agama interface is pretty simple, you can choose the disk to install into
 and decide what to do in order to find space for the new system in that disk, like deleting or
@@ -102,16 +102,18 @@ shrinking the current partitions.
 
 ![Overview of the storage configuration page](/img/user/storage-overview.png)
 
-But Agama's storage user interface offers many more options that are described on its own [separate
-document](/docs/user/guides/storage). Nevertheless, similar to the case of the **Network** area
-described [above](#network), the full Agama potential (like creating software MD RAIDs) is currently
-only accesible using the unattended installation or the command-line interface.
+But Agama's storage user interface offers many more options that are described on its own
+[separate document](/docs/user/guides/storage). Nevertheless, similar to the case of the **Network**
+area described [above](#network), the full Agama potential (like creating software MD RAIDs) is
+currently only accesible using the unattended installation or the command-line interface.
 
 ## Registration {#registration}
 
 If a product must be registered (e.g., SUSE Linux Enterprise Server 16), then a **Registration**
 section is offered. In that section, the product can be registered through the SUSE Customer Center
-server or specifying a custom registration server ([RMT](https://documentation.suse.com/en-us/sles/15-SP7/html/SLES-all/rmt-overview.html) or SCC proxy).
+server or specifying a custom registration server
+([RMT](https://documentation.suse.com/en-us/sles/15-SP7/html/SLES-all/rmt-overview.html) or SCC
+proxy).
 
 ![Product registration](/img/user/registration.png)
 

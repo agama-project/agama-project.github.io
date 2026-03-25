@@ -3,7 +3,7 @@ date: 2023-12-22 12:00:00 +00:00
 title: Releasing version 7
 description: Year 2023 comes to an end with a new version of our next-generation installer
 tags:
-- release
+  - release
 ---
 
 It's vacation season in Europe and most of the YaST development team will be busy for a couple of
@@ -13,9 +13,9 @@ release another prototype of Agama, so you can have fun testing it and giving us
 
 {/* truncate */}
 
-Meet Agama 7 and its corresponding [Agama Live ISO
-images](https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/) for
-testing.
+Meet Agama 7 and its corresponding
+[Agama Live ISO images](https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/)
+for testing.
 
 ## Localization settings for the target system {#l10n}
 
@@ -35,10 +35,10 @@ But what happens when the browser you use to connect to Agama is not in a remote
 configured but is the full-screen browser offered by the Agama Live testing image? Don't worry; your
 localization needs are also covered.
 
-As you can see in the description of [this pull
-request](https://github.com/agama-project/agama/pull/917), you can use the Agama sidebar to change the
-keyboard layout if the browser is running in the same system executing Agama, as is the case of
-Agama Live.
+As you can see in the description of
+[this pull request](https://github.com/agama-project/agama/pull/917), you can use the Agama sidebar
+to change the keyboard layout if the browser is running in the same system executing Agama, as is
+the case of Agama Live.
 
 We plan to create a proper welcome screen for users who don't know enough English to reach that
 sidebar. Meanwhile we hope the current options will be enough to use Agama in your preferred
@@ -71,9 +71,9 @@ can use the very same testing image to install openSUSE Tumbleweed and openSUSE 
 In Agama 5 we introduced a software patterns selector to allow the user to customize, to some
 extent, which software to install. It was just a prototype but it unveiled some troubles:
 
-* There are way too many patterns and it is easy to get lost.
-* As some products share the same repositories (i.e., Tumbleweed and MicroOS), you might mix
-patterns from both products.
+- There are way too many patterns and it is easy to get lost.
+- As some products share the same repositories (i.e., Tumbleweed and MicroOS), you might mix
+  patterns from both products.
 
 To mitigate those problems, Agama displays now a curated list of patterns for each product. However,
 the current implementation is still a prototype, as we plan to refine the approach and add more
@@ -83,8 +83,8 @@ features, like proper conflict handling.
 
 As you may know, some SUSE products are expected to be registered in the SUSE Customer Center using
 a product key. Agama now supports this use case, although with some limitations. The most relevant
-one is that it does not support any proxy of the SUSE Customer Center (e.g., [Repository Mirroring
-Tool](https://documentation.suse.com/sles/15-SP5/single-html/SLES-rmt/index.html)).
+one is that it does not support any proxy of the SUSE Customer Center (e.g.,
+[Repository Mirroring Tool](https://documentation.suse.com/sles/15-SP5/single-html/SLES-rmt/index.html)).
 
 Another constraint of the current implementation is that it does not support products with optional
 registration.
@@ -93,11 +93,11 @@ However, there are plans to remove those limitations sooner than later.
 
 ## More customization options {#storage}
 
-The storage area got its share of regular enhancements too. The first noticeable change is that
-you can tell Agama how to make space to install the system. Do you want to remove the current
-content and use the whole disk? Or do you prefer to shrink existing partitions to make space? Or
-would you like to use only the available space? We expect these options to cover most of the use
-cases, although we plan to add support for a more fine-grained approach.
+The storage area got its share of regular enhancements too. The first noticeable change is that you
+can tell Agama how to make space to install the system. Do you want to remove the current content
+and use the whole disk? Or do you prefer to shrink existing partitions to make space? Or would you
+like to use only the available space? We expect these options to cover most of the use cases,
+although we plan to add support for a more fine-grained approach.
 
 ![File system type selector](../static/img/blog/2023-12-22/file-system-type-selector.png)
 
@@ -120,25 +120,25 @@ connection.
   "id": "Bonding Connection 1",
   "interface": "bond",
   "bond": {
-      "ports": ["eth0", "eth1"],
-      "mode": "active-backup",
-      "options": "primary=eth1"
+    "ports": ["eth0", "eth1"],
+    "mode": "active-backup",
+    "options": "primary=eth1"
   }
 }
 ```
 
 ## Other improvements {#other}
 
-* Preserve the installation logs for easier error reporting and debugging.
-* Make it possible to translate the messages in the installation progress screen. Our superb team of
-translators is [already working on them](https://l10n.opensuse.org/projects/agama/).
-* Several accessibility improvements in the web user interface by adding `aria-label`,
-`aria-live-region` and `aria-busy` attributes where needed.
+- Preserve the installation logs for easier error reporting and debugging.
+- Make it possible to translate the messages in the installation progress screen. Our superb team of
+  translators is [already working on them](https://l10n.opensuse.org/projects/agama/).
+- Several accessibility improvements in the web user interface by adding `aria-label`,
+  `aria-live-region` and `aria-busy` attributes where needed.
 
 ## The year of Agama {#future}
 
-Agama 7 is the first prototype we could consider to be "functional enough". It finally covers all the
-areas we consider as essencial during the installation of the system: localization, network
+Agama 7 is the first prototype we could consider to be "functional enough". It finally covers all
+the areas we consider as essencial during the installation of the system: localization, network
 configuration, storage setup, authentication basis (including the optional creation of a first user)
 and an intentionally simplistic selection of the software to install.
 
@@ -146,10 +146,10 @@ Of course, all those areas need to evolve much further and that's exactly the go
 year - take Agama to the next level in which it could even replace YaST for some scenarios and
 distributions.
 
-Your contributions and opinions are an important element for that. So don't hesitate to contact
-the YaST team at the [YaST Development mailing
-list](https://lists.opensuse.org/archives/list/yast-devel@lists.opensuse.org/), our `#yast`
-channel at [Libera.chat](https://libera.chat/) or the [Agama project at
-GitHub](https://github.com/agama-project/agama).
+Your contributions and opinions are an important element for that. So don't hesitate to contact the
+YaST team at the
+[YaST Development mailing list](https://lists.opensuse.org/archives/list/yast-devel@lists.opensuse.org/),
+our `#yast` channel at [Libera.chat](https://libera.chat/) or the
+[Agama project at GitHub](https://github.com/agama-project/agama).
 
 See you again in 2024!

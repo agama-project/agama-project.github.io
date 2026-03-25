@@ -26,8 +26,8 @@ current versions of Agama activate the corresponding subsystems.
 
 ## Conditional activation
 
-If multipath activation is not enforced with the mentioned boot argument, then Agama will always
-try to detect whether the system contains any multipath device. If that is the case, Agama will ask
+If multipath activation is not enforced with the mentioned boot argument, then Agama will always try
+to detect whether the system contains any multipath device. If that is the case, Agama will ask
 whether multipath must be activated. If no multipath devices are detected, Agama will proceed
 without asking. Bear in mind that detection of multipath devices is not 100% reliable.
 

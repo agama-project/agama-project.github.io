@@ -5,8 +5,8 @@ sidebar_position: 9
 # Storage tips & tricks
 
 Agama relies on yast2-storage-ng for the management of storage devices such as disks, partitions,
-LVM, RAID, etc. Thus, the [environment
-variables](https://github.com/yast/yast-storage-ng/blob/master/src/lib/y2storage/storage_env.rb)
+LVM, RAID, etc. Thus, the
+[environment variables](https://github.com/yast/yast-storage-ng/blob/master/src/lib/y2storage/storage_env.rb)
 honored by that YaST component can be used to modify its behavior.
 
 That is especially useful for development purposes. In particular, setting the following two

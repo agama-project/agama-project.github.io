@@ -32,7 +32,8 @@ The following fields are supported:
 
 - `password`: `root` password, hashed or not depending on `hashedPassword`.
 - `hashedPassword`: whether the `password` is hashed (`true`) or not (`false` or undefined).
-- `sshPublicKey`: SSH public key to be copied to the `/root/.ssh/authorized_keys` file. It can be single string or array of strings (keys).
+- `sshPublicKey`: SSH public key to be copied to the `/root/.ssh/authorized_keys` file. It can be
+  single string or array of strings (keys).
 - `sshPublicKeys`: an alias for `sshPublicKey`, the behavior is exactly the same.
 
 ## First user
@@ -56,7 +57,8 @@ This section includes the following fields:
 - `fullName`: user's full name.
 - `password`: `root` password, hashed or not depending on `hashedPassword`.
 - `hashedPassword`: whether the `password` is hashed (`true`) or not (`false` or undefined).
-- `sshPublicKey`: SSH public key to be copied to the `/home/<userName>/.ssh/authorized_keys` file. It can be single string or array of strings (keys).
+- `sshPublicKey`: SSH public key to be copied to the `/home/<userName>/.ssh/authorized_keys` file.
+  It can be single string or array of strings (keys).
 - `sshPublicKeys`: an alias for `sshPublicKey`, the behavior is exactly the same.
 
 ## Encrypted passwords

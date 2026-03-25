@@ -6,18 +6,15 @@ easier to connect to an Agama instance using a predefined hostname.
 
 This document explains how this feature works and offers a few hints for fix potential problems.
 
-:::warning
-Do not use the `.local` hostnames in untrusted networks (like public WiFi networks, shared
-networks), it is a security risk. An attacker can easily send malicious responses for the `.local`
-hostname resolutions and point you to a wrong Agama instance which could for example steal your root
-password!
-:::
+:::warning Do not use the `.local` hostnames in untrusted networks (like public WiFi networks,
+shared networks), it is a security risk. An attacker can easily send malicious responses for the
+`.local` hostname resolutions and point you to a wrong Agama instance which could for example steal
+your root password! :::
 
 ## Firewall Configuration
 
-If you cannot connect to a server using the `.local` domain then maybe the
-firewall is blocking the traffic. Then you need to enable the mDNS traffic using
-these commands:
+If you cannot connect to a server using the `.local` domain then maybe the firewall is blocking the
+traffic. Then you need to enable the mDNS traffic using these commands:
 
 ```shell
 # enable the mDNS traffic in the current run

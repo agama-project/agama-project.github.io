@@ -244,9 +244,9 @@ Many sections in the profile are used to describe how some devices must be creat
 deleted. In the last two cases, it's important to match the description with one or more devices
 from the system.
 
-If a description matches several devices, the same operations will be applied to
-all. That's useful in several situations like applying the same partitioning schema to several disks
-or deleting all partitions of a disk that match a given criteria.
+If a description matches several devices, the same operations will be applied to all. That's useful
+in several situations like applying the same partitioning schema to several disks or deleting all
+partitions of a disk that match a given criteria.
 
 Matching is performed using a `search` subsection like described below. By default, all devices in
 the scope fitting the conditions will be matched. The number of device matches can be limited using
@@ -289,9 +289,9 @@ software RAID devices and a `search` section inside the `partitions` subsection 
 description will only match partitions of RAIDs that have matched the conditions of the most
 external `search`.
 
-A given device can never match two different sections of the Agama profile. When several sections
-at the same level contain a search subsection, devices are matched in the order the sections appear
-on the profile.
+A given device can never match two different sections of the Agama profile. When several sections at
+the same level contain a search subsection, devices are matched in the order the sections appear on
+the profile.
 
 ```json
 "storage": {
@@ -456,24 +456,24 @@ taking into account the available spaces and all the other specified sizes.
 
 It is also possible to specify "current" as a minimum or maximum size limit for partitions and
 logical volumes that already exist in the system (so "current" can only be used for device
-specifications that contain a `search` section). The usage of "current" and how it affects
-resizing the corresponding devices is explained at a separate section below.
+specifications that contain a `search` section). The usage of "current" and how it affects resizing
+the corresponding devices is explained at a separate section below.
 
 If the size is completely omitted for a device that already exists (ie. combined with `search`),
 then Agama would act as if both min and max limits would have been set to "current" (which implies
 the partition or logical volume will not be resized).
 
-If the size is omitted for a device that will be created, Agama can determine the size limits
-as long as the device contains a `filesystem` entry specifying a mount point. In that case, Agama
-will use the settings of the product to set the size limits. In Agama Jargon, the "product" is the
+If the size is omitted for a device that will be created, Agama can determine the size limits as
+long as the device contains a `filesystem` entry specifying a mount point. In that case, Agama will
+use the settings of the product to set the size limits. In Agama Jargon, the "product" is the
 operating system being installed. And each product specifies the default size ranges for its
 relevant file systems like "/", "swap", "/home", etc.
 
 ## Partitions Needed for Booting
 
-Using a `boot` entry makes it possible to configure whether (and where, using an alias) Agama
-should calculate and create the extra partitions needed for booting. If the device is not
-specified, Agama will take the location of the root file system as a reference.
+Using a `boot` entry makes it possible to configure whether (and where, using an alias) Agama should
+calculate and create the extra partitions needed for booting. If the device is not specified, Agama
+will take the location of the root file system as a reference.
 
 ```json
 "storage": {
@@ -519,8 +519,8 @@ It is even possible to express some combinations of the above, like "try to shri
 but proceed to delete it if shrinking it is not enough".
 
 Deletion can be achieved with the corresponding `delete` flag or the alternative `deleteIfNeeded`.
-If any of those flags are active for a partition, it makes no sense to specify any other usage
-(like declaring a file system on it).
+If any of those flags are active for a partition, it makes no sense to specify any other usage (like
+declaring a file system on it).
 
 The following example deletes the partition with the number 1 (according to the partition name) in
 all cases and, if needed, keeps deleting other partitions as needed to make space for the new
@@ -576,8 +576,8 @@ found) devices if `size` is completely omitted.
 ```
 
 Other combinations can be used to specify how a device could be resized if possible. See the
-following examples with explanatory filesystem labels. Note the condition `fsLabel` is actually
-not implemented yet.
+following examples with explanatory filesystem labels. Note the condition `fsLabel` is actually not
+implemented yet.
 
 ```json
 "storage": {

@@ -36,11 +36,11 @@ Beware that which products are available depend on the installation image you ar
 
 ## Product mode
 
-Some products support different installation modes. The mode can change how the product behaves,
-for instance, enabling an **immutable OS** with **transactional updates**.
+Some products support different installation modes. The mode can change how the product behaves, for
+instance, enabling an **immutable OS** with **transactional updates**.
 
-The supported values depend on the product. For instance, `SLES` supports `standard` and
-`immutable` modes.
+The supported values depend on the product. For instance, `SLES` supports `standard` and `immutable`
+modes.
 
 In an unattended installation profile, the `mode` key is optional for backward compatibility; if
 omitted, the product will use its traditional default behavior. However, it is preferred to

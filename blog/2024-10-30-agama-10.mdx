@@ -58,6 +58,7 @@ EDITOR=joe agama config edit
 :::tip
 
 You can install more editors using the usual `zypper install` command. But be careful, see the
+
 <a href="#free-space-warning">warning</a> below.
 
 :::
@@ -100,8 +101,8 @@ Delete a partition only when needed:
 }
 ```
 
-See more details in the [auto_storage](
-https://github.com/openSUSE/agama/blob/master/doc/auto_storage.md) documentation.
+See more details in the
+[auto_storage](https://github.com/openSUSE/agama/blob/master/doc/auto_storage.md) documentation.
 
 ## Installation repository URL {#installation-url}
 
@@ -161,10 +162,10 @@ storing the new or updated files otherwise the Agama installer might crash later
 :::
 
 Technically it was a bit tricky because when building the ISO image Kiwi computes the file system
-size automatically and does not allow to set a custom value. As a workaround we create a big [sparse
-file](https://en.wikipedia.org/wiki/Sparse_file) during the image build which just takes a tiny
-fraction of its real size so the final ISO size is basically the same. To free even some more space
-the file is automatically deleted when booting the Live ISO.
+size automatically and does not allow to set a custom value. As a workaround we create a big
+[sparse file](https://en.wikipedia.org/wiki/Sparse_file) during the image build which just takes a
+tiny fraction of its real size so the final ISO size is basically the same. To free even some more
+space the file is automatically deleted when booting the Live ISO.
 
 ### Puppeteer {#puppeteer}
 
@@ -191,10 +192,10 @@ frontend. This should avoid possible inconsistencies between those two user inte
 ## Conclusion {#conclusion}
 
 Your contributions and opinions are important sources for feedback about the new release. So don't
-hesitate to contact the YaST team at the [YaST Development mailing
-list](https://lists.opensuse.org/archives/list/yast-devel@lists.opensuse.org/), our `#yast` channel
-at [Libera.chat](https://libera.chat/) or the [Agama project at
-GitHub](https://github.com/agama-project/agama) if you find any problem or have an idea for
-improvement.
+hesitate to contact the YaST team at the
+[YaST Development mailing list](https://lists.opensuse.org/archives/list/yast-devel@lists.opensuse.org/),
+our `#yast` channel at [Libera.chat](https://libera.chat/) or the
+[Agama project at GitHub](https://github.com/agama-project/agama) if you find any problem or have an
+idea for improvement.
 
 Have a lot of fun!

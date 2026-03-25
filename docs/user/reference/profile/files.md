@@ -28,9 +28,9 @@ file from), the permissions, the owner and the destination of the file.
 If you use the `inst.auto` boot option to specify the URL of the profile, any relative URL will use
 the URL of the profile as its base.
 
-However, loading the profile using the `agama config load` will not work in the same way.
-Check the [Manually loading a profile](../../profile/working_with_profiles#manually-loading-a-profile)
-section for further information.
+However, loading the profile using the `agama config load` will not work in the same way. Check the
+[Manually loading a profile](../../profile/working_with_profiles#manually-loading-a-profile) section
+for further information.
 
 :::
 

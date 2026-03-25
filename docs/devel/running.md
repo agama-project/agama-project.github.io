@@ -35,9 +35,8 @@ sudo journalctl -u agama-web-server
 ```
 
 Another alternative is to run source checkout inside container so system is not affected by doing
-testing run beside real actions really done by installer. See more details [in the
-documentation](./testing_using_container.md).
+testing run beside real actions really done by installer. See more details
+[in the documentation](./testing_using_container.md).
 
-:::warning
-To do: integrate the information about running the proxy web server (`AGAMA_SERVER` argument).
-:::
+:::warning To do: integrate the information about running the proxy web server (`AGAMA_SERVER`
+argument). :::

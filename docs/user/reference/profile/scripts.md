@@ -14,8 +14,9 @@ This section describes how to specify a script and goes through some use-cases.
 
 :::note `inst.script`
 
-For a more general script feature wrapping the whole installation process, see [Fully scripted
-installation](/docs/overview/unattended#fully-scripted-installation) at the starter's guide.
+For a more general script feature wrapping the whole installation process, see
+[Fully scripted installation](/docs/overview/unattended#fully-scripted-installation) at the
+starter's guide.
 
 :::
 
