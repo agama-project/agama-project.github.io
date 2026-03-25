@@ -162,11 +162,19 @@ import { Since } from "@site/src/components/Badge"; ... `foo` <Since version="16
 option for ...
 ```
 
-## Formatting the code
+## Formatting
 
-For consistency reasons, it is a good idea to use a code formatter like
-[prettier](https://prettier.io/). To get the code formatted, run the `fmt` script:
+For consistency reasons, we use [prettier](https://prettier.io/) to format the Markdown files. You
+can automatically format them running the following command:
 
 ```
 $ yarn fmt
 ```
+
+If you only want to check whether the format is OK, you can use:
+
+```
+$ yarn fmt:check
+```
+
+Our Continuous Integration runs that command to make sure the Markdown files are properly formatted.
