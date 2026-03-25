@@ -12,9 +12,8 @@ To set up the network, you can:
 - Specify the network configuration at boot time, so it is set up even before Agama starts.
 - Define the configuration as part of the Agama profile.
 
-In some cases, you might also want to combine both approaches. A typical scenario is when
-you do not have a DHCP server and you need to set up the network so Agama can fetch the
-profile.
+In some cases, you might also want to combine both approaches. A typical scenario is when you do not
+have a DHCP server and you need to set up the network so Agama can fetch the profile.
 
 The rest of this section explains how to configure the network using an Agama profile. For the boot
 options, please check the [boot options section](../boot_options).
@@ -51,16 +50,16 @@ If you are familiar with _[NetworkManager][NM]_, the connection concept will not
 
 [NM]: https://www.networkmanager.dev/docs/
 
-For each type of connection, you might need a different set of fields. However, many
-of them are common to any type of connection. Those fields include the connection identifier, the
-IPv4/IPv6 configuration, some device parameters, etc.
+For each type of connection, you might need a different set of fields. However, many of them are
+common to any type of connection. Those fields include the connection identifier, the IPv4/IPv6
+configuration, some device parameters, etc.
 
 - `id`: Human-readable unique connection identifier.
 - `method4` and `method6`: IPv4 and IPv6 configuration method. Possible values are `auto` (usually
   DHCP), `manual`, `link-local`, and `disabled` (default).
-- `interface`: The name of the network interface to bind to this connection. If it is not
-  specified, the connection could be applied to any device if there is no conflict with other match
-  settings like the `macAddress` or the `match` fields.
+- `interface`: The name of the network interface to bind to this connection. If it is not specified,
+  the connection could be applied to any device if there is no conflict with other match settings
+  like the `macAddress` or the `match` fields.
 - `macAddress`: The MAC address of the network interface to bind to this connection.
 - `customMacAddress`: MAC address to assign. It can be a MAC address or one of the following values:
   `preserve`, `permanent`, `random`, or `stable`.
@@ -81,11 +80,12 @@ to add a `bridge` section; for a Wi-Fi connection, you need a `wireless` section
 
 ### Device matching
 
-While the `interface` or the `macAddress` fields are used to match a specific interface
-based on its name or MAC address, the `match` section allows you to match multiple
-devices using name, driver, PCI, or kernel criteria.
+While the `interface` or the `macAddress` fields are used to match a specific interface based on its
+name or MAC address, the `match` section allows you to match multiple devices using name, driver,
+PCI, or kernel criteria.
 
-This is based on the _NetworkManager_ `match` setting (see the [NetworkManager documentation](https://networkmanager.dev/docs/api/latest/nm-settings-dbus.html)).
+This is based on the _NetworkManager_ `match` setting (see the
+[NetworkManager documentation](https://networkmanager.dev/docs/api/latest/nm-settings-dbus.html)).
 
 For instance, you can match a device by its name:
 
@@ -138,8 +138,8 @@ Or by its PCI path:
 }
 ```
 
-You can also use wildcards (globs) in the values. For example, to match any
-interface starting with `eth` or `ens`:
+You can also use wildcards (globs) in the values. For example, to match any interface starting with
+`eth` or `ens`:
 
 ```jsonnet
 {
@@ -222,15 +222,15 @@ The `bridge` section can include:
   [Spanning Tree Protocol (STP)](https://es.wikipedia.org/wiki/Spanning_Tree_Protocol) should be
   enabled.
 - `forwardDelay`: STP forward delay, in seconds.
-- `priority`: STP priority. It is represented by a number equal to or greater than zero. Lower values
-  are "better".
+- `priority`: STP priority. It is represented by a number equal to or greater than zero. Lower
+  values are "better".
 - `maxAge`: STP maximum message age, in seconds.
 - `helloTime`: STP hello time, in seconds.
 
 ### Bonding
 
-To create a bond, you need to include a `bond` section which, among other optional settings, includes
-the list of ports to connect.
+To create a bond, you need to include a `bond` section which, among other optional settings,
+includes the list of ports to connect.
 
 ```jsonnet
 {
@@ -294,9 +294,9 @@ To create a VLAN, you need to include a `vlan` section supporting the following 
 
 ## Deleting network connections
 
-As mentioned in previous sections, the `status` field allows bringing a connection `up`, `down`, or even `remove`
-an existing one. It might be useful to delete an existing connection before creating a new
-one, especially when it is already applied to a specific interface.
+As mentioned in previous sections, the `status` field allows bringing a connection `up`, `down`, or
+even `remove` an existing one. It might be useful to delete an existing connection before creating a
+new one, especially when it is already applied to a specific interface.
 
 ```jsonnet
 {

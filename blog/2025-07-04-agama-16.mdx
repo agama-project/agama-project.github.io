@@ -21,8 +21,8 @@ In particular the software section of the configuration schema received a couple
 in this version, like the ability to define additional repositories and the possibility to ignore
 optional dependencies, installing only those packages that are strictly required.
 
-See the [documentation of the corresponding section](/docs/user/reference/profile/software) to
-learn more about the new `extraRepositories` and `onlyRequired` configuration options.
+See the [documentation of the corresponding section](/docs/user/reference/profile/software) to learn
+more about the new `extraRepositories` and `onlyRequired` configuration options.
 
 ## Better match of storage devices {#search}
 
@@ -54,22 +54,22 @@ biggest disks in the system.
 }
 ```
 
-See more examples of the syntax at the description of the corresponding [pull
-request](https://github.com/agama-project/agama/pull/2474).
+See more examples of the syntax at the description of the corresponding
+[pull request](https://github.com/agama-project/agama/pull/2474).
 
 ## Reporting installation status via IPMI {#ipmi}
 
-The features discussed previously allow more flexibility for unattended and massive deployments.
-But in addition to configuring the installation process, it is also important to be able to monitor
-its progress. For that purpose, Agama 16 introduces status reporting via IPMI ([Intelligent Platform
-Management Interface](https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface)), a
-set of standard interfaces that, among many other things, allow system administrators to install
+The features discussed previously allow more flexibility for unattended and massive deployments. But
+in addition to configuring the installation process, it is also important to be able to monitor its
+progress. For that purpose, Agama 16 introduces status reporting via IPMI
+([Intelligent Platform Management Interface](https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface)),
+a set of standard interfaces that, among many other things, allow system administrators to install
 operating systems remotely.
 
 Now Agama can report to the BMC (Baseboard Management Controller) the status of the installation
 process like STARTED, FINISHED or FAILED. Of course, Agama's own monitoring mechanisms can
-additionally be used to get more fine-grained information that goes beyond the intentionally
-generic IPMI specification.
+additionally be used to get more fine-grained information that goes beyond the intentionally generic
+IPMI specification.
 
 ## Reorganization of the Agama commands {#cli}
 
@@ -77,10 +77,10 @@ And talking about Agama tools for monitoring and configuring the installation, w
 was time for a consistency check on our commands, especially `agama config` and `agama profile`.
 Compared to previous versions of Agama:
 
-  - `agama profile import` is replaced by `agama config generate | agama config load`.
-  - `agama profile evaluate` and `agama profile autoyast` are replaced by `agama config generate`.
-  - `agama profile validate` is renamed to `agama config validate`.
-  - All sub-commands use stdio in a consistent way, using a new `--output` option when needed.
+- `agama profile import` is replaced by `agama config generate | agama config load`.
+- `agama profile evaluate` and `agama profile autoyast` are replaced by `agama config generate`.
+- `agama profile validate` is renamed to `agama config validate`.
+- All sub-commands use stdio in a consistent way, using a new `--output` option when needed.
 
 See more information at the [command-line reference](https://agama-project.github.io/docs/user/cli).
 
@@ -121,7 +121,7 @@ installed system.
 ![Configuring network connections](../static/img/blog/2025-07-04/network.png)
 
 Moreover, if Agama detects that no network will be explicitly configured by the installer at the
-target system, it now alerts the user about the implications. 
+target system, it now alerts the user about the implications.
 
 ## More friendly experience for remote installations {#reboot}
 
@@ -131,8 +131,8 @@ a small usability problem in that scenario. At the end of the process, Agama off
 to reboot into the new system. But the users received no visual feedback after clicking that
 "reboot" button.
 
-That is fixed now, see the corresponding [pull
-request](https://github.com/agama-project/agama/pull/2462) if you are interested in the most
+That is fixed now, see the corresponding
+[pull request](https://github.com/agama-project/agama/pull/2462) if you are interested in the most
 intrincate technical details.
 
 ![Page displayed while the system reboots](../static/img/blog/2025-07-04/reboot.png)
@@ -163,8 +163,8 @@ environment to execute Agama. So we decided to invest a bit into it.
 First of all, we introduced the option to boot the Live ISO without executing Agama or any graphical
 session. We did it with the intention to mitigate the pain of those users missing the classical
 Rescue System that is traditionally integrated into the openSUSE installation images. But the new
-option is far from being a full replacement for that special system, check the corresponding [pull
-request](https://github.com/agama-project/agama/pull/2403) for more information.
+option is far from being a full replacement for that special system, check the corresponding
+[pull request](https://github.com/agama-project/agama/pull/2403) for more information.
 
 ![The new Rescue System option](../static/img/blog/2025-07-04/grub.png)
 
@@ -183,7 +183,7 @@ Enterprise 16.0. And for that we need the installation media to be tested in as 
 possible. Especially with that recent switch from X11 to Wayland. So do not hesitate to test the
 [latest development version](https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/).
 
-If you got questions or want to get involved further, please contact us at the [Agama project at
-GitHub](https://github.com/agama-project/agama) and our `#yast` channel at
+If you got questions or want to get involved further, please contact us at the
+[Agama project at GitHub](https://github.com/agama-project/agama) and our `#yast` channel at
 [Libera.chat](https://libera.chat/). Of course, we will also keep you updated on this blog. Stay
 tuned!

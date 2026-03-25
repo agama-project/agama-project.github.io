@@ -7,8 +7,8 @@ tags:
 
 In our [previous post](2025-11-17-agama-18.mdx) from November 2025 we already told you to expect a
 temporal slow down in this blog activity. And here we are, more than four months later, to finally
-break that hiatus by announcing a new Agama version. But, why did it take so long to go from
-Agama 18 to Agama 19?
+break that hiatus by announcing a new Agama version. But, why did it take so long to go from Agama
+18 to Agama 19?
 
 {/* truncate */}
 
@@ -25,11 +25,10 @@ installation are built on top of that generic API.
 
 ![Agama general architecture](../static/img/blog/2026-03-20/api.png)
 
-But previous versions of Agama were full of quirks that didn't allow us to define an API that
-would match our quality standards as a solid foundation to build a simple but comprehensive
-installer. Agama 19 represents a quite significant architectural overhaul, needed to leave all those
-quirks behind and to define mechanisms that can be the cornerstone for any future development
-(see
+But previous versions of Agama were full of quirks that didn't allow us to define an API that would
+match our quality standards as a solid foundation to build a simple but comprehensive installer.
+Agama 19 represents a quite significant architectural overhaul, needed to leave all those quirks
+behind and to define mechanisms that can be the cornerstone for any future development (see
 [#2951](https://github.com/agama-project/agama/pull/2951) and
 [#2998](https://github.com/agama-project/agama/pull/2998)).
 
@@ -40,18 +39,16 @@ Note that, despite the redesign of the programming interface, the JSON-based con
 remains fully backwards compatible. Any JSON or Jsonnet profile that worked in previous versions of
 Agama will keep working in Agama 19 and beyond.
 
-In a similar way, we also expect to declare the Agama API as stable soon. So anyone could then
-write their own tools to directly interact with the Agama core, without depending on the web user
+In a similar way, we also expect to declare the Agama API as stable soon. So anyone could then write
+their own tools to directly interact with the Agama core, without depending on the web user
 interface or the Agama command-line tools.
 
 ## Reorganization of the web user interface {#webui}
 
 Having a better API enabled us to adjust the web user interface to be closer to our original vision.
 We still have a long way to go in our road to a fully usable interface but the new navigation
-experience, based on a better overview page and a more useful confirmation dialog, sets the direction
-to follow
-(see
-[#2988](https://github.com/agama-project/agama/pull/2988),
+experience, based on a better overview page and a more useful confirmation dialog, sets the
+direction to follow (see [#2988](https://github.com/agama-project/agama/pull/2988),
 [#3009](https://github.com/agama-project/agama/pull/3009) and
 [#3025](https://github.com/agama-project/agama/pull/3025)).
 
@@ -65,21 +62,20 @@ some of them. The process has already started for the sections to configure
 [network](https://github.com/agama-project/agama/pull/2900).
 
 Regarding network, there are two important changes. On the one hand, now the user interface
-dynamicaly reacts to changes in the underlying system.
-For instance, when a new cable is plugged in or when a new WiFi adapter is connected
-(see [#3285](https://github.com/agama-project/agama/pull/3285)).
-On the other hand,
-now it is possible to define new
-ethernet connections. That is very relevant in installation scenarios with several network adapters
-that need to be configured in different ways. For example, where one network is used to access
-storage devices and another one is used to reach the installation repositories.
+dynamicaly reacts to changes in the underlying system. For instance, when a new cable is plugged in
+or when a new WiFi adapter is connected (see
+[#3285](https://github.com/agama-project/agama/pull/3285)). On the other hand, now it is possible to
+define new ethernet connections. That is very relevant in installation scenarios with several
+network adapters that need to be configured in different ways. For example, where one network is
+used to access storage devices and another one is used to reach the installation repositories.
 
 ![New network section](../static/img/blog/2026-03-20/network.png)
 
-The web user interface also got a [new option to download](https://github.com/agama-project/agama/pull/3256)
-the current installer configuration in the JSON format used by the Agama command line tools and for
-unattended installation. That is the first step to turn the web interface into a useful learning
-and prototyping tool for more advanced scenarios, although this new functionality could benefit from
+The web user interface also got a
+[new option to download](https://github.com/agama-project/agama/pull/3256) the current installer
+configuration in the JSON format used by the Agama command line tools and for unattended
+installation. That is the first step to turn the web interface into a useful learning and
+prototyping tool for more advanced scenarios, although this new functionality could benefit from
 several usability improvements. Stay tuned.
 
 ![Downloading Agama configuration](../static/img/blog/2026-03-20/config.png)
@@ -93,9 +89,9 @@ contribute to speed the process up.
 ## Rewritten internal components {#rewrite}
 
 As you may know, YaST still lives in the core of Agama. Many tasks like managing storage devices or
-configuring the boot loader are done under the hood by the corresponding YaST modules
-(ie. yast2-storage-ng or yast2-bootloader). But lately the usage of some particular YaST modules
-became more a limiting factor than an advantage.
+configuring the boot loader are done under the hood by the corresponding YaST modules (ie.
+yast2-storage-ng or yast2-bootloader). But lately the usage of some particular YaST modules became
+more a limiting factor than an advantage.
 
 That is the case for yast2-users and yast2-software. Both are very complex due to historical reasons
 and to their ability to both install a new system and administer an already installed one, something
@@ -104,8 +100,8 @@ that is out of the scope of Agama.
 Thus, we decided to use the architectural revamp as an opportunity to replace those YaST parts with
 simpler implementations that will allow us to evolve faster in the future. Agama 19 includes its own
 management of [users](https://github.com/agama-project/agama/pull/2937) and, even more important and
-ambitious, its own management of [software](https://github.com/agama-project/agama/pull/1829) including
-the registration of SUSE Linux Enterprise and associated products and extensions (see
+ambitious, its own management of [software](https://github.com/agama-project/agama/pull/1829)
+including the registration of SUSE Linux Enterprise and associated products and extensions (see
 [#2915](https://github.com/agama-project/agama/pull/2915),
 [#2978](https://github.com/agama-project/agama/pull/2978) and
 [#2982](https://github.com/agama-project/agama/pull/2982)).
@@ -117,8 +113,8 @@ functionality, like the new ability to install some distributions in different s
 [installation modes](https://github.com/agama-project/agama/pull/3086).
 
 When installing the experimental pre-releases of SLES 16.1 or the corresponding version of SLES for
-SAP Applications, now it is possible
-to select between the Standard and the Immutable modes. See the following screenshot for details.
+SAP Applications, now it is possible to select between the Standard and the Immutable modes. See the
+following screenshot for details.
 
 ![Installation modes for SLES 16.1](../static/img/blog/2026-03-20/modes.png)
 
@@ -145,9 +141,9 @@ We also extended the configuration of the boot loader with a new setting `update
 loader updates of the persistent RAM (NVRAM). That is an expert feature that was requested by
 several users to handle broken firmwares or network setups.
 
-Last but not least, now it is possible to specify [several SSH public keys](https://github.com/agama-project/agama/pull/3274)
-to authenticate the root user and also to use SSH keys as authentication mechanism for the non-root
-user created by Agama.
+Last but not least, now it is possible to specify
+[several SSH public keys](https://github.com/agama-project/agama/pull/3274) to authenticate the root
+user and also to use SSH keys as authentication mechanism for the non-root user created by Agama.
 
 ## Many changes in the installation media {#media}
 
@@ -155,13 +151,13 @@ As you can see, Agama 19 is quite a significant release. But there is room for m
 months, even to work beyond Agama itself. During this time we also incorporated several changes to
 the live ISO that most of you use to execute Agama.
 
-Those changes include several improvements in the boot menu (like better support for [serial
-console](https://github.com/agama-project/agama/pull/3192)
-or [adapted timeouts](https://github.com/agama-project/agama/pull/3185)),
-dropping the "Boot from Disk" option in most architectures,
-unifying the location of kernel and initramfs between the different architectures and a new boot
-argument `live.net_config_tui=1` (see [#2923](https://github.com/agama-project/agama/pull/2923)) to trigger
-`nmtui` (an interactive network configuration tool) before Agama starts.
+Those changes include several improvements in the boot menu (like better support for
+[serial console](https://github.com/agama-project/agama/pull/3192) or
+[adapted timeouts](https://github.com/agama-project/agama/pull/3185)), dropping the "Boot from Disk"
+option in most architectures, unifying the location of kernel and initramfs between the different
+architectures and a new boot argument `live.net_config_tui=1` (see
+[#2923](https://github.com/agama-project/agama/pull/2923)) to trigger `nmtui` (an interactive
+network configuration tool) before Agama starts.
 
 ## Back to regular speed {#conclusion}
 

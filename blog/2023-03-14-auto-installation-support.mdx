@@ -1,10 +1,11 @@
 ---
 date: 2023-03-14 11:00:00 +00:00
 title: Adding auto-installation support
-description: Although it was in our minds from the beginning, we have been postponing the support
-  for auto-installation for several reasons. Now the time has come and we have a plan.
+description:
+  Although it was in our minds from the beginning, we have been postponing the support for
+  auto-installation for several reasons. Now the time has come and we have a plan.
 tags:
- - auto-installation
+  - auto-installation
 ---
 
 AutoYaST is a crucial tool for our users, including customers and partners. So it was clear from the
@@ -23,7 +24,7 @@ concerns between all the components. For that reason, the core of D-Installer is
 that is not coupled to any user interface. The web UI connects to that interface to get/set the
 configuration settings.
 
-In that regard, the *system definition* for auto-installation is another user interface. The D-Bus
+In that regard, the _system definition_ for auto-installation is another user interface. The D-Bus
 service behaves the same whether the configuration is coming from a web UI or an auto-installation
 profile. Let me repeat again: we want a clear separation of concerns.
 
@@ -34,13 +35,14 @@ you keep reading.
 
 ## Replacing XML with Jsonnet {#jsonnet}
 
-Although you might have your own list, there are a few things we did not like about AutoYaST profiles:
+Although you might have your own list, there are a few things we did not like about AutoYaST
+profiles:
 
-* XML is an excellent language for many use cases. But, in 2023, there are more concise alternatives
+- XML is an excellent language for many use cases. But, in 2023, there are more concise alternatives
   for an automated installation system.
-* They are rather verbose, especially with all those type annotations and how collections are
+- They are rather verbose, especially with all those type annotations and how collections are
   specified.
-* Runtime validation, based on `libxml2`, is rather poor. And `jing` is not an option for the
+- Runtime validation, based on `libxml2`, is rather poor. And `jing` is not an option for the
   installation media.
 
 For that reason, we had a look at the landscape of declarative languages and we decided to adopt
@@ -49,19 +51,19 @@ imports, etc. A minimal profile looks like this:
 
 ```json
 {
-  software: {
-    product: 'ALP',
+  "software": {
+    "product": "ALP"
   },
-  user: {
-    fullName: 'Jane Doe',
-    userName: 'jane.doe',
-    password: '123456',
+  "user": {
+    "fullName": "Jane Doe",
+    "userName": "jane.doe",
+    "password": "123456"
   }
 }
 ```
 
-But making use of Jsonnet features, we can also have dynamic profiles, replacing rules/classes or ERB
-with a single and better alternative for this purpose. Let's have a look to a complex profile:
+But making use of Jsonnet features, we can also have dynamic profiles, replacing rules/classes or
+ERB with a single and better alternative for this purpose. Let's have a look to a complex profile:
 
 ```jsonnet
 local dinstaller = import 'hw.libsonnet';
@@ -108,11 +110,11 @@ local findBiggestDisk(disks) =
 }
 ```
 
-This Jsonnet file is evaluated and validated at installation time, generating a JSON profile
-where the `findBiggestDisk(dinstaller.disks)` is replaced with the name of the biggest disk.
+This Jsonnet file is evaluated and validated at installation time, generating a JSON profile where
+the `findBiggestDisk(dinstaller.disks)` is replaced with the name of the biggest disk.
 
-Beware that defining [the
-format](https://github.com/imobachgs/dinstaller-rs/blob/main/dinstaller-lib/share/profile.schema.json)
+Beware that defining
+[the format](https://github.com/imobachgs/dinstaller-rs/blob/main/dinstaller-lib/share/profile.schema.json)
 is still a work in progress, so those examples might change in the future.
 
 ## Replacing the profile with an script
@@ -135,8 +137,8 @@ Please, bear in mind that it is just an idea, but we want to explore where it ta
 ## Better integration with other tools
 
 Integrating AutoYaST with other tools could be tricky because it does not provide a mechanism to
-report the installation progress. Again through our CLI, we plan to solve that problem by
-providing such a mechanism which, to be honest, is already available in many configuration systems.
+report the installation progress. Again through our CLI, we plan to solve that problem by providing
+such a mechanism which, to be honest, is already available in many configuration systems.
 
 ## What about backward compatibility?
 
@@ -153,11 +155,11 @@ JSON-based one. It is far from finished, but it is a good starting point.
 Now let's answer the obvious question: which is the current status? We expect to deliver the basic
 functionality in the following release of D-Installer, but with quite some limitations.
 
-* The user interface is still needed to answer questions or watch the progress.
-* Dynamic profiles are supported, but the hardware information injected in the profiles is
+- The user interface is still needed to answer questions or watch the progress.
+- Dynamic profiles are supported, but the hardware information injected in the profiles is
   incomplete.
-* A mechanism for error reporting is missing.
-* iSCSI and DASD are not supported in auto-installation yet.
+- A mechanism for error reporting is missing.
+- iSCSI and DASD are not supported in auto-installation yet.
 
 ## Closing thoughts
 

@@ -34,11 +34,11 @@ agama config show | jq -C | less
 ```
 
 You can switch back and forth between the graphical console and several text consoles using key
-combinations like `Ctrl`+`Alt`+`F1` or `Ctrl`+`Alt`+`F2`...  `Ctrl`+`Alt`+`F7`. The graphical
+combinations like `Ctrl`+`Alt`+`F1` or `Ctrl`+`Alt`+`F2`... `Ctrl`+`Alt`+`F7`. The graphical
 interface can usually be found at the second console or at the seventh, depending whether the live
-system is based on Wayland or X.Org. You can learn more about text consoles in the [corresponding
-section](../user/guides/collecting_logs.md#shell) of the document about collecting installation
-logs.
+system is based on Wayland or X.Org. You can learn more about text consoles in the
+[corresponding section](../user/guides/collecting_logs.md#shell) of the document about collecting
+installation logs.
 
 ## Remote access to the command-line tools
 
@@ -94,8 +94,8 @@ At that point, if you browse to the **Authentication** section of the web interf
 icon to reveal the password, you could see it was effectively updated!
 
 Needless to say, the loaded JSON document can contain a full Agama configuration or only a partial
-one like in the example. In the latter case, the settings corresponding to the omitted sections
-will not be modified.
+one like in the example. In the latter case, the settings corresponding to the omitted sections will
+not be modified.
 
 Of course, you can also rely on other tools to simplify the process, for example something like this
 would save you from manually creating the JSON file.
@@ -156,8 +156,8 @@ the [corresponding section](../user/profile/working_with_profiles) of Agama's us
 ## Driving the whole installation process
 
 This document is focused on how to combine the web-based user interface and the command-line to get
-the best of both worlds. But actually the command-line interface is enough to interactively drive the
-whole installation process. The following sequence of commands should be enough for the simplest
+the best of both worlds. But actually the command-line interface is enough to interactively drive
+the whole installation process. The following sequence of commands should be enough for the simplest
 scenario.
 
 ```
@@ -166,6 +166,5 @@ agama install
 agama finish
 ```
 
-There are many other commands that can be useful. All of them are described at the [command-line
-reference](../user/reference/cli).
-
+There are many other commands that can be useful. All of them are described at the
+[command-line reference](../user/reference/cli).

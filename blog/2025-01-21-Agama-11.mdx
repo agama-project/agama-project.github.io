@@ -15,16 +15,16 @@ see what's new on this release.
 
 {/* truncate */}
 
-Bear in mind that some minor revisions of Agama 11 could be released in the following
-days to correct issues detected during the testing of SLES 16 Beta and openSUSE Leap 16 Alpha. We
-will update this blog post if any of those changes affect significantly any of the features listed
-below.
+Bear in mind that some minor revisions of Agama 11 could be released in the following days to
+correct issues detected during the testing of SLES 16 Beta and openSUSE Leap 16 Alpha. We will
+update this blog post if any of those changes affect significantly any of the features listed below.
 
 ## Agama can install Slowroll now {#slowroll}
 
 Let's start welcoming a new member to the family of operating systems Agama can install. Thanks to
-[WesFun](https://github.com/WesfunOfficial) now it is possible to select [openSUSE
-Slowroll](https://en.opensuse.org/Portal:Slowroll) when using the Agama testing iso for openSUSE.
+[WesFun](https://github.com/WesfunOfficial) now it is possible to select
+[openSUSE Slowroll](https://en.opensuse.org/Portal:Slowroll) when using the Agama testing iso for
+openSUSE.
 
 ![openSUSE product selection page](../static/img/blog/2025-01-21/opensuse-agama11.png)
 
@@ -78,8 +78,8 @@ public and they will always be.
 
 Another difference between openSUSE and a corporate distribution like SLES is that users needs to
 explicitly accept a license agreement to use the latter. In the case of the Agama web interface,
-that means presenting the license as soon as possible in the process. Thus, the corresponding
-EULA must be accepted already when selecting any of the products that require to do so.
+that means presenting the license as soon as possible in the process. Thus, the corresponding EULA
+must be accepted already when selecting any of the products that require to do so.
 
 ![License in product selection](../static/img/blog/2025-01-21/license-agama11.png)
 
@@ -145,22 +145,22 @@ so nice for a blog post :wink:).
 }
 ```
 
-For more details see the [scripts
-section](https://agama-project.github.io/docs/user/unattended/scripts) of the Agama documentation
-site.
+For more details see the
+[scripts section](https://agama-project.github.io/docs/user/unattended/scripts) of the Agama
+documentation site.
 
 ## Storage management for unattended installation {#storage}
 
 The Agama configuration format offers a very convenient and powerful approach to configure the
-storage setup of the new system, way more consistent and concise that the corresponding 
+storage setup of the new system, way more consistent and concise that the corresponding
 `<partitioning>` section of the AutoYaST profile (which is still fully supported for migration
 purposes).
 
 Agama 11 adds the possibility to define the physical volumes of an LVM volume group by simply
 specifying the disk (or disks) that will be used as a base for the LVM. Agama will take care of
 creating all the needed partitions, honoring any other aspect of the configuration in the process.
-Find a more detailed explanation with examples at the [corresponding
-section](https://agama-project.github.io/docs/user/unattended/storage#generating-physical-volumes)
+Find a more detailed explanation with examples at the
+[corresponding section](https://agama-project.github.io/docs/user/unattended/storage#generating-physical-volumes)
 of the Agama documentation.
 
 On the other hand, now it is possible to specify TPM-based unlocking of the encrypted devices as
@@ -176,8 +176,8 @@ code.
 
 In the case of the CLI, the manual pages, its Markdown variant and also the files needed for
 [shell completion](https://en.wikipedia.org/wiki/Command-line_completion) are all generated from
-sources. You can see the always current result of the Markdown version at the [corresponding
-section](https://agama-project.github.io/docs/user/cli) of the Agama web page.
+sources. You can see the always current result of the Markdown version at the
+[corresponding section](https://agama-project.github.io/docs/user/cli) of the Agama web page.
 
 The HTTP API is also automatically documented via an [OpenAPI](https://www.openapis.org/)
 specification. This will help anyone interested in integrating Agama into any solution or
@@ -187,8 +187,8 @@ account that the Agama HTTP is still not stable and changes on every release.
 ## More changes under the hood {#techdetails}
 
 As you can imagine, the above list of features is far for representing everything that has changed
-from Agama 10. As usual, the new version also includes many bug fixes and small improvements. And
-we took the opportunity to update to the latest version of the three programming languages used in
+from Agama 10. As usual, the new version also includes many bug fixes and small improvements. And we
+took the opportunity to update to the latest version of the three programming languages used in
 Agama, including all used libraries.
 
 We also gave some love to the Agama Live ISO. On the one hand, we revisited the list of included
@@ -204,10 +204,10 @@ invaluable effort to ensure a smoother experience to all users.
 ## Just another step {#conclusion}
 
 We are already working on the next version of Agama and your feedback may be useful to decide in
-which aspects we should focus. So do not hesitate to give Agama a try using our [latest Live ISO
-images](https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/)
-and to report bugs through Bugzilla. You can also contact us at the [Agama project at
-GitHub](https://github.com/agama-project/agama). Of course, if you prefer to chat, you can find us
-as always at our `#yast` channel at [Libera.chat](https://libera.chat/).
+which aspects we should focus. So do not hesitate to give Agama a try using our
+[latest Live ISO images](https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/)
+and to report bugs through Bugzilla. You can also contact us at the
+[Agama project at GitHub](https://github.com/agama-project/agama). Of course, if you prefer to chat,
+you can find us as always at our `#yast` channel at [Libera.chat](https://libera.chat/).
 
 And don't forget to have a lot of fun!

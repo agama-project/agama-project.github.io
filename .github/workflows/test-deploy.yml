@@ -34,6 +34,9 @@ jobs:
       - name: Use a surge.sh URL
         run: .github/workflows/test-deploy-patch-url.rb
 
+      - name: Check the format
+        run: yarn fmt:check
+
       - name: Test build website
         run: yarn build
 

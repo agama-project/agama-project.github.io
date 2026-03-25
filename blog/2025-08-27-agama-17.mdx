@@ -11,9 +11,9 @@ not even heat can stop Free Software!
 
 {/* truncate */}
 
-Agama 17 represents an important milestone for the Agama project. Taking into account how close
-the release of SUSE Linux Enterprise 16.0 is, we foresee this version of Agama (or a very similar
-one) becoming the endorsed installer for that release of SUSE's flagship distribution.
+Agama 17 represents an important milestone for the Agama project. Taking into account how close the
+release of SUSE Linux Enterprise 16.0 is, we foresee this version of Agama (or a very similar one)
+becoming the endorsed installer for that release of SUSE's flagship distribution.
 
 So let's see what's new.
 
@@ -27,8 +27,8 @@ devices share the connection.
 
 ## Improvements in the storage user interface {#storage}
 
-The page to configure the storage setup was also slightly restructured. The information displayed
-at the "Installation Devices" section was reorganized with the goal of making its usage more
+The page to configure the storage setup was also slightly restructured. The information displayed at
+the "Installation Devices" section was reorganized with the goal of making its usage more
 understandable at first sight.
 
 ![Several network devices using the same connection](../static/img/blog/2025-08-27/storage.png)
@@ -39,9 +39,9 @@ reached - one step at a time.
 Apart from reorganizing the information, the new user interface offers the possibility to directly
 use a disk (or a pre-existing RAID device) without creating partitions.
 
-There is also a new option to re-scan the system in case new hardware devices has been plugged in, new
-logical devices (line RAIDs or LVM volume groups) have been created or the user needs a second chance
-to enter an encryption password.
+There is also a new option to re-scan the system in case new hardware devices has been plugged in,
+new logical devices (line RAIDs or LVM volume groups) have been created or the user needs a second
+chance to enter an encryption password.
 
 ![New options at the storage user interface](../static/img/blog/2025-08-27/rescan.png)
 
@@ -59,15 +59,15 @@ Mirroring Tool).
 
 ![Registering on an instance of RMT](../static/img/blog/2025-08-27/registration.png)
 
-Users of such RMTs do not longer need to use a configuration profile or Agama's command-line
-tools, like in previous versions of the installer.
+Users of such RMTs do not longer need to use a configuration profile or Agama's command-line tools,
+like in previous versions of the installer.
 
 ## Skipping SELinux configuration {#lsm}
 
 The default installations of SUSE Linux Enterprise Server 16.0 and openSUSE Leap 16.0 will use
 [SELinux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux) as the default Linux kernel
-security module (LSM). But it is possible to adjust the software selection to not install
-SELinux or to install an alternative LSM (like [AppArmor](https://en.wikipedia.org/wiki/AppArmor)).
+security module (LSM). But it is possible to adjust the software selection to not install SELinux or
+to install an alternative LSM (like [AppArmor](https://en.wikipedia.org/wiki/AppArmor)).
 
 Previous versions of Agama did not manage that situation correctly. Agama always enforced the
 configuration of the default LSM for the product (SELinux in the mentioned cases).
@@ -86,21 +86,21 @@ Agama 17 adds the possibility to configure VLAN interfaces. See the following ex
 
 ```json
 {
-  "id":          "vlan10",
-  "method4":     "manual",
-  "method6":     "disabled",
-  "addresses":   ["192.168.1.28/24"],
-  "gateway4":    "192.168.1.1",
+  "id": "vlan10",
+  "method4": "manual",
+  "method6": "disabled",
+  "addresses": ["192.168.1.28/24"],
+  "gateway4": "192.168.1.1",
   "nameservers": ["192.168.1.1"],
   "vlan": {
-    "id":     10,
+    "id": 10,
     "parent": "eth0"
   }
 }
 ```
 
-Now it is also possible to activate zFCP devices by specifying the corresponding section at the
-JSON configuration, like in this example.
+Now it is also possible to activate zFCP devices by specifying the corresponding section at the JSON
+configuration, like in this example.
 
 ```json
 {
@@ -108,8 +108,8 @@ JSON configuration, like in this example.
     "devices": [
       {
         "channel": "0.0.fa00",
-        "wwpn":    "0x500507630300c562",
-        "lun":     "0x4010403300000000"
+        "wwpn": "0x500507630300c562",
+        "lun": "0x4010403300000000"
       }
     ]
   }
@@ -126,7 +126,7 @@ just adding or removing certain patterns.
   "software": {
     "patterns": {
       "remove": ["selinux"],
-      "add":    ["apparmor", "gnome"]
+      "add": ["apparmor", "gnome"]
     }
   }
 }
@@ -155,14 +155,14 @@ configuration. Again, let's illustrate it with an example.
 
 ## Improvements for unattended installation {#unattended}
 
-Users of the unattended installation will of course benefit from the mentioned new options added to the
-JSON configuration. But the improvements for automated installations go beyond that.
+Users of the unattended installation will of course benefit from the mentioned new options added to
+the JSON configuration. But the improvements for automated installations go beyond that.
 
 On the one hand, Agama does not longer proceed silently if it fails to fetch or process a
 configuration provided via the `inst.auto` boot argument. Instead, this new version displays an
-error message asking the user whether or not to retry. If the user decides to not retry, Agama does not
-start the auto-installation process. This is just a first step in the right direction, in the future
-Agama will offer better diagnostics and the possibility to specify a new URL.
+error message asking the user whether or not to retry. If the user decides to not retry, Agama does
+not start the auto-installation process. This is just a first step in the right direction, in the
+future Agama will offer better diagnostics and the possibility to specify a new URL.
 
 On the other hand, the new boot arguments `inst.auto_insecure` and `inst.script_insecure` allow to
 disable the SSL checks when fetching the configuration or the installation script for an unattended
@@ -182,8 +182,8 @@ installation process. But that compatibility improves a lot with Agama 17.
 
 At Agama, the URL of an update is specified through the boot option `inst.dud`. As mentioned, an
 update can be a simple rpm package or a more complex DUD, created with the
-[`mkdud`](https://github.com/openSUSE/mkdud) tool. You can specify as many updates as you wish.
-Do not forget the `rd.neednet` option if you need the network to retrieve the DUD.
+[`mkdud`](https://github.com/openSUSE/mkdud) tool. You can specify as many updates as you wish. Do
+not forget the `rd.neednet` option if you need the network to retrieve the DUD.
 
 ```
 inst.dud=http://192.168.122.1/agama.dud rd.neednet
@@ -195,9 +195,10 @@ self-signed certificate) when fetching updates.
 ## The family grows {#leap-micro}
 
 As you know, Agama allows to install different distributions that are called "products" in Agama's
-jargon. Recently Lubos Kocman contributed a [new product
-definition](https://github.com/agama-project/agama/pull/2527) for openSUSE Leap Micro 6.2. That means you
-will now find a new option on the initial page that allows to select the distribution to install.
+jargon. Recently Lubos Kocman contributed a
+[new product definition](https://github.com/agama-project/agama/pull/2527) for openSUSE Leap Micro
+6.2. That means you will now find a new option on the initial page that allows to select the
+distribution to install.
 
 Welcome aboard, Leap Micro!
 
@@ -219,12 +220,12 @@ information. Sorry about that.
 As mentioned, the upcoming SUSE Linux Enterprise 16.0 will be distributed with the current version
 of Agama or with a very similar one. But that does not imply Agama development will slow down, quite
 the opposite. There is still a long road ahead and we will keep implementing fixes and new features
-that you could always test with our constantly updated [testing
-ISO](https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/).
+that you could always test with our constantly updated
+[testing ISO](https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/).
 
 Of course, we will keep you updated on this blog. But if you got questions or want to get involved
-further, do not hesitate to contact us at the [Agama project at
-GitHub](https://github.com/agama-project/agama) and our `#yast` channel at
+further, do not hesitate to contact us at the
+[Agama project at GitHub](https://github.com/agama-project/agama) and our `#yast` channel at
 [Libera.chat](https://libera.chat/).
 
 Have a lot of fun!

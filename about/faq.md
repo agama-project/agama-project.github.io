@@ -6,8 +6,8 @@ sidebar_position: 4
 
 ## What is Agama?
 
-Short answer - a Linux installer intended as the evolution of YaST. For a longer answer, check
-the [About](/about) section.
+Short answer - a Linux installer intended as the evolution of YaST. For a longer answer, check the
+[About](/about) section.
 
 ## Why a new installer?
 
@@ -42,15 +42,15 @@ Unlike the YaST wizard, which forces the user to go through some sequential step
 aspect of the system, the Agama interface offers a simpler workflow that is described at the
 [interactive installation guide](/docs/overview/webui) (screenshots included!).
 
-We consider this interface as the best alternative for most of the use cases, replacing the
-use of VNC or a text-based interface over SSH.
+We consider this interface as the best alternative for most of the use cases, replacing the use of
+VNC or a text-based interface over SSH.
 
 ## Where is the NCURSES text-mode interface?
 
 The approach to text-mode (console) installation is also different from YaST. Instead of offering a
 pseudo-graphical interface that mimics the graphical one, Agama features a powerful
-[command-line interface](/docs/overview/cli) that allows to drive and monitor the installation process
-in many convenient and flexible ways.
+[command-line interface](/docs/overview/cli) that allows to drive and monitor the installation
+process in many convenient and flexible ways.
 
 ## Where is the Expert Partitioner?
 
@@ -63,22 +63,22 @@ the [documentation about storage](/docs/user/guides/storage) for more details.
 
 The installation process can be partially or totally automated and driven by:
 
-  - A set of scripts based on Agama's command-line interface.
-  - A profile in JSON format (actually [Jsonnet](https://jsonnet.org/)), similar to AutoYaST.
-  - Any third party tool like [Uyuni](https://www.uyuni-project.org/) through the HTTP interface.
-  - Any combination of the three previous methods.
+- A set of scripts based on Agama's command-line interface.
+- A profile in JSON format (actually [Jsonnet](https://jsonnet.org/)), similar to AutoYaST.
+- Any third party tool like [Uyuni](https://www.uyuni-project.org/) through the HTTP interface.
+- Any combination of the three previous methods.
 
 For more information see the [unattended installation guide](/docs/overview/unattended).
 
 ## Can I use my existing AutoYaST profiles and infrastructure?
 
-Yes, Agama can fetch and process AutoYaST profiles. It supports the most used AutoYaST features
-like [dynamic profiles](https://documentation.suse.com/sles/15-SP5/html/SLES-all/part-dynamic-profiles.html)
+Yes, Agama can fetch and process AutoYaST profiles. It supports the most used AutoYaST features like
+[dynamic profiles](https://documentation.suse.com/sles/15-SP5/html/SLES-all/part-dynamic-profiles.html)
 and the most used AutoYaST sections like `partitioning`, `networking`, `software`, `scripts`, etc.
 
-But there are also some caveats. Bear in mind that Agama is focused on the installation and it delegates
-further configuration to other tools. Therefore it includes less features and there are some
-sections you can find in an AutoYaST profile that are ignored by Agama.
+But there are also some caveats. Bear in mind that Agama is focused on the installation and it
+delegates further configuration to other tools. Therefore it includes less features and there are
+some sections you can find in an AutoYaST profile that are ignored by Agama.
 
 You can find further details in the [AutoYaST support section](/docs/user/profile/autoyast).
 
@@ -91,5 +91,5 @@ Although nothing is set in stone, that is the plan for SUSE Linux Enterprise Ser
 There are no concrete plans in that regard.
 
 The YaST Team works in close collaboration with several openSUSE contributors to make sure Agama can
-install openSUSE Tumbleweed, openSUSE MicroOS and the first prototypes of Leap 16.0. But there is
-no concrete roadmap for the adoption of Agama as an endorsed installer for those distributions.
+install openSUSE Tumbleweed, openSUSE MicroOS and the first prototypes of Leap 16.0. But there is no
+concrete roadmap for the adoption of Agama as an endorsed installer for those distributions.

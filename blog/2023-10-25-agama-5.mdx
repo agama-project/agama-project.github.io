@@ -3,12 +3,12 @@ date: 2023-10-25 11:00:00 +00:00
 title: Releasing version 5
 description: A translated web user interface, customized software selection and PXE support.
 tags:
-- release
+  - release
 ---
 
 We are aware that the time between Agama releases is usually too long. Recently, we committed to
-increase the frequency, although it means having smaller releases. You know, ["release early,
-release often"](https://en.wikipedia.org/wiki/Release_early,_release_often).
+increase the frequency, although it means having smaller releases. You know,
+["release early, release often"](https://en.wikipedia.org/wiki/Release_early,_release_often).
 
 {/* truncate */}
 
@@ -21,22 +21,23 @@ reuse pre-existing swap partitions. And last but not least, now you can boot Aga
 Until now, Agama web interface was only available in English. However, this new release allows you
 to select a different language and it is now available in another four languages: Dutch, Japanese,
 Spanish and Swedish. Kudos to [Natasha Ament](https://l10n.opensuse.org/user/Stacheldrahtje/),
-[Yasuhiko Kamata](https://l10n.opensuse.org/user/YasuhikoKamata/), [Victor
-hck](https://l10n.opensuse.org/user/VictorHck/) and [Luna
-Jernberg](https://l10n.opensuse.org/user/LunaJernbergc15bd25a134943af/) for this first round
+[Yasuhiko Kamata](https://l10n.opensuse.org/user/YasuhikoKamata/),
+[Victor hck](https://l10n.opensuse.org/user/VictorHck/) and
+[Luna Jernberg](https://l10n.opensuse.org/user/LunaJernbergc15bd25a134943af/) for this first round
 of translations. Much appreciated!
 
 ![Screenshot with language selector](../static/img/blog/2023-10-25/language-selector.png)
 
-If you are interested, please, consider helping with the translations. The [openSUSE localization
-guide](https://en.opensuse.org/openSUSE:Localization_guide) might be a good starting point. :wink:
+If you are interested, please, consider helping with the translations. The
+[openSUSE localization guide](https://en.opensuse.org/openSUSE:Localization_guide) might be a good
+starting point. :wink:
 
 You can check the pull request [#796](https://github.com/agama-project/agama/pull/796) if you are
 interested in the technical details.
 
-Bear in mind that selecting a different language does not affect the system you are
-installing. For that matter, we have started to work on a better "Localization" page that will allow
-selecting a language, a keyboard layout and a timezone for the system to install.
+Bear in mind that selecting a different language does not affect the system you are installing. For
+that matter, we have started to work on a better "Localization" page that will allow selecting a
+language, a keyboard layout and a timezone for the system to install.
 
 ## Patterns selection {#patterns-selection}
 
@@ -45,11 +46,11 @@ selection. We do not want to bring back complex and specific concepts, like syst
 decided to start with a prototype that shows the list of available software patterns.
 
 Agama 5 ships a new software patterns selector, as shown in the screenshot below, although it is
-still a work in progress. However, it is even more important the [discussion we have
-opened](https://lists.opensuse.org/archives/list/factory@lists.opensuse.org/thread/PH7R3Q36KUBBBV4COQ5ZLDCTJNODHC6N/)
-about this topic in the [openSUSE Factory mailing
-list](https://lists.opensuse.org/archives/list/factory@lists.opensuse.org/). Please do not hesitate
-to join if you have anything to say.
+still a work in progress. However, it is even more important the
+[discussion we have opened](https://lists.opensuse.org/archives/list/factory@lists.opensuse.org/thread/PH7R3Q36KUBBBV4COQ5ZLDCTJNODHC6N/)
+about this topic in the
+[openSUSE Factory mailing list](https://lists.opensuse.org/archives/list/factory@lists.opensuse.org/).
+Please do not hesitate to join if you have anything to say.
 
 ![Screenshot with software pattern selector](../static/img/blog/2023-10-25/software-patterns-selector.png)
 
@@ -71,8 +72,8 @@ Check [#806](https://github.com/agama-project/agama/pull/806) for further detail
 
 Since the earlier releases of Agama Live, it became clear that we needed a way to boot the installer
 using PXE. Recently, we started to build the images you need for that. The `agama-live` package
-contains [some
-notes](https://build.opensuse.org/package/view_file/systemsmanagement:Agama:Devel/agama-live/README.pxe?expand=1)
+contains
+[some notes](https://build.opensuse.org/package/view_file/systemsmanagement:Agama:Devel/agama-live/README.pxe?expand=1)
 about how to grab them from [openSUSE Build Service](https://build.opensuse.org/).
 
 This feature relies on [Kiwi](https://osinside.github.io/kiwi/), so it can be used by anyone who
@@ -81,28 +82,27 @@ built for demonstration purposes.
 
 ## Other changes {#misc}
 
-* Add a label in the storage section to indicate whether a Btrfs system will be transactional
+- Add a label in the storage section to indicate whether a Btrfs system will be transactional
   ([#789](https://github.com/agama-project/agama/pull/789)).
-* Set more restrictive permissions to the archive generated by the `agama logs store` command
-([#812](https://github.com/agama-project/agama/pull/812)).
-* Update to [Patternfly](https://www.patternfly.org/) 5.1
+- Set more restrictive permissions to the archive generated by the `agama logs store` command
+  ([#812](https://github.com/agama-project/agama/pull/812)).
+- Update to [Patternfly](https://www.patternfly.org/) 5.1
   ([#800](https://github.com/agama-project/agama/pull/800)).
 
 ![Screenshot wit the transactional Btrfs indicator](../static/img/blog/2023-10-25/transactional-btrfs.png)
 
 ## Trying Agama 5 {#download}
 
-The best way to try Agama is to download one of the two variants (ALP or openSUSE) of the [Agama
-Live devel
-ISO](https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/). This
-image is built in the [systemsmanagement:Agama:Devel OBS
-project](https://build.opensuse.org/package/show/systemsmanagement:Agama:Devel/agama-live) and is
-updated each time we release a new version.
+The best way to try Agama is to download one of the two variants (ALP or openSUSE) of the
+[Agama Live devel ISO](https://download.opensuse.org/repositories/systemsmanagement:/Agama:/Devel/images/iso/).
+This image is built in the
+[systemsmanagement:Agama:Devel OBS project](https://build.opensuse.org/package/show/systemsmanagement:Agama:Devel/agama-live)
+and is updated each time we release a new version.
 
-Are you interested in the bleeding edge? The ISO in the [systemsmanagement:Agama:Staging OBS
-project](https://build.opensuse.org/package/show/systemsmanagement:Agama:Staging/agama-live) is for
-you because it is built automatically from the code on [Agama's Git
-repository](https://github.com/agama-project/agama).
+Are you interested in the bleeding edge? The ISO in the
+[systemsmanagement:Agama:Staging OBS project](https://build.opensuse.org/package/show/systemsmanagement:Agama:Staging/agama-live)
+is for you because it is built automatically from the code on
+[Agama's Git repository](https://github.com/agama-project/agama).
 
 ## What's next {#future}
 
@@ -111,9 +111,9 @@ November. For that release, we expect more changes in the internationalization a
 SUSE Customer Center and the possibility of selecting how to make space for your new system.
 Additionally, we are working on making it easier to tweak Agama's configuration.
 
-We appreciate opinions and feedback. Feel free to contact the YaST team at the [YaST Development
-mailing list](https://lists.opensuse.org/archives/list/yast-devel@lists.opensuse.org/), our `#yast`
-channel at [Libera.chat](https://libera.chat/) or even the [Agama project at
-GitHub](https://github.com/agama-project/agama).
+We appreciate opinions and feedback. Feel free to contact the YaST team at the
+[YaST Development mailing list](https://lists.opensuse.org/archives/list/yast-devel@lists.opensuse.org/),
+our `#yast` channel at [Libera.chat](https://libera.chat/) or even the
+[Agama project at GitHub](https://github.com/agama-project/agama).
 
 Stay tunned!

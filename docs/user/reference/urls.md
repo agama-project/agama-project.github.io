@@ -29,8 +29,8 @@ In addition to those schemes, Agama supports a set of specific ones which can be
 
 ## Relative references
 
-For `"scripts"` and `"files"` in the Agama JSON config, the `"url"` property
-can be a relative reference, where the resolution base is the URL of the containing config.
+For `"scripts"` and `"files"` in the Agama JSON config, the `"url"` property can be a relative
+reference, where the resolution base is the URL of the containing config.
 
 This is a replacement for the ~~`relurl`~~ scheme used in AutoYaST.
 
@@ -115,15 +115,18 @@ dvd:/autoinst.xml?devices=sr1
 ```
 
 :::note
-Prefer `device` to `cd`, `dvd` or `hd` Given that `cd`, `dvd` and `hd` do not offer any
-advantage, using `device` might be a better option.
+
+Prefer `device` to `cd`, `dvd` or `hd` Given that `cd`, `dvd` and `hd` do not offer any advantage,
+using `device` might be a better option.
+
 :::
 
 ### Not supported yet
 
 The `repo://` URLs are not supported yet, but there are plans to implement them.
 
-[^1]: Agama relies on [curl](https://curl.se/) to support generic protocols (network protocols and
+[^1]:
+    Agama relies on [curl](https://curl.se/) to support generic protocols (network protocols and
     `file://`). So it might happen that some protocol is supported "by accident". However, only the
     documented protocols are really supported by Agama.
 

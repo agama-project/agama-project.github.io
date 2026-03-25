@@ -15,15 +15,15 @@ choosing the option "install openSUSE".
 If a script or configuration profile was placed at a given location or specified during the boot
 process, Agama will perform some steps or even the whole installation automatically, in an
 unattended way. That is an option for advanced scenarios and probably what you are looking for if
-you are currently an AutoYaST user. If that is the case, check the section about [unattended
-instalation](./overview/unattended).
+you are currently an AutoYaST user. If that is the case, check the section about
+[unattended instalation](./overview/unattended).
 
 In any other case, Agama will just run and wait for your instructions before proceeding. The whole
-interactive process can be controlled using an HTTP API (for developers), a set of [command-line
-tools](./overview/cli) (suitable for advanced users) or with a web-based graphical user interface.
-The latter method is definitely the way to go for new or casual users. You just have to browse
-through the pages displayed at the screen and described in the [next section](./overview/webui)
-of this guide.
+interactive process can be controlled using an HTTP API (for developers), a set of
+[command-line tools](./overview/cli) (suitable for advanced users) or with a web-based graphical
+user interface. The latter method is definitely the way to go for new or casual users. You just have
+to browse through the pages displayed at the screen and described in the
+[next section](./overview/webui) of this guide.
 
 ![Product selection screen offering openSUSE Leap, MicroOS and
 Tumbleweed](/img/user/product-selection.png)

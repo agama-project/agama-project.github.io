@@ -29,15 +29,16 @@ block at beginning of the MDX file enclosed in the `---` markers.
 
 ## Style
 
-- Use [sentence style capitalization](
-  https://developers.google.com/style/capitalization#capitalization-in-titles-and-headings) in the
-  heading and titles
+- Use
+  [sentence style capitalization](https://developers.google.com/style/capitalization#capitalization-in-titles-and-headings)
+  in the heading and titles
 - Add a short heading anchor explicitly, although Docusaurus generates them automatically using a
   predefined anchor avoids changing it after fixing a typo or rewording
 
 ## Syntax highlighting
 
-Syntax highlighting in code blocks works with the usual three backticks followed by the language name.
+Syntax highlighting in code blocks works with the usual three backticks followed by the language
+name.
 
     ```json
     {

@@ -12,8 +12,8 @@ You can find more details the automatic OBS synchronization in the
 
 The process to build each package is slightly different depending on the technology we are using.
 While the Ruby-based one (`rubygem-agama-yast`) is built as any other YaST package, the Agama server
-(`agama`), the CLI (`agama-cli`), and the web UI (`agama-web-ui`) rely on [OBS source
-services](https://openbuildservice.org/help/manuals/obs-user-guide/cha.obs.source_service.html).
+(`agama`), the CLI (`agama-cli`), and the web UI (`agama-web-ui`) rely on
+[OBS source services](https://openbuildservice.org/help/manuals/obs-user-guide/cha.obs.source_service.html).
 
 ## Versioning policy
 

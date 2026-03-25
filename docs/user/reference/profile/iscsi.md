@@ -20,20 +20,20 @@ name.
 
 ## List of targets
 
-The property `targets` contains a list of objects. Each object describes the connection to an
-iSCSI target and can contain the following properties (only the first four are mandatory):
+The property `targets` contains a list of objects. Each object describes the connection to an iSCSI
+target and can contain the following properties (only the first four are mandatory):
 
- * `address`: IP address (or hostname) of the target.
- * `port`: TCP port.
- * `name`: iSCSI name of the target.
- * `interface`: iSCSI interface to use, not to be confused with the network interface. It can be
-   "default" or the name of any interface defined at `/var/lib/iscsi/ifaces/`.
- * `startup`: The startup mode for the iSCSI node. The possible values are 'onboot', 'manual' and
-   'automatic'.
- * `authByTarget`: Optional pair of username and password, used if CHAP authentication should be
-    performed by the target. See below.
- * `authByInitiator`: Optional pair of username and password, used if CHAP authentication should be
-   performed by the initiator. See below.
+- `address`: IP address (or hostname) of the target.
+- `port`: TCP port.
+- `name`: iSCSI name of the target.
+- `interface`: iSCSI interface to use, not to be confused with the network interface. It can be
+  "default" or the name of any interface defined at `/var/lib/iscsi/ifaces/`.
+- `startup`: The startup mode for the iSCSI node. The possible values are 'onboot', 'manual' and
+  'automatic'.
+- `authByTarget`: Optional pair of username and password, used if CHAP authentication should be
+  performed by the target. See below.
+- `authByInitiator`: Optional pair of username and password, used if CHAP authentication should be
+  performed by the initiator. See below.
 
 ## iSCSI authentication
 

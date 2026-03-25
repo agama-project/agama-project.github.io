@@ -55,8 +55,8 @@ It uses the [lunr](https://lunrjs.com) search engine internally. The engine supp
 or usual `+` or `-` search terms, see more details in the
 [documentation](https://lunrjs.com/guides/searching.html).
 
-:warning: *The search index is generated only in a production build, not during development! To test
-the search functionality locally you need to run the `yarn build && yarn serve` commands!*
+:warning: _The search index is generated only in a production build, not during development! To test
+the search functionality locally you need to run the `yarn build && yarn serve` commands!_
 
 ## Blog
 
@@ -80,8 +80,8 @@ uses the [GitHub discussions](https://docs.github.com/en/discussions) as the bac
 The advantage is that we can use the existing GitHub infrastructure and user authentication. Giscus
 is basically just a wrapper for embedding the GitHub discussions into another page.
 
-By default discussions are enabled below all blog posts. To disable discussion under a specific
-blog post set `discussion: false` in the blog post front matter.
+By default discussions are enabled below all blog posts. To disable discussion under a specific blog
+post set `discussion: false` in the blog post front matter.
 
 For blog posts discussions it was created a special
 [Blog](https://github.com/agama-project/agama-project.github.io/discussions/categories/blog)
@@ -103,10 +103,9 @@ different pros and cons so the Agama blog supports both.
 
 #### Search blog post URL path
 
-The respective discussion at GitHub is found by searching the URL path in the discussion title.
-E.g. for the `https://agama-project.github.io/blog/2023/02/16/d-installer-0-7` blog post URL
-it searches for a discussion with the `blog/2023/02/16/d-installer-0-7` title (or similar, see
-below).
+The respective discussion at GitHub is found by searching the URL path in the discussion title. E.g.
+for the `https://agama-project.github.io/blog/2023/02/16/d-installer-0-7` blog post URL it searches
+for a discussion with the `blog/2023/02/16/d-installer-0-7` title (or similar, see below).
 
 Advantages:
 
@@ -125,9 +124,9 @@ Disadvantages:
 
 #### Explicit discussion ID
 
-The respective GitHub discussion ID is defined directly in the blog post front matter. E.g.
-for the `https://github.com/agama-project/agama-project.github.io/discussions/42` discussion URL
-set the `discussion_id: 42` value in the blog post front matter.
+The respective GitHub discussion ID is defined directly in the blog post front matter. E.g. for the
+`https://github.com/agama-project/agama-project.github.io/discussions/42` discussion URL set the
+`discussion_id: 42` value in the blog post front matter.
 
 Advantages:
 
@@ -159,7 +158,23 @@ features as deprecated or removed then use the `<Since>`, `<Deprecated>` or `<Re
 components.
 
 ```md
-import { Since } from "@site/src/components/Badge";
-...
-`foo` <Since version="16.1"/>: configuration option for ...
+import { Since } from "@site/src/components/Badge"; ... `foo` <Since version="16.1"/>: configuration
+option for ...
 ```
+
+## Formatting
+
+For consistency reasons, we use [prettier](https://prettier.io/) to format the Markdown files. You
+can automatically format them running the following command:
+
+```
+$ yarn fmt
+```
+
+If you only want to check whether the format is OK, you can use:
+
+```
+$ yarn fmt:check
+```
+
+Our Continuous Integration runs that command to make sure the Markdown files are properly formatted.
