@@ -12,11 +12,15 @@ Agama. In some cases, you might find a table with the following columns:
 - Agama: name of the Agama element.
 - Comment: any comment or reason about the element.
 
-:::warning AutoYaST support is not fully defined yet, which means that we might add support for more
-sections in the future even if we do not plan to do so now. However, we will do our best to keep
-this document up to date.
+:::warning
 
-Please, let us know if you miss support for any section. :::
+AutoYaST support is not fully defined yet, which means that we might add support for more sections
+in the future even if we do not plan to do so now. However, we will do our best to keep this
+document up to date.
+
+Please, let us know if you miss support for any section.
+
+:::
 
 ## add-on
 

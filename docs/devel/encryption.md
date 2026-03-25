@@ -26,5 +26,9 @@ as you can see on the screenshot below.
 
 ![Displaying the SSL certificate's fingerprint in the console](./img/certificate-fingerprint.png)
 
-:::warning There is no easy way yet to inject your own certificate when using Agama's live medium,
-although the `agama-web-server` command provides options to set the certificate and its key.
+:::warning
+
+There is no easy way yet to inject your own certificate when using Agama's live medium, although the
+`agama-web-server` command provides options to set the certificate and its key.
+
+:::

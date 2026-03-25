@@ -85,9 +85,12 @@ types, like bridges or bonds, does not have support in the user interface yet. H
 matter of time that they get added, given that Agama supports many of them during an
 [unattended installation](./unattended.md) or using the [command-line interface](./cli.md).
 
-:::warning Network changes are applied instantly Beware that network configuration changes are
-applied instantly. So you must be careful when adjusting the network configuration on a remote
-installation. :::
+:::warning
+
+Network changes are applied instantly Beware that network configuration changes are applied
+instantly. So you must be careful when adjusting the network configuration on a remote installation.
+
+:::
 
 ![Network settings including wired and wireless devices](/img/user/network.png)
 

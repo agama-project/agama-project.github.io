@@ -24,11 +24,19 @@ A live ISO for running Agama should provide the following software:
 - A browser to locally render the Agama web UI.
 - Optionally, repository packages of the products to install.
 
-:::note If no browser is included, then the installation has to be remotely performed by using a
-browser from another machine. This would be the typical case for s390x installations. :::
+:::note
 
-:::warning These days the packages repositories are not included, so the installation requires
-Internet connection to download the packages of the product to install. :::
+If no browser is included, then the installation has to be remotely performed by using a browser
+from another machine. This would be the typical case for s390x installations.
+
+:::
+
+:::warning
+
+These days the packages repositories are not included, so the installation requires Internet
+connection to download the packages of the product to install.
+
+:::
 
 ## Agama Live ISO (_only for development and testing_)
 
@@ -55,7 +63,11 @@ it is not optimized for production usage.
 
 ## Experimental self-update
 
-:::warning This feature is experimental and untested! :::
+:::warning
+
+This feature is experimental and untested!
+
+:::
 
 The Agama packages on the Live ISO can be automatically updated from the
 [OBS Devel project](https://build.opensuse.org/project/show/systemsmanagement:Agama:Devel).
@@ -63,8 +75,12 @@ The Agama packages on the Live ISO can be automatically updated from the
 - Use the `inst.self_update` boot parameter to run the self-update automatically during boot.
 - Or run the `agama-self-update` script anytime later in a running Live system.
 
-:::note After updating the packages the Agama servers need to be restarted. This will reset all you
-current Agama settings, you will need to start from scratch! :::
+:::note
+
+After updating the packages the Agama servers need to be restarted. This will reset all you current
+Agama settings, you will need to start from scratch!
+
+:::
 
 ## The access password
 
@@ -188,9 +204,12 @@ and then enter the password on the command line prompt.
 Alternatively you can use the `openssl passwd` command from the openSSL package. It offers less
 encryption methods but on the other hand it should be basically installed in every system.
 
-:::warning By default it uses a weak encryption method (DES or MD5 depending on the OpenSSL version)
-so you should always provide an additional encryption method parameter to select a stronger
-encryption! :::
+:::warning
+
+By default it uses a weak encryption method (DES or MD5 depending on the OpenSSL version) so you
+should always provide an additional encryption method parameter to select a stronger encryption!
+
+:::
 
 To create a SHA512 hash for your password run
 

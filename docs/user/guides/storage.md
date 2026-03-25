@@ -53,14 +53,17 @@ clearly the relationship between those settings and the system being used for in
 
 ![Selecting a device for installation](/img/user/storage-device.png)
 
-:::warning Under development The current user interface does not support all the possibilities that
-can be expressed by an Agama storage configuration. For example, there is not support yet for
-defining new RAID devices.
+:::warning
+
+Under development The current user interface does not support all the possibilities that can be
+expressed by an Agama storage configuration. For example, there is not support yet for defining new
+RAID devices.
 
 If a given configuration is not manageable by the web interface, then the storage section shows a
 message explaining the situation and offers to reset to the default settings. Such an alert is
 always shown if the loaded configuration uses
 [the legacy AutoYaST mode](../reference/profile/storage#unattended-installation-using-the-legacy-autoyast-mode).
+
 :::
 
 There are several interactive elements allowing to control several aspects of the installation.
