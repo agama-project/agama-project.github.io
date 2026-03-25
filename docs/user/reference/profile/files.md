@@ -23,7 +23,14 @@ file from), the permissions, the owner and the destination of the file.
 - `user`: user owner of the file (`"root"` by default).
 - `group`: group owner of the file (`"root"` by default).
 
-:::note Working with relative URLs
+:::note[Generating a file using a script]
+
+Unlike AutoYaST, Agama does not allow to generate the file using an script. For that use case, you
+might use the [scripts](./scripts) section.
+
+:::
+
+## Working with relative URLs
 
 If you use the `inst.auto` boot option to specify the URL of the profile, any relative URL will use
 the URL of the profile as its base.
@@ -62,10 +69,3 @@ in `/etc/issue.d`:
 
 Although the intention is to work with text files, Agama does not impose any limitation of the kind
 of files you can deploy. So using a URL to a binary file should work too.
-
-:::note Generating a file using a script
-
-Unlike AutoYaST, Agama does not allow to generate the file using an script. For that use case, you
-might use the [scripts](./scripts) section.
-
-:::

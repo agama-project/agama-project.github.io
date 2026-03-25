@@ -119,7 +119,7 @@ to specify its URL via the `registrationUrl` key.
 If you are using HTTPS, you might be interested in the
 [sslCertificates list](./security#list-of-trusted-certificates).
 
-:::note Using a boot argument
+:::note[Using a boot argument]
 
 Alternatively, you can specify the registration URL setting the
 [`register_url` boot argument](../boot_options).

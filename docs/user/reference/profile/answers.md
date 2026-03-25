@@ -69,17 +69,13 @@ Each answer object can have the following properties:
 The installer will attempt to match a question to an answer by checking the `class`, `text`, and
 `data` properties.
 
-:::note Partial data matching
-
 The installer performs a **partial match** on the `data` object. If your answer's `data` entry
 contains a subset of the properties in the question's data, it will still be considered a match if
 the values for the specified properties are identical. For example, a question might contain
 `{ "id": "123", "checksum": "abc", "name": "file.txt" }`, but you only need to specify
 `{ "checksum": "abc" }` to match it.
 
-:::
-
-:::warning
+:::warning[Beware of retries]
 
 The `Retry` value for the `answer` property could get the installation into an infinity loop. Avoid
 using `Retry` if you are not totally sure that the question is going to success at some point. In

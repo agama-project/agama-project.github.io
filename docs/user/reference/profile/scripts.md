@@ -12,7 +12,7 @@ Agama allows to execute scripts at the following points of the installation proc
 
 This section describes how to specify a script and goes through some use-cases.
 
-:::note `inst.script`
+:::note[`inst.script`]
 
 For a more general script feature wrapping the whole installation process, see
 [Fully scripted installation](/docs/overview/unattended#fully-scripted-installation) at the
@@ -85,7 +85,7 @@ All scripts share the same elements:
   are downloaded and written to the disk when loading the profile. In addition to the
   [supported URLs](../urls) you can use a URL relative to the profile (e.g., "/my-script.sh").
 
-:::note Working with relative URLs
+:::note[A note on relative URLs]
 
 If you use the `inst.auto` boot option to specify the URL of the profile, any relative URL will use
 the URL of the profile as its base.
@@ -103,7 +103,7 @@ Check the following sections to find out the differences between the script type
 The pre-installation scripts are executed before the system is analyzed. They are useful for
 enabling hardware, tweaking the installation media, etc.
 
-:::warning Pre-installation scripts cannot modify the current profile
+:::warning[Pre-installation scripts cannot modify the current profile]
 
 Unlike AutoYaST, the pre-installation scripts cannot modify the current profile. We recommend using
 Jsonnet to build a dynamic profile. If you need something that behaves exactly like AutoYaST, you
