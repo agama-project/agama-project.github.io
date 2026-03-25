@@ -3,5 +3,5 @@
 # top-most EditorConfig file
 root = true
 
-[*.md]
+[*.{md,mdx}]
 max_line_length = 100

@@ -163,3 +163,12 @@ import { Since } from "@site/src/components/Badge";
 ...
 `foo` <Since version="16.1"/>: configuration option for ...
 ```
+
+## Formatting the code
+
+For consistency reasons, it is a good idea to use a code formatter like [prettier](https://prettier.io/).
+To get the code formatted, run the `fmt` script:
+
+```
+$ yarn fmt
+```
