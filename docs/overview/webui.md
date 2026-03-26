@@ -11,20 +11,22 @@ the installation workflow.
 
 Agama allows installing several SUSE and openSUSE-based distributions. The
 [openSUSE-based image](/download) image includes [Tumbleweed](https://www.opensuse.org/#Tumbleweed),
-[Leap 16.0 Beta](https://get.opensuse.org/leap/16.0/),
-[Leap Micro 6.2 Beta](https://en.opensuse.org/Portal:Leap_Micro),
-[Slowroll](https://en.opensuse.org/Portal:Slowroll), [Kalpa](https://kalpadesktop.org/) and
-[openSUSE Micro OS](https://get.opensuse.org/microos/).
+[Slowroll](https://en.opensuse.org/Portal:Slowroll) and
+[openSUSE Micro OS](https://get.opensuse.org/microos/). Additionally, Agama is the installer for
+[openSUSE Leap](https://get.opensuse.org/leap) too.
 
 It is noteworthy to mention that the product selection does not only determine which software we
 will install, but it may affect other aspects like the system's partitioning.
 
-![Product selection screen offering openSUSE Leap, MicroOS and
+![Product selection screen offering Slowroll, MicroOS and
 Tumbleweed](/img/user/product-selection.png)
 
-Some products may offer different installation modes (for instance, a "standard" or an "immutable"
-mode, the latter providing an **immutable OS** with **transactional updates**). If the selected
-product supports multiple modes, choosing one is mandatory to proceed with the installation.
+Some products may, like SUSE Linux Enterprise Server, offer different installation modes (for
+instance, a "standard" or an "immutable" mode, the latter providing an **immutable OS** with
+**transactional updates**). If the selected product supports multiple modes, choosing one is
+mandatory to proceed with the installation.
+
+![Product selection with modes](/img/user/product-selection-modes.png)
 
 You can change the product later if you change your mind, but you should carefully check the
 configuration as some values can be reset.
@@ -32,29 +34,20 @@ configuration as some values can be reset.
 ## General layout {#layout}
 
 Once you select a product, Agama takes you to the _overview page_. In the main area, you can find a
-summary of the installation settings including localization, storage and software.
+summary of the installation settings including localization, network, storage, software,
+authentication, etc. The installer let you know if there is an error or something is missing in any
+of those areas.
 
 ![Overview of the installation settings](/img/user/overview.png)
 
-No matter whether you are at that initial **Overview** page or any other section of the installer,
-the `Install` button is always present and allows to, unsurprisingly, start the installation. Check
-the [Starting the installation](#installing) section for further information.
+You can find the button to start the installation in the bottom of this _overview page_. Check the
+[Starting the installation](#installing) section for further information. In the image above, the
+`Install` button cannot actually start the process because Agama is asking to setup some
+authentication method first.
 
-In the image above, the `Install` button cannot actually start the process because Agama is asking
-to setup some authentication method first. In some cases, other issues may also be reported. Maybe
-related to network access, to the partitioning of the hard disks or to the registration of certain
-products. We will go back to that, but before doing so it is worth to pay attention to the rest of
-the page layout.
-
-The **sidebar** at the left contains a set of links to navigate to different installer areas (e.g.,
-**Localization**, **Network**, **Storage**, etc.). You can follow those links to revisit and/or
-change the installation settings for those areas. This **sidebar** can be shown or hidden by
-clicking the icon at the top (the one with the three bars). It is important to know that, depending
-on the form factor of your device, this _sidebar_ could be automatically hidden.
-
-Finally, at the top right corner and next to the already mentioned `Install` button, there is
-another button to change the localization settings for the installer and a menu offering some
-special options, like the possibility of changing the chosen product as discussed above.
+Finally, at the top right corner there is another button to change the localization settings for the
+installer and a menu offering some special options, like the possibility of changing the chosen
+product as discussed above, downloading the logs or the current configuration in JSON format.
 
 ![Menu with special settings like changing product](/img/user/installer-menu.png)
 
@@ -81,8 +74,8 @@ take a look to the different areas of the Agama interface before proceeding.
 
 Agama makes it easy to adjust your network configuration. It allows setting up wired and wireless
 devices, specifying the mode (DHCP/manual), IP addresses, name servers, etc. Advanced connections
-types, like bridges or bonds, does not have support in the user interface yet. However, it is a
-matter of time that they get added, given that Agama supports many of them during an
+types, like bridges or bonds, do not have support in the user interface yet. However, it is a matter
+of time that they get added given that Agama supports many of them during an
 [unattended installation](./unattended.md) or using the [command-line interface](./cli.md).
 
 :::warning
@@ -138,7 +131,7 @@ the value you want to select.
 ## Software {#software}
 
 Agama software selection is rather simple. Depending on the product, it offers a reduced set of
-software pattern. The image below partially shows how the software selector looks like. As in other
+software patterns. The image below partially shows how the software selector looks like. As in other
 places of the interfaces, Agama offers a search box. If you need any advanced package selection, we
 suggest to do it once the system is installed.
 
@@ -146,11 +139,15 @@ suggest to do it once the system is installed.
 
 ## Starting the installation {#installing}
 
-As mentioned above, the `Install` button can be pressed at any time. If there are no issues
-preventing the installation, Agama will ask for confirmation. Once you accept, the installation
-starts.
+As mentioned above, the `Install` button is always present, but with minor changes depending on the
+situation:
+
+- When it is not possible to start the installation, usually because there is some configuration
+  problem you need to solve first, the button is disabled.
+- When the installation might cause data loss, for instance removing existing file systems, the
+  button text is adapted accordingly (_Install now with potential data loss_).
+- In other case, the button label reads _Install now_.
+
+Once you press the button, Agama will ask for confirmation.
 
 ![Confirmation after pressing the `Install` button](/img/user/install-button.png)
-
-The interface will then show the progress, allowing to reboot into the new system at the end of the
-installation.

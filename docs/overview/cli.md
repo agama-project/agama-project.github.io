@@ -19,7 +19,8 @@ a Linux console session as the user `root`. The easiest way to do show is to swi
 text consoles, for example pressing `Ctrl`+`Alt`+`F1`. Then you can log in as `root` using any
 password you may have setup [during boot](../user/reference/boot_options) or just typing the
 password you can find right above the login prompt. Notice that this password is freshly generated;
-it's different each time the live system is booted.
+it's different each time the live system boots. Alternatively, you can switch to `Ctrl` + `Alt` +
+`F8` where no authentication is required.
 
 Once you are logged as `root`, you have the `agama` command at your disposal.
 
@@ -34,7 +35,7 @@ agama config show | jq -C | less
 ```
 
 You can switch back and forth between the graphical console and several text consoles using key
-combinations like `Ctrl`+`Alt`+`F1` or `Ctrl`+`Alt`+`F2`... `Ctrl`+`Alt`+`F7`. The graphical
+combinations like `Ctrl`+`Alt`+`F1` or `Ctrl`+`Alt`+`F2`... `Ctrl`+`Alt`+`F8`. The graphical
 interface can usually be found at the second console or at the seventh, depending whether the live
 system is based on Wayland or X.Org. You can learn more about text consoles in the
 [corresponding section](../user/guides/collecting_logs.md#shell) of the document about collecting
