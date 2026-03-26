@@ -79,14 +79,3 @@ as part of the script:
 - `agama install`
 
 If `inst.auto` is also present, it is processed after `inst.script`.
-
-:::warning[Experimental feature]
-
-Long term backward compatibility is guaranteed for `inst.auto`, but `inst.script` is considered a
-last minute feature for SUSE Linux Enterprise 16.0 and openSUSE Leap 16.0. It may evolve in the
-following months, even in ways that may break recent `inst.script` programs.
-
-We plan to specify this feature better and stabilize it by SLE 16.1 and the corresponding Leap
-version.
-
-:::
