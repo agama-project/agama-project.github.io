@@ -17,7 +17,6 @@ Agama supports the following standard schemes[^1]:
 - `http` and `https` for HTTP and HTTPS.
 - `ftp` and `ftps` for FTP and FTP over TSL.
 - `smb` and `smbs` for the Server Message Block (SMB) protocol[^2].
-- `nfs` for the Network File System (NFS) protocol.
 - `file` for local files.
 
 In addition to those schemes, Agama supports a set of specific ones which can be rather useful:
