@@ -2,6 +2,8 @@
 sidebar_position: 9
 ---
 
+import { Since } from "@site/src/components/Badge";
+
 # Unattended installation
 
 Agama is able to install a system without user interaction. The user provides a definition of the
@@ -53,10 +55,24 @@ locations. Agama expects a file named `autoinst.jsonnet`, `autoinst.json` or `au
 order) to be located on:
 
 - The root of a file system named `OEMDRV`.
-- Or the root (`/`) of the installation environment.
+- <Since version="16.1" /> The root of the installation medium, see the instructions below.
+- Or the root (`/`) of the installation environment, in the root filesystem image located in the
+  `/LiveOS/squashfs.img` file in the ISO image.
 
 The first file found is used as the profile, starting the installation right away. If no profile is
 found, Agama will fall back to the interactive installation.
+
+### Injecting the installation profile into ISO image
+
+The installaiton profile can be added into the root of the installation medium using this command:
+
+```sh
+xorriso -indev agama.iso -outdev agama-auto.iso -boot_image any replay -map profile.json /autoinst.json
+```
+
+Where `agama.iso` is the input ISO image, `agama-auto.iso` is the name of the new modified ISO
+image, the `profile.json` is the installation profile copied to the `/autoinst.json` location in the
+new ISO.
 
 ## Fully scripted installation
 
