@@ -76,7 +76,7 @@ Agama makes it easy to adjust your network configuration. It allows setting up w
 devices, specifying the mode (DHCP/manual), IP addresses, name servers, etc. Advanced connections
 types, like bridges or bonds, do not have support in the user interface yet. However, it is a matter
 of time that they get added given that Agama supports many of them during an
-[unattended installation](./unattended.md) or using the [command-line interface](./cli.md).
+[unattended installation](./unattended.mdx) or using the [command-line interface](./cli.md).
 
 :::warning
 
