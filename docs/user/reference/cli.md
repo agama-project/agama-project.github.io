@@ -31,6 +31,7 @@ installation process, check the [corresponding section](/docs/overview/cli) of t
 * [`agama download`↴](#agama-download)
 * [`agama finish`↴](#agama-finish)
 * [`agama monitor`↴](#agama-monitor)
+* [`agama status`↴](#agama-status)
 * [`agama events`↴](#agama-events)
 
 ## `agama`
@@ -53,7 +54,8 @@ Please, use the "help" command to learn more.
 * `auth` — Authenticate with Agama's server
 * `download` — Download file from a given (AutoYaST) URL
 * `finish` — Finish the installation
-* `monitor` — Monitors the Agama service
+* `monitor` — Continuously monitors the Agama service until it finishes
+* `status` — Prints the current state of the installation (e.g., waiting, blocked, running, or finished)
 * `events` — Display Agama events
 
 ###### **Options:**
@@ -124,7 +126,7 @@ Read and load a profile
 
 Validate a profile using JSON Schema
 
-Schema is available at /usr/share/agama-cli/profile.schema.json Note: validation is always done as part of all other "agama config" commands.
+Schema is available at /usr/share/agama/schema/profile.schema.json Note: validation is always done as part of all other "agama config" commands.
 
 **Usage:** `agama config validate [OPTIONS] <URL_OR_PATH>`
 
@@ -246,7 +248,7 @@ Load predefined answers.
 
 It allows predefining answers for specific questions in order to skip them in interactive mode or change the answer in automatic mode.
 
-Please check Agama documentation for more details and examples: https://github.com/openSUSE/agama/blob/master/doc/questions.md
+Please check Agama documentation for more details and examples: https://github.com/openSUSE/agama/blob/master/doc/questions.
 
 **Usage:** `agama questions answers <PATH>`
 
@@ -380,21 +382,40 @@ Finish the installation
 
    stop - do not reboot and the Agama backend continues running.
 
-   reboot - reboot into the installed system.
+   reboot - reboot into the installed system. This value is the default. It can be overriden by setting the inst.finish kernel command-line argument.
 
    halt - halt the installed machine.
 
    poweroff - power off the installed machine.
 
-  Default value: `reboot`
-
 
 
 ## `agama monitor`
 
-Monitors the Agama service
+Continuously monitors the Agama service until it finishes
 
 **Usage:** `agama monitor`
+
+
+
+## `agama status`
+
+Prints the current state of the installation (e.g., waiting, blocked, running, or finished)
+
+**Usage:** `agama status [OPTIONS]`
+
+###### **Options:**
+
+* `--format <FORMAT>` — Specify in which format status will be shown
+
+  Default value: `text`
+
+  Possible values:
+  - `json`:
+    json format suitable for machine processing
+  - `text`:
+    textual format that is optimized to be read for humans, can change in future and can be localized
+
 
 
 
