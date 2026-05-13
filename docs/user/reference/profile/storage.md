@@ -2,6 +2,8 @@
 sidebar_position: 8
 ---
 
+import { Since } from "@site/src/components/Badge";
+
 # Storage
 
 The general concepts regarding configuration of storage devices with Agama are exposed at the
@@ -796,6 +798,183 @@ the _generate_ section:
               "luks2": { "password": "12345" }
             }
           }
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Encryption Options
+
+Agama supports encrypting drives, partitions, MD RAIDs, and logical volumes using various encryption
+methods. The encryption configuration is specified using an `encryption` property within the device
+definition.
+
+### LUKS1 Encryption
+
+LUKS1 (Linux Unified Key Setup version 1) is the legacy encryption format. It is recommended to use
+LUKS2 for new installations unless compatibility with older systems is required.
+
+```json
+"encryption": {
+  "luks1": {
+    "password": "my secret passphrase",
+    "cipher": "aes-xts-plain64",
+    "keySize": 256
+  }
+}
+```
+
+Properties:
+
+- `password` (required): Password to use when creating the encryption device.
+- `cipher` (optional): Encryption cipher compatible with cryptsetup's `--cipher` argument.
+- `keySize` (optional): Key size in bits. Must be a multiple of 8 and compatible with the cipher.
+
+### LUKS2 Encryption
+
+LUKS2 is the current standard for disk encryption in Linux, offering improved security and
+flexibility over LUKS1.
+
+```json
+"encryption": {
+  "luks2": {
+    "password": "my secret passphrase",
+    "cipher": "aes-xts-plain64",
+    "keySize": 512,
+    "pbkdFunction": "argon2id",
+    "label": "encrypted_root",
+    "tpm": true
+  }
+}
+```
+
+Properties:
+
+- `password` (required): Password to use when creating the encryption device.
+- `cipher` (optional): Encryption cipher compatible with cryptsetup's `--cipher` argument.
+- `keySize` (optional): Key size in bits. Must be a multiple of 8 and compatible with the cipher.
+- `pbkdFunction` (optional): Password-Based Key Derivation Function. Possible values: `pbkdf2`,
+  `argon2i`, `argon2id`.
+- `label` (optional): LUKS2 label for the encrypted device.
+- `tpm` (optional): <Since version="16.1"/> Whether to use TPM2 (Trusted Platform Module 2.0) for
+  unlocking. Default is `false`.
+
+### Pervasive LUKS2 Encryption
+
+Pervasive encryption is a specialized form of LUKS2 encryption available on IBM Z mainframe systems,
+which uses hardware-based encryption capabilities.
+
+```json
+"encryption": {
+  "pervasiveLuks2": {
+    "password": "my secret passphrase"
+  }
+}
+```
+
+Properties:
+
+- `password` (required): Password to use when creating the encryption device.
+
+### TPM-Based Full Disk Encryption
+
+:::warning[Deprecated]
+
+This encryption method is deprecated. Use LUKS2 with the `tpm` option set to `true` instead.
+
+:::
+
+```json
+"encryption": {
+  "tpmFde": {
+    "password": "my secret passphrase"
+  }
+}
+```
+
+### Swap Encryption
+
+For swap devices, Agama provides simplified encryption options that are suitable for swap space:
+
+- `randomSwap`: Encrypts swap with a random key generated at boot. No password required. Data is
+  lost on reboot.
+- `protectedSwap`: Encrypts swap using a key derived from the system. Provides protection while the
+  system is powered off.
+- `secureSwap`: Similar to protected swap with additional security measures.
+
+```json
+"encryption": "randomSwap"
+```
+
+Note: The snake_case variants (`random_swap`, `protected_swap`, `secure_swap`) are deprecated. Use
+camelCase instead.
+
+### Complete Encryption Examples
+
+#### Encrypted Partition with LUKS2
+
+```json
+"storage": {
+  "drives": [
+    {
+      "partitions": [
+        {
+          "size": "100 GiB",
+          "encryption": {
+            "luks2": {
+              "password": "my secret passphrase",
+              "label": "root_crypt"
+            }
+          },
+          "filesystem": {
+            "path": "/",
+            "type": "ext4"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Encrypted LVM Setup
+
+```json
+"storage": {
+  "drives": [
+    {
+      "partitions": [
+        {
+          "alias": "pv",
+          "id": "lvm",
+          "size": { "min": "50 GiB" },
+          "encryption": {
+            "luks2": {
+              "password": "my secret passphrase",
+              "tpm": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "volumeGroups": [
+    {
+      "name": "system",
+      "physicalVolumes": ["pv"],
+      "logicalVolumes": [
+        {
+          "name": "root",
+          "size": { "min": "30 GiB" },
+          "filesystem": { "path": "/", "type": "btrfs" }
+        },
+        {
+          "name": "swap",
+          "size": "2 GiB",
+          "encryption": "randomSwap",
+          "filesystem": { "path": "swap", "type": "swap" }
         }
       ]
     }
