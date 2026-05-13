@@ -167,11 +167,8 @@ const config: Config = {
 
   markdown: {
     mermaid: true,
-    hooks: {
-      onBrokenMarkdownLinks: "throw",
-      onBrokenMarkdownImages: "throw",
-    }
   },
+  onBrokenMarkdownLinks: "throw",
   themes: ["@docusaurus/theme-mermaid"],
   plugins: [
     // zoom images on click
@@ -188,7 +185,7 @@ const config: Config = {
         path: 'about',
         routeBasePath: 'about',
         sidebarPath: './sidebarsAbout.js',
-      } satisfies DocsOptions,
+      },
     ]
   ],
 };
