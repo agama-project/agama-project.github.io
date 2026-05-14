@@ -859,12 +859,15 @@ Properties:
   `argon2i`, `argon2id`.
 - `label` (optional): LUKS2 label for the encrypted device.
 - `tpm` (optional): <Since version="16.1"/> Whether to use TPM2 (Trusted Platform Module 2.0) for
-  unlocking. Default is `false`.
+  automatically unlocking the device during system boot. Default is `false`.
 
 ### Pervasive LUKS2 Encryption
 
-Pervasive encryption is a specialized form of LUKS2 encryption available on IBM Z mainframe systems,
-which uses hardware-based encryption capabilities.
+Pervasive encryption is a specialized form of LUKS2 encryption available on IBM Z mainframe systems.
+It encrypts the device using LUKS2 with a master secure key processed by a Crypto Express
+cryptographic coprocessor. The encryption password is used to protect the access to the master key.
+If there are several APQNs (Adjunct Processor Queue Number) in the system, you can select which ones
+to use.
 
 ```json
 "encryption": {
@@ -898,11 +901,18 @@ This encryption method is deprecated. Use LUKS2 with the `tpm` option set to `tr
 
 For swap devices, Agama provides simplified encryption options that are suitable for swap space:
 
-- `randomSwap`: Encrypts swap with a random key generated at boot. No password required. Data is
-  lost on reboot.
-- `protectedSwap`: Encrypts swap using a key derived from the system. Provides protection while the
-  system is powered off.
-- `secureSwap`: Similar to protected swap with additional security measures.
+- `randomSwap`: uses a randomly generated key at boot and Hibernation to hard disk is not supported.
+  The swap device is re-encrypted during every boot, and its previous content is destroyed. You
+  should disable Hibernation to avoid Data Loss! Please, only use encryption with volatile keys if
+  you are sure about the implications.
+
+- `protectedSwap`: uses a volatile protected AES key (without requiring a cryptographic
+  co-processor) to encrypt a swap device. This is an improvement over randomSwap method and all
+  considerations for such method still apply.
+
+- `secureSwap`: encryption available on IBM Z mainframe systems. It uses a volatile secure AES key
+  (generated from a cryptographic co-processor) for encrypting a swap device. This is an improvement
+  over randomSwap method and all considerations for such method still apply.
 
 ```json
 "encryption": "randomSwap"
@@ -913,7 +923,7 @@ camelCase instead.
 
 ### Complete Encryption Examples
 
-#### Encrypted Partition with LUKS2
+#### Encrypted Partitions with LUKS2
 
 ```json
 "storage": {
@@ -932,6 +942,10 @@ camelCase instead.
             "path": "/",
             "type": "ext4"
           }
+        },
+        {
+          "encryption": "randomSwap",
+          "filesystem": { "path": "swap" }
         }
       ]
     }
@@ -973,8 +987,7 @@ camelCase instead.
         {
           "name": "swap",
           "size": "2 GiB",
-          "encryption": "randomSwap",
-          "filesystem": { "path": "swap", "type": "swap" }
+          "filesystem": { "path": "swap" }
         }
       ]
     }
