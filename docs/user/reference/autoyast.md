@@ -1,4 +1,4 @@
-# AutoYaST compatibility
+# AutoYaST compatibility reference
 
 Let's describe which sections and elements from an AutoYaST profile are (or will be) supported in
 Agama. In some cases, you might find a table with the following columns:
@@ -12,19 +12,39 @@ Agama. In some cases, you might find a table with the following columns:
 - Agama: name of the Agama element.
 - Comment: any comment or reason about the element.
 
-:::warning
-
-AutoYaST support is not fully defined yet, which means that we might add support for more sections
-in the future even if we do not plan to do so now. However, we will do our best to keep this
-document up to date.
-
-Please, let us know if you miss support for any section.
-
-:::
-
 ## add-on
 
-There are plans to support this section in the future.
+This section is supported.
+
+### add-on/add_on_products
+
+This section is supported.
+
+| AutoYaST          | Supported | Agama        | Notes |
+| ----------------- | --------- | ------------ | ----- |
+| `media_url`       | yes       | `url`        |       |
+| `product_dir`     | yes       | `productDir` |       |
+| `product`         | no        |              |       |
+| `alias`           | yes       |              |       |
+| `priority`        | yes       |              |       |
+| `ask_on_error`    | no        |              |       |
+| `confirm_license` | no        |              |       |
+| `name`            | yes       |              |       |
+
+### add-on/add_on_others
+
+This section is supported.
+
+| AutoYaST          | Supported | Agama        | Notes |
+| ----------------- | --------- | ------------ | ----- |
+| `media_url`       | yes       | `url`        |       |
+| `product_dir`     | yes       | `productDir` |       |
+| `product`         | no        |              |       |
+| `alias`           | yes       |              |       |
+| `priority`        | yes       |              |       |
+| `ask_on_error`    | no        |              |       |
+| `confirm_license` | no        |              |       |
+| `name`            | yes       |              |       |
 
 ## bootloader
 
@@ -64,6 +84,17 @@ This section is supported.
 | `xen_append`        | no        |                                |       |
 | `xen_kernel_append` | no        |                                |       |
 
+## dasd
+
+This section is supported.
+
+| AutoYaST   | Supported | Agama | Notes |
+| ---------- | --------- | ----- | ----- |
+| `device`   | no        |       |       |
+| `dev_name` | no        |       |       |
+| `channel`  | yes       |       |       |
+| `diag`     | yes       |       |       |
+
 ## files
 
 This section is supported.
@@ -79,7 +110,24 @@ This section is supported.
 
 ## iscsi-client
 
-There are plans to support this section in the future.
+This section is supported.
+
+| AutoYaST        | Supported | Agama             | Notes |
+| --------------- | --------- | ----------------- | ----- |
+| `initiatorname` | yes       | `iscsi.initiator` |       |
+| `version`       | no        |                   |       |
+
+### iscsi-client/targets[]
+
+This section is supported.
+
+| AutoYaST     | Supported | Agama                       | Notes                                       |
+| ------------ | --------- | --------------------------- | ------------------------------------------- |
+| `authmethod` | no        |                             |                                             |
+| `portal`     | yes       | `iscsi.targets[].address`   | Splitted into two values, address and port. |
+| `startup`    | yes       |                             |                                             |
+| `target`     | yes       | `iscsi.targets[].name`      |                                             |
+| `iface`      | yes       | `iscsi.targets[].interface` |                                             |
 
 ## kdump
 
@@ -214,6 +262,25 @@ same.
 | `wireless_wpa_identity`        | no        |                                      |                                                  |
 | `wireless_wpa_password`        | yes       | `password`                           |                                                  |
 | `wireless_wpa_psk`             | yes       | `password`                           |                                                  |
+
+## ntp-client
+
+This section is supported.
+
+| AutoYaST     | Supported | Agama | Notes |
+| ------------ | --------- | ----- | ----- |
+| `ntp_policy` | no        |       |       |
+| `ntp_sync`   | no        |       |       |
+
+### ntp-client/ntp_servers[]
+
+This section is supported. All servers are considered of type "pool"
+
+| AutoYaST  | Supported | Agama                   | Notes |
+| --------- | --------- | ----------------------- | ----- |
+| `address` | yes       | `ntp.sources[].address` |       |
+| `iburst`  | yes       | `ntp.sources[].iburst`  |       |
+| `offline` | yes       | `ntp.sources[].offline` |       |
 
 ## proxy
 
@@ -363,7 +430,7 @@ This section is supported.
 | `email`                            | yes       | `product.registrationEmail`              |                                                                          |
 | `install_updates`                  | no        |                                          |                                                                          |
 | `reg_code`                         | yes       | `product.registrationCode`               |                                                                          |
-| `reg_server`                       | planned   |                                          |                                                                          |
+| `reg_server`                       | yes       | `product.registrationUrl`                |                                                                          |
 | `reg_server_cert`                  | no        |                                          |                                                                          |
 | `reg_server_cert_fingerprint`      | yes       | `security.sslCertificates[].fingerprint` |                                                                          |
 | `reg_server_cert_fingerprint_type` | yes       | `security.sslCertificates[].algorithm`   |                                                                          |
@@ -389,7 +456,11 @@ This section is supported. Only the root and the first user are considered.
 | `fullName`        | yes       | `user.fullName`       |                                                                |
 | `password`        | yes       | `user.password`       |                                                                |
 | `encrypted`       | yes       | `user.hashedPassword` | If set to true, it uses "hashedPassword" instead of "password" |
-| `authorized_keys` | yes       | `root.sshPublicKey`   |                                                                |
+| `authorized_keys` | yes       | `root.sshPublicKeys`  |                                                                |
+
+## zfcp
+
+This section is supported.
 
 ## Unsupported sections
 
@@ -413,7 +484,6 @@ The following sections are not supported and there are no plans to support them 
 - `nfs_server`
 - `nis`
 - `nis_server`
-- `ntp-client`
 - `printer`
 - `report`
 - `samba-client`
