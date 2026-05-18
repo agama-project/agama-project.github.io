@@ -189,6 +189,15 @@ options at the end of the `linux` line.
   proxy=http://192.168.122.1:3128
   ```
 
+- `rd.ntp`: sets the time sources to synchronize the date/time. You can specify multiple time
+  sources by using this option several times. The installation media will try to synchronize the
+  date/time while booting, before Agama starts. The given configuration will be copied by Agama to
+  the installed system.
+
+  ```text
+  rd.ntp=pool:1.opensuse.pool.ntp.org:iburst
+  ```
+
 - `systemd.unit`: standard way to change target for systemd boot. It is useful for head-less mode
   when graphical interface neither browser needs to be started locally.
 
