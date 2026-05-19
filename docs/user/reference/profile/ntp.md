@@ -44,5 +44,7 @@ source can specify:
 
 :::note
 
-If you need to synchronize the date/time befor Agama starts (e.g., if your system does not have a
+If you need to synchronize the date/time before Agama starts (e.g., if your system does not have a
 clock), check the [`rd.ntp` boot option](./../boot_options).
+
+:::
