@@ -866,13 +866,13 @@ Properties:
 Pervasive encryption is a specialized form of LUKS2 encryption available on IBM Z mainframe systems.
 It encrypts the device using LUKS2 with a master secure key processed by a Crypto Express
 cryptographic coprocessor. The encryption password is used to protect the access to the master key.
-If there are several APQNs (Adjunct Processor Queue Number) in the system, you can select which ones
-to use.
 
 ```json
 "encryption": {
   "pervasiveLuks2": {
-    "password": "my secret passphrase"
+    "password": "my secret passphrase",
+    "apqns": ["01.0001", "01.0002"],
+    "keyType": "CCA-AESDATA"
   }
 }
 ```
@@ -880,6 +880,11 @@ to use.
 Properties:
 
 - `password` (required): Password to use when creating the encryption device.
+- `apqns` (optional): List of APQNs (Adjunct Processor Queue Numbers) used to generate secure keys.
+  Each APQN is specified as a string (e.g., `"01.0001"`). If not specified, Agama will use the
+  available APQNs in the system.
+- `keyType` (optional): Type of the generated secure key. Possible values: `EP11-AES`,
+  `CCA-AESCIPHER`, `CCA-AESDATA`.
 
 ### TPM-Based Full Disk Encryption
 
