@@ -125,6 +125,19 @@ options at the end of the `linux` line.
   libzypp in the `/var/log/YaST2/autoTestcase` directory and the `inst.solver_testcase` option is
   ignored.
 
+- `inst.systemd_boot_preview=1`: <Since version="16.1"/> Enables the systemd-boot bootloader as a
+  preview feature.
+
+  :::note
+
+  This is a preview feature for testing systemd-boot support. It will automatically fall back to
+  using grub2 bootloader if the system does not meet
+  [BLS requirements](https://uapi-group.org/specifications/specs/boot_loader_specification/). This
+  option may disappear in the future, after finishing the testing period for the systemd-boot
+  support.
+
+  :::
+
 - `inst.install`: on unattended mode, Agama automatically starts the installation after reading the
   profile. However, if you set `inst.install` to `0`, Agama stops after reading the configuration,
   giving the user a chance to review the installation options before proceeding.

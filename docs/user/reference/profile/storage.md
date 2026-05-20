@@ -2,6 +2,8 @@
 sidebar_position: 8
 ---
 
+import { Since } from "@site/src/components/Badge";
+
 # Storage
 
 The general concepts regarding configuration of storage devices with Agama are exposed at the
@@ -796,6 +798,204 @@ the _generate_ section:
               "luks2": { "password": "12345" }
             }
           }
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Encryption Options
+
+Agama supports encrypting drives, partitions, MD RAIDs, and logical volumes using various encryption
+methods. The encryption configuration is specified using an `encryption` property within the device
+definition.
+
+### LUKS1 Encryption
+
+LUKS1 (Linux Unified Key Setup version 1) is the legacy encryption format. It is recommended to use
+LUKS2 for new installations unless compatibility with older systems is required.
+
+```json
+"encryption": {
+  "luks1": {
+    "password": "my secret passphrase",
+    "cipher": "aes-xts-plain64",
+    "keySize": 256
+  }
+}
+```
+
+Properties:
+
+- `password` (required): Encryption passphrase used to open the device.
+- `cipher` (optional): Encryption cipher compatible with cryptsetup's `--cipher` argument.
+- `keySize` (optional): Key size in bits. Must be a multiple of 8 and compatible with the cipher.
+
+### LUKS2 Encryption
+
+LUKS2 is the current standard for disk encryption in Linux, offering improved security and
+flexibility over LUKS1.
+
+```json
+"encryption": {
+  "luks2": {
+    "password": "my secret passphrase",
+    "cipher": "aes-xts-plain64",
+    "keySize": 512,
+    "pbkdFunction": "argon2id",
+    "label": "encrypted_root",
+    "tpm": true
+  }
+}
+```
+
+Properties:
+
+- `password` (required): Encryption passphrase used to open the device.
+- `cipher` (optional): Encryption cipher compatible with cryptsetup's `--cipher` argument.
+- `keySize` (optional): Key size in bits. Must be a multiple of 8 and compatible with the cipher.
+- `pbkdFunction` (optional): Password-Based Key Derivation Function. Possible values: `pbkdf2`,
+  `argon2i`, `argon2id`.
+- `label` (optional): LUKS2 label for the encrypted device.
+- `tpm` (optional): <Since version="16.1"/> Whether to use TPM2 (Trusted Platform Module 2.0) for
+  automatically unlocking the device during system boot. Default is `false`.
+
+### Pervasive LUKS2 Encryption
+
+Pervasive encryption is a specialized form of LUKS2 encryption available on IBM Z mainframe systems.
+It encrypts the device using LUKS2 with a master secure key processed by a Crypto Express
+cryptographic coprocessor. The encryption password is used to protect the access to the master key.
+
+```json
+"encryption": {
+  "pervasiveLuks2": {
+    "password": "my secret passphrase",
+    "apqns": ["01.0001", "01.0002"],
+    "keyType": "CCA-AESDATA"
+  }
+}
+```
+
+Properties:
+
+- `password` (required): Encryption passphrase used to protect the access to the master key.
+- `apqns` (optional): List of APQNs (Adjunct Processor Queue Numbers) used to generate secure keys.
+  Each APQN is specified as a string (e.g., `"01.0001"`). All the APQNs used for generating the
+  secure key must have the same master key. If not specified, all online APQNs in the system will be
+  used.
+- `keyType` (optional): Type of the generated secure key. When using EP11 APQNs, the only supported
+  key type is `EP11-AES`. When using CCA APQNs, the key types `CCA-AESCIPHER` and `CCA-AESDATA` can
+  be used. If the key type is not specified, it will be automatically chosen based on the used
+  APQNs.
+
+### TPM-Based Full Disk Encryption
+
+:::warning[Deprecated]
+
+This encryption method is deprecated. Use LUKS2 with the `tpm` option set to `true` instead.
+
+:::
+
+```json
+"encryption": {
+  "tpmFde": {
+    "password": "my secret passphrase"
+  }
+}
+```
+
+### Swap Encryption
+
+Agama provides specific encryption options for swap space:
+
+- `randomSwap`: uses a randomly generated key at boot and Hibernation to hard disk is not supported.
+  The swap device is re-encrypted during every boot, and its previous content is destroyed. You
+  should disable Hibernation to avoid Data Loss! Please, only use encryption with volatile keys if
+  you are sure about the implications.
+
+- `protectedSwap`: uses a volatile protected AES key (without requiring a cryptographic
+  co-processor) to encrypt a swap device. This is an improvement over randomSwap method and all
+  considerations for such method still apply.
+
+- `secureSwap`: encryption available on IBM Z mainframe systems. It uses a volatile secure AES key
+  (generated from a cryptographic co-processor) for encrypting a swap device. This is an improvement
+  over randomSwap method and all considerations for such method still apply.
+
+```json
+"encryption": "randomSwap"
+```
+
+Note: The snake_case variants (`random_swap`, `protected_swap`, `secure_swap`) are deprecated. Use
+camelCase instead.
+
+### Complete Encryption Examples
+
+#### Encrypted Partitions with LUKS2
+
+```json
+"storage": {
+  "drives": [
+    {
+      "partitions": [
+        {
+          "size": "100 GiB",
+          "encryption": {
+            "luks2": {
+              "password": "my secret passphrase",
+              "label": "root_crypt"
+            }
+          },
+          "filesystem": {
+            "path": "/",
+            "type": "ext4"
+          }
+        },
+        {
+          "encryption": "randomSwap",
+          "filesystem": { "path": "swap" }
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Encrypted LVM Setup
+
+```json
+"storage": {
+  "drives": [
+    {
+      "partitions": [
+        {
+          "alias": "pv",
+          "id": "lvm",
+          "size": { "min": "50 GiB" },
+          "encryption": {
+            "luks2": {
+              "password": "my secret passphrase",
+              "tpm": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "volumeGroups": [
+    {
+      "name": "system",
+      "physicalVolumes": ["pv"],
+      "logicalVolumes": [
+        {
+          "name": "root",
+          "size": { "min": "30 GiB" },
+          "filesystem": { "path": "/", "type": "btrfs" }
+        },
+        {
+          "name": "swap",
+          "size": "2 GiB",
+          "filesystem": { "path": "swap" }
         }
       ]
     }
