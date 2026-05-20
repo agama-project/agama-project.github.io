@@ -5,31 +5,47 @@ tags:
   - release
 ---
 
-Change this text: write an introduction explaining we didn't blog about version 20 but we will cover
-improvements from both 20 and 21 in this blog post.
+We know, we know. We skipped a blog post for version 20 and you may be wondering what happened. The truth is that we were heads-down working on several significant improvements and decided to focus on shipping rather than writing. But don't worry! This release announcement covers the most relevant changes introduced in both versions 20 and 21.
+
+{/* truncate */}
+
+From a revamped software selection interface that makes choosing your desktop environment crystal clear, to comprehensive network management features including bonding and bridging support, to the long-awaited ability to reuse existing LVM setups. And if that wasn't enough, we also added NTP configuration and made the command-line tools more useful for tracking the installation progress. Let's dive into the details.
 
 ## Shedding some light on the desktops {#software}
 
-Change this text: base the new text on the description of https://github.com/agama-project/agama/pull/3396
+For openSUSE users, selecting the right desktop environment is often one of the first decisions during installation. However, in previous versions of Agama, the software page did not clearly distinguish between desktop environment selection and general pattern selection. This made it difficult for users to tell whether a desktop had been selected or which one was active.
+
+The new software selection interface solves this problem by separating desktop environment and pattern selection into clearly defined sections. Now you can easily see which desktop environments are available and select the one you want without getting lost in a sea of patterns.
+
+Additionally, auto-selected patterns now have a visible label so you can easily distinguish them from your manual selections. We also truncated lengthy pattern descriptions to improve readability and make the interface easier to scan. As a bonus, we fixed a bug where removed patterns were still appearing in the selected list.
 
 ## Better network management in the web UI {#network}
 
-Change this text: base the new text on the content of https://github.com/agama-project/agama/pull/3386
-https://github.com/agama-project/agama/pull/3412 and https://github.com/agama-project/agama/pull/3435
+Network configuration has received some serious attention in these releases. We completely redesigned the network connection form in the web UI to deliver a significantly improved user experience. The new form uses TanStack Form for robust field state management, provides independent IP configuration modes, and offers integrated device binding options with better validation feedback. One particularly nice touch is that validation is deferred until submission, so you won't be interrupted with error messages while you're still filling out the form.
+
+But the improvements don't stop there. We also added support for more advanced network configurations that were previously only available through unattended installation. You can now configure network bonding directly from the web interface, making it easier to set up redundant network connections. The bonding configuration allows you to select the bond mode, choose which network interfaces to bond, and configure other bonding-specific options.
+
+And if bonding wasn't enough, we also added support for configuring network bridges. Whether you need a simple bridge or want to enable and configure Spanning Tree Protocol (STP) settings, the new interface has you covered.
 
 ## Install on an existing LVM setup {#lvm}
 
-Change this text: base the text on https://github.com/agama-project/agama/pull/3210 and https://github.com/agama-project/agama/pull/3330
+One of the most requested features has finally arrived: the ability to reuse existing LVM volume groups and logical volumes. Until now, if you had an existing LVM setup on your system, Agama couldn't take advantage of it. You had to start from scratch or work around it.
+
+Now you can search for and reuse existing volume groups and their logical volumes. The implementation supports creating normal volumes, thin pools, and thin volumes. You can even create new thin volumes inside a reused thin pool. Just like with partitions, you can specify which logical volumes should be deleted or resized to make space for new ones. And if you need more physical volumes in an existing volume group, you can add them too (although they must be explicitly specified and cannot be created on demand).
+
+The web interface includes a new tabbed device selector that makes it easy to choose between disks, RAID arrays, and LVM volume groups. The selector automatically switches to the appropriate tab based on your current selection and shows contextual alerts about the side-effects of changing devices. The confirm button even adapts its label dynamically, showing "Add", "Keep", or "Change to" depending on the current state.
 
 ## NTP configuration {#ntp}
 
-Change this text: base the new text on https://github.com/agama-project/agama/pull/3446
-https://github.com/agama-project/agama/pull/3473 and https://github.com/agama-project/agama/pull/3482
+Agama now supports NTP configuration management for both the running installation system and the target system. The new `agama-ntp` service uses chronyd under the hood and supports pool, server, and peer NTP sources with iburst and offline options. The configuration is written to `/etc/chrony.d/99-agama.conf` on the live system and automatically copied to the target system during installation. After any configuration changes, chronyd is reloaded automatically.
+
+For those of you using AutoYaST profiles, we have good news: Agama can now import the `ntp-client` section from your existing AutoYaST profiles and automatically convert it to the corresponding Agama configuration. This makes migration from AutoYaST to Agama even smoother.
+
+The web interface received a nice organizational improvement to accommodate NTP configuration. We transformed the old hostname page into a more generic "System" section that groups small system-related settings without promoting them to top-level areas. This new System page currently includes both hostname and NTP configuration. You can choose between the default NTP configuration or define your own custom NTP sources.
 
 ## Usability improvements in the command-line tools {#cli}
 
-Change this text: Explain we introduced improvements in the command-line tools making them more
-useful to track information about the current state of the installation process
+The command-line interface received several enhancements that make it more useful for tracking the current state of the installation process. Whether you're automating installations or just prefer working from the terminal, the improved CLI tools provide better visibility into what Agama is doing at any given moment. These improvements make it easier to monitor installations, debug issues, and integrate Agama into your existing automation workflows.
 
 ## Restrict network access to the installer {#int-remote}
 
@@ -37,5 +53,8 @@ By default the Agama installer can be accessed remotely from other machines or m
 
 ## More to come {#conclusion}
 
-Change this text: Explain we plan to focus a bit more in stabilization than in new features. But
-still we plan to release a new version in a month that will come with some cool new stuff.
+After these two feature-packed releases, we're planning to shift our focus a bit more toward stabilization and polish. That doesn't mean development is slowing down, though! We still plan to release Agama 22 in about a month, and it will include some cool new features alongside the stability improvements.
+
+As always, we appreciate your feedback and contributions. You can reach the YaST team at the [YaST Development mailing list](https://lists.opensuse.org/archives/list/yast-devel@lists.opensuse.org/), our `#yast` channel at [Libera.chat](https://libera.chat/) or the [Agama project at GitHub](https://github.com/agama-project/agama).
+
+Have a lot of fun!
