@@ -828,7 +828,7 @@ LUKS2 for new installations unless compatibility with older systems is required.
 
 Properties:
 
-- `password` (required): Password to use when creating the encryption device.
+- `password` (required): Encryption passphrase used to open the device.
 - `cipher` (optional): Encryption cipher compatible with cryptsetup's `--cipher` argument.
 - `keySize` (optional): Key size in bits. Must be a multiple of 8 and compatible with the cipher.
 
@@ -852,7 +852,7 @@ flexibility over LUKS1.
 
 Properties:
 
-- `password` (required): Password to use when creating the encryption device.
+- `password` (required): Encryption passphrase used to open the device.
 - `cipher` (optional): Encryption cipher compatible with cryptsetup's `--cipher` argument.
 - `keySize` (optional): Key size in bits. Must be a multiple of 8 and compatible with the cipher.
 - `pbkdFunction` (optional): Password-Based Key Derivation Function. Possible values: `pbkdf2`,
@@ -879,12 +879,15 @@ cryptographic coprocessor. The encryption password is used to protect the access
 
 Properties:
 
-- `password` (required): Password to use when creating the encryption device.
+- `password` (required): Encryption passphrase used to protect the access to the master key.
 - `apqns` (optional): List of APQNs (Adjunct Processor Queue Numbers) used to generate secure keys.
-  Each APQN is specified as a string (e.g., `"01.0001"`). If not specified, Agama will use the
-  available APQNs in the system.
-- `keyType` (optional): Type of the generated secure key. Possible values: `EP11-AES`,
-  `CCA-AESCIPHER`, `CCA-AESDATA`.
+  Each APQN is specified as a string (e.g., `"01.0001"`). All the APQNs used for generating the
+  secure key must have the same master key. If not specified, all online APQNs in the system will be
+  used.
+- `keyType` (optional): Type of the generated secure key. When using EP11 APQNs, the only supported
+  key type is `EP11-AES`. When using CCA APQNs, the key types `CCA-AESCIPHER` and `CCA-AESDATA` can
+  be used. If the key type is not specified, it will be automatically chosen based on the used
+  APQNs.
 
 ### TPM-Based Full Disk Encryption
 
@@ -904,7 +907,7 @@ This encryption method is deprecated. Use LUKS2 with the `tpm` option set to `tr
 
 ### Swap Encryption
 
-For swap devices, Agama provides simplified encryption options that are suitable for swap space:
+Agama provides specific encryption options for swap space:
 
 - `randomSwap`: uses a randomly generated key at boot and Hibernation to hard disk is not supported.
   The swap device is re-encrypted during every boot, and its previous content is destroyed. You
