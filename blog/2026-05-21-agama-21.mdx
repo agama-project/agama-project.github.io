@@ -27,12 +27,12 @@ That was not obvious enough in previous versions of Agama. As a result, it was t
 installing a system with no graphical interface at all. The resulting text-based system could be
 daunting for many users, especially newbies to openSUSE or GNU/Linux in general.
 
-Now the situation is more obvious in the main summary screen of the installer and in the software
-selection section.
+Now the situation is more clearly presented in the main summary screen of the installer and in the
+software selection section.
 
 ![Revamped software selection screen](../static/img/blog/2026-05-21/software.png)
 
-We took the opportunity to rethink several aspect of the form used to select patterns. Now it works
+We took the opportunity to rethink several aspects of the form used to select patterns. Now it works
 in a way that is more consistent with the rest of the Agama interface and it presents the
 information in a more useful way.
 
@@ -103,7 +103,7 @@ if the user decided to do so.
 
 For products that still rely on Grub2, like the beta versions of openSUSE Leap 16.1 and SUSE
 Enterprise Linux Server 16.1, the user can force the usage of Systemd-boot where possible by
-starting the installation with the boot argument `inst.preview_systemd_boot=1`.
+starting the installation with the boot argument `inst.systemd_boot_preview=1`.
 
 ## NTP configuration {#ntp}
 
@@ -133,7 +133,7 @@ or by using the `rd.ntp` boot option.
 
 ## Restrict network access to the installer {#remote}
 
-And talking about installations and network, you already know that by default Agama allows to
+Speaking of installations and network, you already know that by default Agama allows to
 control the installation process over the network from another computer or mobile device. But that
 is a feature that could come with security implications in some scenarios.
 
