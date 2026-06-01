@@ -805,6 +805,37 @@ the _generate_ section:
 }
 ```
 
+### Space Policy for Auto-Generated Physical Volumes <Since version="16.1"/>
+
+When auto-generating physical volumes, the `spacePolicy` option controls how much space from the
+target devices is used. Two policies are available:
+
+- **`useNeeded`** (default): Only the space needed to allocate the logical volumes is used. For
+  example, if two disks are selected as target devices and everything fits into the first disk, the
+  second disk is not used at all. This is the default to maintain backward compatibility with
+  existing profiles.
+
+- **`useAvailable`**: All available space in the target devices is used for the volume group. This
+  is the policy used when creating volume groups through the UI.
+
+```json
+"storage": {
+  "volumeGroups": [
+    {
+      "name": "system",
+      "physicalVolumes": [
+        {
+          "generate": {
+            "targetDevices": ["pvs-disk1", "pvs-disk2"],
+            "spacePolicy": "useAvailable"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## Encryption Options
 
 Agama supports encrypting drives, partitions, MD RAIDs, and logical volumes using various encryption
