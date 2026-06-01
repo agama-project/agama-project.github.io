@@ -1,0 +1,29 @@
+---
+sidebar_position: 1
+---
+
+import { Since } from "@site/src/components/Badge";
+
+# Access
+
+The `access` section allows configuring access to the installed system.
+
+It supports the following elements:
+
+- `ssh`: whether SSH access is enabled. Supported values are:
+  - `"enabled"`: ensures SSH is accessible. Still root login via password can be restricted
+    by product configuration.
+  - `"default"`: keeps the product's default behavior.
+- `webConsole`: whether web console access is enabled. Supported values are:
+  - `"enabled"`: ensures web console is accessible. Still root login can be prevented by
+    cockpit configuration in `/etc/cockpit/disallowed-users` by product.
+  - `"default"`: keeps the product's default behavior.
+
+```json
+{
+  "access": {
+    "ssh": "enabled",
+    "webConsole": "default"
+  }
+}
+```
