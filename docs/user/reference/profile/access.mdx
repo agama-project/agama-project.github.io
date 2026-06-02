@@ -1,0 +1,30 @@
+---
+sidebar_position: 16
+---
+
+import { Since } from "@site/src/components/Badge";
+
+# Access
+
+The `access` section allows configuring access to the installed system.
+
+It supports the following elements:
+
+- `ssh`: whether SSH access is enabled. If omitted, SSH access is automatically enabled if either
+  the `user` or `root` section defines `sshPublicKeys`. Supported values are:
+  - `"enabled"`: ensures SSH is accessible. However, root login via password can still be restricted
+    by the product's default configuration.
+  - `"default"`: keeps the product's default behavior.
+- `webConsole`: whether web console access is enabled. Supported values are:
+  - `"enabled"`: ensures the web console is accessible. However, root login can still be prevented
+    by the product's default configuration.
+  - `"default"`: keeps the product's default behavior.
+
+```json
+{
+  "access": {
+    "ssh": "enabled",
+    "webConsole": "default"
+  }
+}
+```
