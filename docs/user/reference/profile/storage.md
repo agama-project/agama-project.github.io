@@ -820,6 +820,16 @@ target devices is used. Two policies are available:
 
 ```json
 "storage": {
+  "drives": [
+    {
+      "search": "/dev/vda",
+      "alias": "pvs-disk1"
+    },
+    {
+      "search": "/dev/vdb",
+      "alias": "pvs-disk2"
+    }
+  ],
   "volumeGroups": [
     {
       "name": "system",
