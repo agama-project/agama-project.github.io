@@ -161,8 +161,12 @@ If you want to remove the password setting from the ISO image then run:
 tagmedia --remove-tag live_password agama.iso
 ```
 
-:::danger The image usually already contains some other tags, like the checksums for verifying the
-medium integrity. Do not touch them! :::
+:::danger
+
+The image usually already contains some other tags, like the checksums for verifying the medium
+integrity. Do not touch them!
+
+:::
 
 ### Random password as a fallback
 
