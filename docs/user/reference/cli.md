@@ -304,8 +304,9 @@ operations. You can log in by specifying the root password through the "auth log
 successful authentication, the server returns a JSON Web Token (JWT) which is stored to authenticate
 the following requests.
 
-If you run this program as root, you can skip the authentication step because it automatically uses
-the master token at /run/agama/token. Only the root user must have access to such a file.
+If you run this program locally as root, you can skip the authentication step because it
+automatically uses the master token at /run/agama/token. Only the root user must have access to such
+a file.
 
 You can logout at any time by using the "auth logout" command, although this command does not affect
 the root user.
