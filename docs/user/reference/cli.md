@@ -36,7 +36,7 @@ installation process, check the [corresponding section](/docs/overview/cli) of t
 
 ## `agama`
 
-Agama's command-line interface
+Agama's command-line interface.
 
 This program allows inspecting or changing Agama's configuration, handling installation profiles,
 starting the installation, monitoring the process, etc.
@@ -93,7 +93,7 @@ the "load" subcommand.
 - `show` — Generate an installation profile with the current settings
 - `load` — Read and load a profile
 - `validate` — Validate a profile using JSON Schema
-- `generate` — Generate and print a native Agama JSON configuration from any kind and location.
+- `generate` — Generate and print a native Agama JSON configuration from any kind and location
 - `edit` — Edit and update installation option using an external editor
 
 ## `agama config show`
@@ -123,7 +123,7 @@ Read and load a profile
 
 ## `agama config validate`
 
-Validate a profile using JSON Schema
+Validate a profile using JSON Schema.
 
 Schema is available at /usr/share/agama/schema/profile.schema.json Note: validation is always done
 as part of all other "agama config" commands.
@@ -342,7 +342,7 @@ Print the used token to the standard output
 
 ## `agama download`
 
-Download file from a given (AutoYaST) URL
+Download file from a given (AutoYaST) URL.
 
 The purpose of this command is to download files using AutoYaST supported schemas (e.g. device://).
 It can be used to download additional scripts, configuration files and so on. You can use it for
