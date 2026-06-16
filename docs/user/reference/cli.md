@@ -186,7 +186,7 @@ Analyze the system.
 
 In Agama's jargon, the term 'probing' refers to the process of 'analyzing' the system. This includes
 reading software repositories, analyzing storage devices, and more. The 'probe' command initiates
-this analysis process and returns immediately. TODO: do we really need a "probe" action?
+this analysis process and returns immediately.
 
 **Usage:** `agama probe`
 
