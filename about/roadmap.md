@@ -7,61 +7,44 @@ sidebar_position: 3
 Agama is a project under constant development and priorities are re-evaluated every few weeks. This
 page offers an overview on the current state of the ever-changing development plans.
 
-## Agama 21 (latest released version)
-
-- Improved usability of the command-line tools.
-- Compatibility with Systemd-boot.
-- Configuration of NTP sources.
-- Web-based graphical user interface:
-  - Improved software section.
-  - A more guided desktop selection for openSUSE.
-  - Management of non-ethernet network connections like bonding and bridges.
-- Profile-based (unattended) installation:
-  - Customize APQNs and key type when defining PAES-encrypted volumes.
-- Agama-live installation media:
-  - Disable remote web-server access during installation.
-
-## Agama 22 (~ June 15th)
+## Agama 22 (latest released version)
 
 - Dedicated setting to configure remote access to the installed system (SSH, Cockpit, etc.)
 - Better adjusted sizes in the partitions for booting.
 - Improvements in network management.
+- Command-line interface:
+  - Answer questions directly from the monitor
+  - Usability improvements
 - Web-based graphical user interface:
-  - Improvements to configure authentication.
+  - Redesigned header and toolbar
+  - Dark and light modes
+  - Usability improvements downloading the installer logs and configuration.
   - Management of VLAN connections.
   - More understandable configuration of multi-disk LVM volume groups.
+  - Advanced settings for file systems
+  - Improvements to configure authentication.
 
 ## Agama 23 (~ July 20th)
 
-- Improvements when installing a system in immutable mode.
-- Better error reporting and handling for invalid profiles and other configuration errors.
 - Cleanup of the HTTP API.
 - Web-based graphical user interface:
+  - Improved i18n configuration
   - Integrate a command-line terminal.
-  - Usability improvements downloading the installer logs and configuration.
-  - Enhancements in the management of file systems including labels, formatting and mounting
-    options, etc.
 - Profile-based (unattended) installation:
   - More possibilities for the `search` option in the `storage` section.
-- Command-line interface:
-  - Usability improvements, especially regarding questions.
-  - Allow to get both the explicit config and the extended one.
 
-## Mid term plans (autumn 2026)
+## Mid term plans
 
 - Introduce the concept of security profiles.
 - Support for NVMeOF.
+- Improve integration with other tools.
 - Profile-based (unattended) installation:
   - Specify the boot loader to install.
   - Allow to configure a password for the boot loader.
   - More convenient encryption settings.
-  - Configure connection to NFS shares.
 
 ## Long term plans (2027)
 
-- Deal with multiple real-time clocks.
-- Partial support for importing ask-lists from AutoYaST profiles.
-- Improve integration with other tools.
 - Showing individual licenses of packages.
 - Improve mechanism to ask existing encryption passwords (allow to reuse the password).
 - Re-evaluate some aspects of storage handling:
