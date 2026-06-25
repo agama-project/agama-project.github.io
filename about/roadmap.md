@@ -43,7 +43,7 @@ page offers an overview on the current state of the ever-changing development pl
   - Allow to configure a password for the boot loader.
   - More convenient encryption settings.
 
-## Long term plans (2027)
+## Long term plans
 
 - Showing individual licenses of packages.
 - Improve mechanism to ask existing encryption passwords (allow to reuse the password).
