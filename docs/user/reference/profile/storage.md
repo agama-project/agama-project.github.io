@@ -589,9 +589,52 @@ Since `driver` takes a single value, matching several drivers requires the `or` 
 #### Matching Partitions by Id <Since version="16.1"/>
 
 The `id` leaf matches the partition id and is only accepted for `partitions`. It uses the same
-values accepted by the `id` property used to create a partition, like `esp`, `bios_boot`, `linux`,
-`swap`, `lvm`, `raid` or `ntfs`. The full list contains all the partition ids managed by
-libstorage-ng, some of which are only valid for a given partition table type.
+values accepted by the `id` property used to create a partition. The following table lists all valid
+values, including the partition table types they apply to.
+
+| Value                | Description                                                                                                   | Partition Table             |
+| -------------------- | ------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| `dos12`              | FAT12 partition                                                                                               | MS-DOS                      |
+| `dos16`              | FAT16 partition                                                                                               | MS-DOS                      |
+| `ntfs`               | NTFS or HPFS partition                                                                                        | MS-DOS                      |
+| `dos32`              | FAT32 partition                                                                                               | MS-DOS                      |
+| `extended`           | Extended partition                                                                                            | MS-DOS                      |
+| `diag`               | Diagnostics partition                                                                                         | MS-DOS, GPT                 |
+| `prep`               | PPC PReP boot partition                                                                                       | MS-DOS, GPT                 |
+| `swap`               | Swap partition                                                                                                | MS-DOS, GPT, DASD           |
+| `linux`              | Linux partition                                                                                               | MS-DOS, GPT, DASD, implicit |
+| `irst`               | Intel Rapid Start Technology partition                                                                        | MS-DOS, GPT                 |
+| `lvm`                | LVM partition                                                                                                 | MS-DOS, GPT, DASD           |
+| `raid`               | RAID partition                                                                                                | MS-DOS, GPT, DASD           |
+| `xbootldr`           | [Boot Loader Specification](https://uapi-group.org/specifications/specs/boot_loader_specification/) partition | MS-DOS, GPT                 |
+| `esp`                | EFI System Partition                                                                                          | MS-DOS, GPT                 |
+| `bios_boot`          | [BIOS boot partition](https://en.wikipedia.org/wiki/BIOS_boot_partition)                                      | GPT                         |
+| `windows_basic_data` | Windows basic data partition                                                                                  | GPT                         |
+| `microsoft_reserved` | Microsoft reserved partition                                                                                  | GPT                         |
+| `linux_home`         | Linux Home partition                                                                                          | GPT                         |
+| `linux_server_data`  | Linux Server Data partition                                                                                   | GPT                         |
+| `linux_root_arm`     | Linux Root Partition (arm)                                                                                    | GPT                         |
+| `linux_root_aarch64` | Linux Root Partition (aarch64)                                                                                | GPT                         |
+| `linux_root_ppc32`   | Linux Root Partition (ppc)                                                                                    | GPT                         |
+| `linux_root_ppc64be` | Linux Root Partition (ppc64be)                                                                                | GPT                         |
+| `linux_root_ppc64le` | Linux Root Partition (ppc64le)                                                                                | GPT                         |
+| `linux_root_riscv32` | Linux Root Partition (riscv32)                                                                                | GPT                         |
+| `linux_root_riscv64` | Linux Root Partition (riscv64)                                                                                | GPT                         |
+| `linux_root_s390`    | Linux Root Partition (s390)                                                                                   | GPT                         |
+| `linux_root_s390x`   | Linux Root Partition (s390x)                                                                                  | GPT                         |
+| `linux_root_x86`     | Linux Root Partition (x86)                                                                                    | GPT                         |
+| `linux_root_x86_64`  | Linux Root Partition (x86_64)                                                                                 | GPT                         |
+| `linux_usr_arm`      | Linux USR Partition (arm)                                                                                     | GPT                         |
+| `linux_usr_aarch64`  | Linux USR Partition (aarch64)                                                                                 | GPT                         |
+| `linux_usr_ppc32`    | Linux USR Partition (ppc)                                                                                     | GPT                         |
+| `linux_usr_ppc64be`  | Linux USR Partition (ppc64be)                                                                                 | GPT                         |
+| `linux_usr_ppc64le`  | Linux USR Partition (ppc64le)                                                                                 | GPT                         |
+| `linux_usr_riscv32`  | Linux USR Partition (riscv32)                                                                                 | GPT                         |
+| `linux_usr_riscv64`  | Linux USR Partition (riscv64)                                                                                 | GPT                         |
+| `linux_usr_s390`     | Linux USR Partition (s390)                                                                                    | GPT                         |
+| `linux_usr_s390x`    | Linux USR Partition (s390x)                                                                                   | GPT                         |
+| `linux_usr_x86`      | Linux USR Partition (x86)                                                                                     | GPT                         |
+| `linux_usr_x86_64`   | Linux USR Partition (x86_64)                                                                                  | GPT                         |
 
 ```json
 { "search": { "condition": { "id": "esp" } } }
