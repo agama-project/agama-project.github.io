@@ -331,6 +331,294 @@ partitions of the chosen disk. But it only will work if the disk indeed contains
 }
 ```
 
+### Search Conditions
+
+The `condition` of a `search` section holds a tree of criteria. Leaves match a property of the
+device and the logical operators combine them. Which leaves are accepted depends on the type of
+device being searched.
+
+| Leaf                 | `drives` | `mdRaids` | `partitions` | `logicalVolumes` | `volumeGroups` |
+| -------------------- | :------: | :-------: | :----------: | :--------------: | :------------: |
+| `name`               |    ✓     |     ✓     |      ✓       |        ✓         |       ✓        |
+| `size`               |    ✓     |     ✓     |      ✓       |        ✓         |       ✓        |
+| `number`             |    —     |     —     |      ✓       |        —         |       —        |
+| `and` / `or` / `not` |    ✓     |     ✓     |      ✓       |        ✓         |       ✓        |
+| `filesystem`         |    ✓     |     ✓     |      ✓       |        ✓         |       —        |
+| `partitions`         |    ✓     |     ✓     |      —       |        —         |       —        |
+| `driver`             |    ✓     |     —     |      —       |        —         |       —        |
+| `boss`               |    ✓     |     —     |      —       |        —         |       —        |
+| `id`                 |    —     |     —     |      ✓       |        —         |       —        |
+
+Using a leaf in a search that does not accept it results in an invalid profile.
+
+#### Matching by Name and Size
+
+`name` matches the name of the device. Both the kernel name and a persistent udev name can be used.
+
+```json
+{ "search": { "condition": { "name": "/dev/vda" } } }
+```
+
+`size` accepts a plain size or an object with `equal`, `greater` or `less`.
+
+```json
+{ "search": { "condition": { "size": "10 GiB" } } }
+
+{ "search": { "condition": { "size": { "greater": "10 GiB" } } } }
+```
+
+`number` matches the partition number, so `1` corresponds to `/dev/vda1`.
+
+```json
+{ "search": { "condition": { "number": 1 } } }
+```
+
+#### Combining Conditions <Since version="16.1"/>
+
+Conditions can be combined with three logical operators.
+
+- `and` takes an array of conditions and matches when all of them match.
+- `or` takes an array of conditions and matches when at least one of them matches.
+- `not` takes a single condition and matches when that condition does not match.
+
+The arrays of `and` and `or` must contain at least two conditions.
+
+Operators can be nested arbitrarily and can wrap any of the leaves. For example, to match drives
+bigger than 10 GiB except `/dev/vdb`:
+
+```json
+{
+  "search": {
+    "condition": {
+      "and": [{ "size": { "greater": "10 GiB" } }, { "not": { "name": "/dev/vdb" } }]
+    }
+  }
+}
+```
+
+To match either of two drives:
+
+```json
+{
+  "search": {
+    "condition": {
+      "or": [{ "name": "/dev/vda" }, { "name": "/dev/vdb" }]
+    }
+  }
+}
+```
+
+A more elaborate example, matching one of two drives as long as it is not smaller than 1 GiB:
+
+```json
+{
+  "search": {
+    "condition": {
+      "and": [
+        { "or": [{ "name": "/dev/vda" }, { "name": "/dev/vdb" }] },
+        { "not": { "size": { "less": "1 GiB" } } }
+      ]
+    }
+  }
+}
+```
+
+#### Matching by File System <Since version="16.1"/>
+
+The `filesystem` leaf matches devices by their file system. It takes one of three forms.
+
+The strings "any" and "none" match, respectively, any formatted device and any unformatted one.
+
+```json
+{ "search": { "condition": { "filesystem": "any" } } }
+
+{ "search": { "condition": { "filesystem": "none" } } }
+```
+
+An object matches a formatted device whose file system satisfies the given condition. Note the
+object form always implies the device is formatted, so there is no need to combine it with "any".
+The accepted keys are `type` and `label`.
+
+```json
+{ "search": { "condition": { "filesystem": { "type": "ext4" } } } }
+
+{ "search": { "condition": { "filesystem": { "label": "data" } } } }
+```
+
+The object accepts its own `and`, `or` and `not` operators. They apply to the file system, so they
+are independent from the operators used at the device level. This matches devices formatted as Btrfs
+with a label other than "root".
+
+```json
+{
+  "search": {
+    "condition": {
+      "filesystem": {
+        "and": [{ "type": "btrfs" }, { "not": { "label": "root" } }]
+      }
+    }
+  }
+}
+```
+
+Of course, the leaf composes with the device-level operators. This matches a partition bigger than
+10 GiB formatted as XFS.
+
+```json
+{
+  "search": {
+    "condition": {
+      "and": [{ "size": { "greater": "10 GiB" } }, { "filesystem": { "type": "xfs" } }]
+    }
+  }
+}
+```
+
+#### Matching by Partitions <Since version="16.1"/>
+
+The `partitions` leaf matches partitionable devices by the presence or the properties of their
+partitions. It is only accepted for `drives` and `mdRaids`.
+
+The strings "any" and "none" match, respectively, a device with at least one partition and a device
+with no partitions at all.
+
+```json
+{ "search": { "condition": { "partitions": "any" } } }
+
+{ "search": { "condition": { "partitions": "none" } } }
+```
+
+An object allows to check the partitions against a condition using one of four quantifiers. The
+quantifiers `any`, `none` and `all` take a partition condition, with the same syntax used to search
+partitions elsewhere in the profile.
+
+```json
+{ "search": { "condition": { "partitions": { "any": { "size": { "greater": "10 GiB" } } } } } }
+
+{ "search": { "condition": { "partitions": { "none": { "filesystem": "any" } } } } }
+
+{ "search": { "condition": { "partitions": { "all": { "filesystem": { "type": "xfs" } } } } } }
+```
+
+Beware that `all` also requires the device to have at least one partition, so a device with no
+partitions never matches it.
+
+The fourth quantifier, `count`, restricts the number of partitions with `min`, `max` or both. At
+least one of the two limits must be specified and neither of them can be smaller than one.
+
+```json
+{ "search": { "condition": { "partitions": { "count": { "min": 2 } } } } }
+
+{ "search": { "condition": { "partitions": { "count": { "max": 3 } } } } }
+```
+
+By default `count` considers all the partitions of the device. Adding a `condition` restricts the
+count to the partitions matching it. This matches devices containing between two and five partitions
+bigger than 10 GiB.
+
+```json
+{
+  "search": {
+    "condition": {
+      "partitions": {
+        "count": {
+          "condition": { "size": { "greater": "10 GiB" } },
+          "min": 2,
+          "max": 5
+        }
+      }
+    }
+  }
+}
+```
+
+This matches a disk bigger than 100 GiB containing an Ext4 partition.
+
+```json
+{
+  "search": {
+    "condition": {
+      "and": [
+        { "size": { "greater": "100 GiB" } },
+        { "partitions": { "any": { "filesystem": { "type": "ext4" } } } }
+      ]
+    }
+  }
+}
+```
+
+#### Matching Drives by Hardware <Since version="16.1"/>
+
+The leaves `driver` and `boss` are only accepted for `drives`.
+
+`driver` matches the devices handled by the given kernel driver, as reported by hwinfo. A device can
+be handled by several drivers, in which case it matches if any of them is the given one.
+
+```json
+{ "search": { "condition": { "driver": "ahci" } } }
+```
+
+Do not confuse the driver with the driver module. The values of the latter usually contain
+underscores and suffixes, like `virtio_pci` instead of `virtio-pci` or `ahci_mod` instead of `ahci`.
+
+Since `driver` takes a single value, matching several drivers requires the `or` operator.
+
+```json
+{
+  "search": {
+    "condition": {
+      "or": [{ "driver": "ahci" }, { "driver": "sd" }]
+    }
+  }
+}
+```
+
+`boss` is a boolean indicating whether the device is a BOSS (Boot Optimized Storage Solution). Use
+`false` to match any other device. This matches a disk bigger than 100 GiB that is not a BOSS.
+
+```json
+{
+  "search": {
+    "condition": {
+      "and": [{ "boss": false }, { "size": { "greater": "100 GiB" } }]
+    }
+  }
+}
+```
+
+#### Matching Partitions by Id <Since version="16.1"/>
+
+The `id` leaf matches the partition id and is only accepted for `partitions`. It uses the same
+values accepted by the `id` property used to create a partition, like `esp`, `bios_boot`, `linux`,
+`swap`, `lvm`, `raid` or `ntfs`. The full list contains all the partition ids managed by
+libstorage-ng, some of which are only valid for a given partition table type.
+
+```json
+{ "search": { "condition": { "id": "esp" } } }
+```
+
+This matches a formatted Linux partition.
+
+```json
+{
+  "search": {
+    "condition": {
+      "and": [{ "id": "linux" }, { "filesystem": "any" }]
+    }
+  }
+}
+```
+
+The leaf works anywhere a partition condition is accepted. That includes the partitions marked for
+deletion and the quantifiers of a `partitions` leaf, so this matches a disk with no EFI system
+partition.
+
+```json
+{ "search": { "condition": { "partitions": { "none": { "id": "esp" } } } } }
+```
+
+### When Nothing Matches
+
 If there is not a single system device matching the scope and the conditions of a given search, then
 `ifNotFound` comes into play. If the value is "skip", the device definition is ignored. If it's
 "error" the whole process is aborted.
@@ -348,6 +636,8 @@ drive, it will be considered to contain the following one.
   }
 }
 ```
+
+### Search Shortcuts
 
 In some common cases, the syntax of a `search` subsection can be cumbersome. For that reason, it is
 possible to use simple strings in some situations.
