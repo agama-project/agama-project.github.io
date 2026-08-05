@@ -20,31 +20,31 @@ This section is supported.
 
 This section is supported.
 
-| AutoYaST          | Supported | Agama        | Notes |
-| ----------------- | --------- | ------------ | ----- |
-| `media_url`       | yes       | `url`        |       |
-| `product_dir`     | yes       | `productDir` |       |
-| `product`         | no        |              |       |
-| `alias`           | yes       |              |       |
-| `priority`        | yes       |              |       |
-| `ask_on_error`    | no        |              |       |
-| `confirm_license` | no        |              |       |
-| `name`            | yes       |              |       |
+| AutoYaST          | Supported | Agama                                     | Notes |
+| ----------------- | --------- | ----------------------------------------- | ----- |
+| `media_url`       | yes       | `software.extraRepositories[].url`        |       |
+| `product_dir`     | yes       | `software.extraRepositories[].productDir` |       |
+| `alias`           | yes       | `software.extraRepositories[].alias`      |       |
+| `priority`        | yes       | `software.extraRepositories[].priority`   |       |
+| `name`            | yes       | `software.extraRepositories[].name`       |       |
+| `product`         | no        |                                           |       |
+| `ask_on_error`    | no        |                                           |       |
+| `confirm_license` | no        |                                           |       |
 
 ### add-on/add_on_others
 
 This section is supported.
 
-| AutoYaST          | Supported | Agama        | Notes |
-| ----------------- | --------- | ------------ | ----- |
-| `media_url`       | yes       | `url`        |       |
-| `product_dir`     | yes       | `productDir` |       |
-| `product`         | no        |              |       |
-| `alias`           | yes       |              |       |
-| `priority`        | yes       |              |       |
-| `ask_on_error`    | no        |              |       |
-| `confirm_license` | no        |              |       |
-| `name`            | yes       |              |       |
+| AutoYaST          | Supported | Agama                                     | Notes                     |
+| ----------------- | --------- | ----------------------------------------- | ------------------------- |
+| `media_url`       | yes       | `software.extraRepositories[].url`        |                           |
+| `product_dir`     | yes       | `software.extraRepositories[].productDir` | Agama ignores this value. |
+| `alias`           | yes       | `software.extraRepositories[].alias`      |                           |
+| `priority`        | yes       | `software.extraRepositories[].priority`   |                           |
+| `name`            | yes       | `software.extraRepositories[].name`       |                           |
+| `product`         | no        |                                           |                           |
+| `ask_on_error`    | no        |                                           |                           |
+| `confirm_license` | no        |                                           |                           |
 
 ## bootloader
 
@@ -99,14 +99,14 @@ This section is supported.
 
 This section is supported.
 
-| AutoYaST           | Supported | Agama               | Notes                                                              |
-| ------------------ | --------- | ------------------- | ------------------------------------------------------------------ |
-| `file_path`        | yes       | `files.destination` | Creating directories by using trailing slash is not yet supported. |
-| `file_contents`    | yes       | `files.content`     |                                                                    |
-| `file_location`    | yes       | `files.url`         |                                                                    |
-| `file_owner`       | yes       |                     | In agama it is split to files.user and files.group                 |
-| `file_permissions` | yes       |                     |                                                                    |
-| `file_script`      | planned   |                     |                                                                    |
+| AutoYaST           | Supported | Agama                 | Notes                                                              |
+| ------------------ | --------- | --------------------- | ------------------------------------------------------------------ |
+| `file_path`        | yes       | `files[].destination` | Creating directories by using trailing slash is not yet supported. |
+| `file_contents`    | yes       | `files[].content`     |                                                                    |
+| `file_location`    | yes       | `files[].url`         |                                                                    |
+| `file_owner`       | yes       |                       | In agama it is split to files[].user and files[].group             |
+| `file_permissions` | yes       | `files[].permissions` |                                                                    |
+| `file_script`      | planned   |                       |                                                                    |
 
 ## iscsi-client
 
@@ -121,13 +121,13 @@ This section is supported.
 
 This section is supported.
 
-| AutoYaST     | Supported | Agama                       | Notes                                       |
-| ------------ | --------- | --------------------------- | ------------------------------------------- |
-| `authmethod` | no        |                             |                                             |
-| `portal`     | yes       | `iscsi.targets[].address`   | Splitted into two values, address and port. |
-| `startup`    | yes       |                             |                                             |
-| `target`     | yes       | `iscsi.targets[].name`      |                                             |
-| `iface`      | yes       | `iscsi.targets[].interface` |                                             |
+| AutoYaST     | Supported | Agama                       | Notes                                                                       |
+| ------------ | --------- | --------------------------- | --------------------------------------------------------------------------- |
+| `authmethod` | no        |                             |                                                                             |
+| `portal`     | yes       | `iscsi.targets[].address`   | Splitted into two values, iscsi.targets[].address and iscsi.targets[].port. |
+| `startup`    | yes       | `iscsi.targets[].startup`   |                                                                             |
+| `target`     | yes       | `iscsi.targets[].name`      |                                                                             |
+| `iface`      | yes       | `iscsi.targets[].interface` |                                                                             |
 
 ## kdump
 
@@ -137,25 +137,25 @@ There are plans to support this section in the future.
 
 This section is supported.
 
-| AutoYaST   | Supported | Agama                   | Notes |
-| ---------- | --------- | ----------------------- | ----- |
-| `keymap`   | yes       | `localization.keyboard` |       |
-| `capslock` | no        |                         |       |
-| `delay`    | no        |                         |       |
-| `discaps`  | no        |                         |       |
-| `numlock`  | no        |                         |       |
-| `rate`     | no        |                         |       |
-| `scrlock`  | no        |                         |       |
-| `tty`      | no        |                         |       |
+| AutoYaST   | Supported | Agama           | Notes |
+| ---------- | --------- | --------------- | ----- |
+| `keymap`   | yes       | `l10n.keyboard` |       |
+| `capslock` | no        |                 |       |
+| `delay`    | no        |                 |       |
+| `discaps`  | no        |                 |       |
+| `numlock`  | no        |                 |       |
+| `rate`     | no        |                 |       |
+| `scrlock`  | no        |                 |       |
+| `tty`      | no        |                 |       |
 
 ## language
 
 This section is supported.
 
-| AutoYaST    | Supported | Agama                   | Notes |
-| ----------- | --------- | ----------------------- | ----- |
-| `language`  | yes       | `localization.language` |       |
-| `languages` | no        |                         |       |
+| AutoYaST    | Supported | Agama           | Notes |
+| ----------- | --------- | --------------- | ----- |
+| `language`  | yes       | `l10n.language` |       |
+| `languages` | no        |                 |       |
 
 ## networking
 
@@ -180,88 +180,88 @@ This section is supported.
 
 This section is supported.
 
-| AutoYaST             | Supported | Agama                                  | Notes                      |
-| -------------------- | --------- | -------------------------------------- | -------------------------- |
-| `dhcp_hostname`      | no        |                                        |                            |
-| `hostname`           | yes       | `hostname.static`                      |                            |
-| `nameservers`        | yes       | `network.connections[].nameservers`    | Copied to each connection. |
-| `resolv_conf_policy` | no        |                                        |                            |
-| `searchlist`         | yes       | `network.connections[].dns_searchlist` | Copied to each connection. |
+| AutoYaST             | Supported | Agama                                 | Notes                      |
+| -------------------- | --------- | ------------------------------------- | -------------------------- |
+| `dhcp_hostname`      | no        |                                       |                            |
+| `hostname`           | yes       | `hostname.static`                     |                            |
+| `nameservers`        | yes       | `network.connections[].nameservers`   | Copied to each connection. |
+| `resolv_conf_policy` | no        |                                       |                            |
+| `searchlist`         | yes       | `network.connections[].dnsSearchList` | Copied to each connection. |
 
 ### networking/interfaces[]
 
 This section is supported. It corresponds to Agama `connections`, but the format is not exactly the
 same.
 
-| AutoYaST                       | Supported | Agama                                | Notes                                            |
-| ------------------------------ | --------- | ------------------------------------ | ------------------------------------------------ |
-| `device`                       | yes       | `interface`                          |                                                  |
-| `name`                         | yes       | `id`                                 |                                                  |
-| `description`                  | no        |                                      |                                                  |
-| `bootproto`                    | no        | `method6`                            | Different set of values.                         |
-| `startmode`                    | no        |                                      | Do not set up network connections you won't use. |
-| `lladdr`                       | yes       | `macAddress`                         |                                                  |
-| `ifplugd_priority`             | no        |                                      | Not relevant (no ifplugd support).               |
-| `usercontrol`                  | no        |                                      |                                                  |
-| `dhclient_set_hostname`        | no        |                                      |                                                  |
-| `ipaddr`                       | yes       | `network.connections[].address[]`    |                                                  |
-| `prefixlen`                    | yes       | `network.connections[].address[]`    |                                                  |
-| `netmask`                      | yes       | `network.connections[].address[]`    |                                                  |
-| `aliases`                      | yes       | `network.connections[].address[]`    |                                                  |
-| `broadcast`                    | yes       | `network.connections[].address[]`    |                                                  |
-| `network`                      | yes       | `network.connections[].address[]`    |                                                  |
-| `mtu`                          | no        |                                      |                                                  |
-| `ethtool_options`              | no        |                                      |                                                  |
-| `wireless`                     | yes       | `wireless`                           | It uses a different format.                      |
-| `dhclient_set_down_link`       | no        |                                      |                                                  |
-| `dhclient_set_default_route`   | no        |                                      |                                                  |
-| `zone`                         | no        |                                      |                                                  |
-| `firewall`                     | no        |                                      |                                                  |
-| `bonding_master`               | planned   |                                      |                                                  |
-| `bonding_module_opts`          | yes       | `network.connections[].bond.options` |                                                  |
-| `bonding_slave0`               | yes       | `network.connections[].bond.ports`   |                                                  |
-| `bonding_slave1`               | yes       | `network.connections[].bond.ports`   |                                                  |
-| `bonding_slave2`               | yes       | `network.connections[].bond.ports`   |                                                  |
-| `bonding_slave3`               | yes       | `network.connections[].bond.ports`   |                                                  |
-| `bonding_slave4`               | yes       | `network.connections[].bond.ports`   |                                                  |
-| `bonding_slave5`               | yes       | `network.connections[].bond.ports`   |                                                  |
-| `bonding_slave6`               | yes       | `network.connections[].bond.ports`   |                                                  |
-| `bonding_slave7`               | yes       | `network.connections[].bond.ports`   |                                                  |
-| `bonding_slave8`               | yes       | `network.connections[].bond.ports`   |                                                  |
-| `bonding_slave9`               | yes       | `network.connections[].bond.ports`   |                                                  |
-| `bridge`                       | planned   |                                      |                                                  |
-| `bridge_forwarddelay`          | planned   |                                      |                                                  |
-| `bridge_ports`                 | planned   |                                      |                                                  |
-| `bridge_stp`                   | planned   |                                      |                                                  |
-| `vlan_id`                      | planned   |                                      |                                                  |
-| `wireless_auth_mode`           | yes       |                                      |                                                  |
-| `wireless_ap`                  | no        |                                      |                                                  |
-| `wireless_bitrate`             | no        |                                      |                                                  |
-| `wireless_ca_cert`             | no        |                                      |                                                  |
-| `wireless_channel`             | no        |                                      |                                                  |
-| `wireless_client_cert`         | no        |                                      |                                                  |
-| `wireless_client_key`          | no        |                                      |                                                  |
-| `wireless_client_key_password` | no        |                                      |                                                  |
-| `wireless_default_key`         | no        |                                      |                                                  |
-| `wireless_eap_auth`            | no        |                                      |                                                  |
-| `wireless_eap_mode`            | no        |                                      |                                                  |
-| `wireless_essid`               | yes       | `ssid`                               |                                                  |
-| `wireless_frequency`           | no        |                                      |                                                  |
-| `wireless_key`                 | no        |                                      |                                                  |
-| `wireless_key_0`               | no        |                                      |                                                  |
-| `wireless_key_1`               | no        |                                      |                                                  |
-| `wireless_key_2`               | no        |                                      |                                                  |
-| `wireless_key_3`               | no        |                                      |                                                  |
-| `wireless_key_length`          | no        |                                      |                                                  |
-| `wireless_mode`                | yes       | `mode`                               |                                                  |
-| `wireless_nick`                | no        |                                      |                                                  |
-| `wireless_nwid`                | no        |                                      |                                                  |
-| `wireless_peap_version`        | no        |                                      |                                                  |
-| `wireless_power`               | no        |                                      |                                                  |
-| `wireless_wpa_anonid`          | no        |                                      |                                                  |
-| `wireless_wpa_identity`        | no        |                                      |                                                  |
-| `wireless_wpa_password`        | yes       | `password`                           |                                                  |
-| `wireless_wpa_psk`             | yes       | `password`                           |                                                  |
+| AutoYaST                       | Supported | Agama                                     | Notes                                                                        |
+| ------------------------------ | --------- | ----------------------------------------- | ---------------------------------------------------------------------------- |
+| `device`                       | yes       | `network.connections[].interface`         |                                                                              |
+| `name`                         | yes       | `network.connections[].id`                |                                                                              |
+| `description`                  | no        |                                           |                                                                              |
+| `bootproto`                    | no        |                                           | Different set of values.                                                     |
+| `startmode`                    | no        |                                           | Do not set up network connections you won't use.                             |
+| `lladdr`                       | yes       | `network.connections[].macAddress`        |                                                                              |
+| `ifplugd_priority`             | no        |                                           | Not relevant (no ifplugd support).                                           |
+| `usercontrol`                  | no        |                                           |                                                                              |
+| `dhclient_set_hostname`        | no        |                                           |                                                                              |
+| `ipaddr`                       | yes       | `network.connections[].addresses[]`       |                                                                              |
+| `prefixlen`                    | yes       | `network.connections[].addresses[]`       |                                                                              |
+| `netmask`                      | yes       | `network.connections[].addresses[]`       |                                                                              |
+| `aliases`                      | yes       | `network.connections[].addresses[]`       |                                                                              |
+| `broadcast`                    | yes       | `network.connections[].addresses[]`       |                                                                              |
+| `network`                      | yes       | `network.connections[].addresses[]`       |                                                                              |
+| `mtu`                          | no        |                                           |                                                                              |
+| `ethtool_options`              | no        |                                           |                                                                              |
+| `wireless`                     | yes       | `wireless`                                | It uses a different format.                                                  |
+| `dhclient_set_down_link`       | no        |                                           |                                                                              |
+| `dhclient_set_default_route`   | no        |                                           |                                                                              |
+| `zone`                         | no        |                                           |                                                                              |
+| `firewall`                     | no        |                                           |                                                                              |
+| `bonding_master`               | planned   |                                           |                                                                              |
+| `bonding_module_opts`          | yes       | `network.connections[].bond.options`      |                                                                              |
+| `bonding_slave0`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
+| `bonding_slave1`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
+| `bonding_slave2`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
+| `bonding_slave3`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
+| `bonding_slave4`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
+| `bonding_slave5`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
+| `bonding_slave6`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
+| `bonding_slave7`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
+| `bonding_slave8`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
+| `bonding_slave9`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
+| `bridge`                       | planned   |                                           |                                                                              |
+| `bridge_forwarddelay`          | planned   |                                           |                                                                              |
+| `bridge_ports`                 | planned   |                                           |                                                                              |
+| `bridge_stp`                   | planned   |                                           |                                                                              |
+| `vlan_id`                      | planned   |                                           |                                                                              |
+| `wireless_auth_mode`           | yes       | `network.connections[].wireless.security` | Map 'psk' to 'wpa-psk' and 'eap' to 'wpa-eap'; anything else becomes 'none'. |
+| `wireless_ap`                  | no        |                                           |                                                                              |
+| `wireless_bitrate`             | no        |                                           |                                                                              |
+| `wireless_ca_cert`             | no        |                                           |                                                                              |
+| `wireless_channel`             | no        |                                           |                                                                              |
+| `wireless_client_cert`         | no        |                                           |                                                                              |
+| `wireless_client_key`          | no        |                                           |                                                                              |
+| `wireless_client_key_password` | no        |                                           |                                                                              |
+| `wireless_default_key`         | no        |                                           |                                                                              |
+| `wireless_eap_auth`            | no        |                                           |                                                                              |
+| `wireless_eap_mode`            | no        |                                           |                                                                              |
+| `wireless_essid`               | yes       | `network.connections[].wireless.ssid`     | Map 'ad-hoc' to 'adhoc', 'master' to 'ap' and 'managed' to 'infrastructure'. |
+| `wireless_frequency`           | no        |                                           |                                                                              |
+| `wireless_key`                 | no        |                                           |                                                                              |
+| `wireless_key_0`               | no        |                                           |                                                                              |
+| `wireless_key_1`               | no        |                                           |                                                                              |
+| `wireless_key_2`               | no        |                                           |                                                                              |
+| `wireless_key_3`               | no        |                                           |                                                                              |
+| `wireless_key_length`          | no        |                                           |                                                                              |
+| `wireless_mode`                | yes       | `mode`                                    |                                                                              |
+| `wireless_nick`                | no        |                                           |                                                                              |
+| `wireless_nwid`                | no        |                                           |                                                                              |
+| `wireless_peap_version`        | no        |                                           |                                                                              |
+| `wireless_power`               | no        |                                           |                                                                              |
+| `wireless_wpa_anonid`          | no        |                                           |                                                                              |
+| `wireless_wpa_identity`        | no        |                                           |                                                                              |
+| `wireless_wpa_password`        | yes       | `network.connections[].wireless.password` |                                                                              |
+| `wireless_wpa_psk`             | yes       | `network.connections[].wireless.password` |                                                                              |
 
 ## ntp-client
 
@@ -329,18 +329,19 @@ This section is supported.
 
 This section is supported.
 
-| AutoYaST        | Supported | Agama                      | Notes                                 |
-| --------------- | --------- | -------------------------- | ------------------------------------- |
-| `filename`      | yes       | `scripts.chroot[].name`    |                                       |
-| `location`      | yes       | `scripts.chroot[].url`     |                                       |
-| `source`        | yes       | `scripts.chroot[].content` |                                       |
-| `interpreter`   | no        |                            | Use the shebang line in your scripts. |
-| `feedback`      | no        |                            |                                       |
-| `feedback_type` | no        |                            |                                       |
-| `debug`         | no        |                            |                                       |
-| `notification`  | no        |                            |                                       |
-| `param-list`    | no        |                            |                                       |
-| `rerun`         | no        |                            |                                       |
+| AutoYaST        | Supported | Agama                    | Notes                                 |
+| --------------- | --------- | ------------------------ | ------------------------------------- |
+| `filename`      | yes       | `scripts.post[].name`    |                                       |
+| `location`      | yes       | `scripts.post[].url`     |                                       |
+| `source`        | yes       | `scripts.post[].content` |                                       |
+| `interpreter`   | no        |                          | Use the shebang line in your scripts. |
+| `feedback`      | no        |                          |                                       |
+| `feedback_type` | no        |                          |                                       |
+| `debug`         | no        |                          |                                       |
+| `notification`  | no        |                          |                                       |
+| `param-list`    | no        |                          |                                       |
+| `rerun`         | no        |                          |                                       |
+| `chrooted`      | yes       | `scripts.post[].chroot`  |                                       |
 
 ### scripts/post-scripts[]
 
@@ -372,35 +373,15 @@ This section is supported.
 
 ## services-manager
 
-This section is supported. Automatically converted into post-installation script
+This section is supported. Agama does not implement support to enable/disable services on demand, so
+this section is converted to a post-installation script which enables/disables the services.
 
-| AutoYaST         | Supported | Agama | Notes |
-| ---------------- | --------- | ----- | ----- |
-| `default_target` | yes       |       |       |
-
-### services-manager/enable
-
-This section is supported.
-
-| AutoYaST  | Supported | Agama | Notes |
-| --------- | --------- | ----- | ----- |
-| `service` | yes       |       |       |
-
-### services-manager/disable
-
-This section is supported.
-
-| AutoYaST  | Supported | Agama | Notes |
-| --------- | --------- | ----- | ----- |
-| `service` | yes       |       |       |
-
-### services-manager/on_demand
-
-This section is supported.
-
-| AutoYaST  | Supported | Agama | Notes |
-| --------- | --------- | ----- | ----- |
-| `service` | yes       |       |       |
+| AutoYaST         | Supported | Agama | Notes                                                                 |
+| ---------------- | --------- | ----- | --------------------------------------------------------------------- |
+| `default_target` | yes       |       | Add a call to "systemctl set-target" in the post-installation script. |
+| `enable[]`       | yes       |       | Services are enabled in the post-installation script.                 |
+| `disable[]`      | yes       |       | Services are disabled in the post-installation script.                |
+| `on_demand[]`    | yes       |       | Services are enabled on-demand in the post-installation script.       |
 
 ## software
 
@@ -415,7 +396,7 @@ This section is supported.
 | `packages[]`          | yes       | `software.packages[]` |              |
 | `post-packages[]`     | no        |                       |              |
 | `patterns[]`          | yes       | `software.patterns[]` |              |
-| `products[]`          | yes       | `software.id`         |              |
+| `products[]`          | yes       | `product.id`          |              |
 | `remove-packages[]`   | no        |                       |              |
 | `remove-patterns[]`   | no        |                       |              |
 | `remove-products[]`   | no        |                       |              |
@@ -441,26 +422,36 @@ This section is supported.
 
 This section is supported.
 
-| AutoYaST   | Supported | Agama                   | Notes |
-| ---------- | --------- | ----------------------- | ----- |
-| `timezone` | yes       | `localization.timezone` |       |
-| `hwclock`  | no        |                         |       |
+| AutoYaST   | Supported | Agama           | Notes |
+| ---------- | --------- | --------------- | ----- |
+| `timezone` | yes       | `l10n.timezone` |       |
+| `hwclock`  | no        |                 |       |
 
 ## users[]
 
 This section is supported. Only the root and the first user are considered.
 
-| AutoYaST          | Supported | Agama                 | Notes                                                          |
-| ----------------- | --------- | --------------------- | -------------------------------------------------------------- |
-| `username`        | yes       | `user.userName`       |                                                                |
-| `fullName`        | yes       | `user.fullName`       |                                                                |
-| `password`        | yes       | `user.password`       |                                                                |
-| `encrypted`       | yes       | `user.hashedPassword` | If set to true, it uses "hashedPassword" instead of "password" |
-| `authorized_keys` | yes       | `root.sshPublicKeys`  |                                                                |
+| AutoYaST          | Supported | Agama                                        | Notes                                                          |
+| ----------------- | --------- | -------------------------------------------- | -------------------------------------------------------------- |
+| `username`        | yes       | `user.userName`                              |                                                                |
+| `fullName`        | yes       | `user.fullName`                              |                                                                |
+| `password`        | yes       | `user.password or root.password`             |                                                                |
+| `encrypted`       | yes       | `user.hashedPassword or root.hashedPassword` | If set to true, it uses "hashedPassword" instead of "password" |
+| `authorized_keys` | yes       | `user.sshPublicKeys`                         |                                                                |
 
 ## zfcp
 
 This section is supported.
+
+### zfcp/devices[]
+
+This section is supported.
+
+| AutoYaST        | Supported | Agama                    | Notes |
+| --------------- | --------- | ------------------------ | ----- |
+| `controller_id` | yes       | `zfcp.devices[].channel` |       |
+| `wwpn`          | yes       | `zfcp.devices[].wwpn`    |       |
+| `fcp_lun`       | yes       | `zfcp.devices[].lun`     |       |
 
 ## Unsupported sections
 
