@@ -29,7 +29,8 @@ Here is the list of known products:
 - `SLES_SAP`: SUSE Linux Enterprise Server for SAP Applications.
 - `Tumbleweed`: Tumbleweed.
 - `Slowroll`: Slowroll.
-- `Leap_16.0`: Leap 16.0
+- `openSUSE_Leap`: openSUSE Leap.
+- `openSUSE_Leap_Micro`: openSUSE Leap Micro.
 - `MicroOS`: openSUSE Micro OS.
 
 Beware that which products are available depend on the installation image you are using.
