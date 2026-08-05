@@ -329,18 +329,19 @@ This section is supported.
 
 This section is supported.
 
-| AutoYaST        | Supported | Agama                      | Notes                                 |
-| --------------- | --------- | -------------------------- | ------------------------------------- |
-| `filename`      | yes       | `scripts.chroot[].name`    |                                       |
-| `location`      | yes       | `scripts.chroot[].url`     |                                       |
-| `source`        | yes       | `scripts.chroot[].content` |                                       |
-| `interpreter`   | no        |                            | Use the shebang line in your scripts. |
-| `feedback`      | no        |                            |                                       |
-| `feedback_type` | no        |                            |                                       |
-| `debug`         | no        |                            |                                       |
-| `notification`  | no        |                            |                                       |
-| `param-list`    | no        |                            |                                       |
-| `rerun`         | no        |                            |                                       |
+| AutoYaST        | Supported | Agama                    | Notes                                 |
+| --------------- | --------- | ------------------------ | ------------------------------------- |
+| `filename`      | yes       | `scripts.post[].name`    |                                       |
+| `location`      | yes       | `scripts.post[].url`     |                                       |
+| `source`        | yes       | `scripts.post[].content` |                                       |
+| `interpreter`   | no        |                          | Use the shebang line in your scripts. |
+| `feedback`      | no        |                          |                                       |
+| `feedback_type` | no        |                          |                                       |
+| `debug`         | no        |                          |                                       |
+| `notification`  | no        |                          |                                       |
+| `param-list`    | no        |                          |                                       |
+| `rerun`         | no        |                          |                                       |
+| `chrooted`      | yes       | `scripts.post[].chroot`  |                                       |
 
 ### scripts/post-scripts[]
 
