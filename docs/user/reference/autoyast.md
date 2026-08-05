@@ -395,7 +395,7 @@ This section is supported.
 | `packages[]`          | yes       | `software.packages[]` |              |
 | `post-packages[]`     | no        |                       |              |
 | `patterns[]`          | yes       | `software.patterns[]` |              |
-| `products[]`          | yes       | `software.id`         |              |
+| `products[]`          | yes       | `product.id`          |              |
 | `remove-packages[]`   | no        |                       |              |
 | `remove-patterns[]`   | no        |                       |              |
 | `remove-products[]`   | no        |                       |              |
