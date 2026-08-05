@@ -373,7 +373,7 @@ This section is supported.
 ## services-manager
 
 This section is supported. Agama does not implement support to enable/disable services on demand, so
-this section is converted to a post-installation script which enable/disable the services.
+this section is converted to a post-installation script which enables/disables the services.
 
 | AutoYaST         | Supported | Agama | Notes                                                                 |
 | ---------------- | --------- | ----- | --------------------------------------------------------------------- |
