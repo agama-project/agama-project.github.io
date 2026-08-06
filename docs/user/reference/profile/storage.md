@@ -539,7 +539,7 @@ are located in any USB disk.
 In that example, the only criteria to select the disks is the `driver`. Then the `partitions`
 section is used to specify what to do with the partitions within those USB disks.
 
-But sometimes it may be useful to select the disks based the presence or the properties of their
+But sometimes it may be useful to select the disks based on the presence or the properties of their
 partitions. The `partitions` condition can be used for that purpose within the `search` section of
 an entry of `drives` or `mdRaids`.
 
