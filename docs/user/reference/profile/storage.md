@@ -405,7 +405,8 @@ The meaning and usage of some conditions is pretty straightforward.
 { "search": { "condition": { "name": "/dev/vda" } } }
 ```
 
-`size` accepts a plain size or an object with `equal`, `greater` or `less`.
+`size` accepts a plain size or an object with `equal`, `greater` or `less`. A plain size is
+equivalent to the `equal` option.
 
 ```json
 { "search": { "condition": { "size": "10 GiB" } } }
