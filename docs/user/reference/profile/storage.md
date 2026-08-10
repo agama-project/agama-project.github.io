@@ -428,8 +428,9 @@ case it matches if any of them is the given one.
 { "search": { "condition": { "driver": "ahci" } } }
 ```
 
-Do not confuse the driver with the driver module. The values of the latter usually contain
-underscores and suffixes, like `virtio_pci` instead of `virtio-pci` or `ahci_mod` instead of `ahci`.
+Do not confuse the driver with the driver module. The values of the latter usually contain suffixes
+(eg. `ahci_mod` instead of `ahci`), and sometimes they differ on using underscore or hyphen (eg.
+`virtio_pci` instead of `virtio-pci`).
 
 <Since version="16.1"/> `boss`, also accepted only for drives, is a boolean indicating whether the
 device is a BOSS (Boot Optimized Storage Solution). Use `false` to match any other device. This
