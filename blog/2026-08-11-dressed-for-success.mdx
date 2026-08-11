@@ -53,13 +53,14 @@ the light scheme. So after adjusting some colors he also comes with the followin
 
 ![Agama looking nerdy but light](../static/img/blog/2026-08-11/pixel-leap-light.png)
 
-Two products, one shared set of customizable visual roles, and not a line of Agama code touched. The
-work that matters happens before the CSS file is written: choosing the colors, deciding what each
-scheme should look like, checking that every pair actually reads on screen. Once those decisions
-exist, putting them in is the short part... no matter whether you set a few roles or every possible
-one.
+Two products, one shared set of customizable visual roles, and not a line of Agama code touched.
 
-## How this is possible, in brief {#how}
+## Learn how to do it {#learn}
+
+The work that matters happens before the CSS file is written: choosing the colors, deciding what
+each scheme should look like, checking that every pair actually reads on screen. Once those
+decisions exist, putting them in is the short part... no matter whether you are Lucie setting a few
+roles or Charles configuring every possible one.
 
 But what "role" means in this context? A product stylesheet sets only properties named
 `--agm-t--something`. Those are the so-called roles, named after what they mean in an installer: the
@@ -85,34 +86,10 @@ All that is explained in the
 comes along with two ready-to-copy examples similar to the ones described above and even with a
 draft AI prompt in case you want to outsource the fun.
 
-Just keep in mind there are two rules to observe when selecting the colors for the roles. On the
-first place, light and dark are described separately, since dark is more than just a filter over
-light. On the other hand, contrast should be measured rather than felt.
-
-Please take that second rule seriously. A palette that looks fine on the screen you picked it on can
-be unreadable on a dim laptop panel, in a sunlit server room, or to someone with low vision. And an
-operating system installer is a bad place to lose a warning or a button label. The good news is that
-it is a number rather than an opinion: the mentioned theming guide carries a checklist of every pair
-that matters, and a script that measures one for you and suggests a shade of the same hue when it
-falls short. Your brand color survives; it just moves a little.
-
-## What you actually touch {#files}
-
-As mentioned, to get your product appearance you only need to add a few files to the installer, all
-named after your product:
-
-|                                    |                                                                           |
-| ---------------------------------- | ------------------------------------------------------------------------- |
-| the stylesheet                     | `assets/appearance/<product-id>.css`                                      |
-| the logo                           | `assets/logos/<icon>`, plus the same name with `-dark` for the dark theme |
-| anything the stylesheet references | a font, an image, wherever it points, relative to itself                  |
-
-That is the whole surface. The names come from the product definition your medium already ships, and
-a missing file is harmless: the installer keeps Agama's own look.
-
-Those files travel to the installer medium in your own package, which is the part we like best: your
-branding stays in your repository, versioned with the rest of your distribution, and ships on your
-schedule rather than waiting for an Agama release. The
+Then you only need to add a your logos, stylesheet and eventually fonts to the installer medium.
+Those files travel to the medium in your own package, which is the part we like best: your branding
+stays in your repository, versioned with the rest of your distribution, and ships on your schedule
+rather than waiting for an Agama release. The
 [packaging guide](https://github.com/agama-project/agama/blob/master/doc/product_theming_packaging.md)
 walks through it. It also includes a few things you may want to know, like how to make your
 installer start in dark mode or how to preview the result without packaging anything by just copying
