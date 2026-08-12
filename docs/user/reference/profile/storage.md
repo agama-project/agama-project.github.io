@@ -331,6 +331,9 @@ partitions of the chosen disk. But it only will work if the disk indeed contains
 }
 ```
 
+There are many different conditions that can be used to describe the devices that should match a
+given search. They are detailed in the next section of this document.
+
 If there is not a single system device matching the scope and the conditions of a given search, then
 `ifNotFound` comes into play. If the value is "skip", the device definition is ignored. If it's
 "error" the whole process is aborted.
@@ -367,6 +370,338 @@ useful to match all partitions or logical volumes in a device, no matter whether
 { "search": "*" }
 
 { "search": { "ifNotFound": "skip" } }
+```
+
+## Search Conditions
+
+As described above, several conditions can be used within a `search` section to specify which
+devices should match. The keys accepted by `condition` depend on the scope of the search. Some
+conditions like `name` or `size` can be used for all kinds of devices, while others may be specific
+for searching partitions (eg. the partition id), drives (eg. the driver used to manage the disk) or
+any other kind of device.
+
+The following table summarizes the possible location for all the conditions that will be described
+in this document.
+
+| Condition            | `drives` | `mdRaids` | `partitions` | `logicalVolumes` | `volumeGroups` |
+| -------------------- | :------: | :-------: | :----------: | :--------------: | :------------: |
+| `name`               |    ✓     |     ✓     |      ✓       |        ✓         |       ✓        |
+| `size`               |    ✓     |     ✓     |      ✓       |        ✓         |       ✓        |
+| `filesystem`         |    ✓     |     ✓     |      ✓       |        ✓         |       —        |
+| `partitions`         |    ✓     |     ✓     |      —       |        —         |       —        |
+| `driver`             |    ✓     |     —     |      —       |        —         |       —        |
+| `boss`               |    ✓     |     —     |      —       |        —         |       —        |
+| `id`                 |    —     |     —     |      ✓       |        —         |       —        |
+| `number`             |    —     |     —     |      ✓       |        —         |       —        |
+| `and` / `or` / `not` |    ✓     |     ✓     |      ✓       |        ✓         |       ✓        |
+
+### Basic Search Conditions
+
+The meaning and usage of some conditions is pretty straightforward.
+
+`name` matches the name of the device. Both the kernel name and a persistent udev name can be used.
+
+```json
+{ "search": { "condition": { "name": "/dev/vda" } } }
+```
+
+`size` accepts a plain size or an object with `equal`, `greater` or `less`. A plain size is
+equivalent to the `equal` option.
+
+```json
+{ "search": { "condition": { "size": "10 GiB" } } }
+
+{ "search": { "condition": { "size": { "greater": "10 GiB" } } } }
+```
+
+`number` matches the partition number, so `1` corresponds to `/dev/vda1`.
+
+```json
+{ "search": { "condition": { "number": 1 } } }
+```
+
+<Since version="16.1"/> `driver` is only accepted for drives. It matches the devices handled by the
+given kernel driver, as reported by `hwinfo`. A device can be handled by several drivers, in which
+case it matches if any of them is the given one.
+
+```json
+{ "search": { "condition": { "driver": "ahci" } } }
+```
+
+Do not confuse the driver with the driver module. The values of the latter usually contain suffixes
+(eg. `ahci_mod` instead of `ahci`), and sometimes they differ on using underscore or hyphen (eg.
+`virtio_pci` instead of `virtio-pci`).
+
+<Since version="16.1"/> `boss`, also accepted only for drives, is a boolean indicating whether the
+device is a BOSS (Boot Optimized Storage Solution). Use `false` to match any other device. This
+matches a disk that is not a BOSS.
+
+```json
+{
+  "search": {
+    "condition": { "boss": false }
+  }
+}
+```
+
+<Since version="16.1"/> The `id` condition can be used to find `partitions`. It uses the same values
+accepted by the `id` property used to create a partition. The following table lists all valid
+values, including the partition table types they apply to.
+
+| Value                | Description                                                                                                   | Partition Table             |
+| -------------------- | ------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| `dos12`              | FAT12 partition                                                                                               | MS-DOS                      |
+| `dos16`              | FAT16 partition                                                                                               | MS-DOS                      |
+| `ntfs`               | NTFS or HPFS partition                                                                                        | MS-DOS                      |
+| `dos32`              | FAT32 partition                                                                                               | MS-DOS                      |
+| `extended`           | Extended partition                                                                                            | MS-DOS                      |
+| `diag`               | Diagnostics partition                                                                                         | MS-DOS, GPT                 |
+| `prep`               | PPC PReP boot partition                                                                                       | MS-DOS, GPT                 |
+| `swap`               | Swap partition                                                                                                | MS-DOS, GPT, DASD           |
+| `linux`              | Linux partition                                                                                               | MS-DOS, GPT, DASD, implicit |
+| `irst`               | Intel Rapid Start Technology partition                                                                        | MS-DOS, GPT                 |
+| `lvm`                | LVM partition                                                                                                 | MS-DOS, GPT, DASD           |
+| `raid`               | RAID partition                                                                                                | MS-DOS, GPT, DASD           |
+| `xbootldr`           | [Boot Loader Specification](https://uapi-group.org/specifications/specs/boot_loader_specification/) partition | MS-DOS, GPT                 |
+| `esp`                | EFI System Partition                                                                                          | MS-DOS, GPT                 |
+| `bios_boot`          | [BIOS boot partition](https://en.wikipedia.org/wiki/BIOS_boot_partition)                                      | GPT                         |
+| `windows_basic_data` | Windows basic data partition                                                                                  | GPT                         |
+| `microsoft_reserved` | Microsoft reserved partition                                                                                  | GPT                         |
+| `linux_home`         | Linux Home partition                                                                                          | GPT                         |
+| `linux_server_data`  | Linux Server Data partition                                                                                   | GPT                         |
+| `linux_root_arm`     | Linux Root Partition (arm)                                                                                    | GPT                         |
+| `linux_root_aarch64` | Linux Root Partition (aarch64)                                                                                | GPT                         |
+| `linux_root_ppc32`   | Linux Root Partition (ppc)                                                                                    | GPT                         |
+| `linux_root_ppc64be` | Linux Root Partition (ppc64be)                                                                                | GPT                         |
+| `linux_root_ppc64le` | Linux Root Partition (ppc64le)                                                                                | GPT                         |
+| `linux_root_riscv32` | Linux Root Partition (riscv32)                                                                                | GPT                         |
+| `linux_root_riscv64` | Linux Root Partition (riscv64)                                                                                | GPT                         |
+| `linux_root_s390`    | Linux Root Partition (s390)                                                                                   | GPT                         |
+| `linux_root_s390x`   | Linux Root Partition (s390x)                                                                                  | GPT                         |
+| `linux_root_x86`     | Linux Root Partition (x86)                                                                                    | GPT                         |
+| `linux_root_x86_64`  | Linux Root Partition (x86_64)                                                                                 | GPT                         |
+| `linux_usr_arm`      | Linux USR Partition (arm)                                                                                     | GPT                         |
+| `linux_usr_aarch64`  | Linux USR Partition (aarch64)                                                                                 | GPT                         |
+| `linux_usr_ppc32`    | Linux USR Partition (ppc)                                                                                     | GPT                         |
+| `linux_usr_ppc64be`  | Linux USR Partition (ppc64be)                                                                                 | GPT                         |
+| `linux_usr_ppc64le`  | Linux USR Partition (ppc64le)                                                                                 | GPT                         |
+| `linux_usr_riscv32`  | Linux USR Partition (riscv32)                                                                                 | GPT                         |
+| `linux_usr_riscv64`  | Linux USR Partition (riscv64)                                                                                 | GPT                         |
+| `linux_usr_s390`     | Linux USR Partition (s390)                                                                                    | GPT                         |
+| `linux_usr_s390x`    | Linux USR Partition (s390x)                                                                                   | GPT                         |
+| `linux_usr_x86`      | Linux USR Partition (x86)                                                                                     | GPT                         |
+| `linux_usr_x86_64`   | Linux USR Partition (x86_64)                                                                                  | GPT                         |
+
+```json
+{ "search": { "condition": { "id": "esp" } } }
+```
+
+### Matching by File System <Since version="16.1"/>
+
+The `filesystem` condition allows to match devices based on their file system. It can take several
+forms.
+
+The strings "any" and "none" match, respectively, any formatted device and any unformatted one.
+
+```json
+{ "search": { "condition": { "filesystem": "any" } } }
+
+{ "search": { "condition": { "filesystem": "none" } } }
+```
+
+An object matches a formatted device whose file system satisfies the given condition. Note the
+object form always implies the device is formatted, so there is no need to combine it with "any".
+The accepted keys are `type` and `label`.
+
+```json
+{ "search": { "condition": { "filesystem": { "type": "ext4" } } } }
+
+{ "search": { "condition": { "filesystem": { "label": "data" } } } }
+```
+
+### Matching by Partitions <Since version="16.1"/>
+
+As explained above, the `partitions` section of a drive or RAID can contain searches to reference
+concrete partitions within that device. For example, this will match all the small partitions that
+are located in any USB disk.
+
+```json
+{
+  "drives": [
+    {
+      "search": { "conditions": { "driver": "usb-storage" } }
+      "partitions": [
+        { "search": { "conditions": { "size": { "less": "10 MiB" } } } }
+      ]
+    }
+  ]
+}
+```
+
+In that example, the only criteria to select the disks is the `driver`. Then the `partitions`
+section is used to specify what to do with the partitions within those USB disks.
+
+But sometimes it may be useful to select the disks based on the presence or the properties of their
+partitions. The `partitions` condition can be used for that purpose within the `search` section of
+an entry of `drives` or `mdRaids`.
+
+The strings "any" and "none" match, respectively, a device with at least one partition and a device
+with no partitions at all.
+
+```json
+{ "search": { "condition": { "partitions": "any" } } }
+
+{ "search": { "condition": { "partitions": "none" } } }
+```
+
+An object allows to check the partitions against a condition using one of four quantifiers. The
+quantifiers `any`, `none` and `all` take a partition condition, with the same syntax used to search
+partitions elsewhere in the profile.
+
+```json
+{ "search": { "condition": { "partitions": { "any": { "size": { "greater": "10 GiB" } } } } } }
+
+{ "search": { "condition": { "partitions": { "none": { "id": "esp" } } } } }
+
+{ "search": { "condition": { "partitions": { "all": { "filesystem": { "type": "xfs" } } } } } }
+```
+
+Beware that `all` also requires the device to have at least one partition, so a device with no
+partitions never matches it.
+
+The fourth quantifier, `count`, restricts the number of partitions with `min`, `max` or both. At
+least one of the two limits must be specified and neither of them can be smaller than one.
+
+```json
+{ "search": { "condition": { "partitions": { "count": { "min": 2 } } } } }
+
+{ "search": { "condition": { "partitions": { "count": { "max": 3 } } } } }
+```
+
+By default `count` considers all the partitions of the device. Adding a `condition` restricts the
+count to the partitions matching it. This matches devices containing between two and five partitions
+bigger than 10 GiB.
+
+```json
+{
+  "search": {
+    "condition": {
+      "partitions": {
+        "count": {
+          "condition": { "size": { "greater": "10 GiB" } },
+          "min": 2,
+          "max": 5
+        }
+      }
+    }
+  }
+}
+```
+
+### Combining Conditions <Since version="16.1"/>
+
+Conditions can be combined with three logical operators.
+
+- `and` takes an array of conditions and matches when all of them match.
+- `or` takes an array of conditions and matches when at least one of them matches.
+- `not` takes a single condition and matches when that condition does not match.
+
+The arrays of `and` and `or` must contain at least two conditions.
+
+Operators can be nested arbitrarily and can wrap any of the conditions described above. For example,
+to match drives bigger than 10 GiB except `/dev/vdb`:
+
+```json
+{
+  "search": {
+    "condition": {
+      "and": [{ "size": { "greater": "10 GiB" } }, { "not": { "name": "/dev/vdb" } }]
+    }
+  }
+}
+```
+
+To match two different disks in a single drive definition:
+
+```json
+{
+  "search": {
+    "condition": {
+      "or": [{ "name": "/dev/vda" }, { "name": "/dev/vdb" }]
+    }
+  }
+}
+```
+
+This matches the first disk bigger than 100 GiB that is not a BOSS:
+
+```json
+{
+  "search": {
+    "max": 1,
+    "condition": {
+      "and": [{ "boss": false }, { "size": { "greater": "100 GiB" } }]
+    }
+  }
+}
+```
+
+This matches all formatted Linux partitions (eg. in the context of a given disk or RAID):
+
+```json
+{
+  "search": {
+    "condition": {
+      "and": [{ "id": "linux" }, { "filesystem": "any" }]
+    }
+  }
+}
+```
+
+Since `driver` takes a single value, matching several drivers requires the `or` operator:
+
+```json
+{
+  "search": {
+    "condition": {
+      "or": [{ "driver": "ahci" }, { "driver": "sd" }]
+    }
+  }
+}
+```
+
+A more elaborate example, matching the first virtual disk of at least 100 GiB containing an Ext4
+partition:
+
+```json
+{
+  "search": {
+    "max": 1,
+    "condition": {
+      "and": [
+        { "or": [{ "driver": "virtio-pci" }, { "driver": "virtio_scsi" }] },
+        { "not": { "size": { "less": "100 GiB" } } },
+        { "partitions": { "any": { "filesystem": { "type": "ext4" } } } }
+      ]
+    }
+  }
+}
+```
+
+The `and`, `or` and `not` operators can also appear within a `filesystem` condition. In that case,
+they apply to the file system, so they are independent from the operators used at the device level.
+This matches devices formatted as Btrfs with a label other than "root".
+
+```json
+{
+  "search": {
+    "condition": {
+      "filesystem": {
+        "and": [{ "type": "btrfs" }, { "not": { "label": "root" } }]
+      }
+    }
+  }
+}
 ```
 
 ## Referencing Other Devices
