@@ -180,88 +180,90 @@ This section is supported.
 
 This section is supported.
 
-| AutoYaST             | Supported | Agama                                 | Notes                      |
-| -------------------- | --------- | ------------------------------------- | -------------------------- |
-| `dhcp_hostname`      | no        |                                       |                            |
-| `hostname`           | yes       | `hostname.static`                     |                            |
-| `nameservers`        | yes       | `network.connections[].nameservers`   | Copied to each connection. |
-| `resolv_conf_policy` | no        |                                       |                            |
-| `searchlist`         | yes       | `network.connections[].dnsSearchList` | Copied to each connection. |
+| AutoYaST             | Supported | Agama                                   | Notes                      |
+| -------------------- | --------- | --------------------------------------- | -------------------------- |
+| `dhcp_hostname`      | no        |                                         |                            |
+| `hostname`           | yes       | `hostname.static`                       |                            |
+| `nameservers`        | yes       | `network.connections[].nameservers[]`   | Copied to each connection. |
+| `resolv_conf_policy` | no        |                                         |                            |
+| `searchlist`         | yes       | `network.connections[].dnsSearchList[]` | Copied to each connection. |
 
 ### networking/interfaces[]
 
 This section is supported. It corresponds to Agama `connections`, but the format is not exactly the
 same.
 
-| AutoYaST                       | Supported | Agama                                     | Notes                                                                        |
-| ------------------------------ | --------- | ----------------------------------------- | ---------------------------------------------------------------------------- |
-| `device`                       | yes       | `network.connections[].interface`         |                                                                              |
-| `name`                         | yes       | `network.connections[].id`                |                                                                              |
-| `description`                  | no        |                                           |                                                                              |
-| `bootproto`                    | no        |                                           | Different set of values.                                                     |
-| `startmode`                    | no        |                                           | Do not set up network connections you won't use.                             |
-| `lladdr`                       | yes       | `network.connections[].macAddress`        |                                                                              |
-| `ifplugd_priority`             | no        |                                           | Not relevant (no ifplugd support).                                           |
-| `usercontrol`                  | no        |                                           |                                                                              |
-| `dhclient_set_hostname`        | no        |                                           |                                                                              |
-| `ipaddr`                       | yes       | `network.connections[].addresses[]`       |                                                                              |
-| `prefixlen`                    | yes       | `network.connections[].addresses[]`       |                                                                              |
-| `netmask`                      | yes       | `network.connections[].addresses[]`       |                                                                              |
-| `aliases`                      | yes       | `network.connections[].addresses[]`       |                                                                              |
-| `broadcast`                    | yes       | `network.connections[].addresses[]`       |                                                                              |
-| `network`                      | yes       | `network.connections[].addresses[]`       |                                                                              |
-| `mtu`                          | no        |                                           |                                                                              |
-| `ethtool_options`              | no        |                                           |                                                                              |
-| `wireless`                     | yes       | `wireless`                                | It uses a different format.                                                  |
-| `dhclient_set_down_link`       | no        |                                           |                                                                              |
-| `dhclient_set_default_route`   | no        |                                           |                                                                              |
-| `zone`                         | no        |                                           |                                                                              |
-| `firewall`                     | no        |                                           |                                                                              |
-| `bonding_master`               | planned   |                                           |                                                                              |
-| `bonding_module_opts`          | yes       | `network.connections[].bond.options`      |                                                                              |
-| `bonding_slave0`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
-| `bonding_slave1`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
-| `bonding_slave2`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
-| `bonding_slave3`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
-| `bonding_slave4`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
-| `bonding_slave5`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
-| `bonding_slave6`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
-| `bonding_slave7`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
-| `bonding_slave8`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
-| `bonding_slave9`               | yes       | `network.connections[].bond.ports[]`      |                                                                              |
-| `bridge`                       | planned   |                                           |                                                                              |
-| `bridge_forwarddelay`          | planned   |                                           |                                                                              |
-| `bridge_ports`                 | planned   |                                           |                                                                              |
-| `bridge_stp`                   | planned   |                                           |                                                                              |
-| `vlan_id`                      | planned   |                                           |                                                                              |
-| `wireless_auth_mode`           | yes       | `network.connections[].wireless.security` | Map 'psk' to 'wpa-psk' and 'eap' to 'wpa-eap'; anything else becomes 'none'. |
-| `wireless_ap`                  | no        |                                           |                                                                              |
-| `wireless_bitrate`             | no        |                                           |                                                                              |
-| `wireless_ca_cert`             | no        |                                           |                                                                              |
-| `wireless_channel`             | no        |                                           |                                                                              |
-| `wireless_client_cert`         | no        |                                           |                                                                              |
-| `wireless_client_key`          | no        |                                           |                                                                              |
-| `wireless_client_key_password` | no        |                                           |                                                                              |
-| `wireless_default_key`         | no        |                                           |                                                                              |
-| `wireless_eap_auth`            | no        |                                           |                                                                              |
-| `wireless_eap_mode`            | no        |                                           |                                                                              |
-| `wireless_essid`               | yes       | `network.connections[].wireless.ssid`     | Map 'ad-hoc' to 'adhoc', 'master' to 'ap' and 'managed' to 'infrastructure'. |
-| `wireless_frequency`           | no        |                                           |                                                                              |
-| `wireless_key`                 | no        |                                           |                                                                              |
-| `wireless_key_0`               | no        |                                           |                                                                              |
-| `wireless_key_1`               | no        |                                           |                                                                              |
-| `wireless_key_2`               | no        |                                           |                                                                              |
-| `wireless_key_3`               | no        |                                           |                                                                              |
-| `wireless_key_length`          | no        |                                           |                                                                              |
-| `wireless_mode`                | yes       | `mode`                                    |                                                                              |
-| `wireless_nick`                | no        |                                           |                                                                              |
-| `wireless_nwid`                | no        |                                           |                                                                              |
-| `wireless_peap_version`        | no        |                                           |                                                                              |
-| `wireless_power`               | no        |                                           |                                                                              |
-| `wireless_wpa_anonid`          | no        |                                           |                                                                              |
-| `wireless_wpa_identity`        | no        |                                           |                                                                              |
-| `wireless_wpa_password`        | yes       | `network.connections[].wireless.password` |                                                                              |
-| `wireless_wpa_psk`             | yes       | `network.connections[].wireless.password` |                                                                              |
+| AutoYaST                       | Supported | Agama                                                          | Notes                                                                                                                     |
+| ------------------------------ | --------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `device`                       | yes       | `network.connections[].interface`                              |                                                                                                                           |
+| `name`                         | yes       | `network.connections[].id`                                     |                                                                                                                           |
+| `description`                  | no        |                                                                |                                                                                                                           |
+| `bootproto`                    | yes       | `network.connections[].method4, network.connections[].method6` | Different set of values. 'ibft' and 'dhcp+autoip' fall back to 'auto'.                                                    |
+| `startmode`                    | yes       | `network.connections[].autoconnect`                            | 'manual' and 'off' disable the auto-connection and keep the connection down; the rest enable it.                          |
+| `lladdr`                       | yes       | `network.connections[].macAddress`                             |                                                                                                                           |
+| `ifplugd_priority`             | no        |                                                                | Not relevant (no ifplugd support).                                                                                        |
+| `usercontrol`                  | no        |                                                                |                                                                                                                           |
+| `dhclient_set_hostname`        | no        |                                                                |                                                                                                                           |
+| `ipaddr`                       | yes       | `network.connections[].addresses[]`                            |                                                                                                                           |
+| `prefixlen`                    | yes       | `network.connections[].addresses[]`                            |                                                                                                                           |
+| `netmask`                      | yes       | `network.connections[].addresses[]`                            |                                                                                                                           |
+| `aliases`                      | yes       | `network.connections[].addresses[]`                            |                                                                                                                           |
+| `broadcast`                    | yes       | `network.connections[].addresses[]`                            |                                                                                                                           |
+| `network`                      | yes       | `network.connections[].addresses[]`                            |                                                                                                                           |
+| `mtu`                          | no        |                                                                |                                                                                                                           |
+| `ethtool_options`              | no        |                                                                |                                                                                                                           |
+| `wireless`                     | yes       | `network.connections[].wireless`                               | It uses a different format.                                                                                               |
+| `dhclient_set_down_link`       | no        |                                                                |                                                                                                                           |
+| `dhclient_set_default_route`   | no        |                                                                |                                                                                                                           |
+| `zone`                         | no        |                                                                |                                                                                                                           |
+| `firewall`                     | no        |                                                                |                                                                                                                           |
+| `bonding_master`               | yes       |                                                                | Implied by the presence of the `bonding_slaveN` elements.                                                                 |
+| `bonding_module_opts`          | yes       | `network.connections[].bond.options`                           | The `mode` option is set in `network.connections[].bond.mode`. Numeric modes (e.g., `mode=1`) are supported too.          |
+| `bonding_slave0`               | yes       | `network.connections[].bond.ports[]`                           |                                                                                                                           |
+| `bonding_slave1`               | yes       | `network.connections[].bond.ports[]`                           |                                                                                                                           |
+| `bonding_slave2`               | yes       | `network.connections[].bond.ports[]`                           |                                                                                                                           |
+| `bonding_slave3`               | yes       | `network.connections[].bond.ports[]`                           |                                                                                                                           |
+| `bonding_slave4`               | yes       | `network.connections[].bond.ports[]`                           |                                                                                                                           |
+| `bonding_slave5`               | yes       | `network.connections[].bond.ports[]`                           |                                                                                                                           |
+| `bonding_slave6`               | yes       | `network.connections[].bond.ports[]`                           |                                                                                                                           |
+| `bonding_slave7`               | yes       | `network.connections[].bond.ports[]`                           |                                                                                                                           |
+| `bonding_slave8`               | yes       | `network.connections[].bond.ports[]`                           |                                                                                                                           |
+| `bonding_slave9`               | yes       | `network.connections[].bond.ports[]`                           |                                                                                                                           |
+| `bridge`                       | yes       |                                                                | Implied by the presence of the `bridge_ports` element.                                                                    |
+| `bridge_forward_delay`         | yes       | `network.connections[].bridge.forwardDelay`                    | Negative values are ignored.                                                                                              |
+| `bridge_forwarddelay`          | yes       | `network.connections[].bridge.forwardDelay`                    | Deprecated spelling of `bridge_forward_delay`.                                                                            |
+| `bridge_ports`                 | yes       | `network.connections[].bridge.ports[]`                         |                                                                                                                           |
+| `bridge_stp`                   | yes       | `network.connections[].bridge.stp`                             |                                                                                                                           |
+| `etherdevice`                  | yes       | `network.connections[].vlan.parent`                            | Inferred from the device name (e.g., 'eth0' for 'eth0.10') when it is not set.                                            |
+| `vlan_id`                      | yes       | `network.connections[].vlan.id`                                | Inferred from the device name (e.g., 10 for 'eth0.10') when it is not set. It must be lower than 4095, which is reserved. |
+| `wireless_auth_mode`           | yes       | `network.connections[].wireless.security`                      | Map 'psk' to 'wpa-psk' and 'eap' to 'wpa-eap'; anything else becomes 'none'.                                              |
+| `wireless_ap`                  | no        |                                                                |                                                                                                                           |
+| `wireless_bitrate`             | no        |                                                                |                                                                                                                           |
+| `wireless_ca_cert`             | no        |                                                                |                                                                                                                           |
+| `wireless_channel`             | no        |                                                                |                                                                                                                           |
+| `wireless_client_cert`         | no        |                                                                |                                                                                                                           |
+| `wireless_client_key`          | no        |                                                                |                                                                                                                           |
+| `wireless_client_key_password` | no        |                                                                |                                                                                                                           |
+| `wireless_default_key`         | no        |                                                                |                                                                                                                           |
+| `wireless_eap_auth`            | no        |                                                                |                                                                                                                           |
+| `wireless_eap_mode`            | no        |                                                                |                                                                                                                           |
+| `wireless_essid`               | yes       | `network.connections[].wireless.ssid`                          |                                                                                                                           |
+| `wireless_frequency`           | no        |                                                                |                                                                                                                           |
+| `wireless_key`                 | no        |                                                                |                                                                                                                           |
+| `wireless_key_0`               | no        |                                                                |                                                                                                                           |
+| `wireless_key_1`               | no        |                                                                |                                                                                                                           |
+| `wireless_key_2`               | no        |                                                                |                                                                                                                           |
+| `wireless_key_3`               | no        |                                                                |                                                                                                                           |
+| `wireless_key_length`          | no        |                                                                |                                                                                                                           |
+| `wireless_mode`                | yes       | `network.connections[].wireless.mode`                          | Map 'ad-hoc' to 'adhoc', 'master' to 'ap' and 'managed' to 'infrastructure'.                                              |
+| `wireless_nick`                | no        |                                                                |                                                                                                                           |
+| `wireless_nwid`                | no        |                                                                |                                                                                                                           |
+| `wireless_peap_version`        | no        |                                                                |                                                                                                                           |
+| `wireless_power`               | no        |                                                                |                                                                                                                           |
+| `wireless_wpa_anonid`          | no        |                                                                |                                                                                                                           |
+| `wireless_wpa_identity`        | no        |                                                                |                                                                                                                           |
+| `wireless_wpa_password`        | yes       | `network.connections[].wireless.password`                      | Only used when 'wireless_auth_mode' is 'eap'.                                                                             |
+| `wireless_wpa_psk`             | yes       | `network.connections[].wireless.password`                      | Only used when 'wireless_auth_mode' is 'psk'.                                                                             |
 
 ## ntp-client
 

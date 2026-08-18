@@ -40,6 +40,77 @@ including:
   [parse][ask-list-reader] and [run][ask-list-runner] the process is there but we need to adapt the
   [user interface][ask-list-dialog], which is not trivial.
 
+## Networking
+
+Agama converts the `networking/interfaces` section to a list of connections. Apart from the regular
+Ethernet and wireless devices, bonding, bridge and VLAN interfaces are supported too.
+
+An interface is handled as a **bond** when it defines at least one `bonding_slaveN` element, as a
+**bridge** when it defines `bridge_ports` (or it is explicitly marked with `<bridge>yes</bridge>`)
+and as a **VLAN** when it defines `etherdevice` or `vlan_id`.
+
+```xml
+<interfaces config:type="list">
+  <interface>
+    <device>bond0</device>
+    <bootproto>static</bootproto>
+    <startmode>auto</startmode>
+    <ipaddr>192.168.100.1</ipaddr>
+    <prefixlen>24</prefixlen>
+    <bonding_master>yes</bonding_master>
+    <bonding_slave0>eth0</bonding_slave0>
+    <bonding_slave1>eth1</bonding_slave1>
+    <bonding_module_opts>mode=active-backup miimon=100</bonding_module_opts>
+  </interface>
+  <interface>
+    <device>br0</device>
+    <bootproto>dhcp</bootproto>
+    <startmode>auto</startmode>
+    <bridge>yes</bridge>
+    <bridge_ports>eth2</bridge_ports>
+    <bridge_stp>off</bridge_stp>
+    <bridge_forward_delay>15</bridge_forward_delay>
+  </interface>
+  <interface>
+    <device>eth3.10</device>
+    <bootproto>static</bootproto>
+    <startmode>auto</startmode>
+    <ipaddr>192.168.10.1</ipaddr>
+    <prefixlen>24</prefixlen>
+    <etherdevice>eth3</etherdevice>
+    <vlan_id>10</vlan_id>
+  </interface>
+</interfaces>
+```
+
+Agama needs both the identifier and the parent interface to set up a VLAN. If none of them can be
+determined (neither from `etherdevice`/`vlan_id` nor from the `parent.id` device name notation), the
+`vlan` section is omitted, so only that interface is ignored instead of making the whole
+installation fail.
+
+### Boot protocol and start mode
+
+The `bootproto` element is translated to the Agama `method4` and `method6` settings:
+
+| `bootproto`                        | `method4`    | `method6`                          |
+| ---------------------------------- | ------------ | ---------------------------------- |
+| `static`                           | `manual`     | `manual` (`disabled` without IPv6) |
+| `dhcp`, `dhcp+autoip`, `ibft`, ... | `auto`       | `auto` (`disabled` without IPv6)   |
+| `dhcp4`                            | `auto`       | `disabled`                         |
+| `dhcp6`                            | `disabled`   | `auto`                             |
+| `autoip`                           | `link-local` | `disabled`                         |
+| `none`                             | `disabled`   | `disabled`                         |
+
+Whether IPv6 is wanted or not depends on the `networking/ipv6` element.
+
+Regarding `startmode`, NetworkManager does not have an equivalent for each AutoYaST value, so they
+are reduced to whether the connection is brought up automatically or not:
+
+- `manual` and `off` set `autoconnect` to `false` and `status` to `down`, so the connection is not
+  set up during the installation either.
+- `auto` (including its `boot`, `on` and `onboot` aliases), `hotplug`, `ifplugd` and `nfsroot` set
+  `autoconnect` to `true`.
+
 [dynamic-profiles]:
   https://doc.opensuse.org/documentation/leap/autoyast/html/book-autoyast/part-dynamic-profiles.html
 [rules-classes]:
