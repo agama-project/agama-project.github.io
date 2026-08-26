@@ -1,14 +1,14 @@
 ---
-unlisted: true
+sidebar_position: 15.5
 ---
 
-# Questions (SLES 16 and openSUSE Leap 16.0)
+# Questions (older versions)
 
 :::warning[This page describes an older Agama version]
 
-This page documents the `questions` feature as implemented by the version of Agama shipped with
-**SLES 16 GA** and **openSUSE Leap 16.0**. If you are using a more recent version of Agama (e.g., a
-newer maintenance update or openSUSE Tumbleweed), check the
+This page documents the `questions` feature as implemented by older versions of Agama, like the one
+shipped with **SLES 16 GA** and **openSUSE Leap 16.0**. If you are using a more recent version of
+Agama (e.g., a newer maintenance update or openSUSE Tumbleweed), check the
 [current version of this page](./answers) instead.
 
 :::
