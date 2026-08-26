@@ -176,7 +176,14 @@ const config: Config = {
     // search functionality, works only in production builds!
     [
       "docusaurus-lunr-search",
-      { maxHits: 10, disableVersioning: true, highlightResult: true },
+      {
+        maxHits: 10,
+        disableVersioning: true,
+        highlightResult: true,
+        // Keep out-of-date documentation pages (e.g., for older Agama versions) out of the
+        // search results, even though they are still reachable through a direct link.
+        excludeRoutes: ["/docs/user/reference/profile/answers-16"],
+      },
     ],
     [
       'content-docs',

@@ -121,3 +121,9 @@ use to match them.
 | `write_script_failed`                  | When a user-defined script cannot be written to disk.                                                                                            | `Yes`, `No` (default)                                  | `attempt`: The number of the current attempt.<br />`details`: The details of the failure.                                                                                    |
 | `write_file_failed`                    | When a user-defined file cannot be written to disk.                                                                                              | `Yes`, `No` (default)                                  | `attempt`: The number of the current attempt.<br />`details`: The details of the failure.                                                                                    |
 | `registration.certificate`             | When the registration server uses a self-signed certificate.                                                                                     | `Trust` (default), `Reject`                            | `issueDate`, `expirationDate`: Certificate validity dates.<br />`issuer`, `organization`: Certificate issuer details.<br />`sha1`, `sha256`: Certificate fingerprints.       |
+
+:::info
+
+Check [this page](./answers-16) if you are using SLES 16.0 or openSUSE Leap 16.0.
+
+:::
