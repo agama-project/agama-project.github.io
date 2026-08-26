@@ -25,12 +25,12 @@ two main properties: `policy` and `answers`.
     "answers": [
       {
         "class": "storage.activate_multipath",
-        "answer": "yes",
+        "action": "yes",
       },
       {
         "class": "storage.luks_activation",
-        "answer": "decrypt",
-        "password": "my-secret-password"
+        "action": "decrypt",
+        "value": "my-secret-password"
         "data": {
           "device": "/dev/sda22"
         }
@@ -61,10 +61,12 @@ Each answer object can have the following properties:
 
 - `class`: a unique identifier for the question (e.g., `"storage.activate_multipath"`).
 - `text`: the full text of the question.
-- `answer`: the value to be used as the answer.
-- `password`: an additional value that is required for questions that also need an extra piece of
-  information, like a password (e.g., `storage.luks_activation` with the `decrypt` answer) or a
-  plain string (e.g., `load.retry`, which can use it to specify an alternative URL).
+- `action`: the action to use as the answer (e.g., `"yes"`, `"decrypt"`, `"Retry"`). The `answer`
+  property is also accepted as a deprecated alias.
+- `value`: an additional value that is required for questions that also need an extra piece of
+  information, like a password (e.g., `storage.luks_activation` with the `decrypt` action) or a
+  plain string (e.g., `load.retry`, which can use it to specify an alternative URL). The `password`
+  property is also accepted as an alias, and it may read better for password-based questions.
 - `data`: an optional object with additional key-value pairs to match the question.
 
 The installer will attempt to match a question to an answer by checking the `class`, `text`, and
@@ -78,7 +80,7 @@ the values for the specified properties are identical. For example, a question m
 
 :::warning[Beware of retries]
 
-The `Retry` value for the `answer` property could get the installation into an infinity loop. Avoid
+The `Retry` value for the `action` property could get the installation into an infinity loop. Avoid
 using `Retry` if you are not totally sure that the question is going to success at some point. In
 the future, this problem could be overcome by defining a maximum number of attempts.
 
@@ -95,7 +97,7 @@ use to match them.
 | :------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `autoyast.unsupported`                 | When there are unsupported elements in an AutoYaST profile.                                                                                      | `Abort`, `Continue` (default)                          | `planned`: elements to be supported in the future.<br />`unsupported`: unsupported elements.                                                                                 |
 | `autoyast.popup`                       | Generic question used while converting an AutoYaST profile (it replaces calls to `Yast2::Popup` in the AutoYaST code it reuses).                 | Varies (e.g., `ok`; `yes`, `no`; `continue`, `cancel`) | None.                                                                                                                                                                        |
-| `autoyast.password`                    | When a password is needed to decrypt a GPG-encrypted AutoYaST profile.                                                                           | `ok`, `cancel` (default)                               | None. It uses a password field, so the answer must be provided through the `password` property.                                                                              |
+| `autoyast.password`                    | When a password is needed to decrypt a GPG-encrypted AutoYaST profile.                                                                           | `ok`, `cancel` (default)                               | None. It uses a password field, so the answer must be provided through the `value` (or `password`) property.                                                                 |
 | `software.unsigned_file`               | When a file from a repository is not digitally signed.                                                                                           | `Yes`, `No` (default)                                  | `filename`: The name of the file.                                                                                                                                            |
 | `software.import_gpg`                  | When a signature is signed with an unknown GPG key.                                                                                              | `Trust`, `Skip` (default)                              | `id`, `name`, `fingerprint`: Details of the unknown key.                                                                                                                     |
 | `software.unknown_gpg`                 | When a file is signed with an unknown key.                                                                                                       | `Yes`, `No` (default)                                  | `filename`: The name of the signed file.<br />`id`: The key ID.                                                                                                              |
