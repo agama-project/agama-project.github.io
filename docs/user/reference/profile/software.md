@@ -91,7 +91,50 @@ The `software` section allows you to define custom repositories using a list und
 - `enabled`: Controls whether the repository is active. This is handy for pre-defining repositories
   you plan to enable later. By default, repositories are enabled.
 - `allowUnsigned`: If set to `true`, the repository will be accepted even if it lacks a GPG
-  signature. This can be useful for your own repositories. It's not set by default.
+  signature (e.g., repositories created with `createrepo` without a signature). This can be useful
+  for your own repositories. It's not set by default.
+  **Note**: This only applies to the repository metadata itself. If an individual package is
+  unsigned or signed with an unknown key, its installation will still fail. To bypass package
+  signature errors (not recommended), you can use the [questions](./answers) section to
+  automatically answer `"Ignore"` to the `software.package_error.provide_error` question.
+
+  ```json
+  {
+    "questions": {
+      "answers": [
+        {
+          "class": "software.package_error.provide_error",
+          "answer": "Ignore",
+          "data": {
+            "package": "my-unsigned-pkg"
+          }
+        }
+      ]
+    }
+  }
+  ```
 - `gpgFingerprints`: A list of accepted GPG fingerprints for the repository. This is helpful if the
   repository is signed by a GPG key not included in your installation medium. This list is empty by
   default.
+  **Note**: This feature requires the repository to provide a `.key` file (e.g., `repomd.xml.key`).
+  If the repository lacks this file, it will report an unknown key ID, which `gpgFingerprints` cannot
+  match. In such cases, use the [questions](./answers) section to answer `"Yes"` to the
+  `software.unknown_gpg` question. Furthermore, this setting does not import the key for package
+  verification. To globally trust a key for packages, include it in your installation medium (see
+  [SUSE Manager documentation](https://documentation.suse.com/suma/4.3/en/suse-manager/client-configuration/autoinst-owngpgkey.html)).
+
+  ```json
+  {
+    "questions": {
+      "answers": [
+        {
+          "class": "software.unknown_gpg",
+          "answer": "Yes",
+          "data": {
+            "filename": "repomd.xml"
+          }
+        }
+      ]
+    }
+  }
+  ```
