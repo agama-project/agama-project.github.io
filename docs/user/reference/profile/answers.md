@@ -24,7 +24,7 @@ two main properties: `policy` and `answers`.
     "policy": "auto",
     "answers": [
       {
-        "class": "activateMultipath",
+        "class": "multipathActivation",
         "action": "yes",
       },
       {
@@ -59,7 +59,7 @@ a specific question.
 
 Each answer object can have the following properties:
 
-- `class`: a unique identifier for the question (e.g., `"activateMultipath"`).
+- `class`: a unique identifier for the question (e.g., `"multipathActivation"`).
 - `text`: the full text of the question.
 - `action`: the action to use as the answer (e.g., `"yes"`, `"decrypt"`, `"Retry"`).
 - `value`: an additional value that is required for questions that also need an extra piece of
@@ -101,8 +101,8 @@ use to match them.
 :::info[Class names were renamed]
 
 Question classes used to follow an inconsistent mix of naming schemes (dotted, namespaced,
-snake_case). They now use a flat camelCase identifier instead (e.g., `activateMultipath` instead of
-`storage.activate_multipath`). The old names are still recognized for backward compatibility, so
+snake_case). They now use a flat camelCase identifier instead (e.g., `multipathActivation` instead
+of `storage.activate_multipath`). The old names are still recognized for backward compatibility, so
 existing answers keep working, but new profiles should use the current names listed below. The
 **SLE-16 name** column shows the corresponding deprecated name used in SLES 16.0 and openSUSE Leap
 16.0 (see [this page](./answers-16)); it's left blank for classes that didn't exist in that version.
@@ -111,7 +111,6 @@ existing answers keep working, but new profiles should use the current names lis
 
 | Class                  | SLE-16 name                            | Description                                                                                                                                      | Possible Answers                                       | Available Data                                                                                                                                                               |
 | :--------------------- | :------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `activateMultipath`    | `storage.activate_multipath`           | When it looks like the system has multipath and if it should be activated.                                                                       | `yes` (default), `no`                                  |                                                                                                                                                                              |
 | `autoyastPassword`     | `autoyast.password`                    | When a password is needed to decrypt a GPG-encrypted AutoYaST profile.                                                                           | `ok`, `cancel` (default)                               | None. It uses a password field, so the answer must be provided through the `value` property.                                                                                 |
 | `autoyastPopup`        | `autoyast.popup`                       | Generic question used while converting an AutoYaST profile (it replaces calls to `Yast2::Popup` in the AutoYaST code it reuses).                 | Varies (e.g., `ok`; `yes`, `no`; `continue`, `cancel`) | None.                                                                                                                                                                        |
 | `autoyastUnsupported`  | `autoyast.unsupported`                 | When there are unsupported elements in an AutoYaST profile.                                                                                      | `Abort`, `Continue` (default)                          | `planned`: elements to be supported in the future.<br />`unsupported`: unsupported elements.                                                                                 |
@@ -119,6 +118,7 @@ existing answers keep working, but new profiles should use the current names lis
 | `importGpg`            | `software.import_gpg`                  | When a signature is signed with an unknown GPG key.                                                                                              | `Trust`, `Skip` (default)                              | `id`, `name`, `fingerprint`: Details of the unknown key.                                                                                                                     |
 | `loadConfigError`      | `load.retry`                           | When the installer fails to load the profile (e.g., because of a network problem). The answer can also include an alternative URL to retry from. | `Retry`, `Manual` (default)                            | `error`: The text of the error message.<br />`originalValue`: The URL that failed to be loaded.                                                                              |
 | `luksActivation`       | `storage.luks_activation`              | When a LUKS encrypted device is detected and requires a password to probe it.                                                                    | `skip`, `decrypt` (default)                            | `device`: The device name.<br />`label`: The device label.<br />`size`: The device size.<br />`attempt`: The number of the current attempt.                                  |
+| `multipathActivation`  | `storage.activate_multipath`           | When it looks like the system has multipath and if it should be activated.                                                                       | `yes` (default), `no`                                  |                                                                                                                                                                              |
 | `noDigest`             | `software.digest.no_digest`            | When a file is in a signed repository, but is not listed in the list of checksums.                                                               | `Yes`, `No` (default)                                  |                                                                                                                                                                              |
 | `packageInstallError`  | `software.package_error.install_error` | When a package could not be installed (e.g., because of an I/O error while unpacking it).                                                        | `Retry`, `Ignore` (no default)                         | `package`: The package name.                                                                                                                                                 |
 | `packageProvideError`  | `software.package_error.provide_error` | When a package could not be downloaded (e.g., because of a network or medium error).                                                             | `Retry`, `Ignore` (no default)                         | `package`: The package name.<br />`errorCode`: The kind of download error.                                                                                                   |
