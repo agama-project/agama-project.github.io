@@ -25,12 +25,12 @@ two main properties: `policy` and `answers`.
     "answers": [
       {
         "class": "multipathActivation",
-        "action": "yes",
+        "action": "yes"
       },
       {
         "class": "luksActivation",
         "action": "decrypt",
-        "value": "my-secret-password"
+        "value": "my-secret-password",
         "data": {
           "device": "/dev/sda22"
         }
