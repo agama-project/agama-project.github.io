@@ -157,7 +157,7 @@ Locations:
 - URL (including AutoYaST specific schemes)
 
 For an example of Jsonnet-based profile, see
-https://github.com/openSUSE/agama/blob/master/rust/agama-lib/share/examples/profile.jsonnet
+https://github.com/openSUSE/agama/blob/master/rust/share/examples/profile.jsonnet
 
 **Usage:** `agama config generate [URL_OR_PATH]`
 
