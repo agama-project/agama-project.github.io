@@ -19,7 +19,7 @@ For the SUSE SLES-16.0 or openSUSE Leap 16.0 profiles you can use this line:
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/agama-project/agama/refs/heads/SLE-16/rust/agama-lib/share/profile.schema.json"
+  "$schema": "https://raw.githubusercontent.com/agama-project/agama/refs/heads/SLE-16/rust/share/profile.schema.json"
 }
 ```
 
@@ -28,7 +28,7 @@ line:
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/agama-project/agama/refs/heads/master/rust/agama-lib/share/profile.schema.json"
+  "$schema": "https://raw.githubusercontent.com/agama-project/agama/refs/heads/master/rust/share/profile.schema.json"
 }
 ```
 

@@ -27,8 +27,8 @@ instructs Agama to install Tumbleweed and defines a first user so you can log in
 Reading throught the following sections you can find the supported configuration values. The
 documentation includes several examples to make it easier to write your own profiles. Alternatively,
 you can check the
-[JSON Schema](https://github.com/openSUSE/agama/blob/master/rust/agama-lib/share/profile.schema.json)
-to learn about the supported elements.
+[JSON Schema](https://github.com/openSUSE/agama/blob/master/rust/share/profile.schema.json) to learn
+about the supported elements.
 
 If you are interested in the dynamic bits, you can check the
 [Writing a dynamic profile](../profile/dynamic) section.
