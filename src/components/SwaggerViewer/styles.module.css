@@ -1,0 +1,245 @@
+.swaggerWrapper {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  background-color: var(--ifm-card-background-color, #ffffff);
+  border-radius: var(--ifm-global-radius, 8px);
+  padding: 1.5rem;
+  box-shadow: var(--ifm-global-shadow-lw, 0 1px 3px rgba(0, 0, 0, 0.1));
+  border: 1px solid var(--ifm-color-emphasis-200, #e0e0e0);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* ======================================================== */
+/* TYPOGRAPHY OVERRIDES                                      */
+/* ======================================================== */
+
+/* Force all text in Swagger UI to inherit Docusaurus base font */
+.swaggerWrapper :global(.swagger-ui),
+.swaggerWrapper :global(.swagger-ui *),
+.swaggerWrapper :global(.swagger-ui p),
+.swaggerWrapper :global(.swagger-ui span),
+.swaggerWrapper :global(.swagger-ui a),
+.swaggerWrapper :global(.swagger-ui div),
+.swaggerWrapper :global(.swagger-ui td),
+.swaggerWrapper :global(.swagger-ui th),
+.swaggerWrapper :global(.swagger-ui label),
+.swaggerWrapper :global(.swagger-ui input),
+.swaggerWrapper :global(.swagger-ui select),
+.swaggerWrapper :global(.swagger-ui textarea),
+.swaggerWrapper :global(.swagger-ui button) {
+  font-family: var(--ifm-font-family-base, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif) !important;
+}
+
+/* Headings use Docusaurus Poppins heading font */
+.swaggerWrapper :global(.swagger-ui h1),
+.swaggerWrapper :global(.swagger-ui h2),
+.swaggerWrapper :global(.swagger-ui h3),
+.swaggerWrapper :global(.swagger-ui h4),
+.swaggerWrapper :global(.swagger-ui h5),
+.swaggerWrapper :global(.swagger-ui .info .title),
+.swaggerWrapper :global(.swagger-ui .opblock-tag),
+.swaggerWrapper :global(.swagger-ui section.models h4),
+.swaggerWrapper :global(.swagger-ui .model-title) {
+  font-family: var(--ifm-heading-font-family, "Poppins", var(--ifm-font-family-base)) !important;
+  font-weight: var(--ifm-heading-font-weight, 500) !important;
+  color: var(--ifm-heading-color, inherit) !important;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock-tag) {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200, #e0e0e0);
+}
+
+/* Monospace & code fonts */
+.swaggerWrapper :global(.swagger-ui code),
+.swaggerWrapper :global(.swagger-ui kbd),
+.swaggerWrapper :global(.swagger-ui samp),
+.swaggerWrapper :global(.swagger-ui pre),
+.swaggerWrapper :global(.swagger-ui .renderedMarkdown code),
+.swaggerWrapper :global(.swagger-ui .microlight),
+.swaggerWrapper :global(.swagger-ui .highlight-code),
+.swaggerWrapper :global(.swagger-ui .opblock .opblock-summary-path),
+.swaggerWrapper :global(.swagger-ui .model-box code),
+.swaggerWrapper :global(.swagger-ui .parameter__name),
+.swaggerWrapper :global(.swagger-ui .parameter__type),
+.swaggerWrapper :global(.swagger-ui .prop-type),
+.swaggerWrapper :global(.swagger-ui .prop-format),
+.swaggerWrapper :global(.swagger-ui .response-col_status) {
+  font-family: var(--ifm-font-family-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace) !important;
+  font-size: var(--ifm-code-font-size, 92%) !important;
+}
+
+/* HTTP method badges (GET, POST, PUT, DELETE) */
+.swaggerWrapper :global(.swagger-ui .opblock .opblock-summary-method) {
+  font-family: var(--ifm-font-family-base) !important;
+  font-weight: 700 !important;
+}
+
+/* ======================================================== */
+/* LAYOUT AND CLEANUP                                       */
+/* ======================================================== */
+
+.swaggerWrapper :global(.swagger-ui) {
+  color: var(--ifm-font-color-base, #1c1e21);
+}
+
+.swaggerWrapper :global(.swagger-ui .topbar) {
+  display: none !important;
+}
+
+.swaggerWrapper :global(.swagger-ui .wrapper) {
+  padding: 0 !important;
+  max-width: none !important;
+}
+
+/* Copy button & SVG icon */
+.swaggerWrapper :global(.swagger-ui .copy-to-clipboard) {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  z-index: 5;
+}
+
+.swaggerWrapper :global(.swagger-ui .copy-to-clipboard button) {
+  display: inline-block !important;
+  width: 24px !important;
+  height: 24px !important;
+  border: none !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  opacity: 0.8 !important;
+  background-color: var(--ifm-color-emphasis-100, #f0f0f0) !important;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2330ba78' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'%3E%3C/path%3E%3C/svg%3E") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 14px 14px !important;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.swaggerWrapper :global(.swagger-ui .copy-to-clipboard button:hover) {
+  opacity: 1 !important;
+  background-color: var(--ifm-color-emphasis-200, #e0e0e0) !important;
+}
+
+/* ======================================================== */
+/* DARK THEME STYLING                                       */
+/* ======================================================== */
+
+[data-theme='dark'] .swaggerWrapper {
+  background-color: #08231f;
+  border-color: #123e37;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui) {
+  color: #e3e3e3;
+}
+
+/* Dark mode text overrides */
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .info .title),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .info p),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .info li),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock-tag),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock .opblock-summary-path),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock .opblock-summary-description),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .tab li),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_status),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .response-col_links),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .parameter__name),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .parameter__type),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .parameter__deprecated),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .parameter__in),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .model-title),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui section.models h4),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .prop-name) {
+  color: #e3e3e3 !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .prop-type) {
+  color: #40ce8a !important;
+}
+
+/* Dark mode section headers and schemes */
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .scheme-container),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .opblock .opblock-section-header) {
+  background-color: #0c322c !important;
+  color: #e3e3e3 !important;
+  border-bottom: 1px solid #14463d !important;
+}
+
+/* Dark mode inputs, textareas, and selects */
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui input[type=text]),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui textarea),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui select) {
+  background-color: #061a17 !important;
+  color: #ffffff !important;
+  border: 1px solid #194a42 !important;
+  border-radius: 4px !important;
+}
+
+/* Dark mode code blocks */
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .highlight-code),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .microlight) {
+  background-color: #051513 !important;
+  color: #e3e3e3 !important;
+  border: 1px solid #123e37 !important;
+}
+
+/* Dark mode models */
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui section.models) {
+  border: 1px solid #14463d !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .model-box) {
+  background-color: #061a17 !important;
+}
+
+/* Dark mode buttons */
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .btn) {
+  background-color: #0c322c !important;
+  color: #e3e3e3 !important;
+  border: 1px solid #194a42 !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .btn.execute) {
+  background-color: #30ba78 !important;
+  color: #0c322c !important;
+  font-weight: 600 !important;
+  border: none !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .btn.authorize) {
+  background-color: transparent !important;
+  color: #40ce8a !important;
+  border-color: #40ce8a !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .btn.authorize svg) {
+  fill: #40ce8a !important;
+}
+
+/* Dark mode copy button */
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .copy-to-clipboard button) {
+  background-color: #123e37 !important;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2340ce8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'%3E%3C/path%3E%3C/svg%3E") !important;
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .copy-to-clipboard button:hover) {
+  background-color: #1a564c !important;
+}
+
+/* Loading & error states */
+.loading {
+  padding: 3rem 1rem;
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.error {
+  padding: 1rem 1.25rem;
+  color: #d32f2f;
+  background-color: #ffebee;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+}
