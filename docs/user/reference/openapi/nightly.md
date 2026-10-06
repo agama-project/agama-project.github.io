@@ -14,8 +14,8 @@ Agama.
 
 - **Modular (JSON)**: `https://agama-project.github.io/openapi/nightly/openapi.json`
 - **Modular (YAML)**: `https://agama-project.github.io/openapi/nightly/openapi.yaml`
-- **Full / Monolithic (JSON)**: `https://agama-project.github.io/openapi/nightly/openapi_full.json`
-- **Full / Monolithic (YAML)**: `https://agama-project.github.io/openapi/nightly/openapi_full.yaml`
+- **Full / Monolithic (JSON)**: `https://agama-project.github.io/openapi/nightly/openapi-full.json`
+- **Full / Monolithic (YAML)**: `https://agama-project.github.io/openapi/nightly/openapi-full.yaml`
 
 ### Standalone JSON Schemas
 
@@ -30,4 +30,4 @@ Agama.
 
 You can load these URLs directly into any standard OpenAPI tool:
 
-- [Open in Swagger Editor](https://editor.swagger.io/?url=https://agama-project.github.io/openapi/nightly/openapi_full.json)
+- [Open in Swagger Editor](https://editor.swagger.io/?url=https://agama-project.github.io/openapi/nightly/openapi-full.json)
