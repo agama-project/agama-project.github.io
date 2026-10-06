@@ -22,8 +22,8 @@ All specifications and standalone JSON schemas are hosted at stable URLs directl
 
 ## Stable Schema URLs
 
-You can reference the JSON Schema directly in your Agama profile (JSON or YAML) for editor
-auto-completion and validation:
+You can reference the JSON Schema directly in your Agama profile for editor auto-completion and
+validation:
 
 ```json
 {
@@ -32,14 +32,6 @@ auto-completion and validation:
     "id": "Tumbleweed"
   }
 }
-```
-
-Or for YAML:
-
-```yaml
-# yaml-language-server: $schema=https://agama-project.github.io/openapi/nightly/schemas/config.schema.json
-product:
-  id: Tumbleweed
 ```
 
 ---
