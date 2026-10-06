@@ -31,7 +31,3 @@ Agama.
 You can load these URLs directly into any standard OpenAPI tool:
 
 - [Open in Swagger Editor](https://editor.swagger.io/?url=https://agama-project.github.io/openapi/nightly/openapi_full.json)
-- View locally with `openapi-spec-validator`:
-  ```sh
-  openapi-spec-validator https://agama-project.github.io/openapi/nightly/openapi_full.json
-  ```
