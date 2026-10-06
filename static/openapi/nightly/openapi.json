@@ -1539,7 +1539,7 @@
           "address",
           "port",
           "interface",
-          "ibtf",
+          "ibft",
           "startup",
           "connected",
           "locked"
