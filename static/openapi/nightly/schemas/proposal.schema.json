@@ -1,0 +1,1464 @@
+{
+  "$id": "file:///usr/share/agama/openapi/nightly/schemas/proposal.schema.json",
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "components": {
+    "schemas": {
+      "AccessValue": {
+        "description": "Allows to specify explicit enablement of remote access for supported services",
+        "oneOf": [
+          {
+            "const": "enabled",
+            "description": "Explicitly enabled",
+            "type": "string"
+          },
+          {
+            "const": "default",
+            "description": "Default system configuration behavior that is product specific",
+            "type": "string"
+          }
+        ]
+      },
+      "BondSettings": {
+        "properties": {
+          "mode": {
+            "type": "string"
+          },
+          "options": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ports": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "mode"
+        ],
+        "type": "object"
+      },
+      "BridgeSettings": {
+        "properties": {
+          "forwardDelay": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "helloTime": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "maxAge": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "ports": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "priority": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "stp": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "ConnectivityState": {
+        "description": "Network connectivity state.",
+        "oneOf": [
+          {
+            "const": "unknown",
+            "description": "The connectivity state is unknown.",
+            "type": "string"
+          },
+          {
+            "const": "none",
+            "description": "No connectivity.",
+            "type": "string"
+          },
+          {
+            "const": "portal",
+            "description": "The network is behind a captive portal and cannot reach the full internet.",
+            "type": "string"
+          },
+          {
+            "const": "limited",
+            "description": "The network is connected but it has no access to the full internet.",
+            "type": "string"
+          },
+          {
+            "const": "full",
+            "description": "The network is connected and it has access to the full internet.",
+            "type": "string"
+          }
+        ]
+      },
+      "FirstUserConfig": {
+        "description": "First user settings\n\nHolds the settings for the first user.",
+        "properties": {
+          "fullName": {
+            "description": "First user's full name",
+            "examples": [
+              "Jane Doe"
+            ],
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "hashedPassword": {
+            "default": false,
+            "description": "Whether the password is hashed or is plain text",
+            "type": "boolean"
+          },
+          "password": {
+            "description": "User password",
+            "examples": [
+              "nots3cr3t"
+            ],
+            "type": "string"
+          },
+          "sshPublicKey": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StringOrList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "deprecated": true
+          },
+          "sshPublicKeys": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StringOrList"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "userName": {
+            "description": "First user's username",
+            "examples": [
+              "jane.doe"
+            ],
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "title": "First user settings",
+        "type": "object"
+      },
+      "IEEE8021XSettings": {
+        "description": "IEEE 802.1x (EAP) settings",
+        "properties": {
+          "anonymousIdentity": {
+            "description": "Anonymous identity string for EAP authentication methods",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "caCert": {
+            "description": "Path to CA certificate",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "caCertPassword": {
+            "description": "Password string for CA certificate if it is encrypted",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "clientCert": {
+            "description": "Path to client certificate",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "clientCertPassword": {
+            "description": "Password string for client certificate if it is encrypted",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "eap": {
+            "description": "List of EAP methods used",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "identity": {
+            "description": "Identity string, often for example the user's login name",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "password": {
+            "description": "Password string used for EAP authentication",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "peapLabel": {
+            "description": "Force the use of the new PEAP label during key derivation",
+            "type": "boolean"
+          },
+          "peapVersion": {
+            "description": "Which PEAP version is used when PEAP is set as the EAP method in the 'eap' property",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "phase2Auth": {
+            "description": "Phase 2 inner auth method",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "privateKey": {
+            "description": "Path to private key",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "privateKeyPassword": {
+            "description": "Password string for private key if it is encrypted",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "eap"
+        ],
+        "type": "object"
+      },
+      "IpInet": {
+        "description": "An IP address (IPv4 or IPv6) with prefix length in CIDR notation",
+        "examples": [
+          "192.168.1.254/24",
+          "2001:db8::/32"
+        ],
+        "type": "string"
+      },
+      "Ipv4Method": {
+        "enum": [
+          "disabled",
+          "auto",
+          "manual",
+          "linkLocal",
+          "shared"
+        ],
+        "type": "string"
+      },
+      "Ipv6Method": {
+        "enum": [
+          "disabled",
+          "auto",
+          "manual",
+          "linkLocal",
+          "ignore",
+          "dhcp",
+          "shared"
+        ],
+        "type": "string"
+      },
+      "MatchSettings": {
+        "properties": {
+          "driver": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "interface": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "kernel": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "path": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "NetworkConnection": {
+        "description": "Represents the configuration details for a network connection",
+        "properties": {
+          "addresses": {
+            "description": "List of assigned IP addresses",
+            "items": {
+              "$ref": "#/components/schemas/IpInet"
+            },
+            "type": "array"
+          },
+          "autoconnect": {
+            "description": "Specifies if the connection should automatically connect",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "bond": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BondSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Bonding settings if part of a bond"
+          },
+          "bridge": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BridgeSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Bridge settings if part of a bridge"
+          },
+          "customMacAddress": {
+            "description": "Custom MAC address of the connection's interface",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dnsSearchList": {
+            "description": "List of search domains for DNS resolution",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "gateway4": {
+            "description": "Gateway IP address for the IPv4 connection",
+            "examples": [
+              "192.168.122.1"
+            ],
+            "format": "ip",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "gateway6": {
+            "description": "Gateway IP address for the IPv6 connection",
+            "examples": [
+              "::ffff:c0a8:7a01"
+            ],
+            "format": "ip",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "description": "Unique identifier for the network connection",
+            "type": "string"
+          },
+          "ieee8021x": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IEEE8021XSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "IEEE 802.1X settings"
+          },
+          "ignoreAutoDns": {
+            "description": "Specifies whether to ignore automatically assigned DNS settings",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "interface": {
+            "description": "Network interface associated with the connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "macAddress": {
+            "description": "MAC address of the connection's interface",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "match": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MatchSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Match settings for the network connection"
+          },
+          "method4": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Ipv4Method"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "IPv4 method used for the network connection"
+          },
+          "method6": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Ipv6Method"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "IPv6 method used for the network connection"
+          },
+          "mtu": {
+            "description": "Maximum Transmission Unit (MTU) for the connection",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "nameservers": {
+            "description": "List of DNS server IP addresses",
+            "items": {
+              "format": "ip",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "parent": {
+            "description": "Identifier for the parent connection, if this connection is part of a bond",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "persistent": {
+            "description": "Specifies whether the connection should be persisted or not",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Status2"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Current status of the network connection"
+          },
+          "vlan": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VlanSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "VLAN settings for the connection"
+          },
+          "wireless": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WirelessSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Wireless settings for the connection"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": "object"
+      },
+      "NetworkConnectionsCollection": {
+        "items": {
+          "$ref": "#/components/schemas/NetworkConnection"
+        },
+        "type": "array"
+      },
+      "RootUserConfig": {
+        "description": "Root user settings\n\nHolds the settings for the root user.",
+        "properties": {
+          "hashedPassword": {
+            "default": false,
+            "description": "Whether the password is hashed or is plain text",
+            "type": "boolean"
+          },
+          "password": {
+            "description": "User password",
+            "examples": [
+              "nots3cr3t"
+            ],
+            "type": "string"
+          },
+          "sshPublicKey": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StringOrList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "deprecated": true,
+            "description": "Root SSH public key"
+          },
+          "sshPublicKeys": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StringOrList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Root SSH public key"
+          }
+        },
+        "title": "Root authentication settings",
+        "type": "object"
+      },
+      "SelectedBy": {
+        "description": "Represents the reason why a pattern is selected.",
+        "oneOf": [
+          {
+            "enum": [
+              "removed"
+            ],
+            "type": "string"
+          },
+          {
+            "const": "user",
+            "description": "The pattern was selected by the user.",
+            "type": "string"
+          },
+          {
+            "const": "auto",
+            "description": "The pattern was selected automatically.",
+            "type": "string"
+          },
+          {
+            "const": "none",
+            "description": "The pattern has not been selected.",
+            "type": "string"
+          }
+        ]
+      },
+      "StateSettings": {
+        "description": "Network general settings for the installation like enabling wireless, networking and\nallowing to enable or disable the copy of the network settings to the\ntarget system",
+        "properties": {
+          "connectivity": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ConnectivityState"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "copyNetwork": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "networkingEnabled": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "wirelessEnabled": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "Status2": {
+        "enum": [
+          "up",
+          "down",
+          "removed",
+          "keep"
+        ],
+        "type": "string"
+      },
+      "StorageDevice": {
+        "additionalProperties": false,
+        "description": "Schema to describe a device both in 'system' and 'proposal'.",
+        "properties": {
+          "block": {
+            "$ref": "#/components/schemas/StorageDeviceBlock"
+          },
+          "class": {
+            "$ref": "#/components/schemas/StorageDeviceDeviceClass"
+          },
+          "description": {
+            "type": "string"
+          },
+          "drive": {
+            "$ref": "#/components/schemas/StorageDeviceDrive"
+          },
+          "filesystem": {
+            "$ref": "#/components/schemas/StorageDeviceFilesystem"
+          },
+          "logicalVolumes": {
+            "items": {
+              "$ref": "#/components/schemas/StorageDevice"
+            },
+            "type": "array"
+          },
+          "md": {
+            "$ref": "#/components/schemas/StorageDeviceMd"
+          },
+          "multipath": {
+            "$ref": "#/components/schemas/StorageDeviceMultipath"
+          },
+          "name": {
+            "type": "string"
+          },
+          "partition": {
+            "$ref": "#/components/schemas/StorageDevicePartition"
+          },
+          "partitionTable": {
+            "$ref": "#/components/schemas/StorageDevicePartitionTable"
+          },
+          "partitions": {
+            "items": {
+              "$ref": "#/components/schemas/StorageDevice"
+            },
+            "type": "array"
+          },
+          "sid": {
+            "type": "integer"
+          },
+          "volumeGroup": {
+            "$ref": "#/components/schemas/StorageDeviceVolumeGroup"
+          }
+        },
+        "required": [
+          "sid",
+          "name"
+        ],
+        "title": "Device",
+        "type": "object"
+      },
+      "StorageDeviceBlock": {
+        "additionalProperties": false,
+        "properties": {
+          "encrypted": {
+            "type": "boolean"
+          },
+          "shrinking": {
+            "$ref": "#/components/schemas/StorageDeviceShrinkInfo"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "start": {
+            "type": "integer"
+          },
+          "systems": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "udevIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "udevPaths": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "start",
+          "size",
+          "shrinking"
+        ],
+        "type": "object"
+      },
+      "StorageDeviceDeviceClass": {
+        "enum": [
+          "drive",
+          "mdRaid",
+          "partition",
+          "volumeGroup",
+          "logicalVolume"
+        ],
+        "title": "Device class"
+      },
+      "StorageDeviceDrive": {
+        "additionalProperties": false,
+        "properties": {
+          "bus": {
+            "type": "string"
+          },
+          "busId": {
+            "type": "string"
+          },
+          "drivers": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "info": {
+            "$ref": "#/components/schemas/StorageDeviceDriveInfo"
+          },
+          "model": {
+            "type": "string"
+          },
+          "transport": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/StorageDeviceDriveType"
+          },
+          "vendor": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "StorageDeviceDriveInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "boss": {
+            "type": "boolean"
+          },
+          "sdCard": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "StorageDeviceDriveType": {
+        "enum": [
+          "disk",
+          "raid",
+          "multipath",
+          "dasd"
+        ],
+        "title": "Drive type"
+      },
+      "StorageDeviceFilesystem": {
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "mountPath": {
+            "type": "string"
+          },
+          "sid": {
+            "type": "integer"
+          },
+          "type": {
+            "$ref": "#/components/schemas/StorageDeviceFilesystemType"
+          }
+        },
+        "required": [
+          "sid",
+          "type"
+        ],
+        "type": "object"
+      },
+      "StorageDeviceFilesystemType": {
+        "enum": [
+          "bcachefs",
+          "btrfs",
+          "btrfsSnapshots",
+          "btrfsImmutable",
+          "exfat",
+          "ext2",
+          "ext3",
+          "ext4",
+          "f2fs",
+          "jfs",
+          "nfs",
+          "nilfs2",
+          "ntfs",
+          "reiserfs",
+          "swap",
+          "tmpfs",
+          "vfat",
+          "xfs"
+        ],
+        "title": "Filesystem type"
+      },
+      "StorageDeviceMd": {
+        "additionalProperties": false,
+        "properties": {
+          "devices": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "level": {
+            "$ref": "#/components/schemas/StorageDeviceMdRaidLevel"
+          },
+          "uuid": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "level",
+          "devices"
+        ],
+        "type": "object"
+      },
+      "StorageDeviceMdRaidLevel": {
+        "enum": [
+          "raid0",
+          "raid1",
+          "raid5",
+          "raid6",
+          "raid10"
+        ],
+        "title": "MD level"
+      },
+      "StorageDeviceMultipath": {
+        "additionalProperties": false,
+        "properties": {
+          "wireNames": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "wireNames"
+        ],
+        "type": "object"
+      },
+      "StorageDevicePartition": {
+        "additionalProperties": false,
+        "properties": {
+          "efi": {
+            "type": "boolean"
+          },
+          "id": {
+            "$ref": "#/components/schemas/StorageDevicePartitionId"
+          }
+        },
+        "required": [
+          "efi"
+        ],
+        "type": "object"
+      },
+      "StorageDevicePartitionId": {
+        "enum": [
+          "dos12",
+          "dos16",
+          "ntfs",
+          "dos32",
+          "extended",
+          "diag",
+          "prep",
+          "swap",
+          "linux",
+          "irst",
+          "lvm",
+          "raid",
+          "xbootldr",
+          "esp",
+          "bios_boot",
+          "windows_basic_data",
+          "microsoft_reserved",
+          "linux_home",
+          "linux_server_data",
+          "linux_root_arm",
+          "linux_root_aarch64",
+          "linux_root_ppc32",
+          "linux_root_ppc64be",
+          "linux_root_ppc64le",
+          "linux_root_riscv32",
+          "linux_root_riscv64",
+          "linux_root_s390",
+          "linux_root_s390x",
+          "linux_root_x86",
+          "linux_root_x86_64",
+          "linux_usr_arm",
+          "linux_usr_aarch64",
+          "linux_usr_ppc32",
+          "linux_usr_ppc64be",
+          "linux_usr_ppc64le",
+          "linux_usr_riscv32",
+          "linux_usr_riscv64",
+          "linux_usr_s390",
+          "linux_usr_s390x",
+          "linux_usr_x86",
+          "linux_usr_x86_64"
+        ],
+        "title": "Partition id"
+      },
+      "StorageDevicePartitionTable": {
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/StorageDevicePtableType"
+          },
+          "unusedSlots": {
+            "items": {
+              "$ref": "#/components/schemas/StorageDeviceUnusedSlot"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "type",
+          "unusedSlots"
+        ],
+        "type": "object"
+      },
+      "StorageDevicePtableType": {
+        "enum": [
+          "gpt",
+          "msdos",
+          "dasd"
+        ],
+        "title": "Partition table type"
+      },
+      "StorageDeviceShrinkInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "minSize": {
+            "type": "integer"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "supported": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "supported"
+        ],
+        "type": "object"
+      },
+      "StorageDeviceUnusedSlot": {
+        "additionalProperties": false,
+        "properties": {
+          "size": {
+            "type": "integer"
+          },
+          "start": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "start",
+          "size"
+        ],
+        "type": "object"
+      },
+      "StorageDeviceVolumeGroup": {
+        "additionalProperties": false,
+        "properties": {
+          "physicalVolumes": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "size": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "size",
+          "physicalVolumes"
+        ],
+        "type": "object"
+      },
+      "StorageProposal": {
+        "additionalProperties": false,
+        "description": "API description of the storage proposal.",
+        "properties": {
+          "actions": {
+            "description": "Sorted list of actions to execute during the commit phase.",
+            "items": {
+              "$ref": "#/components/schemas/StorageProposalAction"
+            },
+            "type": "array"
+          },
+          "devices": {
+            "description": "Expected layout of the system after the commit phase.",
+            "items": {
+              "$ref": "#/components/schemas/StorageDevice"
+            },
+            "type": "array"
+          }
+        },
+        "title": "Proposal",
+        "type": "object"
+      },
+      "StorageProposalAction": {
+        "additionalProperties": false,
+        "properties": {
+          "delete": {
+            "type": "boolean"
+          },
+          "device": {
+            "type": "integer"
+          },
+          "resize": {
+            "type": "boolean"
+          },
+          "subvol": {
+            "type": "boolean"
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "device",
+          "text"
+        ],
+        "type": "object"
+      },
+      "StringOrList": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        ]
+      },
+      "VlanFlag": {
+        "description": "VLAN flags controlling behavior",
+        "oneOf": [
+          {
+            "const": "reorder-headers",
+            "description": "Reorder Ethernet headers to make packets look less like VLAN packets",
+            "type": "string"
+          },
+          {
+            "const": "gvrp",
+            "description": "GARP VLAN Registration Protocol - dynamically register/deregister VLANs",
+            "type": "string"
+          },
+          {
+            "const": "loose-binding",
+            "description": "Allow changing master device while connection is active",
+            "type": "string"
+          },
+          {
+            "const": "mvrp",
+            "description": "Multiple VLAN Registration Protocol - next generation of GVRP",
+            "type": "string"
+          }
+        ]
+      },
+      "VlanSettings": {
+        "properties": {
+          "flags": {
+            "items": {
+              "$ref": "#/components/schemas/VlanFlag"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "id": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "parent": {
+            "type": "string"
+          },
+          "protocol": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "parent",
+          "id"
+        ],
+        "type": "object"
+      },
+      "WirelessSettings": {
+        "description": "Wireless configuration",
+        "properties": {
+          "band": {
+            "description": "Frequency band of the wireless network",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "bssid": {
+            "description": "Only allow connection to this mac address",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "channel": {
+            "description": "Wireless channel of the wireless network",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "groupAlgorithms": {
+            "description": "A list of group/broadcast encryption algorithms",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "hidden": {
+            "description": "Indicates that the wireless network is not broadcasting its SSID",
+            "type": "boolean"
+          },
+          "mode": {
+            "description": "Wireless network mode",
+            "type": "string"
+          },
+          "pairwiseAlgorithms": {
+            "description": "A list of pairwise encryption algorithms",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "password": {
+            "description": "Password of the wireless network",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "pmf": {
+            "description": "Indicates whether Protected Management Frames must be enabled for the connection",
+            "format": "int32",
+            "type": "integer"
+          },
+          "security": {
+            "description": "Security method/key management",
+            "type": "string"
+          },
+          "ssid": {
+            "description": "SSID of the wireless network",
+            "type": "string"
+          },
+          "wpaProtocolVersions": {
+            "description": "A list of allowed WPA protocol versions",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "security",
+          "ssid",
+          "mode"
+        ],
+        "type": "object"
+      },
+      "access.ExtendedConfig": {
+        "description": "Remote Access extended configuration that is resolved",
+        "properties": {
+          "ssh": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccessValue"
+              }
+            ],
+            "description": "Remote access to SSH"
+          },
+          "webConsole": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccessValue"
+              }
+            ],
+            "description": "Remote access to Web Console"
+          }
+        },
+        "required": [
+          "ssh",
+          "webConsole"
+        ],
+        "type": "object"
+      },
+      "hostname.Proposal": {
+        "description": "Describes what Agama proposes for the target system.",
+        "properties": {
+          "hostname": {
+            "type": "string"
+          },
+          "static": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "hostname"
+        ],
+        "type": "object"
+      },
+      "l10n.Proposal": {
+        "description": "Describes what Agama proposes for the target system.",
+        "properties": {
+          "keymap": {
+            "description": "Keymap (e.g., \"us\", \"cz(qwerty)\", etc.).",
+            "type": "string"
+          },
+          "locale": {
+            "description": "Locale (e.g., \"en_US.UTF-8\").",
+            "type": "string"
+          },
+          "timezone": {
+            "description": "Timezone (e.g., \"Europe/Berlin\").",
+            "type": "string"
+          }
+        },
+        "required": [
+          "keymap",
+          "locale",
+          "timezone"
+        ],
+        "type": "object"
+      },
+      "network.Proposal": {
+        "description": "Network proposal settings for installation",
+        "properties": {
+          "connections": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NetworkConnectionsCollection"
+              }
+            ],
+            "description": "Connections to use in the installation"
+          },
+          "state": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StateSettings"
+              }
+            ],
+            "description": "General network settings"
+          }
+        },
+        "required": [
+          "connections",
+          "state"
+        ],
+        "type": "object"
+      },
+      "software.Proposal": {
+        "description": "Describes what Agama proposes for the target system.",
+        "properties": {
+          "patterns": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SelectedBy"
+            },
+            "description": "Patterns selection. It is represented as a hash map where the key is the pattern's name\nand the value why the pattern is selected.",
+            "type": "object"
+          },
+          "registration": {
+            "description": "Registration proposal. Maybe same as config?\nTODO: implement it",
+            "type": "null"
+          },
+          "usedSpace": {
+            "description": "Space required for installation in KiB.",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "users.Config": {
+        "description": "User settings\n\nHolds the user settings for the installation.",
+        "properties": {
+          "root": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RootUserConfig"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FirstUserConfig"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "properties": {
+    "access": {
+      "$ref": "#/components/schemas/access.ExtendedConfig"
+    },
+    "hostname": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/hostname.Proposal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "l10n": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/l10n.Proposal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "network": {
+      "$ref": "#/components/schemas/network.Proposal"
+    },
+    "software": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/software.Proposal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "storage": {
+      "$ref": "#/components/schemas/StorageProposal"
+    },
+    "users": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/users.Config"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "network",
+    "access"
+  ],
+  "type": "object"
+}

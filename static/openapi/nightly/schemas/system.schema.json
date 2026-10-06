@@ -1,0 +1,2644 @@
+{
+  "$id": "file:///usr/share/agama/openapi/nightly/schemas/system.schema.json",
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "components": {
+    "schemas": {
+      "AccessPoint": {
+        "description": "Access Point",
+        "properties": {
+          "device": {
+            "type": "string"
+          },
+          "flags": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "hwAddress": {
+            "type": "string"
+          },
+          "rsnFlags": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "ssid": {
+            "type": "string"
+          },
+          "strength": {
+            "format": "uint8",
+            "maximum": 255,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "wpaFlags": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "device",
+          "ssid",
+          "hwAddress",
+          "strength",
+          "flags",
+          "rsnFlags",
+          "wpaFlags"
+        ],
+        "type": "object"
+      },
+      "AddonInfo": {
+        "description": "Addon registration",
+        "properties": {
+          "available": {
+            "description": "Whether the addon is mirrored on the RMT server, on SCC it is always `true`",
+            "type": "boolean"
+          },
+          "description": {
+            "description": "Short description of the addon (translated)",
+            "type": "string"
+          },
+          "free": {
+            "description": "Whether a registration code is required for registering the addon",
+            "type": "boolean"
+          },
+          "id": {
+            "description": "Addon identifier",
+            "type": "string"
+          },
+          "label": {
+            "description": "User visible name",
+            "type": "string"
+          },
+          "recommended": {
+            "description": "Whether the addon is recommended for the users",
+            "type": "boolean"
+          },
+          "registration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AddonRegistration"
+              }
+            ],
+            "description": "Whether the addon is registered"
+          },
+          "release": {
+            "description": "Release status of the addon, e.g. \"beta\"",
+            "type": "string"
+          },
+          "version": {
+            "description": "Version of the addon",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "label",
+          "available",
+          "free",
+          "recommended",
+          "description",
+          "release",
+          "registration"
+        ],
+        "type": "object"
+      },
+      "AddonRegistration": {
+        "oneOf": [
+          {
+            "properties": {
+              "code": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "const": "registered",
+                "type": "string"
+              }
+            },
+            "required": [
+              "status"
+            ],
+            "type": "object"
+          },
+          {
+            "properties": {
+              "status": {
+                "const": "notRegistered",
+                "type": "string"
+              }
+            },
+            "required": [
+              "status"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "BondSettings": {
+        "properties": {
+          "mode": {
+            "type": "string"
+          },
+          "options": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ports": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "mode"
+        ],
+        "type": "object"
+      },
+      "BootloaderSystemInfo": {
+        "additionalProperties": false,
+        "description": "API description of the bootloader system",
+        "properties": {
+          "availableBootloaders": {
+            "description": "Possible bootloaders to select in the current system.",
+            "items": {
+              "$ref": "#/components/schemas/BootloaderSystemInfoBootloader"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "availableBootloaders"
+        ],
+        "title": "System",
+        "type": "object"
+      },
+      "BootloaderSystemInfoBootloader": {
+        "additionalProperties": false,
+        "properties": {
+          "encryptionAuth": {
+            "description": "Encryption authentication methods that can be managed by the bootloader in this system.",
+            "items": {
+              "$ref": "#/components/schemas/BootloaderSystemInfoEncryptionAuthMethod"
+            },
+            "type": "array"
+          },
+          "type": {
+            "$ref": "#/components/schemas/BootloaderSystemInfoBootloaderType"
+          }
+        },
+        "required": [
+          "type",
+          "encryptionAuth"
+        ],
+        "type": "object"
+      },
+      "BootloaderSystemInfoBootloaderType": {
+        "enum": [
+          "grub2",
+          "grub2-bls",
+          "systemd-boot"
+        ]
+      },
+      "BootloaderSystemInfoEncryptionAuthMethod": {
+        "enum": [
+          "password",
+          "tpm"
+        ]
+      },
+      "BridgeSettings": {
+        "properties": {
+          "forwardDelay": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "helloTime": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "maxAge": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "ports": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "priority": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "stp": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "ConnectionState": {
+        "oneOf": [
+          {
+            "const": "unknown",
+            "description": "The connection state is unknown.",
+            "type": "string"
+          },
+          {
+            "const": "activating",
+            "description": "The connection is getting activated.",
+            "type": "string"
+          },
+          {
+            "const": "activated",
+            "description": "The connection is activated.",
+            "type": "string"
+          },
+          {
+            "const": "deactivating",
+            "description": "The connection is getting deactivated.",
+            "type": "string"
+          },
+          {
+            "const": "deactivated",
+            "description": "The connection is deactivated.",
+            "type": "string"
+          }
+        ]
+      },
+      "ConnectivityState": {
+        "description": "Network connectivity state.",
+        "oneOf": [
+          {
+            "const": "unknown",
+            "description": "The connectivity state is unknown.",
+            "type": "string"
+          },
+          {
+            "const": "none",
+            "description": "No connectivity.",
+            "type": "string"
+          },
+          {
+            "const": "portal",
+            "description": "The network is behind a captive portal and cannot reach the full internet.",
+            "type": "string"
+          },
+          {
+            "const": "limited",
+            "description": "The network is connected but it has no access to the full internet.",
+            "type": "string"
+          },
+          {
+            "const": "full",
+            "description": "The network is connected and it has access to the full internet.",
+            "type": "string"
+          }
+        ]
+      },
+      "DasdSystemInfo": {
+        "additionalProperties": false,
+        "description": "API description of the DASD system",
+        "properties": {
+          "devices": {
+            "description": "DASD devices",
+            "items": {
+              "$ref": "#/components/schemas/DasdSystemInfoDevice"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "devices"
+        ],
+        "title": "System",
+        "type": "object"
+      },
+      "DasdSystemInfoDevice": {
+        "additionalProperties": false,
+        "properties": {
+          "accessType": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "channel": {
+            "type": "string"
+          },
+          "deviceName": {
+            "type": "string"
+          },
+          "diag": {
+            "type": "boolean"
+          },
+          "formatted": {
+            "type": "boolean"
+          },
+          "partitionInfo": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "channel",
+          "deviceName",
+          "type",
+          "diag",
+          "accessType",
+          "partitionInfo",
+          "status",
+          "active",
+          "formatted"
+        ],
+        "type": "object"
+      },
+      "DesktopSelection": {
+        "description": "Desktop selection mode for a product",
+        "enum": [
+          "optional",
+          "suggested"
+        ],
+        "type": "string"
+      },
+      "Device": {
+        "description": "Network device",
+        "properties": {
+          "busPath": {
+            "description": "Physical location of the device, e.g. \"pci-0000:c5:00.3\".",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "carrier": {
+            "description": "Whether the device currently has a link (carrier).",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "connection": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "driver": {
+            "description": "Kernel driver in use, e.g. \"e1000e\".",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ipConfig": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IpConfig"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "macAddress": {
+            "type": "string"
+          },
+          "mtu": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "speed": {
+            "description": "Link speed in Mb/s, when the device reports one.\n\nOnly wired devices report a speed, and only while the link is up.",
+            "format": "uint32",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "state": {
+            "$ref": "#/components/schemas/DeviceState"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DeviceType"
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "macAddress",
+          "state"
+        ],
+        "type": "object"
+      },
+      "DeviceState": {
+        "description": "Network device state.",
+        "oneOf": [
+          {
+            "const": "unknown",
+            "description": "The device's state is unknown.",
+            "type": "string"
+          },
+          {
+            "const": "unmanaged",
+            "description": "The device is recognized but not managed by Agama.",
+            "type": "string"
+          },
+          {
+            "const": "unavailable",
+            "description": "The device is detected but it cannot be used (wireless switched off, missing firmware, etc.).",
+            "type": "string"
+          },
+          {
+            "const": "connecting",
+            "description": "The device is connecting to the network.",
+            "type": "string"
+          },
+          {
+            "const": "connected",
+            "description": "The device is successfully connected to the network.",
+            "type": "string"
+          },
+          {
+            "const": "disconnecting",
+            "description": "The device is disconnecting from the network.",
+            "type": "string"
+          },
+          {
+            "const": "disconnected",
+            "description": "The device is disconnected from the network.",
+            "type": "string"
+          },
+          {
+            "const": "failed",
+            "description": "The device failed to connect to a network.",
+            "type": "string"
+          }
+        ]
+      },
+      "DeviceType": {
+        "enum": [
+          "loopback",
+          "ethernet",
+          "wireless",
+          "dummy",
+          "bond",
+          "vlan",
+          "bridge"
+        ],
+        "type": "string"
+      },
+      "Dhcp4Settings": {
+        "properties": {
+          "client_id": {
+            "$ref": "#/components/schemas/DhcpClientId"
+          },
+          "hostname": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "iaid": {
+            "$ref": "#/components/schemas/DhcpIaid"
+          },
+          "send_hostname": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "send_release": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "client_id",
+          "iaid"
+        ],
+        "type": "object"
+      },
+      "Dhcp6Settings": {
+        "properties": {
+          "duid": {
+            "$ref": "#/components/schemas/DhcpDuid"
+          },
+          "hostname": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "iaid": {
+            "$ref": "#/components/schemas/DhcpIaid"
+          },
+          "send_hostname": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "send_release": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "duid",
+          "iaid"
+        ],
+        "type": "object"
+      },
+      "DhcpClientId": {
+        "oneOf": [
+          {
+            "enum": [
+              "Mac",
+              "PermMac",
+              "Ipv6Duid",
+              "Duid",
+              "Stable",
+              "None",
+              "Unset"
+            ],
+            "type": "string"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Id"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "DhcpDuid": {
+        "oneOf": [
+          {
+            "enum": [
+              "Lease",
+              "Llt",
+              "Ll",
+              "StableLlt",
+              "StableLl",
+              "StableUuid",
+              "Unset"
+            ],
+            "type": "string"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Id"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "DhcpIaid": {
+        "oneOf": [
+          {
+            "enum": [
+              "Mac",
+              "PermMac",
+              "Ifname",
+              "Stable",
+              "Unset"
+            ],
+            "type": "string"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "Id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Id"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "HardwareInfo": {
+        "description": "Represents the hardware information of the underlying system.",
+        "properties": {
+          "cpu": {
+            "description": "CPU description.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "memory": {
+            "description": "Memory size (in bytes).",
+            "format": "uint64",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "model": {
+            "description": "Computer model.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "IEEE8021XSettings": {
+        "description": "IEEE 802.1x (EAP) settings",
+        "properties": {
+          "anonymousIdentity": {
+            "description": "Anonymous identity string for EAP authentication methods",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "caCert": {
+            "description": "Path to CA certificate",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "caCertPassword": {
+            "description": "Password string for CA certificate if it is encrypted",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "clientCert": {
+            "description": "Path to client certificate",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "clientCertPassword": {
+            "description": "Password string for client certificate if it is encrypted",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "eap": {
+            "description": "List of EAP methods used",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "identity": {
+            "description": "Identity string, often for example the user's login name",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "password": {
+            "description": "Password string used for EAP authentication",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "peapLabel": {
+            "description": "Force the use of the new PEAP label during key derivation",
+            "type": "boolean"
+          },
+          "peapVersion": {
+            "description": "Which PEAP version is used when PEAP is set as the EAP method in the 'eap' property",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "phase2Auth": {
+            "description": "Phase 2 inner auth method",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "privateKey": {
+            "description": "Path to private key",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "privateKeyPassword": {
+            "description": "Password string for private key if it is encrypted",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "eap"
+        ],
+        "type": "object"
+      },
+      "IpConfig": {
+        "properties": {
+          "addresses": {
+            "items": {
+              "$ref": "#/components/schemas/IpInet"
+            },
+            "type": "array"
+          },
+          "dhcp4Settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Dhcp4Settings"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dhcp6Settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Dhcp6Settings"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dnsPriority4": {
+            "format": "int32",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "dnsPriority6": {
+            "format": "int32",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "dnsSearchList": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "gateway4": {
+            "format": "ip",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "gateway6": {
+            "format": "ip",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ignoreAutoDns": {
+            "type": "boolean"
+          },
+          "ignoreAutoRoutes4": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "ignoreAutoRoutes6": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "ip6Privacy": {
+            "format": "int32",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "linkLocal4": {
+            "$ref": "#/components/schemas/LinkLocal"
+          },
+          "method4": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Ipv4Method"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "method6": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Ipv6Method"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "nameservers": {
+            "items": {
+              "format": "ip",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "neverDefault4": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "neverDefault6": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "routes4": {
+            "items": {
+              "$ref": "#/components/schemas/IpRoute"
+            },
+            "type": "array"
+          },
+          "routes6": {
+            "items": {
+              "$ref": "#/components/schemas/IpRoute"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "ignoreAutoDns",
+          "linkLocal4"
+        ],
+        "type": "object"
+      },
+      "IpInet": {
+        "description": "An IP address (IPv4 or IPv6) with prefix length in CIDR notation",
+        "examples": [
+          "192.168.1.254/24",
+          "2001:db8::/32"
+        ],
+        "type": "string"
+      },
+      "IpRoute": {
+        "properties": {
+          "destination": {
+            "$ref": "#/components/schemas/IpInet"
+          },
+          "metric": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "nextHop": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "destination"
+        ],
+        "type": "object"
+      },
+      "Ipv4Method": {
+        "enum": [
+          "disabled",
+          "auto",
+          "manual",
+          "linkLocal",
+          "shared"
+        ],
+        "type": "string"
+      },
+      "Ipv6Method": {
+        "enum": [
+          "disabled",
+          "auto",
+          "manual",
+          "linkLocal",
+          "ignore",
+          "dhcp",
+          "shared"
+        ],
+        "type": "string"
+      },
+      "IscsiSystemInfo": {
+        "additionalProperties": false,
+        "description": "API description of the iSCSI system",
+        "properties": {
+          "initiator": {
+            "additionalProperties": false,
+            "properties": {
+              "ibft": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "ibft"
+            ],
+            "title": "Initiator",
+            "type": "object"
+          },
+          "targets": {
+            "items": {
+              "$ref": "#/components/schemas/IscsiSystemInfoTarget"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "initiator",
+          "targets"
+        ],
+        "title": "System",
+        "type": "object"
+      },
+      "IscsiSystemInfoTarget": {
+        "additionalProperties": false,
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "connected": {
+            "description": "Whether the node is connected (there is a session).",
+            "type": "boolean"
+          },
+          "ibft": {
+            "description": "Whether the target was initiated by iBFT.",
+            "type": "boolean"
+          },
+          "interface": {
+            "type": "string"
+          },
+          "locked": {
+            "description": "Whether the node is locked (cannot be deactivated)",
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "port": {
+            "type": "number"
+          },
+          "startup": {
+            "enum": [
+              "onboot",
+              "manual",
+              "automatic"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "address",
+          "port",
+          "interface",
+          "ibtf",
+          "startup",
+          "connected",
+          "locked"
+        ],
+        "type": "object"
+      },
+      "Keymap": {
+        "properties": {
+          "description": {
+            "description": "Keymap description",
+            "type": "string"
+          },
+          "id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KeymapId"
+              }
+            ],
+            "description": "Keymap identifier (e.g., \"us\")"
+          }
+        },
+        "required": [
+          "id",
+          "description"
+        ],
+        "type": "object"
+      },
+      "KeymapId": {
+        "description": "Keymap layout identifier\n\n```\nuse agama_locale_data::KeymapId;\nuse std::str::FromStr;\n\nlet id: KeymapId = \"es(ast)\".parse().unwrap();\nassert_eq!(id.layout, \"es\");\nassert_eq!(id.variant, Some(\"ast\".to_string()));\nassert_eq!(id.dashed(), \"es-ast\".to_string());\n\nlet id_with_dashes: KeymapId = \"es-ast\".parse().unwrap();\nassert_eq!(id, id_with_dashes);\n```",
+        "properties": {
+          "layout": {
+            "description": "Keyboard layout (e.g., \"es\" in \"es(ast)\")",
+            "type": "string"
+          },
+          "variant": {
+            "description": "Keyboard variante (e.g., \"ast\" in \"es(ast)\")",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "layout"
+        ],
+        "type": "object"
+      },
+      "License": {
+        "description": "Represents a product license.\n\nIt contains the license ID and name, in the current system language.",
+        "properties": {
+          "id": {
+            "description": "License ID.",
+            "type": "string"
+          },
+          "name": {
+            "description": "License name.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object"
+      },
+      "LinkLocal": {
+        "enum": [
+          "default",
+          "auto",
+          "disabled",
+          "enabled",
+          "fallback"
+        ],
+        "type": "string"
+      },
+      "LocaleEntry": {
+        "description": "Represents a locale, including the localized language and territory.",
+        "properties": {
+          "consolefont": {
+            "description": "Console font",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "description": "The locale code (e.g., \"es_ES.UTF-8\").",
+            "type": "string"
+          },
+          "language": {
+            "description": "Localized language name (e.g., \"Spanish\", \"Español\", etc.)",
+            "type": "string"
+          },
+          "territory": {
+            "description": "Localized territory name (e.g., \"Spain\", \"España\", etc.)",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "language",
+          "territory"
+        ],
+        "type": "object"
+      },
+      "MatchSettings": {
+        "properties": {
+          "driver": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "interface": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "kernel": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "path": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "NetworkConnectionWithState": {
+        "description": "Represents the configuration details for a network connection",
+        "properties": {
+          "addresses": {
+            "description": "List of assigned IP addresses",
+            "items": {
+              "$ref": "#/components/schemas/IpInet"
+            },
+            "type": "array"
+          },
+          "autoconnect": {
+            "description": "Specifies if the connection should automatically connect",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "bond": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BondSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Bonding settings if part of a bond"
+          },
+          "bridge": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BridgeSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Bridge settings if part of a bridge"
+          },
+          "customMacAddress": {
+            "description": "Custom MAC address of the connection's interface",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dnsSearchList": {
+            "description": "List of search domains for DNS resolution",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "gateway4": {
+            "description": "Gateway IP address for the IPv4 connection",
+            "examples": [
+              "192.168.122.1"
+            ],
+            "format": "ip",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "gateway6": {
+            "description": "Gateway IP address for the IPv6 connection",
+            "examples": [
+              "::ffff:c0a8:7a01"
+            ],
+            "format": "ip",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "description": "Unique identifier for the network connection",
+            "type": "string"
+          },
+          "ieee8021x": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IEEE8021XSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "IEEE 802.1X settings"
+          },
+          "ignoreAutoDns": {
+            "description": "Specifies whether to ignore automatically assigned DNS settings",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "interface": {
+            "description": "Network interface associated with the connection",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "macAddress": {
+            "description": "MAC address of the connection's interface",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "match": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MatchSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Match settings for the network connection"
+          },
+          "method4": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Ipv4Method"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "IPv4 method used for the network connection"
+          },
+          "method6": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Ipv6Method"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "IPv6 method used for the network connection"
+          },
+          "mtu": {
+            "description": "Maximum Transmission Unit (MTU) for the connection",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "nameservers": {
+            "description": "List of DNS server IP addresses",
+            "items": {
+              "format": "ip",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "parent": {
+            "description": "Identifier for the parent connection, if this connection is part of a bond",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "persistent": {
+            "description": "Specifies whether the connection should be persisted or not",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "state": {
+            "$ref": "#/components/schemas/ConnectionState"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Status2"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Current status of the network connection"
+          },
+          "vlan": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VlanSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "VLAN settings for the connection"
+          },
+          "wireless": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WirelessSettings"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Wireless settings for the connection"
+          }
+        },
+        "required": [
+          "id",
+          "state"
+        ],
+        "type": "object"
+      },
+      "NetworkConnectionsWithStateCollection": {
+        "items": {
+          "$ref": "#/components/schemas/NetworkConnectionWithState"
+        },
+        "type": "array"
+      },
+      "Pattern": {
+        "properties": {
+          "category": {
+            "description": "Pattern category (e.g., \"Production\")",
+            "type": "string"
+          },
+          "description": {
+            "description": "Pattern description",
+            "type": "string"
+          },
+          "desktop": {
+            "description": "Whether the pattern represents a desktop (e.g., gnome).",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Pattern name (eg., \"aaa_base\", \"gnome\")",
+            "type": "string"
+          },
+          "order": {
+            "description": "Pattern order",
+            "type": "string"
+          },
+          "preselected": {
+            "description": "Whether the pattern is selected by default",
+            "type": "boolean"
+          },
+          "summary": {
+            "description": "Pattern summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "category",
+          "description",
+          "summary",
+          "order",
+          "preselected",
+          "desktop"
+        ],
+        "type": "object"
+      },
+      "Product": {
+        "description": "Represents a software product",
+        "properties": {
+          "description": {
+            "description": "Product description (translated to the current UI language)",
+            "type": "string"
+          },
+          "desktopSelection": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DesktopSelection"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Desktop selection mode"
+          },
+          "icon": {
+            "description": "Product icon (e.g., \"default.svg\")",
+            "type": "string"
+          },
+          "id": {
+            "description": "Product ID (eg., \"SLES\", \"Tumbleweed\", etc.)",
+            "type": "string"
+          },
+          "licenses": {
+            "default": [],
+            "description": "License IDs (a product may require accepting more than one).",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "modes": {
+            "default": [],
+            "description": "Product modes (names and descriptions are translated to the current UI language)",
+            "items": {
+              "$ref": "#/components/schemas/ProductMode"
+            },
+            "type": "array"
+          },
+          "name": {
+            "description": "Product name (e.g., \"openSUSE Tumbleweed\")",
+            "type": "string"
+          },
+          "registration": {
+            "description": "Registration requirement",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "description",
+          "icon",
+          "registration"
+        ],
+        "type": "object"
+      },
+      "ProductMode": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "description"
+        ],
+        "type": "object"
+      },
+      "RegistrationInfo": {
+        "properties": {
+          "addons": {
+            "description": "Available add-ons.",
+            "items": {
+              "$ref": "#/components/schemas/AddonInfo"
+            },
+            "type": "array"
+          },
+          "code": {
+            "description": "Registration code.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "email": {
+            "description": "Registration e-mail.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "url": {
+            "description": "URL of the registration server.",
+            "format": "uri",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "addons"
+        ],
+        "type": "object"
+      },
+      "StateSettings": {
+        "description": "Network general settings for the installation like enabling wireless, networking and\nallowing to enable or disable the copy of the network settings to the\ntarget system",
+        "properties": {
+          "connectivity": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ConnectivityState"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "copyNetwork": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "networkingEnabled": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "wirelessEnabled": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "Status2": {
+        "enum": [
+          "up",
+          "down",
+          "removed",
+          "keep"
+        ],
+        "type": "string"
+      },
+      "StorageDevice": {
+        "additionalProperties": false,
+        "description": "Schema to describe a device both in 'system' and 'proposal'.",
+        "properties": {
+          "block": {
+            "$ref": "#/components/schemas/StorageDeviceBlock"
+          },
+          "class": {
+            "$ref": "#/components/schemas/StorageDeviceDeviceClass"
+          },
+          "description": {
+            "type": "string"
+          },
+          "drive": {
+            "$ref": "#/components/schemas/StorageDeviceDrive"
+          },
+          "filesystem": {
+            "$ref": "#/components/schemas/StorageDeviceFilesystem"
+          },
+          "logicalVolumes": {
+            "items": {
+              "$ref": "#/components/schemas/StorageDevice"
+            },
+            "type": "array"
+          },
+          "md": {
+            "$ref": "#/components/schemas/StorageDeviceMd"
+          },
+          "multipath": {
+            "$ref": "#/components/schemas/StorageDeviceMultipath"
+          },
+          "name": {
+            "type": "string"
+          },
+          "partition": {
+            "$ref": "#/components/schemas/StorageDevicePartition"
+          },
+          "partitionTable": {
+            "$ref": "#/components/schemas/StorageDevicePartitionTable"
+          },
+          "partitions": {
+            "items": {
+              "$ref": "#/components/schemas/StorageDevice"
+            },
+            "type": "array"
+          },
+          "sid": {
+            "type": "integer"
+          },
+          "volumeGroup": {
+            "$ref": "#/components/schemas/StorageDeviceVolumeGroup"
+          }
+        },
+        "required": [
+          "sid",
+          "name"
+        ],
+        "title": "Device",
+        "type": "object"
+      },
+      "StorageDeviceBlock": {
+        "additionalProperties": false,
+        "properties": {
+          "encrypted": {
+            "type": "boolean"
+          },
+          "shrinking": {
+            "$ref": "#/components/schemas/StorageDeviceShrinkInfo"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "start": {
+            "type": "integer"
+          },
+          "systems": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "udevIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "udevPaths": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "start",
+          "size",
+          "shrinking"
+        ],
+        "type": "object"
+      },
+      "StorageDeviceDeviceClass": {
+        "enum": [
+          "drive",
+          "mdRaid",
+          "partition",
+          "volumeGroup",
+          "logicalVolume"
+        ],
+        "title": "Device class"
+      },
+      "StorageDeviceDrive": {
+        "additionalProperties": false,
+        "properties": {
+          "bus": {
+            "type": "string"
+          },
+          "busId": {
+            "type": "string"
+          },
+          "drivers": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "info": {
+            "$ref": "#/components/schemas/StorageDeviceDriveInfo"
+          },
+          "model": {
+            "type": "string"
+          },
+          "transport": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/StorageDeviceDriveType"
+          },
+          "vendor": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "StorageDeviceDriveInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "boss": {
+            "type": "boolean"
+          },
+          "sdCard": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "StorageDeviceDriveType": {
+        "enum": [
+          "disk",
+          "raid",
+          "multipath",
+          "dasd"
+        ],
+        "title": "Drive type"
+      },
+      "StorageDeviceFilesystem": {
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "mountPath": {
+            "type": "string"
+          },
+          "sid": {
+            "type": "integer"
+          },
+          "type": {
+            "$ref": "#/components/schemas/StorageDeviceFilesystemType"
+          }
+        },
+        "required": [
+          "sid",
+          "type"
+        ],
+        "type": "object"
+      },
+      "StorageDeviceFilesystemType": {
+        "enum": [
+          "bcachefs",
+          "btrfs",
+          "btrfsSnapshots",
+          "btrfsImmutable",
+          "exfat",
+          "ext2",
+          "ext3",
+          "ext4",
+          "f2fs",
+          "jfs",
+          "nfs",
+          "nilfs2",
+          "ntfs",
+          "reiserfs",
+          "swap",
+          "tmpfs",
+          "vfat",
+          "xfs"
+        ],
+        "title": "Filesystem type"
+      },
+      "StorageDeviceMd": {
+        "additionalProperties": false,
+        "properties": {
+          "devices": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "level": {
+            "$ref": "#/components/schemas/StorageDeviceMdRaidLevel"
+          },
+          "uuid": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "level",
+          "devices"
+        ],
+        "type": "object"
+      },
+      "StorageDeviceMdRaidLevel": {
+        "enum": [
+          "raid0",
+          "raid1",
+          "raid5",
+          "raid6",
+          "raid10"
+        ],
+        "title": "MD level"
+      },
+      "StorageDeviceMultipath": {
+        "additionalProperties": false,
+        "properties": {
+          "wireNames": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "wireNames"
+        ],
+        "type": "object"
+      },
+      "StorageDevicePartition": {
+        "additionalProperties": false,
+        "properties": {
+          "efi": {
+            "type": "boolean"
+          },
+          "id": {
+            "$ref": "#/components/schemas/StorageDevicePartitionId"
+          }
+        },
+        "required": [
+          "efi"
+        ],
+        "type": "object"
+      },
+      "StorageDevicePartitionId": {
+        "enum": [
+          "dos12",
+          "dos16",
+          "ntfs",
+          "dos32",
+          "extended",
+          "diag",
+          "prep",
+          "swap",
+          "linux",
+          "irst",
+          "lvm",
+          "raid",
+          "xbootldr",
+          "esp",
+          "bios_boot",
+          "windows_basic_data",
+          "microsoft_reserved",
+          "linux_home",
+          "linux_server_data",
+          "linux_root_arm",
+          "linux_root_aarch64",
+          "linux_root_ppc32",
+          "linux_root_ppc64be",
+          "linux_root_ppc64le",
+          "linux_root_riscv32",
+          "linux_root_riscv64",
+          "linux_root_s390",
+          "linux_root_s390x",
+          "linux_root_x86",
+          "linux_root_x86_64",
+          "linux_usr_arm",
+          "linux_usr_aarch64",
+          "linux_usr_ppc32",
+          "linux_usr_ppc64be",
+          "linux_usr_ppc64le",
+          "linux_usr_riscv32",
+          "linux_usr_riscv64",
+          "linux_usr_s390",
+          "linux_usr_s390x",
+          "linux_usr_x86",
+          "linux_usr_x86_64"
+        ],
+        "title": "Partition id"
+      },
+      "StorageDevicePartitionTable": {
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/StorageDevicePtableType"
+          },
+          "unusedSlots": {
+            "items": {
+              "$ref": "#/components/schemas/StorageDeviceUnusedSlot"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "type",
+          "unusedSlots"
+        ],
+        "type": "object"
+      },
+      "StorageDevicePtableType": {
+        "enum": [
+          "gpt",
+          "msdos",
+          "dasd"
+        ],
+        "title": "Partition table type"
+      },
+      "StorageDeviceShrinkInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "minSize": {
+            "type": "integer"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "supported": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "supported"
+        ],
+        "type": "object"
+      },
+      "StorageDeviceUnusedSlot": {
+        "additionalProperties": false,
+        "properties": {
+          "size": {
+            "type": "integer"
+          },
+          "start": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "start",
+          "size"
+        ],
+        "type": "object"
+      },
+      "StorageDeviceVolumeGroup": {
+        "additionalProperties": false,
+        "properties": {
+          "physicalVolumes": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "size": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "size",
+          "physicalVolumes"
+        ],
+        "type": "object"
+      },
+      "StorageSystemInfo": {
+        "additionalProperties": false,
+        "description": "API description of the system",
+        "properties": {
+          "availableDrives": {
+            "description": "SIDs of the available drives",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "availableMdRaids": {
+            "description": "SIDs of the available MD RAIDs",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "availableVolumeGroups": {
+            "description": "SIDs of the available LVM volume groups",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "candidateDrives": {
+            "description": "SIDs of the drives that are candidate for installation",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "candidateMdRaids": {
+            "description": "SIDs of the MD RAIDs that are candidate for installation",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "devices": {
+            "description": "All relevant devices on the system",
+            "items": {
+              "$ref": "#/components/schemas/StorageDevice"
+            },
+            "type": "array"
+          },
+          "issues": {
+            "items": {
+              "$ref": "#/components/schemas/StorageSystemInfoIssue"
+            },
+            "type": "array"
+          },
+          "productMountPoints": {
+            "description": "Meaningful mount points for the current product",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "volumeTemplates": {
+            "description": "Volumes defined by the product as templates",
+            "items": {
+              "$ref": "#/components/schemas/StorageSystemInfoVolume"
+            },
+            "type": "array"
+          }
+        },
+        "title": "System",
+        "type": "object"
+      },
+      "StorageSystemInfoIssue": {
+        "additionalProperties": false,
+        "properties": {
+          "class": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "details": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description"
+        ],
+        "type": "object"
+      },
+      "StorageSystemInfoVolume": {
+        "additionalProperties": false,
+        "properties": {
+          "autoSize": {
+            "type": "boolean"
+          },
+          "fsType": {
+            "$ref": "#/components/schemas/StorageDeviceFilesystemType"
+          },
+          "maxSize": {
+            "type": "integer"
+          },
+          "minSize": {
+            "type": "integer"
+          },
+          "mountOptions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "mountPath": {
+            "type": "string"
+          },
+          "outline": {
+            "$ref": "#/components/schemas/StorageSystemInfoVolumeOutline"
+          }
+        },
+        "required": [
+          "mountPath",
+          "minSize",
+          "autoSize"
+        ],
+        "type": "object"
+      },
+      "StorageSystemInfoVolumeOutline": {
+        "additionalProperties": false,
+        "properties": {
+          "adjustByRam": {
+            "type": "boolean"
+          },
+          "fsTypes": {
+            "items": {
+              "$ref": "#/components/schemas/StorageDeviceFilesystemType"
+            },
+            "type": "array"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "sizeRelevantVolumes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "snapshotsAffectSizes": {
+            "type": "boolean"
+          },
+          "supportAutoSize": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "required",
+          "supportAutoSize"
+        ],
+        "type": "object"
+      },
+      "SystemInfo2": {
+        "description": "Software-related information of the system where the installer\nis running.",
+        "properties": {
+          "patterns": {
+            "description": "List of known patterns.",
+            "items": {
+              "$ref": "#/components/schemas/Pattern"
+            },
+            "type": "array"
+          },
+          "registration": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RegistrationInfo"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Registration information"
+          }
+        },
+        "required": [
+          "patterns"
+        ],
+        "type": "object"
+      },
+      "TimezoneEntry": {
+        "description": "Represents a timezone, including each part as localized.",
+        "properties": {
+          "country": {
+            "description": "Localized name of the territory this timezone is associated to",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimezoneId"
+              }
+            ],
+            "description": "Timezone identifier (e.g. \"Atlantic/Canary\")."
+          },
+          "parts": {
+            "description": "Localized parts (e.g., \"Atlántico\", \"Canarias\").",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "parts"
+        ],
+        "type": "object"
+      },
+      "TimezoneId": {
+        "type": "string"
+      },
+      "VlanFlag": {
+        "description": "VLAN flags controlling behavior",
+        "oneOf": [
+          {
+            "const": "reorder-headers",
+            "description": "Reorder Ethernet headers to make packets look less like VLAN packets",
+            "type": "string"
+          },
+          {
+            "const": "gvrp",
+            "description": "GARP VLAN Registration Protocol - dynamically register/deregister VLANs",
+            "type": "string"
+          },
+          {
+            "const": "loose-binding",
+            "description": "Allow changing master device while connection is active",
+            "type": "string"
+          },
+          {
+            "const": "mvrp",
+            "description": "Multiple VLAN Registration Protocol - next generation of GVRP",
+            "type": "string"
+          }
+        ]
+      },
+      "VlanSettings": {
+        "properties": {
+          "flags": {
+            "items": {
+              "$ref": "#/components/schemas/VlanFlag"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "id": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "parent": {
+            "type": "string"
+          },
+          "protocol": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "parent",
+          "id"
+        ],
+        "type": "object"
+      },
+      "WirelessSettings": {
+        "description": "Wireless configuration",
+        "properties": {
+          "band": {
+            "description": "Frequency band of the wireless network",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "bssid": {
+            "description": "Only allow connection to this mac address",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "channel": {
+            "description": "Wireless channel of the wireless network",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "groupAlgorithms": {
+            "description": "A list of group/broadcast encryption algorithms",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "hidden": {
+            "description": "Indicates that the wireless network is not broadcasting its SSID",
+            "type": "boolean"
+          },
+          "mode": {
+            "description": "Wireless network mode",
+            "type": "string"
+          },
+          "pairwiseAlgorithms": {
+            "description": "A list of pairwise encryption algorithms",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "password": {
+            "description": "Password of the wireless network",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "pmf": {
+            "description": "Indicates whether Protected Management Frames must be enabled for the connection",
+            "format": "int32",
+            "type": "integer"
+          },
+          "security": {
+            "description": "Security method/key management",
+            "type": "string"
+          },
+          "ssid": {
+            "description": "SSID of the wireless network",
+            "type": "string"
+          },
+          "wpaProtocolVersions": {
+            "description": "A list of allowed WPA protocol versions",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "security",
+          "ssid",
+          "mode"
+        ],
+        "type": "object"
+      },
+      "ZfcpSystemInfo": {
+        "additionalProperties": false,
+        "description": "API description of the zFCP system",
+        "properties": {
+          "controllers": {
+            "description": "zFCP controllers",
+            "items": {
+              "$ref": "#/components/schemas/ZfcpSystemInfoController"
+            },
+            "type": "array"
+          },
+          "devices": {
+            "description": "zFCP devices",
+            "items": {
+              "$ref": "#/components/schemas/ZfcpSystemInfoDevice"
+            },
+            "type": "array"
+          },
+          "lunScan": {
+            "description": "Whether automatic LUN scan is active in the system.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "lunScan",
+          "controllers",
+          "devices"
+        ],
+        "title": "System",
+        "type": "object"
+      },
+      "ZfcpSystemInfoController": {
+        "additionalProperties": false,
+        "properties": {
+          "active": {
+            "type": "boolean"
+          },
+          "channel": {
+            "type": "string"
+          },
+          "lunScan": {
+            "description": "Whether the controller automatically scans LUNs.",
+            "type": "boolean"
+          },
+          "wwpns": {
+            "description": "All available WWPNs.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "channel",
+          "wwpns",
+          "lunScan",
+          "active"
+        ],
+        "type": "object"
+      },
+      "ZfcpSystemInfoDevice": {
+        "additionalProperties": false,
+        "properties": {
+          "active": {
+            "type": "boolean"
+          },
+          "channel": {
+            "type": "string"
+          },
+          "deviceName": {
+            "description": "Device name assigned by the kernel once it is active.",
+            "type": "string"
+          },
+          "lun": {
+            "type": "string"
+          },
+          "wwpn": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "channel",
+          "wwpn",
+          "lun",
+          "active"
+        ],
+        "type": "object"
+      },
+      "hostname.SystemInfo": {
+        "description": "Describes the current system hostname information",
+        "properties": {
+          "hostname": {
+            "type": "string"
+          },
+          "static": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "hostname"
+        ],
+        "type": "object"
+      },
+      "l10n.SystemInfo": {
+        "description": "Localization-related information of the system where the installer is running.",
+        "properties": {
+          "keymap": {
+            "description": "Keymap of the system where Agama is running.",
+            "type": "string"
+          },
+          "keymaps": {
+            "description": "List of known keymaps.",
+            "items": {
+              "$ref": "#/components/schemas/Keymap"
+            },
+            "type": "array"
+          },
+          "locale": {
+            "description": "Locale of the system where Agama is running.",
+            "type": "string"
+          },
+          "locales": {
+            "description": "List of know locales.",
+            "items": {
+              "$ref": "#/components/schemas/LocaleEntry"
+            },
+            "type": "array"
+          },
+          "timezone": {
+            "description": "Timezone of the system where Agama is running.",
+            "type": "string"
+          },
+          "timezones": {
+            "description": "List of known timezones.",
+            "items": {
+              "$ref": "#/components/schemas/TimezoneEntry"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "locales",
+          "timezones",
+          "keymaps",
+          "locale",
+          "keymap",
+          "timezone"
+        ],
+        "type": "object"
+      },
+      "network.SystemInfo": {
+        "description": "Network settings for installation",
+        "properties": {
+          "accessPoints": {
+            "items": {
+              "$ref": "#/components/schemas/AccessPoint"
+            },
+            "type": "array"
+          },
+          "connections": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NetworkConnectionsWithStateCollection"
+              }
+            ],
+            "description": "Connections to use in the installation"
+          },
+          "devices": {
+            "items": {
+              "$ref": "#/components/schemas/Device"
+            },
+            "type": "array"
+          },
+          "state": {
+            "$ref": "#/components/schemas/StateSettings"
+          }
+        },
+        "required": [
+          "accessPoints",
+          "connections",
+          "devices",
+          "state"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "description": "Global information of the system where the installer is running.",
+  "properties": {
+    "bootloader": {
+      "$ref": "#/components/schemas/BootloaderSystemInfo"
+    },
+    "dasd": {
+      "$ref": "#/components/schemas/DasdSystemInfo"
+    },
+    "hardware": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/HardwareInfo"
+        }
+      ],
+      "description": "Hardware information"
+    },
+    "hostname": {
+      "$ref": "#/components/schemas/hostname.SystemInfo"
+    },
+    "iscsi": {
+      "$ref": "#/components/schemas/IscsiSystemInfo"
+    },
+    "l10n": {
+      "$ref": "#/components/schemas/l10n.SystemInfo"
+    },
+    "licenses": {
+      "description": "List of available licenses (in the current system language).",
+      "items": {
+        "$ref": "#/components/schemas/License"
+      },
+      "type": "array"
+    },
+    "network": {
+      "$ref": "#/components/schemas/network.SystemInfo"
+    },
+    "products": {
+      "description": "List of known products.",
+      "items": {
+        "$ref": "#/components/schemas/Product"
+      },
+      "type": "array"
+    },
+    "software": {
+      "$ref": "#/components/schemas/SystemInfo2"
+    },
+    "storage": {
+      "$ref": "#/components/schemas/StorageSystemInfo"
+    },
+    "zfcp": {
+      "$ref": "#/components/schemas/ZfcpSystemInfo"
+    }
+  },
+  "required": [
+    "products",
+    "licenses",
+    "hardware",
+    "hostname",
+    "l10n",
+    "software",
+    "network"
+  ],
+  "type": "object"
+}
