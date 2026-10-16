@@ -4207,7 +4207,7 @@ components:
         tpm:
           type: boolean
       required:
-      - method
+      - password
       type: object
     StorageModelConfigFilesystem:
       additionalProperties: false

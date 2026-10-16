@@ -6233,7 +6233,7 @@
           }
         },
         "required": [
-          "method"
+          "password"
         ],
         "type": "object"
       },
