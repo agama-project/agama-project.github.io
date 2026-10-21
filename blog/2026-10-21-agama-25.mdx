@@ -48,11 +48,19 @@ hand for a device that is not present in the system yet.
 ## Towards Tumbleweed adoption {#tumbleweed}
 
 Behind the scenes, we keep working with the Tumbleweed maintainers to make Agama the installer for
-the distribution. There is still no date for that to happen, but we are getting closer. Two recent
+the distribution. There is still no date for that to happen, but we are getting closer. Recent
 examples of that effort are
 [adjusting the registration support and 32-bit media build](https://github.com/agama-project/agama/pull/3861)
 and [adding riscv64 support](https://github.com/agama-project/agama/issues/3867), the latter
 contributed by Andreas Schwab.
+
+## Cutting ties with YaST packages {#yast}
+
+Agama was born on top of several YaST packages, reusing logic that was already there instead of
+rewriting it from scratch. We are now reducing that reliance, bringing into Agama's own codebase
+just the parts it actually needs instead of pulling in whole YaST modules. So far
+[this effort covers the AutoYaST-related code](https://github.com/agama-project/agama/pull/4008),
+and more areas will follow.
 
 ## Polishing and publishing our OpenAPI and JSON schemas {#openapi}
 
