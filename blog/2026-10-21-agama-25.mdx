@@ -5,15 +5,14 @@ tags:
   - release
 ---
 
-Autumn is in full swing and so is the Agama team. Version 25 is here, and while it does not carry
-any single headline feature, it bundles a handful of changes that make the day-to-day experience of
-installing a system noticeably smoother.
+Agama 25 is here, and while it does not carry any single headline feature, it bundles a handful of
+changes that make the day-to-day experience of installing a system noticeably smoother.
 
 {/* truncate */}
 
 Let's see what's new.
 
-## Chatting with your installation {#terminal}
+## A web-based terminal {#terminal}
 
 Agama's web UI now features an actual terminal. Until now, if you needed a shell on the system you
 were installing, your options were limited to switching to a different virtual console (e.g.
@@ -22,9 +21,6 @@ alt+ctrl+f8) if you had local access, or connecting through SSH.
 Now you can just open a terminal from the comfort of Agama's web UI, without leaving the browser.
 
 ![A terminal running agama config edit in Agama's web UI](../static/img/blog/2026-10-21/terminal.png)
-
-Check [this pull request](https://github.com/agama-project/agama/pull/3868) for more details about
-how it works under the hood.
 
 ## Leaving before it's too late {#exit}
 
@@ -37,9 +33,6 @@ potentially unbootable state, so the exit option disappears as soon as the insta
 
 ![Confirmation dialog shown when exiting the installation](../static/img/blog/2026-10-21/exit.png)
 
-[This pull request](https://github.com/agama-project/agama/pull/3981) has more details and
-screenshots of the whole flow.
-
 ## Enhanced port selection {#ports}
 
 Until now, the ports of a bond or a bridge had to be typed by hand in a free-text field, with only a
@@ -51,9 +44,6 @@ the system are offered in a list you can filter as you type, and a name can stil
 hand for a device that is not present in the system yet.
 
 ![Ports selection field with the searchable list of devices open](../static/img/blog/2026-10-21/ports.png)
-
-[This pull request](https://github.com/agama-project/agama/pull/3883) goes into the details, including
-the new dialog that shows extra information about each device.
 
 ## Towards Tumbleweed adoption {#tumbleweed}
 
@@ -78,14 +68,11 @@ editors to offer autocompletion and inline validation as you type.
 
 ![An editor validating a configuration file against its JSON schema](../static/img/blog/2026-10-21/editor-schema-validation.png)
 
-## Other changes {#other}
-
-A few smaller improvements also made it into this release:
-
-- Agama now reports more details about network devices, like speed, driver or carrier status (#3884).
-- `systemd-boot` is now the default bootloader for MicroOS (#3955).
-
 ## Keep in touch {#closing}
+
+On top of all that, we have also been busy with a bunch of smaller fixes and improvements that did
+not make it into this post, like reporting more details about network devices or setting
+`systemd-boot` as the default bootloader for MicroOS.
 
 As always, you can take a look at the [project at GitHub](https://github.com/agama-project/agama) or
 drop by the `#yast` channel at [Libera.chat](https://libera.chat/) if you have questions, feedback or
