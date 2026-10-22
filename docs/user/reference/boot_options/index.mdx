@@ -211,6 +211,10 @@ options at the end of the `linux` line.
   rd.ntp=pool:1.opensuse.pool.ntp.org:iburst
   ```
 
+- `rd.iscsi.ibft=1`: makes nm-initrd-generator configure the network interfaces described in the
+  iSCSI Boot Firmware Table (iBFT), like `ip=ibft`. See the
+  [booting from iSCSI](../../guides/network.md#booting-from-iscsi-ibft).
+
 - `systemd.unit`: standard way to change target for systemd boot. It is useful for head-less mode
   when graphical interface neither browser needs to be started locally.
 
