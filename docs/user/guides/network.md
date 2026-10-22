@@ -148,8 +148,12 @@ NetworkManager does not read iBFT once the system is running. Only nm-initrd-gen
 
 nm-initrd-generator creates one connection profile for each NIC in the table, named `ibft0`,
 `ibft1`, etc. after the index of its record, including the VLAN if the record has one, and
-NetworkManager activates them. As every NIC gets its profile, not only the one used for booting, no
-additional option is needed for [multipath](./multipath).
+NetworkManager activates them.
+
+Every NIC in the table gets its profile, not only the one used for booting. This matters when the
+iSCSI targets are reachable through more than one NIC to use [multipath](./multipath.md): the
+firmware describes each of those NICs in the table, so all the paths are configured and no
+additional network option is needed.
 
 To check it, `/sys/firmware/ibft/` must exist (otherwise the firmware does not provide the table),
 and `nmcli connection show` lists the `ibft*` profiles. Agama shows them as any other connection in
