@@ -7,31 +7,25 @@ sidebar_position: 3
 Agama is a project under constant development and priorities are re-evaluated every few weeks. This
 page offers an overview on the current state of the ever-changing development plans.
 
-## Agama 22 (latest released version)
+## Agama 25 (latest released version)
 
-- Dedicated setting to configure remote access to the installed system (SSH, Cockpit, etc.)
-- Better adjusted sizes in the partitions for booting.
-- Improvements in network management.
-- Command-line interface:
-  - Answer questions directly from the monitor
-  - Usability improvements
-- Web-based graphical user interface:
-  - Redesigned header and toolbar
-  - Dark and light modes
-  - Usability improvements downloading the installer logs and configuration.
-  - Management of VLAN connections.
-  - More understandable configuration of multi-disk LVM volume groups.
-  - Advanced settings for file systems
-  - Improvements to configure authentication.
+- Embed a terminal in the web user interface.
+- Add an action to exit during the configuration phase.
+- Enhance bridge and bond ports selection and expose more device information.
+- Polish and publish the OpenAPI and JSON schema specifications.
+- Add support for 32-bit and riscv64 architectures.
+- Add support for specifying multiple licenses for the same product, although it is not used yet.
 
-## Agama 23 (~ July 20th)
+## Agama 26 (~ November 16th)
 
-- Cleanup of the HTTP API.
-- Web-based graphical user interface:
-  - Improved i18n configuration
-  - Integrate a command-line terminal.
-- Profile-based (unattended) installation:
-  - More possibilities for the `search` option in the `storage` section.
+- Finish the changes so Agama can be used as the Tumbleweed installer.
+- Improve the compatibility between different versions of the Agama server and command-line
+  interface.
+- Reduce the dependencies on YaST packages.
+- Use online repositories if possible when using the offline medium.
+- Better management of network connections and ports.
+- New user interface for storage management.
+- Improve the automatic generation of GPT GUIDs and LUKS device-mapper names.
 
 ## Mid term plans
 
