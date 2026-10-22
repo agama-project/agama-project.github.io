@@ -120,6 +120,49 @@ connections from `/etc/NetworkManager/system-connections` to the target system.
 
   :::
 
+## Booting from iSCSI (iBFT)
+
+When the firmware boots the system from iSCSI, it describes the connection in the iSCSI Boot
+Firmware Table (iBFT): the initiator name, the targets and the network configuration of each NIC
+involved (IP address, gateway, VLAN, MAC address, etc.). Agama shows the initiator and the targets
+configured by the firmware, but the network interfaces must be configured during boot so that the
+targets can be reached.
+
+NetworkManager does not read iBFT once the system is running. Only nm-initrd-generator, run by
+[dracut][] in the initramfs, reads it, and only when it is asked to through a boot option.
+
+### Boot options
+
+- `rd.iscsi.ibft=1` (or just `rd.iscsi.ibft`)
+
+  It is the recommended option.
+
+- `ip=ibft`
+
+  It configures the same network interfaces, but Agama considers it an explicit network
+  configuration, like any other `ip=` option (see [Network configuration](#network-configuration)):
+  it turns off the automatic DHCP configuration of the rest of the network interfaces and it copies
+  the generated profiles to the installed system.
+
+### What gets configured
+
+nm-initrd-generator creates one connection profile for each NIC in the table, named `ibft0`,
+`ibft1`, etc. after the index of its record, including the VLAN if the record has one, and
+NetworkManager activates them. As every NIC gets its profile, not only the one used for booting, no
+additional option is needed for [multipath](./multipath).
+
+To check it, `/sys/firmware/ibft/` must exist (otherwise the firmware does not provide the table),
+and `nmcli connection show` lists the `ibft*` profiles. Agama shows them as any other connection in
+the network settings.
+
+### In the installed system
+
+The generated profiles do not need to be copied to the installed system. When its root file system
+is on an iSCSI target described in iBFT, dracut adds `rd.iscsi.ibft=1` to the configuration of its
+initramfs, so nm-initrd-generator generates them again from the firmware on every boot. It does not
+add it for the iSCSI offload cards using the `bnx2i` driver, which use a different MAC address for
+the iSCSI traffic.
+
 ## PXE server documentation
 
 For more information about setting up a PXE Boot Server on SUSE Linux Enterprise Server 16.0 refer
