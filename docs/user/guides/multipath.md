@@ -48,13 +48,20 @@ For that, a JSON configuration containing the following settings must be loaded.
   "questions": {
     "answers": [
       {
-        "class": "storage.activate_multipath",
-        "answer": "yes"
+        "class": "multipathActivation",
+        "action": "yes"
       }
     ]
   }
 }
 ```
+
+:::info
+
+Profiles written for SLES 16.0 and openSUSE Leap 16.0 use the former name of the question class,
+which keeps working. See [the questions of that version](../reference/profile/answers-16).
+
+:::
 
 Read [the profile format reference](../reference/profile/answers) for more info about specifying
 answers at the Agama configuration.
