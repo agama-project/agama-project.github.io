@@ -63,6 +63,12 @@ Also check the starter's guide if you need any clarification regarding how to lo
 configuration using [the command-line tools](/docs/overview/cli) or during boot during an
 [unattended installation](/docs/overview/unattended).
 
+## Multipath over iSCSI with iBFT
+
+If the multipath devices are iSCSI targets defined in the iSCSI Boot Firmware Table (iBFT), the
+network interfaces must be configured during boot with a boot option such as `rd.iscsi.ibft=1`. See
+the [booting from iSCSI](./network#booting-from-iscsi-ibft) for the details.
+
 ## Future improvements
 
 The mechanisms described in this document will keep working in the foreseeable future, but upcoming
