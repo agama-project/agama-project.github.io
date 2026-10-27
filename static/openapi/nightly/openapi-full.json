@@ -296,16 +296,230 @@
         "title": "AuthResponse",
         "type": "object"
       },
+      "BondBondPort": {
+        "additionalProperties": false,
+        "description": "Port of a bond that is a bond itself",
+        "properties": {
+          "autoconnect": {
+            "description": "Specifies if the connection should automatically connect",
+            "type": "boolean"
+          },
+          "bond": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BondSettings"
+              }
+            ],
+            "description": "Bonding settings"
+          },
+          "customMacAddress": {
+            "description": "Custom MAC address of the connection's interface\n\nCan also be 'preserve', 'permanent', 'random' or 'stable'.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
+            "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
+          "interface": {
+            "description": "Network interface associated with the connection",
+            "type": "string"
+          },
+          "macAddress": {
+            "description": "MAC address of the connection's interface",
+            "type": "string"
+          },
+          "match": {
+            "$ref": "#/components/schemas/MatchSettings",
+            "description": "Match settings for the network connection"
+          },
+          "mtu": {
+            "description": "Maximum Transmission Unit (MTU) for the connection",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "persistent": {
+            "description": "Specifies whether the connection should be persisted or not",
+            "type": "boolean"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status2",
+            "description": "Current status of the network connection"
+          }
+        },
+        "required": [
+          "bond"
+        ],
+        "type": "object"
+      },
+      "BondBridgePort": {
+        "additionalProperties": false,
+        "description": "Port of a bond that is a bridge",
+        "properties": {
+          "autoconnect": {
+            "description": "Specifies if the connection should automatically connect",
+            "type": "boolean"
+          },
+          "bridge": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BridgeSettings"
+              }
+            ],
+            "description": "Bridge settings"
+          },
+          "customMacAddress": {
+            "description": "Custom MAC address of the connection's interface\n\nCan also be 'preserve', 'permanent', 'random' or 'stable'.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
+            "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
+          "interface": {
+            "description": "Network interface associated with the connection",
+            "type": "string"
+          },
+          "macAddress": {
+            "description": "MAC address of the connection's interface",
+            "type": "string"
+          },
+          "match": {
+            "$ref": "#/components/schemas/MatchSettings",
+            "description": "Match settings for the network connection"
+          },
+          "mtu": {
+            "description": "Maximum Transmission Unit (MTU) for the connection",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "persistent": {
+            "description": "Specifies whether the connection should be persisted or not",
+            "type": "boolean"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status2",
+            "description": "Current status of the network connection"
+          }
+        },
+        "required": [
+          "bridge"
+        ],
+        "type": "object"
+      },
+      "BondEthernetPort": {
+        "additionalProperties": false,
+        "description": "Port of a bond that is an Ethernet connection, or any other kind of connection that has\nno section of its own (e.g., InfiniBand)",
+        "properties": {
+          "autoconnect": {
+            "description": "Specifies if the connection should automatically connect",
+            "type": "boolean"
+          },
+          "customMacAddress": {
+            "description": "Custom MAC address of the connection's interface\n\nCan also be 'preserve', 'permanent', 'random' or 'stable'.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
+            "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
+          "interface": {
+            "description": "Network interface associated with the connection",
+            "type": "string"
+          },
+          "macAddress": {
+            "description": "MAC address of the connection's interface",
+            "type": "string"
+          },
+          "match": {
+            "$ref": "#/components/schemas/MatchSettings",
+            "description": "Match settings for the network connection"
+          },
+          "mtu": {
+            "description": "Maximum Transmission Unit (MTU) for the connection",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "persistent": {
+            "description": "Specifies whether the connection should be persisted or not",
+            "type": "boolean"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status2",
+            "description": "Current status of the network connection"
+          }
+        },
+        "type": "object"
+      },
+      "BondPort": {
+        "anyOf": [
+          {
+            "description": "Interface name or ID of a connection.\n\nIt is a shorthand for `{ \"interface\": \"<name>\" }`: it refers to the connection with that\ninterface name or ID, and a new Ethernet connection is created when there is none.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/components/schemas/BondEthernetPort"
+          },
+          {
+            "$ref": "#/components/schemas/BondBondPort"
+          },
+          {
+            "$ref": "#/components/schemas/BondBridgePort"
+          },
+          {
+            "$ref": "#/components/schemas/BondVlanPort"
+          },
+          {
+            "$ref": "#/components/schemas/BondWirelessPort"
+          }
+        ],
+        "description": "Entry of the `portConnections` list of a bond.\n\nAny kind of connection can be a port, as NetworkManager does not restrict it. A port given as a\nconnection is told apart by the section it has: `bond`, `bridge`, `vlan`, `wireless` or none of\nthem, for an Ethernet port. Unlike the ports of a bridge, it has no port settings."
+      },
       "BondSettings": {
         "additionalProperties": false,
+        "description": "Bonding configuration\n\nThe ports are given in `portConnections` or, in the deprecated form, in `ports`. When both are\ngiven, `ports` is ignored.",
         "properties": {
           "mode": {
+            "description": "Bonding mode",
+            "enum": [
+              "balance-rr",
+              "active-backup",
+              "balance-xor",
+              "broadcast",
+              "802.3ad",
+              "balance-tlb",
+              "balance-alb"
+            ],
             "type": "string"
           },
           "options": {
+            "description": "Bonding options, separated by spaces (e.g., \"miimon=100 primary=eth0\")",
             "type": "string"
           },
+          "portConnections": {
+            "description": "Ports of the controller. When neither this list nor `ports` is given, the current ports\nare left alone.",
+            "items": {
+              "$ref": "#/components/schemas/BondPort"
+            },
+            "type": "array"
+          },
           "ports": {
+            "deprecated": true,
+            "description": "Interface names or IDs of the ports of the controller.\n\nDEPRECATED: replaced by `portConnections`, which also takes names. It keeps working, and it\nis still reported for the clients that read it. When both lists are given,\n`portConnections` is used and this one is ignored.",
             "items": {
               "type": "string"
             },
@@ -314,6 +528,126 @@
         },
         "required": [
           "mode"
+        ],
+        "type": "object"
+      },
+      "BondVlanPort": {
+        "additionalProperties": false,
+        "description": "Port of a bond that is a VLAN",
+        "properties": {
+          "autoconnect": {
+            "description": "Specifies if the connection should automatically connect",
+            "type": "boolean"
+          },
+          "customMacAddress": {
+            "description": "Custom MAC address of the connection's interface\n\nCan also be 'preserve', 'permanent', 'random' or 'stable'.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
+            "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
+          "interface": {
+            "description": "Network interface associated with the connection",
+            "type": "string"
+          },
+          "macAddress": {
+            "description": "MAC address of the connection's interface",
+            "type": "string"
+          },
+          "match": {
+            "$ref": "#/components/schemas/MatchSettings",
+            "description": "Match settings for the network connection"
+          },
+          "mtu": {
+            "description": "Maximum Transmission Unit (MTU) for the connection",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "persistent": {
+            "description": "Specifies whether the connection should be persisted or not",
+            "type": "boolean"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status2",
+            "description": "Current status of the network connection"
+          },
+          "vlan": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VlanSettings"
+              }
+            ],
+            "description": "VLAN settings"
+          }
+        },
+        "required": [
+          "vlan"
+        ],
+        "type": "object"
+      },
+      "BondWirelessPort": {
+        "additionalProperties": false,
+        "description": "Port of a bond that is a wireless connection",
+        "properties": {
+          "autoconnect": {
+            "description": "Specifies if the connection should automatically connect",
+            "type": "boolean"
+          },
+          "customMacAddress": {
+            "description": "Custom MAC address of the connection's interface\n\nCan also be 'preserve', 'permanent', 'random' or 'stable'.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
+            "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
+          "interface": {
+            "description": "Network interface associated with the connection",
+            "type": "string"
+          },
+          "macAddress": {
+            "description": "MAC address of the connection's interface",
+            "type": "string"
+          },
+          "match": {
+            "$ref": "#/components/schemas/MatchSettings",
+            "description": "Match settings for the network connection"
+          },
+          "mtu": {
+            "description": "Maximum Transmission Unit (MTU) for the connection",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "persistent": {
+            "description": "Specifies whether the connection should be persisted or not",
+            "type": "boolean"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status2",
+            "description": "Current status of the network connection"
+          },
+          "wireless": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WirelessSettings"
+              }
+            ],
+            "description": "Wireless settings"
+          }
+        },
+        "required": [
+          "wireless"
         ],
         "type": "object"
       },
@@ -368,39 +702,406 @@
           "tpm"
         ]
       },
+      "BridgeBondPort": {
+        "additionalProperties": false,
+        "description": "Port of a bridge that is a bond itself",
+        "properties": {
+          "autoconnect": {
+            "description": "Specifies if the connection should automatically connect",
+            "type": "boolean"
+          },
+          "bond": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BondSettings"
+              }
+            ],
+            "description": "Bonding settings"
+          },
+          "customMacAddress": {
+            "description": "Custom MAC address of the connection's interface\n\nCan also be 'preserve', 'permanent', 'random' or 'stable'.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
+            "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
+          "interface": {
+            "description": "Network interface associated with the connection",
+            "type": "string"
+          },
+          "macAddress": {
+            "description": "MAC address of the connection's interface",
+            "type": "string"
+          },
+          "match": {
+            "$ref": "#/components/schemas/MatchSettings",
+            "description": "Match settings for the network connection"
+          },
+          "mtu": {
+            "description": "Maximum Transmission Unit (MTU) for the connection",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "persistent": {
+            "description": "Specifies whether the connection should be persisted or not",
+            "type": "boolean"
+          },
+          "port": {
+            "$ref": "#/components/schemas/BridgePortSettings",
+            "description": "Settings that this connection has because it is a port of a bridge"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status2",
+            "description": "Current status of the network connection"
+          }
+        },
+        "required": [
+          "bond"
+        ],
+        "type": "object"
+      },
+      "BridgeBridgePort": {
+        "additionalProperties": false,
+        "description": "Port of a bridge that is a bridge itself",
+        "properties": {
+          "autoconnect": {
+            "description": "Specifies if the connection should automatically connect",
+            "type": "boolean"
+          },
+          "bridge": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BridgeSettings"
+              }
+            ],
+            "description": "Bridge settings"
+          },
+          "customMacAddress": {
+            "description": "Custom MAC address of the connection's interface\n\nCan also be 'preserve', 'permanent', 'random' or 'stable'.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
+            "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
+          "interface": {
+            "description": "Network interface associated with the connection",
+            "type": "string"
+          },
+          "macAddress": {
+            "description": "MAC address of the connection's interface",
+            "type": "string"
+          },
+          "match": {
+            "$ref": "#/components/schemas/MatchSettings",
+            "description": "Match settings for the network connection"
+          },
+          "mtu": {
+            "description": "Maximum Transmission Unit (MTU) for the connection",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "persistent": {
+            "description": "Specifies whether the connection should be persisted or not",
+            "type": "boolean"
+          },
+          "port": {
+            "$ref": "#/components/schemas/BridgePortSettings",
+            "description": "Settings that this connection has because it is a port of a bridge"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status2",
+            "description": "Current status of the network connection"
+          }
+        },
+        "required": [
+          "bridge"
+        ],
+        "type": "object"
+      },
+      "BridgeEthernetPort": {
+        "additionalProperties": false,
+        "description": "Port of a bridge that is an Ethernet connection, or any other kind of connection that has\nno section of its own (e.g., InfiniBand)",
+        "properties": {
+          "autoconnect": {
+            "description": "Specifies if the connection should automatically connect",
+            "type": "boolean"
+          },
+          "customMacAddress": {
+            "description": "Custom MAC address of the connection's interface\n\nCan also be 'preserve', 'permanent', 'random' or 'stable'.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
+            "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
+          "interface": {
+            "description": "Network interface associated with the connection",
+            "type": "string"
+          },
+          "macAddress": {
+            "description": "MAC address of the connection's interface",
+            "type": "string"
+          },
+          "match": {
+            "$ref": "#/components/schemas/MatchSettings",
+            "description": "Match settings for the network connection"
+          },
+          "mtu": {
+            "description": "Maximum Transmission Unit (MTU) for the connection",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "persistent": {
+            "description": "Specifies whether the connection should be persisted or not",
+            "type": "boolean"
+          },
+          "port": {
+            "$ref": "#/components/schemas/BridgePortSettings",
+            "description": "Settings that this connection has because it is a port of a bridge"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status2",
+            "description": "Current status of the network connection"
+          }
+        },
+        "type": "object"
+      },
+      "BridgePort": {
+        "anyOf": [
+          {
+            "description": "Interface name or ID of a connection.\n\nIt is a shorthand for `{ \"interface\": \"<name>\" }`: it refers to the connection with that\ninterface name or ID, and a new Ethernet connection is created when there is none.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/components/schemas/BridgeEthernetPort"
+          },
+          {
+            "$ref": "#/components/schemas/BridgeBondPort"
+          },
+          {
+            "$ref": "#/components/schemas/BridgeBridgePort"
+          },
+          {
+            "$ref": "#/components/schemas/BridgeVlanPort"
+          },
+          {
+            "$ref": "#/components/schemas/BridgeWirelessPort"
+          }
+        ],
+        "description": "Entry of the `portConnections` list of a bridge.\n\nAny kind of connection can be a port, as NetworkManager does not restrict it. A port given as a\nconnection is told apart by the section it has: `bond`, `bridge`, `vlan`, `wireless` or none of\nthem, for an Ethernet port."
+      },
+      "BridgePortSettings": {
+        "additionalProperties": false,
+        "description": "Settings a connection has because of its membership in a bridge.\n\nUnlike the other sections, these do not describe the device itself but the role it plays in\nthe bridge it belongs to.",
+        "properties": {
+          "pathCost": {
+            "description": "Port cost used by the Spanning Tree Protocol",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "priority": {
+            "description": "Port priority used by the Spanning Tree Protocol",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
       "BridgeSettings": {
         "additionalProperties": false,
+        "description": "Bridge configuration\n\nThe ports are given in `portConnections` or, in the deprecated form, in `ports`. When both are\ngiven, `ports` is ignored.",
         "properties": {
           "forwardDelay": {
+            "description": "Spanning Tree Protocol forward delay, in seconds",
             "format": "uint32",
             "minimum": 0,
             "type": "integer"
           },
           "helloTime": {
+            "description": "Spanning Tree Protocol hello time, in seconds",
             "format": "uint32",
             "minimum": 0,
             "type": "integer"
           },
           "maxAge": {
+            "description": "Spanning Tree Protocol maximum message age, in seconds",
             "format": "uint32",
             "minimum": 0,
             "type": "integer"
           },
+          "portConnections": {
+            "description": "Ports of the controller. When neither this list nor `ports` is given, the current ports\nare left alone.",
+            "items": {
+              "$ref": "#/components/schemas/BridgePort"
+            },
+            "type": "array"
+          },
           "ports": {
+            "deprecated": true,
+            "description": "Interface names or IDs of the ports of the controller.\n\nDEPRECATED: replaced by `portConnections`, which also takes names. It keeps working, and it\nis still reported for the clients that read it. When both lists are given,\n`portConnections` is used and this one is ignored.",
             "items": {
               "type": "string"
             },
             "type": "array"
           },
           "priority": {
+            "description": "Spanning Tree Protocol priority (lower values are 'better')",
             "format": "uint32",
             "minimum": 0,
             "type": "integer"
           },
           "stp": {
+            "description": "Whether the Spanning Tree Protocol is enabled or not",
             "type": "boolean"
           }
         },
+        "type": "object"
+      },
+      "BridgeVlanPort": {
+        "additionalProperties": false,
+        "description": "Port of a bridge that is a VLAN",
+        "properties": {
+          "autoconnect": {
+            "description": "Specifies if the connection should automatically connect",
+            "type": "boolean"
+          },
+          "customMacAddress": {
+            "description": "Custom MAC address of the connection's interface\n\nCan also be 'preserve', 'permanent', 'random' or 'stable'.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
+            "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
+          "interface": {
+            "description": "Network interface associated with the connection",
+            "type": "string"
+          },
+          "macAddress": {
+            "description": "MAC address of the connection's interface",
+            "type": "string"
+          },
+          "match": {
+            "$ref": "#/components/schemas/MatchSettings",
+            "description": "Match settings for the network connection"
+          },
+          "mtu": {
+            "description": "Maximum Transmission Unit (MTU) for the connection",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "persistent": {
+            "description": "Specifies whether the connection should be persisted or not",
+            "type": "boolean"
+          },
+          "port": {
+            "$ref": "#/components/schemas/BridgePortSettings",
+            "description": "Settings that this connection has because it is a port of a bridge"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status2",
+            "description": "Current status of the network connection"
+          },
+          "vlan": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VlanSettings"
+              }
+            ],
+            "description": "VLAN settings"
+          }
+        },
+        "required": [
+          "vlan"
+        ],
+        "type": "object"
+      },
+      "BridgeWirelessPort": {
+        "additionalProperties": false,
+        "description": "Port of a bridge that is a wireless connection",
+        "properties": {
+          "autoconnect": {
+            "description": "Specifies if the connection should automatically connect",
+            "type": "boolean"
+          },
+          "customMacAddress": {
+            "description": "Custom MAC address of the connection's interface\n\nCan also be 'preserve', 'permanent', 'random' or 'stable'.",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
+            "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
+          "interface": {
+            "description": "Network interface associated with the connection",
+            "type": "string"
+          },
+          "macAddress": {
+            "description": "MAC address of the connection's interface",
+            "type": "string"
+          },
+          "match": {
+            "$ref": "#/components/schemas/MatchSettings",
+            "description": "Match settings for the network connection"
+          },
+          "mtu": {
+            "description": "Maximum Transmission Unit (MTU) for the connection",
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "persistent": {
+            "description": "Specifies whether the connection should be persisted or not",
+            "type": "boolean"
+          },
+          "port": {
+            "$ref": "#/components/schemas/BridgePortSettings",
+            "description": "Settings that this connection has because it is a port of a bridge"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status2",
+            "description": "Current status of the network connection"
+          },
+          "wireless": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WirelessSettings"
+              }
+            ],
+            "description": "Wireless settings"
+          }
+        },
+        "required": [
+          "wireless"
+        ],
         "type": "object"
       },
       "Config": {
@@ -1043,6 +1744,15 @@
           "eap": {
             "description": "List of EAP methods used",
             "items": {
+              "enum": [
+                "leap",
+                "md5",
+                "tls",
+                "peap",
+                "ttls",
+                "pwd",
+                "fast"
+              ],
               "type": "string"
             },
             "type": "array"
@@ -1061,10 +1771,24 @@
           },
           "peapVersion": {
             "description": "Which PEAP version is used when PEAP is set as the EAP method in the 'eap' property",
+            "enum": [
+              "0",
+              "1"
+            ],
             "type": "string"
           },
           "phase2Auth": {
             "description": "Phase 2 inner auth method",
+            "enum": [
+              "pap",
+              "chap",
+              "mschap",
+              "mschapv2",
+              "gtc",
+              "otp",
+              "md5",
+              "tls"
+            ],
             "type": "string"
           },
           "privateKey": {
@@ -1250,7 +1974,7 @@
           "disabled",
           "auto",
           "manual",
-          "linkLocal",
+          "link-local",
           "shared"
         ],
         "type": "string"
@@ -1260,7 +1984,7 @@
           "disabled",
           "auto",
           "manual",
-          "linkLocal",
+          "link-local",
           "ignore",
           "dhcp",
           "shared"
@@ -1561,26 +2285,31 @@
       },
       "MatchSettings": {
         "additionalProperties": false,
+        "description": "Match settings\n\nIdentifies the network interface to apply the connection settings to.",
         "properties": {
           "driver": {
+            "description": "A list of driver names to match",
             "items": {
               "type": "string"
             },
             "type": "array"
           },
           "interface": {
+            "description": "A list of interface names to match",
             "items": {
               "type": "string"
             },
             "type": "array"
           },
           "kernel": {
+            "description": "A list of kernel command line arguments to match",
             "items": {
               "type": "string"
             },
             "type": "array"
           },
           "path": {
+            "description": "A list of paths to match against the ID_PATH udev property of devices",
             "items": {
               "type": "string"
             },
@@ -1591,7 +2320,7 @@
       },
       "NetworkConnection": {
         "additionalProperties": false,
-        "description": "Represents the configuration details for a network connection",
+        "description": "Represents the configuration details for a network connection\n\nThe ports of a bond or a bridge are nested in its controller (see [BondPort] and\n[BridgePort]).",
         "properties": {
           "addresses": {
             "description": "List of assigned IP addresses",
@@ -1613,7 +2342,7 @@
             "description": "Bridge settings if part of a bridge"
           },
           "customMacAddress": {
-            "description": "Custom MAC address of the connection's interface",
+            "description": "Custom MAC address of the connection's interface\n\nCan also be 'preserve', 'permanent', 'random' or 'stable'.",
             "type": "string"
           },
           "dnsSearchList": {
@@ -1673,11 +2402,11 @@
           },
           "method4": {
             "$ref": "#/components/schemas/Ipv4Method",
-            "description": "IPv4 method used for the network connection"
+            "description": "IPv4 method used for the network connection\n\nDefaults to 'auto'."
           },
           "method6": {
             "$ref": "#/components/schemas/Ipv6Method",
-            "description": "IPv6 method used for the network connection"
+            "description": "IPv6 method used for the network connection\n\nDefaults to 'auto'."
           },
           "mtu": {
             "description": "Maximum Transmission Unit (MTU) for the connection",
@@ -1692,10 +2421,6 @@
               "type": "string"
             },
             "type": "array"
-          },
-          "parent": {
-            "description": "Identifier for the parent connection, if this connection is part of a bond",
-            "type": "string"
           },
           "persistent": {
             "description": "Specifies whether the connection should be persisted or not",
@@ -1720,7 +2445,7 @@
         "type": "object"
       },
       "NetworkConnectionWithState": {
-        "description": "Represents the configuration details for a network connection",
+        "description": "A connection as the system reports it, with its current state.\n\nThe state is not part of the configuration, so only the system information reports it. The\nports nested in a controller do not report it.",
         "properties": {
           "addresses": {
             "description": "List of assigned IP addresses",
@@ -1742,7 +2467,7 @@
             "description": "Bridge settings if part of a bridge"
           },
           "customMacAddress": {
-            "description": "Custom MAC address of the connection's interface",
+            "description": "Custom MAC address of the connection's interface\n\nCan also be 'preserve', 'permanent', 'random' or 'stable'.",
             "type": "string"
           },
           "dnsSearchList": {
@@ -1802,11 +2527,11 @@
           },
           "method4": {
             "$ref": "#/components/schemas/Ipv4Method",
-            "description": "IPv4 method used for the network connection"
+            "description": "IPv4 method used for the network connection\n\nDefaults to 'auto'."
           },
           "method6": {
             "$ref": "#/components/schemas/Ipv6Method",
-            "description": "IPv6 method used for the network connection"
+            "description": "IPv6 method used for the network connection\n\nDefaults to 'auto'."
           },
           "mtu": {
             "description": "Maximum Transmission Unit (MTU) for the connection",
@@ -1822,16 +2547,17 @@
             },
             "type": "array"
           },
-          "parent": {
-            "description": "Identifier for the parent connection, if this connection is part of a bond",
-            "type": "string"
-          },
           "persistent": {
             "description": "Specifies whether the connection should be persisted or not",
             "type": "boolean"
           },
           "state": {
-            "$ref": "#/components/schemas/ConnectionState"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConnectionState"
+              }
+            ],
+            "description": "Current state of the connection"
           },
           "status": {
             "$ref": "#/components/schemas/Status2",
@@ -1852,13 +2578,15 @@
         ],
         "type": "object"
       },
-      "NetworkConnectionsCollection": {
+      "NetworkConnections": {
+        "description": "Collection of connections.\n\nIt only holds the root connections: the ports of a bond or a bridge are nested inside the\n`portConnections` list of their controller. Use [`Self::flatten`] to go through all of them.",
         "items": {
           "$ref": "#/components/schemas/NetworkConnection"
         },
         "type": "array"
       },
-      "NetworkConnectionsWithStateCollection": {
+      "NetworkConnectionsWithState": {
+        "description": "Collection of connections with their current state, as the system reports them.\n\nLike [`NetworkConnectionsCollection`], it only holds the root connections.",
         "items": {
           "$ref": "#/components/schemas/NetworkConnectionWithState"
         },
@@ -2947,15 +3675,20 @@
         "description": "Network general settings for the installation like enabling wireless, networking and\nallowing to enable or disable the copy of the network settings to the\ntarget system",
         "properties": {
           "connectivity": {
-            "$ref": "#/components/schemas/ConnectivityState"
+            "$ref": "#/components/schemas/ConnectivityState",
+            "description": "Network connectivity state",
+            "readOnly": true
           },
           "copyNetwork": {
+            "description": "Whether the network configuration should be copied to the target system",
             "type": "boolean"
           },
           "networkingEnabled": {
+            "description": "Whether the network should be enabled",
             "type": "boolean"
           },
           "wirelessEnabled": {
+            "description": "Whether the wireless should be enabled",
             "type": "boolean"
           }
         },
@@ -6546,22 +7279,33 @@
       },
       "VlanSettings": {
         "additionalProperties": false,
+        "description": "VLAN configuration",
         "properties": {
           "flags": {
+            "description": "VLAN flags",
             "items": {
               "$ref": "#/components/schemas/VlanFlag"
             },
             "type": "array"
           },
           "id": {
+            "description": "VLAN identifier",
             "format": "uint32",
+            "maximum": 4094,
             "minimum": 0,
             "type": "integer"
           },
           "parent": {
+            "description": "Parent interface",
             "type": "string"
           },
           "protocol": {
+            "default": "802.1Q",
+            "description": "VLAN protocol for encapsulation",
+            "enum": [
+              "802.1Q",
+              "802.1ad"
+            ],
             "type": "string"
           }
         },
@@ -6577,6 +7321,10 @@
         "properties": {
           "band": {
             "description": "Frequency band of the wireless network",
+            "enum": [
+              "a",
+              "bg"
+            ],
             "type": "string"
           },
           "bssid": {
@@ -6592,6 +7340,12 @@
           "groupAlgorithms": {
             "description": "A list of group/broadcast encryption algorithms",
             "items": {
+              "enum": [
+                "wep40",
+                "wep104",
+                "tkip",
+                "ccmp"
+              ],
               "type": "string"
             },
             "type": "array"
@@ -6602,11 +7356,21 @@
           },
           "mode": {
             "description": "Wireless network mode",
+            "enum": [
+              "infrastructure",
+              "adhoc",
+              "mesh",
+              "ap"
+            ],
             "type": "string"
           },
           "pairwiseAlgorithms": {
             "description": "A list of pairwise encryption algorithms",
             "items": {
+              "enum": [
+                "tkip",
+                "ccmp"
+              ],
               "type": "string"
             },
             "type": "array"
@@ -6622,6 +7386,15 @@
           },
           "security": {
             "description": "Security method/key management",
+            "enum": [
+              "none",
+              "owe",
+              "ieee8021x",
+              "wpa-psk",
+              "sae",
+              "wpa-eap",
+              "wpa-eap-suite-b-192"
+            ],
             "type": "string"
           },
           "ssid": {
@@ -6631,6 +7404,10 @@
           "wpaProtocolVersions": {
             "description": "A list of allowed WPA protocol versions",
             "items": {
+              "enum": [
+                "wpa",
+                "rsn"
+              ],
               "type": "string"
             },
             "type": "array"
@@ -7089,10 +7866,10 @@
       },
       "network.Config": {
         "additionalProperties": false,
-        "description": "Network config settings for installation",
+        "description": "Network settings",
         "properties": {
           "connections": {
-            "$ref": "#/components/schemas/NetworkConnectionsCollection",
+            "$ref": "#/components/schemas/NetworkConnections",
             "description": "Connections to use in the installation"
           },
           "state": {
@@ -7108,7 +7885,7 @@
           "connections": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NetworkConnectionsCollection"
+                "$ref": "#/components/schemas/NetworkConnections"
               }
             ],
             "description": "Connections to use in the installation"
@@ -7140,10 +7917,10 @@
           "connections": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/NetworkConnectionsWithStateCollection"
+                "$ref": "#/components/schemas/NetworkConnectionsWithState"
               }
             ],
-            "description": "Connections to use in the installation"
+            "description": "Connections to use in the installation, with their current state"
           },
           "devices": {
             "items": {
