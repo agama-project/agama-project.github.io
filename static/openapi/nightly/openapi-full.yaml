@@ -36,14 +36,22 @@ components:
       - wpaFlags
       type: object
     AccessValue:
-      description: Allows to specify explicit enablement of remote access for supported services
-      oneOf:
-      - const: enabled
-        description: Explicitly enabled
-        type: string
-      - const: default
-        description: Default system configuration behavior that is product specific
-        type: string
+      description: |-
+        Allows to specify explicit enablement of remote access for supported services
+
+        Available values:
+        - `enabled` - Explicitly enabled
+        - `default` - Default system configuration behavior that is product specific
+      enum:
+      - enabled
+      - default
+      type: string
+      x-enum-descriptions:
+        default: Default system configuration behavior that is product specific
+        enabled: Explicitly enabled
+      x-enumDescriptions:
+        default: Default system configuration behavior that is product specific
+        enabled: Explicitly enabled
     Action:
       oneOf:
       - enum:
@@ -69,9 +77,7 @@ components:
               only:
                 items:
                   $ref: '#/components/schemas/Scope'
-                type:
-                - array
-                - 'null'
+                type: array
             type: object
         required:
         - probe
@@ -91,6 +97,7 @@ components:
         - finish
         type: object
     AddonConfig:
+      additionalProperties: false
       description: Addon settings for registration
       properties:
         id:
@@ -100,16 +107,12 @@ components:
           type: string
         registrationCode:
           description: Registration code for the addon. Free extensions do not require a registration code.
-          type:
-          - string
-          - 'null'
+          type: string
         version:
           description: |-
             Optional version of the addon. It is mandatory if there are multiple available versions.
             If not specified, the version is found from the available addons.
-          type:
-          - string
-          - 'null'
+          type: string
       required:
       - id
       title: List of add-ons to activate
@@ -160,9 +163,7 @@ components:
       oneOf:
       - properties:
           code:
-            type:
-            - string
-            - 'null'
+            type: string
           status:
             const: registered
             type: string
@@ -177,6 +178,7 @@ components:
         - status
         type: object
     AnswerRule:
+      additionalProperties: false
       description: |-
         Defines the answer to use for any question which matches the rule.
 
@@ -190,28 +192,20 @@ components:
           description: Question class (see [QuestionSpec::class]).
           examples:
           - multipathActivation
-          type:
-          - string
-          - 'null'
+          type: string
         data:
           additionalProperties:
             type: string
           description: |-
             A question can include custom data. If any of the entries matches,
             the rule is applied (see [QuestionSpec::data]).
-          type:
-          - object
-          - 'null'
+          type: object
         text:
           description: Question text (see [QuestionSpec::text]).
-          type:
-          - string
-          - 'null'
+          type: string
         value:
           description: Value to use for the question (e.g. password or string input, depending on the question type).
-          type:
-          - string
-          - 'null'
+          type: string
       required:
       - action
       title: Automatic answer to questions
@@ -227,13 +221,12 @@ components:
       title: AuthResponse
       type: object
     BondSettings:
+      additionalProperties: false
       properties:
         mode:
           type: string
         options:
-          type:
-          - string
-          - 'null'
+          type: string
         ports:
           items:
             type: string
@@ -278,25 +271,20 @@ components:
       - password
       - tpm
     BridgeSettings:
+      additionalProperties: false
       properties:
         forwardDelay:
           format: uint32
           minimum: 0
-          type:
-          - integer
-          - 'null'
+          type: integer
         helloTime:
           format: uint32
           minimum: 0
-          type:
-          - integer
-          - 'null'
+          type: integer
         maxAge:
           format: uint32
           minimum: 0
-          type:
-          - integer
-          - 'null'
+          type: integer
         ports:
           items:
             type: string
@@ -304,13 +292,9 @@ components:
         priority:
           format: uint32
           minimum: 0
-          type:
-          - integer
-          - 'null'
+          type: integer
         stp:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
       type: object
     Config:
       additionalProperties: false
@@ -321,14 +305,10 @@ components:
           title: URL of the JSON validation schema
           type: string
         access:
-          anyOf:
-          - $ref: '#/components/schemas/access.Config'
-          - type: 'null'
+          $ref: '#/components/schemas/access.Config'
           description: Remote access configuration (SSH, Web Console).
         bootloader:
-          anyOf:
-          - $ref: '#/components/schemas/bootloader.Config'
-          - type: 'null'
+          $ref: '#/components/schemas/bootloader.Config'
           description: Bootloader configuration.
         dasd:
           $ref: '#/components/schemas/DasdConfig'
@@ -336,20 +316,14 @@ components:
           description: User-defined files to deploy after installation just before post install scripts.
           items:
             $ref: '#/components/schemas/UserFile'
-          type:
-          - array
-          - 'null'
+          type: array
         hostname:
-          anyOf:
-          - $ref: '#/components/schemas/hostname.Config'
-          - type: 'null'
+          $ref: '#/components/schemas/hostname.Config'
           description: Hostname configuration.
         iscsi:
           $ref: '#/components/schemas/IscsiConfig'
         l10n:
-          anyOf:
-          - $ref: '#/components/schemas/l10n.Config'
-          - type: 'null'
+          $ref: '#/components/schemas/l10n.Config'
           description: Localization configuration (keyboard, language, timezone).
         legacyAutoyastStorage:
           description: Accepts all options of the AutoYaST partitioning section (i.e., XML to JSON).
@@ -359,94 +333,99 @@ components:
           description: 'Deprecated: use l10n instead.'
           title: Localization settings (old schema)
         network:
-          anyOf:
-          - $ref: '#/components/schemas/network.Config'
-          - type: 'null'
+          $ref: '#/components/schemas/network.Config'
           description: Network configuration (interfaces, connections, state).
         ntp:
-          anyOf:
-          - $ref: '#/components/schemas/ntp.Config'
-          - type: 'null'
+          $ref: '#/components/schemas/ntp.Config'
           description: NTP time synchronization configuration.
         product:
-          anyOf:
-          - $ref: '#/components/schemas/ProductConfig'
-          - type: 'null'
+          $ref: '#/components/schemas/ProductConfig'
           description: Product related configuration
         proxy:
-          anyOf:
-          - $ref: '#/components/schemas/proxy.Config'
-          - type: 'null'
+          $ref: '#/components/schemas/proxy.Config'
           description: Network proxy configuration.
         questions:
-          anyOf:
-          - $ref: '#/components/schemas/questions.Config'
-          - type: 'null'
+          $ref: '#/components/schemas/questions.Config'
           description: Automated question answering rules and policy.
         root:
-          anyOf:
-          - $ref: '#/components/schemas/RootUserConfig'
-          - type: 'null'
+          $ref: '#/components/schemas/RootUserConfig'
         scripts:
-          anyOf:
-          - $ref: '#/components/schemas/ScriptsConfig'
-          - type: 'null'
+          $ref: '#/components/schemas/ScriptsConfig'
           description: User-defined scripts to run at different points of the installation.
         security:
-          anyOf:
-          - $ref: '#/components/schemas/security.Config'
-          - type: 'null'
+          $ref: '#/components/schemas/security.Config'
           description: Security configuration (e.g. SSL certificate fingerprints).
         software:
-          anyOf:
-          - $ref: '#/components/schemas/SoftwareConfig'
-          - type: 'null'
+          $ref: '#/components/schemas/SoftwareConfig'
           description: Software related configuration
         storage:
           $ref: '#/components/schemas/StorageConfig'
+        transient:
+          $ref: '#/components/schemas/hostname.Config'
+          deprecated: true
+          description: Hostname configuration.
         user:
-          anyOf:
-          - $ref: '#/components/schemas/FirstUserConfig'
-          - type: 'null'
+          $ref: '#/components/schemas/FirstUserConfig'
         zfcp:
           $ref: '#/components/schemas/ZfcpConfig'
       title: Profile
       type: object
     ConnectionState:
-      oneOf:
-      - const: unknown
-        description: The connection state is unknown.
-        type: string
-      - const: activating
-        description: The connection is getting activated.
-        type: string
-      - const: activated
-        description: The connection is activated.
-        type: string
-      - const: deactivating
-        description: The connection is getting deactivated.
-        type: string
-      - const: deactivated
-        description: The connection is deactivated.
-        type: string
+      description: |-
+        Available values:
+        - `unknown` - The connection state is unknown.
+        - `activating` - The connection is getting activated.
+        - `activated` - The connection is activated.
+        - `deactivating` - The connection is getting deactivated.
+        - `deactivated` - The connection is deactivated.
+      enum:
+      - unknown
+      - activating
+      - activated
+      - deactivating
+      - deactivated
+      type: string
+      x-enum-descriptions:
+        activated: The connection is activated.
+        activating: The connection is getting activated.
+        deactivated: The connection is deactivated.
+        deactivating: The connection is getting deactivated.
+        unknown: The connection state is unknown.
+      x-enumDescriptions:
+        activated: The connection is activated.
+        activating: The connection is getting activated.
+        deactivated: The connection is deactivated.
+        deactivating: The connection is getting deactivated.
+        unknown: The connection state is unknown.
     ConnectivityState:
-      description: Network connectivity state.
-      oneOf:
-      - const: unknown
-        description: The connectivity state is unknown.
-        type: string
-      - const: none
-        description: No connectivity.
-        type: string
-      - const: portal
-        description: The network is behind a captive portal and cannot reach the full internet.
-        type: string
-      - const: limited
-        description: The network is connected but it has no access to the full internet.
-        type: string
-      - const: full
-        description: The network is connected and it has access to the full internet.
-        type: string
+      description: |-
+        Network connectivity state.
+
+        Available values:
+        - `unknown` - The connectivity state is unknown.
+        - `none` - No connectivity.
+        - `portal` - The network is behind a captive portal and cannot reach the full internet.
+        - `limited` - The network is connected but it has no access to the full internet.
+        - `full` - The network is connected and it has access to the full internet.
+      enum:
+      - unknown
+      - none
+      - portal
+      - limited
+      - full
+      type: string
+      x-enum-descriptions:
+        full: The network is connected and it has access to the full internet.
+        limited: The network is connected but it has no access to the full internet.
+        none: No connectivity.
+        portal: The network is behind a captive portal and cannot reach the full internet.
+        unknown: The connectivity state is unknown.
+      x-enumDescriptions:
+        full: The network is connected and it has access to the full internet.
+        limited: The network is connected but it has no access to the full internet.
+        none: No connectivity.
+        portal: The network is behind a captive portal and cannot reach the full internet.
+        unknown: The connectivity state is unknown.
     DasdConfig:
       additionalProperties: false
       description: DASD config.
@@ -535,35 +514,23 @@ components:
       properties:
         busPath:
           description: Physical location of the device, e.g. "pci-0000:c5:00.3".
-          type:
-          - string
-          - 'null'
+          type: string
         carrier:
           description: Whether the device currently has a link (carrier).
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         connection:
-          type:
-          - string
-          - 'null'
+          type: string
         driver:
           description: Kernel driver in use, e.g. "e1000e".
-          type:
-          - string
-          - 'null'
+          type: string
         ipConfig:
-          anyOf:
-          - $ref: '#/components/schemas/IpConfig'
-          - type: 'null'
+          $ref: '#/components/schemas/IpConfig'
         macAddress:
           type: string
         mtu:
           format: uint32
           minimum: 0
-          type:
-          - integer
-          - 'null'
+          type: integer
         name:
           type: string
         speed:
@@ -573,9 +540,7 @@ components:
             Only wired devices report a speed, and only while the link is up.
           format: uint32
           minimum: 0
-          type:
-          - integer
-          - 'null'
+          type: integer
         state:
           $ref: '#/components/schemas/DeviceState'
         type:
@@ -587,32 +552,46 @@ components:
       - state
       type: object
     DeviceState:
-      description: Network device state.
-      oneOf:
-      - const: unknown
-        description: The device's state is unknown.
-        type: string
-      - const: unmanaged
-        description: The device is recognized but not managed by Agama.
-        type: string
-      - const: unavailable
-        description: The device is detected but it cannot be used (wireless switched off, missing firmware, etc.).
-        type: string
-      - const: connecting
-        description: The device is connecting to the network.
-        type: string
-      - const: connected
-        description: The device is successfully connected to the network.
-        type: string
-      - const: disconnecting
-        description: The device is disconnecting from the network.
-        type: string
-      - const: disconnected
-        description: The device is disconnected from the network.
-        type: string
-      - const: failed
-        description: The device failed to connect to a network.
-        type: string
+      description: |-
+        Network device state.
+
+        Available values:
+        - `unknown` - The device's state is unknown.
+        - `unmanaged` - The device is recognized but not managed by Agama.
+        - `unavailable` - The device is detected but it cannot be used (wireless switched off, missing firmware, etc.).
+        - `connecting` - The device is connecting to the network.
+        - `connected` - The device is successfully connected to the network.
+        - `disconnecting` - The device is disconnecting from the network.
+        - `disconnected` - The device is disconnected from the network.
+        - `failed` - The device failed to connect to a network.
+      enum:
+      - unknown
+      - unmanaged
+      - unavailable
+      - connecting
+      - connected
+      - disconnecting
+      - disconnected
+      - failed
+      type: string
+      x-enum-descriptions:
+        connected: The device is successfully connected to the network.
+        connecting: The device is connecting to the network.
+        disconnected: The device is disconnected from the network.
+        disconnecting: The device is disconnecting from the network.
+        failed: The device failed to connect to a network.
+        unavailable: The device is detected but it cannot be used (wireless switched off, missing firmware, etc.).
+        unknown: The device's state is unknown.
+        unmanaged: The device is recognized but not managed by Agama.
+      x-enumDescriptions:
+        connected: The device is successfully connected to the network.
+        connecting: The device is connecting to the network.
+        disconnected: The device is disconnected from the network.
+        disconnecting: The device is disconnecting from the network.
+        failed: The device failed to connect to a network.
+        unavailable: The device is detected but it cannot be used (wireless switched off, missing firmware, etc.).
+        unknown: The device's state is unknown.
+        unmanaged: The device is recognized but not managed by Agama.
     DeviceType:
       enum:
       - loopback
@@ -628,19 +607,16 @@ components:
         client_id:
           $ref: '#/components/schemas/DhcpClientId'
         hostname:
-          type:
-          - string
-          - 'null'
+          type: string
         iaid:
           $ref: '#/components/schemas/DhcpIaid'
         send_hostname:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         send_release:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
+        transient:
+          deprecated: true
+          type: string
       required:
       - client_id
       - iaid
@@ -650,19 +626,16 @@ components:
         duid:
           $ref: '#/components/schemas/DhcpDuid'
         hostname:
-          type:
-          - string
-          - 'null'
+          type: string
         iaid:
           $ref: '#/components/schemas/DhcpIaid'
         send_hostname:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         send_release:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
+        transient:
+          deprecated: true
+          type: string
       required:
       - duid
       - iaid
@@ -724,45 +697,48 @@ components:
         address:
           type: string
         initiatorPassword:
-          type:
-          - string
-          - 'null'
+          type: string
         initiatorUsername:
-          type:
-          - string
-          - 'null'
+          type: string
         password:
-          type:
-          - string
-          - 'null'
+          type: string
         port:
           format: uint32
           minimum: 0
           type: integer
         username:
-          type:
-          - string
-          - 'null'
+          type: string
       required:
       - address
       - port
       type: object
     FinishMethod:
-      description: Finish method
-      oneOf:
-      - const: halt
-        description: Halt the system
-        type: string
-      - const: reboot
-        description: Reboots the system
-        type: string
-      - const: stop
-        description: Do nothing at the end of the installation
-        type: string
-      - const: poweroff
-        description: Poweroff the system
-        type: string
+      description: |-
+        Finish method
+
+        Available values:
+        - `halt` - Halt the system
+        - `reboot` - Reboots the system
+        - `stop` - Do nothing at the end of the installation
+        - `poweroff` - Poweroff the system
+      enum:
+      - halt
+      - reboot
+      - stop
+      - poweroff
+      type: string
+      x-enum-descriptions:
+        halt: Halt the system
+        poweroff: Poweroff the system
+        reboot: Reboots the system
+        stop: Do nothing at the end of the installation
+      x-enumDescriptions:
+        halt: Halt the system
+        poweroff: Poweroff the system
+        reboot: Reboots the system
+        stop: Do nothing at the end of the installation
     FirstUserConfig:
+      additionalProperties: false
       description: |-
         First user settings
 
@@ -772,9 +748,7 @@ components:
           description: First user's full name
           examples:
           - Jane Doe
-          type:
-          - string
-          - 'null'
+          type: string
         hashedPassword:
           default: false
           description: Whether the password is hashed or is plain text
@@ -785,21 +759,15 @@ components:
           - nots3cr3t
           type: string
         sshPublicKey:
-          anyOf:
-          - $ref: '#/components/schemas/StringOrList'
-          - type: 'null'
+          $ref: '#/components/schemas/StringOrList'
           deprecated: true
         sshPublicKeys:
-          anyOf:
-          - $ref: '#/components/schemas/StringOrList'
-          - type: 'null'
+          $ref: '#/components/schemas/StringOrList'
         userName:
           description: First user's username
           examples:
           - jane.doe
-          type:
-          - string
-          - 'null'
+          type: string
       title: First user settings
       type: object
     HardwareInfo:
@@ -807,50 +775,35 @@ components:
       properties:
         cpu:
           description: CPU description.
-          type:
-          - string
-          - 'null'
+          type: string
         memory:
           description: Memory size (in bytes).
           format: uint64
           minimum: 0
-          type:
-          - integer
-          - 'null'
+          type: integer
         model:
           description: Computer model.
-          type:
-          - string
-          - 'null'
+          type: string
       type: object
     IEEE8021XSettings:
+      additionalProperties: false
       description: IEEE 802.1x (EAP) settings
       properties:
         anonymousIdentity:
           description: Anonymous identity string for EAP authentication methods
-          type:
-          - string
-          - 'null'
+          type: string
         caCert:
           description: Path to CA certificate
-          type:
-          - string
-          - 'null'
+          type: string
         caCertPassword:
           description: Password string for CA certificate if it is encrypted
-          type:
-          - string
-          - 'null'
+          type: string
         clientCert:
           description: Path to client certificate
-          type:
-          - string
-          - 'null'
+          type: string
         clientCertPassword:
           description: Password string for client certificate if it is encrypted
-          type:
-          - string
-          - 'null'
+          type: string
         eap:
           description: List of EAP methods used
           items:
@@ -858,37 +811,25 @@ components:
           type: array
         identity:
           description: Identity string, often for example the user's login name
-          type:
-          - string
-          - 'null'
+          type: string
         password:
           description: Password string used for EAP authentication
-          type:
-          - string
-          - 'null'
+          type: string
         peapLabel:
           description: Force the use of the new PEAP label during key derivation
           type: boolean
         peapVersion:
           description: Which PEAP version is used when PEAP is set as the EAP method in the 'eap' property
-          type:
-          - string
-          - 'null'
+          type: string
         phase2Auth:
           description: Phase 2 inner auth method
-          type:
-          - string
-          - 'null'
+          type: string
         privateKey:
           description: Path to private key
-          type:
-          - string
-          - 'null'
+          type: string
         privateKeyPassword:
           description: Password string for private key if it is encrypted
-          type:
-          - string
-          - 'null'
+          type: string
       required:
       - eap
       type: object
@@ -925,75 +866,54 @@ components:
             $ref: '#/components/schemas/IpInet'
           type: array
         dhcp4Settings:
-          anyOf:
-          - $ref: '#/components/schemas/Dhcp4Settings'
-          - type: 'null'
+          $ref: '#/components/schemas/Dhcp4Settings'
         dhcp6Settings:
-          anyOf:
-          - $ref: '#/components/schemas/Dhcp6Settings'
-          - type: 'null'
+          $ref: '#/components/schemas/Dhcp6Settings'
         dnsPriority4:
           format: int32
-          type:
-          - integer
-          - 'null'
+          type: integer
         dnsPriority6:
           format: int32
-          type:
-          - integer
-          - 'null'
+          type: integer
         dnsSearchList:
+          items:
+            type: string
+          type: array
+        dnsSearchlist:
+          deprecated: true
           items:
             type: string
           type: array
         gateway4:
           format: ip
-          type:
-          - string
-          - 'null'
+          type: string
         gateway6:
           format: ip
-          type:
-          - string
-          - 'null'
+          type: string
         ignoreAutoDns:
           type: boolean
         ignoreAutoRoutes4:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         ignoreAutoRoutes6:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         ip6Privacy:
           format: int32
-          type:
-          - integer
-          - 'null'
+          type: integer
         linkLocal4:
           $ref: '#/components/schemas/LinkLocal'
         method4:
-          anyOf:
-          - $ref: '#/components/schemas/Ipv4Method'
-          - type: 'null'
+          $ref: '#/components/schemas/Ipv4Method'
         method6:
-          anyOf:
-          - $ref: '#/components/schemas/Ipv6Method'
-          - type: 'null'
+          $ref: '#/components/schemas/Ipv6Method'
         nameservers:
           items:
             format: ip
             type: string
           type: array
         neverDefault4:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         neverDefault6:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         routes4:
           items:
             $ref: '#/components/schemas/IpRoute'
@@ -1013,19 +933,16 @@ components:
       - 2001:db8::/32
       type: string
     IpRoute:
+      additionalProperties: false
       properties:
         destination:
           $ref: '#/components/schemas/IpInet'
         metric:
           format: uint32
           minimum: 0
-          type:
-          - integer
-          - 'null'
+          type: integer
         nextHop:
-          type:
-          - string
-          - 'null'
+          type: string
       required:
       - destination
       type: object
@@ -1167,9 +1084,7 @@ components:
         description:
           type: string
         details:
-          type:
-          - string
-          - 'null'
+          type: string
         scope:
           $ref: '#/components/schemas/Scope'
       required:
@@ -1183,40 +1098,11 @@ components:
           description: Keymap description
           type: string
         id:
-          allOf:
-          - $ref: '#/components/schemas/KeymapId'
           description: Keymap identifier (e.g., "us")
+          type: string
       required:
       - id
       - description
-      type: object
-    KeymapId:
-      description: |-
-        Keymap layout identifier
-
-        ```
-        use agama_locale_data::KeymapId;
-        use std::str::FromStr;
-
-        let id: KeymapId = "es(ast)".parse().unwrap();
-        assert_eq!(id.layout, "es");
-        assert_eq!(id.variant, Some("ast".to_string()));
-        assert_eq!(id.dashed(), "es-ast".to_string());
-
-        let id_with_dashes: KeymapId = "es-ast".parse().unwrap();
-        assert_eq!(id, id_with_dashes);
-        ```
-      properties:
-        layout:
-          description: Keyboard layout (e.g., "es" in "es(ast)")
-          type: string
-        variant:
-          description: Keyboard variante (e.g., "ast" in "es(ast)")
-          type:
-          - string
-          - 'null'
-      required:
-      - layout
       type: object
     License:
       description: |-
@@ -1272,9 +1158,7 @@ components:
       properties:
         consolefont:
           description: Console font
-          type:
-          - string
-          - 'null'
+          type: string
         id:
           description: The locale code (e.g., "es_ES.UTF-8").
           type: string
@@ -1300,6 +1184,7 @@ components:
       title: LoginRequest
       type: object
     MatchSettings:
+      additionalProperties: false
       properties:
         driver:
           items:
@@ -1319,6 +1204,7 @@ components:
           type: array
       type: object
     NetworkConnection:
+      additionalProperties: false
       description: Represents the configuration details for a network connection
       properties:
         addresses:
@@ -1328,25 +1214,23 @@ components:
           type: array
         autoconnect:
           description: Specifies if the connection should automatically connect
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         bond:
-          anyOf:
-          - $ref: '#/components/schemas/BondSettings'
-          - type: 'null'
+          $ref: '#/components/schemas/BondSettings'
           description: Bonding settings if part of a bond
         bridge:
-          anyOf:
-          - $ref: '#/components/schemas/BridgeSettings'
-          - type: 'null'
+          $ref: '#/components/schemas/BridgeSettings'
           description: Bridge settings if part of a bridge
         customMacAddress:
           description: Custom MAC address of the connection's interface
-          type:
-          - string
-          - 'null'
+          type: string
         dnsSearchList:
+          description: List of search domains for DNS resolution
+          items:
+            type: string
+          type: array
+        dnsSearchlist:
+          deprecated: true
           description: List of search domains for DNS resolution
           items:
             type: string
@@ -1356,54 +1240,36 @@ components:
           examples:
           - 192.168.122.1
           format: ip
-          type:
-          - string
-          - 'null'
+          type: string
         gateway6:
           description: Gateway IP address for the IPv6 connection
           examples:
           - ::ffff:c0a8:7a01
           format: ip
-          type:
-          - string
-          - 'null'
+          type: string
         id:
           description: Unique identifier for the network connection
           type: string
         ieee8021x:
-          anyOf:
-          - $ref: '#/components/schemas/IEEE8021XSettings'
-          - type: 'null'
+          $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
         ignoreAutoDns:
           description: Specifies whether to ignore automatically assigned DNS settings
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         interface:
           description: Network interface associated with the connection
-          type:
-          - string
-          - 'null'
+          type: string
         macAddress:
           description: MAC address of the connection's interface
-          type:
-          - string
-          - 'null'
+          type: string
         match:
-          anyOf:
-          - $ref: '#/components/schemas/MatchSettings'
-          - type: 'null'
+          $ref: '#/components/schemas/MatchSettings'
           description: Match settings for the network connection
         method4:
-          anyOf:
-          - $ref: '#/components/schemas/Ipv4Method'
-          - type: 'null'
+          $ref: '#/components/schemas/Ipv4Method'
           description: IPv4 method used for the network connection
         method6:
-          anyOf:
-          - $ref: '#/components/schemas/Ipv6Method'
-          - type: 'null'
+          $ref: '#/components/schemas/Ipv6Method'
           description: IPv6 method used for the network connection
         mtu:
           description: Maximum Transmission Unit (MTU) for the connection
@@ -1418,28 +1284,18 @@ components:
           type: array
         parent:
           description: Identifier for the parent connection, if this connection is part of a bond
-          type:
-          - string
-          - 'null'
+          type: string
         persistent:
           description: Specifies whether the connection should be persisted or not
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         status:
-          anyOf:
-          - $ref: '#/components/schemas/Status2'
-          - type: 'null'
+          $ref: '#/components/schemas/Status2'
           description: Current status of the network connection
         vlan:
-          anyOf:
-          - $ref: '#/components/schemas/VlanSettings'
-          - type: 'null'
+          $ref: '#/components/schemas/VlanSettings'
           description: VLAN settings for the connection
         wireless:
-          anyOf:
-          - $ref: '#/components/schemas/WirelessSettings'
-          - type: 'null'
+          $ref: '#/components/schemas/WirelessSettings'
           description: Wireless settings for the connection
       required:
       - id
@@ -1454,25 +1310,23 @@ components:
           type: array
         autoconnect:
           description: Specifies if the connection should automatically connect
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         bond:
-          anyOf:
-          - $ref: '#/components/schemas/BondSettings'
-          - type: 'null'
+          $ref: '#/components/schemas/BondSettings'
           description: Bonding settings if part of a bond
         bridge:
-          anyOf:
-          - $ref: '#/components/schemas/BridgeSettings'
-          - type: 'null'
+          $ref: '#/components/schemas/BridgeSettings'
           description: Bridge settings if part of a bridge
         customMacAddress:
           description: Custom MAC address of the connection's interface
-          type:
-          - string
-          - 'null'
+          type: string
         dnsSearchList:
+          description: List of search domains for DNS resolution
+          items:
+            type: string
+          type: array
+        dnsSearchlist:
+          deprecated: true
           description: List of search domains for DNS resolution
           items:
             type: string
@@ -1482,54 +1336,36 @@ components:
           examples:
           - 192.168.122.1
           format: ip
-          type:
-          - string
-          - 'null'
+          type: string
         gateway6:
           description: Gateway IP address for the IPv6 connection
           examples:
           - ::ffff:c0a8:7a01
           format: ip
-          type:
-          - string
-          - 'null'
+          type: string
         id:
           description: Unique identifier for the network connection
           type: string
         ieee8021x:
-          anyOf:
-          - $ref: '#/components/schemas/IEEE8021XSettings'
-          - type: 'null'
+          $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
         ignoreAutoDns:
           description: Specifies whether to ignore automatically assigned DNS settings
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         interface:
           description: Network interface associated with the connection
-          type:
-          - string
-          - 'null'
+          type: string
         macAddress:
           description: MAC address of the connection's interface
-          type:
-          - string
-          - 'null'
+          type: string
         match:
-          anyOf:
-          - $ref: '#/components/schemas/MatchSettings'
-          - type: 'null'
+          $ref: '#/components/schemas/MatchSettings'
           description: Match settings for the network connection
         method4:
-          anyOf:
-          - $ref: '#/components/schemas/Ipv4Method'
-          - type: 'null'
+          $ref: '#/components/schemas/Ipv4Method'
           description: IPv4 method used for the network connection
         method6:
-          anyOf:
-          - $ref: '#/components/schemas/Ipv6Method'
-          - type: 'null'
+          $ref: '#/components/schemas/Ipv6Method'
           description: IPv6 method used for the network connection
         mtu:
           description: Maximum Transmission Unit (MTU) for the connection
@@ -1544,30 +1380,20 @@ components:
           type: array
         parent:
           description: Identifier for the parent connection, if this connection is part of a bond
-          type:
-          - string
-          - 'null'
+          type: string
         persistent:
           description: Specifies whether the connection should be persisted or not
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         state:
           $ref: '#/components/schemas/ConnectionState'
         status:
-          anyOf:
-          - $ref: '#/components/schemas/Status2'
-          - type: 'null'
+          $ref: '#/components/schemas/Status2'
           description: Current status of the network connection
         vlan:
-          anyOf:
-          - $ref: '#/components/schemas/VlanSettings'
-          - type: 'null'
+          $ref: '#/components/schemas/VlanSettings'
           description: VLAN settings for the connection
         wireless:
-          anyOf:
-          - $ref: '#/components/schemas/WirelessSettings'
-          - type: 'null'
+          $ref: '#/components/schemas/WirelessSettings'
           description: Wireless settings for the connection
       required:
       - id
@@ -1585,9 +1411,7 @@ components:
       description: Patch for the config.
       properties:
         update:
-          anyOf:
-          - $ref: '#/components/schemas/Config'
-          - type: 'null'
+          $ref: '#/components/schemas/Config'
           description: Update for the current config.
       type: object
     Pattern:
@@ -1633,31 +1457,35 @@ components:
         description: Modifications for the list of user-selected patterns to install.
       description: List or modification map of user-selected patterns to install.
     PatternsMap:
+      additionalProperties: false
       description: Modifications for the list of user-selected patterns to install
       properties:
         add:
           description: List of user-selected patterns to add to the list.
           items:
             type: string
-          type:
-          - array
-          - 'null'
+          type: array
         remove:
           description: List of user-selected patterns to remove from the list.
           items:
             type: string
-          type:
-          - array
-          - 'null'
+          type: array
       type: object
     Policy:
-      oneOf:
-      - const: auto
-        description: Automatically answer questions.
-        type: string
-      - const: user
-        description: Ask the user.
-        type: string
+      description: |-
+        Available values:
+        - `auto` - Automatically answer questions.
+        - `user` - Ask the user.
+      enum:
+      - auto
+      - user
+      type: string
+      x-enum-descriptions:
+        auto: Automatically answer questions.
+        user: Ask the user.
+      x-enumDescriptions:
+        auto: Automatically answer questions.
+        user: Ask the user.
     PostPartitioningScript:
       anyOf:
       - description: File or script content, starting with a shebang for scripts.
@@ -1702,9 +1530,7 @@ components:
       properties:
         chroot:
           description: Whether the script should be run in a chroot environment.
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         name:
           description: Script name, to be used as file name.
           type: string
@@ -1771,9 +1597,7 @@ components:
         properties:
           detail:
             description: Detailed explanation
-            type:
-            - string
-            - 'null'
+            type: string
           errors:
             description: List of validation error messages
             items:
@@ -1793,9 +1617,7 @@ components:
       - description: Invalid JSON in request body (HTTP 400)
         properties:
           detail:
-            type:
-            - string
-            - 'null'
+            type: string
           title:
             type: string
           type:
@@ -1868,9 +1690,7 @@ components:
           description: Product description (translated to the current UI language)
           type: string
         desktopSelection:
-          anyOf:
-          - $ref: '#/components/schemas/DesktopSelection'
-          - type: 'null'
+          $ref: '#/components/schemas/DesktopSelection'
           description: Desktop selection mode
         icon:
           description: Product icon (e.g., "default.svg")
@@ -1911,9 +1731,7 @@ components:
           description: List of product addons to register and install.
           items:
             $ref: '#/components/schemas/AddonConfig'
-          type:
-          - array
-          - 'null'
+          type: array
         id:
           description: ID of the product to install (e.g., "SLES", "Tumbleweed", etc.).
           examples:
@@ -1923,30 +1741,20 @@ components:
           - openSUSE_Leap
           - SLES
           - Kalpa
-          type:
-          - string
-          - 'null'
+          type: string
         mode:
           description: The mode from the products.d/foo.yaml file.
-          type:
-          - string
-          - 'null'
+          type: string
         registrationCode:
           description: Product registration code.
-          type:
-          - string
-          - 'null'
+          type: string
         registrationEmail:
           description: Product registration email.
-          type:
-          - string
-          - 'null'
+          type: string
         registrationUrl:
           description: URL of the registration server.
           format: uri
-          type:
-          - string
-          - 'null'
+          type: string
       title: Product to install
       type: object
     ProductMode:
@@ -1998,25 +1806,25 @@ components:
         access:
           $ref: '#/components/schemas/access.ExtendedConfig'
         hostname:
-          anyOf:
-          - $ref: '#/components/schemas/hostname.Proposal'
-          - type: 'null'
+          $ref: '#/components/schemas/hostname.Proposal'
         l10n:
-          anyOf:
-          - $ref: '#/components/schemas/l10n.Proposal'
-          - type: 'null'
+          $ref: '#/components/schemas/l10n.Proposal'
+        localization:
+          $ref: '#/components/schemas/l10n.Config'
+          deprecated: true
+          description: 'Deprecated: use l10n instead.'
+          title: Localization settings (old schema)
         network:
           $ref: '#/components/schemas/network.Proposal'
         software:
-          anyOf:
-          - $ref: '#/components/schemas/software.Proposal'
-          - type: 'null'
+          $ref: '#/components/schemas/software.Proposal'
         storage:
           $ref: '#/components/schemas/StorageProposal'
+        transient:
+          $ref: '#/components/schemas/hostname.Proposal'
+          deprecated: true
         users:
-          anyOf:
-          - $ref: '#/components/schemas/users.Config'
-          - type: 'null'
+          $ref: '#/components/schemas/users.Config'
       required:
       - network
       - access
@@ -2030,9 +1838,7 @@ components:
             $ref: '#/components/schemas/questions.Action'
           type: array
         answer:
-          anyOf:
-          - $ref: '#/components/schemas/questions.Answer'
-          - type: 'null'
+          $ref: '#/components/schemas/questions.Answer'
           description: Question answer.
         class:
           description: |-
@@ -2048,9 +1854,7 @@ components:
           type: object
         defaultAction:
           description: Default action.
-          type:
-          - string
-          - 'null'
+          type: string
         field:
           allOf:
           - $ref: '#/components/schemas/QuestionField'
@@ -2150,9 +1954,7 @@ components:
           type: object
         defaultAction:
           description: Default action.
-          type:
-          - string
-          - 'null'
+          type: string
         field:
           allOf:
           - $ref: '#/components/schemas/QuestionField'
@@ -2178,24 +1980,19 @@ components:
           type: array
         code:
           description: Registration code.
-          type:
-          - string
-          - 'null'
+          type: string
         email:
           description: Registration e-mail.
-          type:
-          - string
-          - 'null'
+          type: string
         url:
           description: URL of the registration server.
           format: uri
-          type:
-          - string
-          - 'null'
+          type: string
       required:
       - addons
       type: object
     RepositoryConfig:
+      additionalProperties: false
       description: Parameters for creating new a repository
       properties:
         alias:
@@ -2203,14 +2000,10 @@ components:
           type: string
         allowUnsigned:
           description: Whenever repository can be unsigned. Default is false
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         enabled:
           description: Whether the repository is enabled, if missing the repository is enabled
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         gpgFingerprints:
           description: |-
             List of fingerprints for GPG keys used for repository signing. If specified,
@@ -2218,25 +2011,17 @@ components:
             with them. By default empty.
           items:
             type: string
-          type:
-          - array
-          - 'null'
+          type: array
         name:
           description: repository name, if not specified the alias is used
-          type:
-          - string
-          - 'null'
+          type: string
         priority:
           description: Repository priority, lower number means higher priority, the default priority is 99
           format: int32
-          type:
-          - integer
-          - 'null'
+          type: integer
         productDir:
           description: product directory (currently not used, valid only for multiproduct DVDs)
-          type:
-          - string
-          - 'null'
+          type: string
         url:
           description: Repository url (raw format without expanded variables)
           type: string
@@ -2245,6 +2030,7 @@ components:
       - url
       type: object
     RootUserConfig:
+      additionalProperties: false
       description: |-
         Root user settings
 
@@ -2260,19 +2046,16 @@ components:
           - nots3cr3t
           type: string
         sshPublicKey:
-          anyOf:
-          - $ref: '#/components/schemas/StringOrList'
-          - type: 'null'
+          $ref: '#/components/schemas/StringOrList'
           deprecated: true
           description: Root SSH public key
         sshPublicKeys:
-          anyOf:
-          - $ref: '#/components/schemas/StringOrList'
-          - type: 'null'
+          $ref: '#/components/schemas/StringOrList'
           description: Root SSH public key
       title: Root authentication settings
       type: object
     SSLFingerprint:
+      additionalProperties: false
       properties:
         algorithm:
           allOf:
@@ -2319,52 +2102,53 @@ components:
       - users
       type: string
     ScriptsConfig:
+      additionalProperties: false
       properties:
         init:
           description: User-defined init scripts
           items:
             $ref: '#/components/schemas/InitScript'
-          type:
-          - array
-          - 'null'
+          type: array
         post:
           description: User-defined post-installation scripts
           items:
             $ref: '#/components/schemas/PostScript'
-          type:
-          - array
-          - 'null'
+          type: array
         postPartitioning:
           description: User-defined post-partitioning scripts
           items:
             $ref: '#/components/schemas/PostPartitioningScript'
-          type:
-          - array
-          - 'null'
+          type: array
         pre:
           description: User-defined pre-installation scripts
           items:
             $ref: '#/components/schemas/PreScript'
-          type:
-          - array
-          - 'null'
+          type: array
       title: User-defined installation scripts
       type: object
     SelectedBy:
-      description: Represents the reason why a pattern is selected.
-      oneOf:
-      - enum:
-        - removed
-        type: string
-      - const: user
-        description: The pattern was selected by the user.
-        type: string
-      - const: auto
-        description: The pattern was selected automatically.
-        type: string
-      - const: none
-        description: The pattern has not been selected.
-        type: string
+      description: |-
+        Represents the reason why a pattern is selected.
+
+        Available values:
+        - `removed`
+        - `user` - The pattern was selected by the user.
+        - `auto` - The pattern was selected automatically.
+        - `none` - The pattern has not been selected.
+      enum:
+      - removed
+      - user
+      - auto
+      - none
+      type: string
+      x-enum-descriptions:
+        auto: The pattern was selected automatically.
+        none: The pattern has not been selected.
+        user: The pattern was selected by the user.
+      x-enumDescriptions:
+        auto: The pattern was selected automatically.
+        none: The pattern has not been selected.
+        user: The pattern was selected by the user.
     SelectionOption:
       description: Selector option.
       properties:
@@ -2377,38 +2161,32 @@ components:
       - label
       type: object
     SoftwareConfig:
+      additionalProperties: false
       description: Software settings for installation
       properties:
         extraRepositories:
           description: List of user specified repositories to use on top of default ones.
           items:
             $ref: '#/components/schemas/RepositoryConfig'
-          type:
-          - array
-          - 'null'
+          type: array
         onlyRequired:
           description: Flag indicating if only hard requirements should be used by solver.
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         packages:
           description: List of user selected packages to install.
           examples:
           - - vim
           items:
             type: string
-          type:
-          - array
-          - 'null'
+          type: array
         patterns:
-          anyOf:
-          - $ref: '#/components/schemas/PatternsConfig'
-          - type: 'null'
+          $ref: '#/components/schemas/PatternsConfig'
           description: List of user selected patterns to install.
           examples:
           - - minimal_base
       type: object
     Source:
+      additionalProperties: false
       description: NTP source configuration.
       properties:
         address:
@@ -2442,42 +2220,45 @@ components:
       - peer
       type: string
     Stage:
-      description: Represents the current state of the installation process.
-      oneOf:
-      - const: configuring
-        description: Configuring the installation
-        type: string
-      - const: installing
-        description: Installing the system
-        type: string
-      - const: finished
-        description: Installation finished
-        type: string
-      - const: failed
-        description: Installation failed
-        type: string
+      description: |-
+        Represents the current state of the installation process.
+
+        Available values:
+        - `configuring` - Configuring the installation
+        - `installing` - Installing the system
+        - `finished` - Installation finished
+        - `failed` - Installation failed
+      enum:
+      - configuring
+      - installing
+      - finished
+      - failed
+      type: string
+      x-enum-descriptions:
+        configuring: Configuring the installation
+        failed: Installation failed
+        finished: Installation finished
+        installing: Installing the system
+      x-enumDescriptions:
+        configuring: Configuring the installation
+        failed: Installation failed
+        finished: Installation finished
+        installing: Installing the system
     StateSettings:
+      additionalProperties: false
       description: |-
         Network general settings for the installation like enabling wireless, networking and
         allowing to enable or disable the copy of the network settings to the
         target system
       properties:
         connectivity:
-          anyOf:
-          - $ref: '#/components/schemas/ConnectivityState'
-          - type: 'null'
+          $ref: '#/components/schemas/ConnectivityState'
         copyNetwork:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         networkingEnabled:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         wirelessEnabled:
-          type:
-          - boolean
-          - 'null'
+          type: boolean
       type: object
     Status:
       properties:
@@ -4641,18 +4422,15 @@ components:
     SystemInfo:
       description: Global information of the system where the installer is running.
       properties:
-        bootloader:
-          $ref: '#/components/schemas/BootloaderSystemInfo'
-        dasd:
-          $ref: '#/components/schemas/DasdSystemInfo'
+        bootloader: true
+        dasd: true
         hardware:
           allOf:
           - $ref: '#/components/schemas/HardwareInfo'
           description: Hardware information
         hostname:
           $ref: '#/components/schemas/hostname.SystemInfo'
-        iscsi:
-          $ref: '#/components/schemas/IscsiSystemInfo'
+        iscsi: true
         l10n:
           $ref: '#/components/schemas/l10n.SystemInfo'
         licenses:
@@ -4660,6 +4438,11 @@ components:
           items:
             $ref: '#/components/schemas/License'
           type: array
+        localization:
+          $ref: '#/components/schemas/l10n.Config'
+          deprecated: true
+          description: 'Deprecated: use l10n instead.'
+          title: Localization settings (old schema)
         network:
           $ref: '#/components/schemas/network.SystemInfo'
         products:
@@ -4670,9 +4453,11 @@ components:
         software:
           $ref: '#/components/schemas/SystemInfo2'
         storage:
-          $ref: '#/components/schemas/StorageSystemInfo'
-        zfcp:
-          $ref: '#/components/schemas/ZfcpSystemInfo'
+          $ref: '#/components/schemas/StorageProposal'
+        transient:
+          $ref: '#/components/schemas/hostname.SystemInfo'
+          deprecated: true
+        zfcp: true
       required:
       - products
       - licenses
@@ -4693,9 +4478,7 @@ components:
             $ref: '#/components/schemas/Pattern'
           type: array
         registration:
-          anyOf:
-          - $ref: '#/components/schemas/RegistrationInfo'
-          - type: 'null'
+          $ref: '#/components/schemas/RegistrationInfo'
           description: Registration information
       required:
       - patterns
@@ -4729,9 +4512,7 @@ components:
       properties:
         country:
           description: Localized name of the territory this timezone is associated to
-          type:
-          - string
-          - 'null'
+          type: string
         id:
           allOf:
           - $ref: '#/components/schemas/TimezoneId'
@@ -4772,9 +4553,7 @@ components:
                 type: integer
               value:
                 description: Value to use for the question (e.g. password or string input, depending on the question type).
-                type:
-                - string
-                - 'null'
+                type: string
             required:
             - id
             - action
@@ -4836,28 +4615,37 @@ components:
       title: User-defined file to deploy
       type: object
     VlanFlag:
-      description: VLAN flags controlling behavior
-      oneOf:
-      - const: reorder-headers
-        description: Reorder Ethernet headers to make packets look less like VLAN packets
-        type: string
-      - const: gvrp
-        description: GARP VLAN Registration Protocol - dynamically register/deregister VLANs
-        type: string
-      - const: loose-binding
-        description: Allow changing master device while connection is active
-        type: string
-      - const: mvrp
-        description: Multiple VLAN Registration Protocol - next generation of GVRP
-        type: string
+      description: |-
+        VLAN flags controlling behavior
+
+        Available values:
+        - `reorder-headers` - Reorder Ethernet headers to make packets look less like VLAN packets
+        - `gvrp` - GARP VLAN Registration Protocol - dynamically register/deregister VLANs
+        - `loose-binding` - Allow changing master device while connection is active
+        - `mvrp` - Multiple VLAN Registration Protocol - next generation of GVRP
+      enum:
+      - reorder-headers
+      - gvrp
+      - loose-binding
+      - mvrp
+      type: string
+      x-enum-descriptions:
+        gvrp: GARP VLAN Registration Protocol - dynamically register/deregister VLANs
+        loose-binding: Allow changing master device while connection is active
+        mvrp: Multiple VLAN Registration Protocol - next generation of GVRP
+        reorder-headers: Reorder Ethernet headers to make packets look less like VLAN packets
+      x-enumDescriptions:
+        gvrp: GARP VLAN Registration Protocol - dynamically register/deregister VLANs
+        loose-binding: Allow changing master device while connection is active
+        mvrp: Multiple VLAN Registration Protocol - next generation of GVRP
+        reorder-headers: Reorder Ethernet headers to make packets look less like VLAN packets
     VlanSettings:
+      additionalProperties: false
       properties:
         flags:
           items:
             $ref: '#/components/schemas/VlanFlag'
-          type:
-          - array
-          - 'null'
+          type: array
         id:
           format: uint32
           minimum: 0
@@ -4865,26 +4653,21 @@ components:
         parent:
           type: string
         protocol:
-          type:
-          - string
-          - 'null'
+          type: string
       required:
       - parent
       - id
       type: object
     WirelessSettings:
+      additionalProperties: false
       description: Wireless configuration
       properties:
         band:
           description: Frequency band of the wireless network
-          type:
-          - string
-          - 'null'
+          type: string
         bssid:
           description: Only allow connection to this mac address
-          type:
-          - string
-          - 'null'
+          type: string
         channel:
           description: Wireless channel of the wireless network
           format: uint32
@@ -4908,9 +4691,7 @@ components:
           type: array
         password:
           description: Password of the wireless network
-          type:
-          - string
-          - 'null'
+          type: string
         pmf:
           description: Indicates whether Protected Management Frames must be enabled for the connection
           format: int32
@@ -5040,23 +4821,21 @@ components:
       - active
       type: object
     access.Config:
+      additionalProperties: false
       description: |-
         Remote Access configuration.
 
         Allows to explicitly specify how machine has to be accessed after installation.
       properties:
         ssh:
-          anyOf:
-          - $ref: '#/components/schemas/AccessValue'
-          - type: 'null'
+          $ref: '#/components/schemas/AccessValue'
           description: Allows to specify if ssh access has to be enabled after installation or keep product defaults.
         webConsole:
-          anyOf:
-          - $ref: '#/components/schemas/AccessValue'
-          - type: 'null'
+          $ref: '#/components/schemas/AccessValue'
           description: Allows to specify if web console access has to be enabled after installation or keep product defaults.
       type: object
     access.ExtendedConfig:
+      additionalProperties: false
       description: Remote Access extended configuration that is resolved
       properties:
         ssh:
@@ -5072,57 +4851,45 @@ components:
       - webConsole
       type: object
     bootloader.Config:
+      additionalProperties: false
       description: Bootloader configuration.
       properties:
         extraKernelParams:
           description: Bootloader extra kernel parameters.
-          type:
-          - string
-          - 'null'
+          type: string
         stopOnBootMenu:
           description: Whether bootloader should stop on boot menu.
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         timeout:
           description: Bootloader timeout.
           format: uint32
           minimum: 0
-          type:
-          - integer
-          - 'null'
+          type: integer
         updateNvram:
           description: Whether bootloader should update persistent RAM.
-          type:
-          - boolean
-          - 'null'
+          type: boolean
       title: Bootloader settings
       type: object
     hostname.Config:
+      additionalProperties: false
       description: Hostname config.
       properties:
         hostname:
           description: System transient hostname.
           examples:
           - agama-host
-          type:
-          - string
-          - 'null'
+          type: string
         static:
           description: System static hostname.
           examples:
           - agama-host.example.com
-          type:
-          - string
-          - 'null'
+          type: string
         transient:
           deprecated: true
           description: System transient hostname.
           examples:
           - agama-host
-          type:
-          - string
-          - 'null'
+          type: string
       title: Hostname settings
       type: object
     hostname.Proposal:
@@ -5131,9 +4898,10 @@ components:
         hostname:
           type: string
         static:
-          type:
-          - string
-          - 'null'
+          type: string
+        transient:
+          deprecated: true
+          type: string
       required:
       - hostname
       type: object
@@ -5143,13 +4911,15 @@ components:
         hostname:
           type: string
         static:
-          type:
-          - string
-          - 'null'
+          type: string
+        transient:
+          deprecated: true
+          type: string
       required:
       - hostname
       type: object
     l10n.Config:
+      additionalProperties: false
       description: Localization config.
       properties:
         keyboard:
@@ -5159,49 +4929,47 @@ components:
           - us
           - en
           - es
-          type:
-          - string
-          - 'null'
+          type: string
         keymap:
           description: Keymap (e.g., "us", "cz(qwerty)", etc.).
           examples:
           - us
           - en
           - es
-          type:
-          - string
-          - 'null'
+          type: string
         language:
           deprecated: true
           description: Locale (e.g., "en_US.UTF-8").
           examples:
           - en_US.UTF-8
           - en_US
-          type:
-          - string
-          - 'null'
+          type: string
         locale:
           description: Locale (e.g., "en_US.UTF-8").
           examples:
           - en_US.UTF-8
           - en_US
-          type:
-          - string
-          - 'null'
+          type: string
         timezone:
           description: Timezone (e.g., "Europe/Berlin").
           examples:
           - Europe/Berlin
-          type:
-          - string
-          - 'null'
+          type: string
       title: Localization settings
       type: object
     l10n.Proposal:
       description: Describes what Agama proposes for the target system.
       properties:
+        keyboard:
+          deprecated: true
+          description: Keymap (e.g., "us", "cz(qwerty)", etc.).
+          type: string
         keymap:
           description: Keymap (e.g., "us", "cz(qwerty)", etc.).
+          type: string
+        language:
+          deprecated: true
+          description: Locale (e.g., "en_US.UTF-8").
           type: string
         locale:
           description: Locale (e.g., "en_US.UTF-8").
@@ -5216,18 +4984,24 @@ components:
       type: object
     l10n.SystemConfig:
       properties:
+        keyboard:
+          deprecated: true
+          type: string
         keymap:
-          type:
-          - string
-          - 'null'
+          type: string
+        language:
+          deprecated: true
+          type: string
         locale:
-          type:
-          - string
-          - 'null'
+          type: string
       type: object
     l10n.SystemInfo:
       description: Localization-related information of the system where the installer is running.
       properties:
+        keyboard:
+          deprecated: true
+          description: Keymap of the system where Agama is running.
+          type: string
         keymap:
           description: Keymap of the system where Agama is running.
           type: string
@@ -5236,6 +5010,10 @@ components:
           items:
             $ref: '#/components/schemas/Keymap'
           type: array
+        language:
+          deprecated: true
+          description: Locale of the system where Agama is running.
+          type: string
         locale:
           description: Locale of the system where Agama is running.
           type: string
@@ -5261,17 +5039,14 @@ components:
       - timezone
       type: object
     network.Config:
+      additionalProperties: false
       description: Network config settings for installation
       properties:
         connections:
-          anyOf:
-          - $ref: '#/components/schemas/NetworkConnectionsCollection'
-          - type: 'null'
+          $ref: '#/components/schemas/NetworkConnectionsCollection'
           description: Connections to use in the installation
         state:
-          anyOf:
-          - $ref: '#/components/schemas/StateSettings'
-          - type: 'null'
+          $ref: '#/components/schemas/StateSettings'
           description: Network general settings
       type: object
     network.Proposal:
@@ -5313,64 +5088,48 @@ components:
       - state
       type: object
     ntp.Config:
+      additionalProperties: false
       description: NTP configuration.
       properties:
         sources:
           description: NTP sources.
           items:
             $ref: '#/components/schemas/Source'
-          type:
-          - array
-          - 'null'
+          type: array
       title: NTP configuration
       type: object
     proxy.Config:
+      additionalProperties: false
       description: Proxy config.
       properties:
         enabled:
           description: Whether proxy is enabled.
-          type:
-          - boolean
-          - 'null'
+          type: boolean
         ftp:
           description: URL to be used for the FTP proxy.
-          type:
-          - string
-          - 'null'
+          type: string
         gopher:
           description: URL to be used for the Gopher proxy.
-          type:
-          - string
-          - 'null'
+          type: string
         http:
           description: URL to be used for the HTTP proxy.
           examples:
           - http://proxy.provider.de:3128/
-          type:
-          - string
-          - 'null'
+          type: string
         https:
           description: URL to be used for the HTTPS proxy.
-          type:
-          - string
-          - 'null'
+          type: string
         noProxy:
           description: Comma-separated list of domains/hosts to bypass proxy for.
-          type:
-          - string
-          - 'null'
+          type: string
         socks:
           description: URL to be used for the SOCKS proxy.
-          type:
-          - string
-          - 'null'
+          type: string
         socks5:
           description: SOCKS5 server address.
           examples:
           - office-proxy.example.com:8881
-          type:
-          - string
-          - 'null'
+          type: string
       title: Proxy settings
       type: object
     questions.Action:
@@ -5390,6 +5149,7 @@ components:
       - label
       type: object
     questions.Answer:
+      additionalProperties: false
       description: |-
         Question answer.
 
@@ -5401,40 +5161,34 @@ components:
           type: string
         value:
           description: Value to use for the question (e.g. password or string input, depending on the question type).
-          type:
-          - string
-          - 'null'
+          type: string
       required:
       - action
       title: Predefined question action
       type: object
     questions.Config:
+      additionalProperties: false
       description: Questions configuration.
       properties:
         answers:
           description: List of answers to automatically use for matching questions.
           items:
             $ref: '#/components/schemas/AnswerRule'
-          type:
-          - array
-          - 'null'
+          type: array
         policy:
-          anyOf:
-          - $ref: '#/components/schemas/Policy'
-          - type: 'null'
+          $ref: '#/components/schemas/Policy'
           description: 'Policy to answer questions: "auto" to automatically answer questions or "user" to ask the user.'
       title: How to handle Agama questions
       type: object
     security.Config:
+      additionalProperties: false
       description: Security settings
       properties:
         sslCertificates:
           description: List of SSL certificates to add to the system.
           items:
             $ref: '#/components/schemas/SSLFingerprint'
-          type:
-          - array
-          - 'null'
+          type: array
       title: Security settings
       type: object
     software.Proposal:
@@ -5458,19 +5212,16 @@ components:
           type: integer
       type: object
     users.Config:
+      additionalProperties: false
       description: |-
         User settings
 
         Holds the user settings for the installation.
       properties:
         root:
-          anyOf:
-          - $ref: '#/components/schemas/RootUserConfig'
-          - type: 'null'
+          $ref: '#/components/schemas/RootUserConfig'
         user:
-          anyOf:
-          - $ref: '#/components/schemas/FirstUserConfig'
-          - type: 'null'
+          $ref: '#/components/schemas/FirstUserConfig'
       type: object
   securitySchemes:
     bearerAuth:

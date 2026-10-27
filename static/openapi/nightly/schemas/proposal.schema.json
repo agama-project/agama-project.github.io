@@ -4,30 +4,29 @@
   "components": {
     "schemas": {
       "AccessValue": {
-        "description": "Allows to specify explicit enablement of remote access for supported services",
-        "oneOf": [
-          {
-            "const": "enabled",
-            "description": "Explicitly enabled",
-            "type": "string"
-          },
-          {
-            "const": "default",
-            "description": "Default system configuration behavior that is product specific",
-            "type": "string"
-          }
-        ]
+        "description": "Allows to specify explicit enablement of remote access for supported services\n\nAvailable values:\n- `enabled` - Explicitly enabled\n- `default` - Default system configuration behavior that is product specific",
+        "enum": [
+          "enabled",
+          "default"
+        ],
+        "type": "string",
+        "x-enum-descriptions": {
+          "default": "Default system configuration behavior that is product specific",
+          "enabled": "Explicitly enabled"
+        },
+        "x-enumDescriptions": {
+          "default": "Default system configuration behavior that is product specific",
+          "enabled": "Explicitly enabled"
+        }
       },
       "BondSettings": {
+        "additionalProperties": false,
         "properties": {
           "mode": {
             "type": "string"
           },
           "options": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "ports": {
             "items": {
@@ -42,30 +41,22 @@
         "type": "object"
       },
       "BridgeSettings": {
+        "additionalProperties": false,
         "properties": {
           "forwardDelay": {
             "format": "uint32",
             "minimum": 0,
-            "type": [
-              "integer",
-              "null"
-            ]
+            "type": "integer"
           },
           "helloTime": {
             "format": "uint32",
             "minimum": 0,
-            "type": [
-              "integer",
-              "null"
-            ]
+            "type": "integer"
           },
           "maxAge": {
             "format": "uint32",
             "minimum": 0,
-            "type": [
-              "integer",
-              "null"
-            ]
+            "type": "integer"
           },
           "ports": {
             "items": {
@@ -76,51 +67,41 @@
           "priority": {
             "format": "uint32",
             "minimum": 0,
-            "type": [
-              "integer",
-              "null"
-            ]
+            "type": "integer"
           },
           "stp": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": "boolean"
           }
         },
         "type": "object"
       },
       "ConnectivityState": {
-        "description": "Network connectivity state.",
-        "oneOf": [
-          {
-            "const": "unknown",
-            "description": "The connectivity state is unknown.",
-            "type": "string"
-          },
-          {
-            "const": "none",
-            "description": "No connectivity.",
-            "type": "string"
-          },
-          {
-            "const": "portal",
-            "description": "The network is behind a captive portal and cannot reach the full internet.",
-            "type": "string"
-          },
-          {
-            "const": "limited",
-            "description": "The network is connected but it has no access to the full internet.",
-            "type": "string"
-          },
-          {
-            "const": "full",
-            "description": "The network is connected and it has access to the full internet.",
-            "type": "string"
-          }
-        ]
+        "description": "Network connectivity state.\n\nAvailable values:\n- `unknown` - The connectivity state is unknown.\n- `none` - No connectivity.\n- `portal` - The network is behind a captive portal and cannot reach the full internet.\n- `limited` - The network is connected but it has no access to the full internet.\n- `full` - The network is connected and it has access to the full internet.",
+        "enum": [
+          "unknown",
+          "none",
+          "portal",
+          "limited",
+          "full"
+        ],
+        "type": "string",
+        "x-enum-descriptions": {
+          "full": "The network is connected and it has access to the full internet.",
+          "limited": "The network is connected but it has no access to the full internet.",
+          "none": "No connectivity.",
+          "portal": "The network is behind a captive portal and cannot reach the full internet.",
+          "unknown": "The connectivity state is unknown."
+        },
+        "x-enumDescriptions": {
+          "full": "The network is connected and it has access to the full internet.",
+          "limited": "The network is connected but it has no access to the full internet.",
+          "none": "No connectivity.",
+          "portal": "The network is behind a captive portal and cannot reach the full internet.",
+          "unknown": "The connectivity state is unknown."
+        }
       },
       "FirstUserConfig": {
+        "additionalProperties": false,
         "description": "First user settings\n\nHolds the settings for the first user.",
         "properties": {
           "fullName": {
@@ -128,10 +109,7 @@
             "examples": [
               "Jane Doe"
             ],
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "hashedPassword": {
             "default": false,
@@ -146,77 +124,46 @@
             "type": "string"
           },
           "sshPublicKey": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/StringOrList"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/StringOrList",
             "deprecated": true
           },
           "sshPublicKeys": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/StringOrList"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/StringOrList"
           },
           "userName": {
             "description": "First user's username",
             "examples": [
               "jane.doe"
             ],
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         },
         "title": "First user settings",
         "type": "object"
       },
       "IEEE8021XSettings": {
+        "additionalProperties": false,
         "description": "IEEE 802.1x (EAP) settings",
         "properties": {
           "anonymousIdentity": {
             "description": "Anonymous identity string for EAP authentication methods",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "caCert": {
             "description": "Path to CA certificate",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "caCertPassword": {
             "description": "Password string for CA certificate if it is encrypted",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "clientCert": {
             "description": "Path to client certificate",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "clientCertPassword": {
             "description": "Password string for client certificate if it is encrypted",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "eap": {
             "description": "List of EAP methods used",
@@ -227,17 +174,11 @@
           },
           "identity": {
             "description": "Identity string, often for example the user's login name",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "password": {
             "description": "Password string used for EAP authentication",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "peapLabel": {
             "description": "Force the use of the new PEAP label during key derivation",
@@ -245,31 +186,19 @@
           },
           "peapVersion": {
             "description": "Which PEAP version is used when PEAP is set as the EAP method in the 'eap' property",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "phase2Auth": {
             "description": "Phase 2 inner auth method",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "privateKey": {
             "description": "Path to private key",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "privateKeyPassword": {
             "description": "Password string for private key if it is encrypted",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         },
         "required": [
@@ -308,6 +237,7 @@
         "type": "string"
       },
       "MatchSettings": {
+        "additionalProperties": false,
         "properties": {
           "driver": {
             "items": {
@@ -337,6 +267,7 @@
         "type": "object"
       },
       "NetworkConnection": {
+        "additionalProperties": false,
         "description": "Represents the configuration details for a network connection",
         "properties": {
           "addresses": {
@@ -348,41 +279,29 @@
           },
           "autoconnect": {
             "description": "Specifies if the connection should automatically connect",
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": "boolean"
           },
           "bond": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/BondSettings"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/BondSettings",
             "description": "Bonding settings if part of a bond"
           },
           "bridge": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/BridgeSettings"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/BridgeSettings",
             "description": "Bridge settings if part of a bridge"
           },
           "customMacAddress": {
             "description": "Custom MAC address of the connection's interface",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "dnsSearchList": {
+            "description": "List of search domains for DNS resolution",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "dnsSearchlist": {
+            "deprecated": true,
             "description": "List of search domains for DNS resolution",
             "items": {
               "type": "string"
@@ -395,10 +314,7 @@
               "192.168.122.1"
             ],
             "format": "ip",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "gateway6": {
             "description": "Gateway IP address for the IPv6 connection",
@@ -406,78 +322,38 @@
               "::ffff:c0a8:7a01"
             ],
             "format": "ip",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "id": {
             "description": "Unique identifier for the network connection",
             "type": "string"
           },
           "ieee8021x": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/IEEE8021XSettings"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
           },
           "ignoreAutoDns": {
             "description": "Specifies whether to ignore automatically assigned DNS settings",
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": "boolean"
           },
           "interface": {
             "description": "Network interface associated with the connection",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "macAddress": {
             "description": "MAC address of the connection's interface",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "match": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/MatchSettings"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/MatchSettings",
             "description": "Match settings for the network connection"
           },
           "method4": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Ipv4Method"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/Ipv4Method",
             "description": "IPv4 method used for the network connection"
           },
           "method6": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Ipv6Method"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/Ipv6Method",
             "description": "IPv6 method used for the network connection"
           },
           "mtu": {
@@ -496,49 +372,22 @@
           },
           "parent": {
             "description": "Identifier for the parent connection, if this connection is part of a bond",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "persistent": {
             "description": "Specifies whether the connection should be persisted or not",
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": "boolean"
           },
           "status": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Status2"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/Status2",
             "description": "Current status of the network connection"
           },
           "vlan": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VlanSettings"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/VlanSettings",
             "description": "VLAN settings for the connection"
           },
           "wireless": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/WirelessSettings"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/WirelessSettings",
             "description": "Wireless settings for the connection"
           }
         },
@@ -554,6 +403,7 @@
         "type": "array"
       },
       "RootUserConfig": {
+        "additionalProperties": false,
         "description": "Root user settings\n\nHolds the settings for the root user.",
         "properties": {
           "hashedPassword": {
@@ -569,26 +419,12 @@
             "type": "string"
           },
           "sshPublicKey": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/StringOrList"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/StringOrList",
             "deprecated": true,
             "description": "Root SSH public key"
           },
           "sshPublicKeys": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/StringOrList"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/StringOrList",
             "description": "Root SSH public key"
           }
         },
@@ -596,61 +432,40 @@
         "type": "object"
       },
       "SelectedBy": {
-        "description": "Represents the reason why a pattern is selected.",
-        "oneOf": [
-          {
-            "enum": [
-              "removed"
-            ],
-            "type": "string"
-          },
-          {
-            "const": "user",
-            "description": "The pattern was selected by the user.",
-            "type": "string"
-          },
-          {
-            "const": "auto",
-            "description": "The pattern was selected automatically.",
-            "type": "string"
-          },
-          {
-            "const": "none",
-            "description": "The pattern has not been selected.",
-            "type": "string"
-          }
-        ]
+        "description": "Represents the reason why a pattern is selected.\n\nAvailable values:\n- `removed`\n- `user` - The pattern was selected by the user.\n- `auto` - The pattern was selected automatically.\n- `none` - The pattern has not been selected.",
+        "enum": [
+          "removed",
+          "user",
+          "auto",
+          "none"
+        ],
+        "type": "string",
+        "x-enum-descriptions": {
+          "auto": "The pattern was selected automatically.",
+          "none": "The pattern has not been selected.",
+          "user": "The pattern was selected by the user."
+        },
+        "x-enumDescriptions": {
+          "auto": "The pattern was selected automatically.",
+          "none": "The pattern has not been selected.",
+          "user": "The pattern was selected by the user."
+        }
       },
       "StateSettings": {
+        "additionalProperties": false,
         "description": "Network general settings for the installation like enabling wireless, networking and\nallowing to enable or disable the copy of the network settings to the\ntarget system",
         "properties": {
           "connectivity": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ConnectivityState"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/ConnectivityState"
           },
           "copyNetwork": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": "boolean"
           },
           "networkingEnabled": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": "boolean"
           },
           "wirelessEnabled": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": "boolean"
           }
         },
         "type": "object"
@@ -1126,40 +941,35 @@
         ]
       },
       "VlanFlag": {
-        "description": "VLAN flags controlling behavior",
-        "oneOf": [
-          {
-            "const": "reorder-headers",
-            "description": "Reorder Ethernet headers to make packets look less like VLAN packets",
-            "type": "string"
-          },
-          {
-            "const": "gvrp",
-            "description": "GARP VLAN Registration Protocol - dynamically register/deregister VLANs",
-            "type": "string"
-          },
-          {
-            "const": "loose-binding",
-            "description": "Allow changing master device while connection is active",
-            "type": "string"
-          },
-          {
-            "const": "mvrp",
-            "description": "Multiple VLAN Registration Protocol - next generation of GVRP",
-            "type": "string"
-          }
-        ]
+        "description": "VLAN flags controlling behavior\n\nAvailable values:\n- `reorder-headers` - Reorder Ethernet headers to make packets look less like VLAN packets\n- `gvrp` - GARP VLAN Registration Protocol - dynamically register/deregister VLANs\n- `loose-binding` - Allow changing master device while connection is active\n- `mvrp` - Multiple VLAN Registration Protocol - next generation of GVRP",
+        "enum": [
+          "reorder-headers",
+          "gvrp",
+          "loose-binding",
+          "mvrp"
+        ],
+        "type": "string",
+        "x-enum-descriptions": {
+          "gvrp": "GARP VLAN Registration Protocol - dynamically register/deregister VLANs",
+          "loose-binding": "Allow changing master device while connection is active",
+          "mvrp": "Multiple VLAN Registration Protocol - next generation of GVRP",
+          "reorder-headers": "Reorder Ethernet headers to make packets look less like VLAN packets"
+        },
+        "x-enumDescriptions": {
+          "gvrp": "GARP VLAN Registration Protocol - dynamically register/deregister VLANs",
+          "loose-binding": "Allow changing master device while connection is active",
+          "mvrp": "Multiple VLAN Registration Protocol - next generation of GVRP",
+          "reorder-headers": "Reorder Ethernet headers to make packets look less like VLAN packets"
+        }
       },
       "VlanSettings": {
+        "additionalProperties": false,
         "properties": {
           "flags": {
             "items": {
               "$ref": "#/components/schemas/VlanFlag"
             },
-            "type": [
-              "array",
-              "null"
-            ]
+            "type": "array"
           },
           "id": {
             "format": "uint32",
@@ -1170,10 +980,7 @@
             "type": "string"
           },
           "protocol": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         },
         "required": [
@@ -1183,21 +990,16 @@
         "type": "object"
       },
       "WirelessSettings": {
+        "additionalProperties": false,
         "description": "Wireless configuration",
         "properties": {
           "band": {
             "description": "Frequency band of the wireless network",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "bssid": {
             "description": "Only allow connection to this mac address",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "channel": {
             "description": "Wireless channel of the wireless network",
@@ -1229,10 +1031,7 @@
           },
           "password": {
             "description": "Password of the wireless network",
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           },
           "pmf": {
             "description": "Indicates whether Protected Management Frames must be enabled for the connection",
@@ -1263,6 +1062,7 @@
         "type": "object"
       },
       "access.ExtendedConfig": {
+        "additionalProperties": false,
         "description": "Remote Access extended configuration that is resolved",
         "properties": {
           "ssh": {
@@ -1295,10 +1095,11 @@
             "type": "string"
           },
           "static": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
+          },
+          "transient": {
+            "deprecated": true,
+            "type": "string"
           }
         },
         "required": [
@@ -1306,11 +1107,72 @@
         ],
         "type": "object"
       },
+      "l10n.Config": {
+        "additionalProperties": false,
+        "description": "Localization config.",
+        "properties": {
+          "keyboard": {
+            "deprecated": true,
+            "description": "Keymap (e.g., \"us\", \"cz(qwerty)\", etc.).",
+            "examples": [
+              "us",
+              "en",
+              "es"
+            ],
+            "type": "string"
+          },
+          "keymap": {
+            "description": "Keymap (e.g., \"us\", \"cz(qwerty)\", etc.).",
+            "examples": [
+              "us",
+              "en",
+              "es"
+            ],
+            "type": "string"
+          },
+          "language": {
+            "deprecated": true,
+            "description": "Locale (e.g., \"en_US.UTF-8\").",
+            "examples": [
+              "en_US.UTF-8",
+              "en_US"
+            ],
+            "type": "string"
+          },
+          "locale": {
+            "description": "Locale (e.g., \"en_US.UTF-8\").",
+            "examples": [
+              "en_US.UTF-8",
+              "en_US"
+            ],
+            "type": "string"
+          },
+          "timezone": {
+            "description": "Timezone (e.g., \"Europe/Berlin\").",
+            "examples": [
+              "Europe/Berlin"
+            ],
+            "type": "string"
+          }
+        },
+        "title": "Localization settings",
+        "type": "object"
+      },
       "l10n.Proposal": {
         "description": "Describes what Agama proposes for the target system.",
         "properties": {
+          "keyboard": {
+            "deprecated": true,
+            "description": "Keymap (e.g., \"us\", \"cz(qwerty)\", etc.).",
+            "type": "string"
+          },
           "keymap": {
             "description": "Keymap (e.g., \"us\", \"cz(qwerty)\", etc.).",
+            "type": "string"
+          },
+          "language": {
+            "deprecated": true,
+            "description": "Locale (e.g., \"en_US.UTF-8\").",
             "type": "string"
           },
           "locale": {
@@ -1378,27 +1240,14 @@
         "type": "object"
       },
       "users.Config": {
+        "additionalProperties": false,
         "description": "User settings\n\nHolds the user settings for the installation.",
         "properties": {
           "root": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/RootUserConfig"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/RootUserConfig"
           },
           "user": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/FirstUserConfig"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/FirstUserConfig"
           }
         },
         "type": "object"
@@ -1410,50 +1259,32 @@
       "$ref": "#/components/schemas/access.ExtendedConfig"
     },
     "hostname": {
-      "anyOf": [
-        {
-          "$ref": "#/components/schemas/hostname.Proposal"
-        },
-        {
-          "type": "null"
-        }
-      ]
+      "$ref": "#/components/schemas/hostname.Proposal"
     },
     "l10n": {
-      "anyOf": [
-        {
-          "$ref": "#/components/schemas/l10n.Proposal"
-        },
-        {
-          "type": "null"
-        }
-      ]
+      "$ref": "#/components/schemas/l10n.Proposal"
+    },
+    "localization": {
+      "$ref": "#/components/schemas/l10n.Config",
+      "deprecated": true,
+      "description": "Deprecated: use l10n instead.",
+      "title": "Localization settings (old schema)"
     },
     "network": {
       "$ref": "#/components/schemas/network.Proposal"
     },
     "software": {
-      "anyOf": [
-        {
-          "$ref": "#/components/schemas/software.Proposal"
-        },
-        {
-          "type": "null"
-        }
-      ]
+      "$ref": "#/components/schemas/software.Proposal"
     },
     "storage": {
       "$ref": "#/components/schemas/StorageProposal"
     },
+    "transient": {
+      "$ref": "#/components/schemas/hostname.Proposal",
+      "deprecated": true
+    },
     "users": {
-      "anyOf": [
-        {
-          "$ref": "#/components/schemas/users.Config"
-        },
-        {
-          "type": "null"
-        }
-      ]
+      "$ref": "#/components/schemas/users.Config"
     }
   },
   "required": [
