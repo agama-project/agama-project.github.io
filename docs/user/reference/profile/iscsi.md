@@ -101,3 +101,9 @@ In the last two cases, the format of each entry is always the same: an object wi
   }
 }
 ```
+
+## iBFT
+
+The initiator and the targets configured by the firmware through the iSCSI Boot Firmware Table
+(iBFT) do not need to be described in this section, but the network interfaces they use must be
+configured during boot. See [booting from iSCSI](../../guides/network#booting-from-iscsi-ibft).

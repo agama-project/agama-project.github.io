@@ -35,6 +35,13 @@ ifcfg="eth0=192.168.0.33/24 10.0.0.100/24,192.168.0.1,192.168.0.1 10.0.0.1,suse.
 ip=192.168.0.33::192.168.0.1:24::eth0 nameserver=192.168.0.1 nameserver=10.0.0.1 ip=10.0.0.100:::24::eth0
 ```
 
+### iBFT network configuration
+
+With linuxrc, wicked applied the network configuration from the iSCSI Boot Firmware Table (iBFT) on
+its own, both during the installation and in the installed system. In Agama, NetworkManager only
+gets it through nm-initrd-generator, which requires the `rd.iscsi.ibft=1` (recommended) or `ip=ibft`
+boot option. See [booting from iSCSI](../../guides/network.md#booting-from-iscsi-ibft).
+
 ## Hostname management
 
 The linuxrc `hostname` and `SetHostname` options are also available in Agama with almost the same
