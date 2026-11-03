@@ -1496,6 +1496,11 @@ components:
       required:
       - name
       type: object
+    Ip6AddrGenMode:
+      enum:
+      - eui64
+      - stablePrivacy
+      type: string
     IpConfig:
       properties:
         addresses:
@@ -1533,6 +1538,8 @@ components:
           type: boolean
         ignoreAutoRoutes6:
           type: boolean
+        ip6AddrGenMode:
+          $ref: '#/components/schemas/Ip6AddrGenMode'
         ip6Privacy:
           format: int32
           type: integer

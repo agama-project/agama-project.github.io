@@ -1747,6 +1747,13 @@
         ],
         "type": "object"
       },
+      "Ip6AddrGenMode": {
+        "enum": [
+          "eui64",
+          "stablePrivacy"
+        ],
+        "type": "string"
+      },
       "IpConfig": {
         "properties": {
           "addresses": {
@@ -1798,6 +1805,9 @@
           },
           "ignoreAutoRoutes6": {
             "type": "boolean"
+          },
+          "ip6AddrGenMode": {
+            "$ref": "#/components/schemas/Ip6AddrGenMode"
           },
           "ip6Privacy": {
             "format": "int32",
