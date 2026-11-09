@@ -2871,6 +2871,19 @@
               "detail"
             ],
             "type": "object"
+          },
+          {
+            "description": "Fallback for problem types this client doesn't know about yet.\n\nKeeps older clients from failing to deserialize an error response when a newer server\nreports a problem type that didn't exist when this client was built. `#[serde(other)]`\nonly allows a unit variant, so the original `title`/`detail` are not preserved here - the\nclient falls back to a generic message instead. See API-COMPATIBILITY-POLICY.md.",
+            "properties": {
+              "type": {
+                "const": "unknown",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "type": "object"
           }
         ]
       },
@@ -3156,6 +3169,19 @@
               "options"
             ],
             "type": "object"
+          },
+          {
+            "description": "Fallback for field types this client doesn't know about yet.\n\nKeeps older clients from failing to deserialize a question when a newer server sends a\nfield type that didn't exist when this client was built. See\nAPI-COMPATIBILITY-POLICY.md.",
+            "properties": {
+              "type": {
+                "const": "unknown",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "type": "object"
           }
         ]
       },
@@ -3345,27 +3371,36 @@
       },
       "Scope": {
         "description": "Scope to distinguish each service.",
-        "enum": [
-          "access",
-          "bootloader",
-          "manager",
-          "network",
-          "ntp",
-          "hostname",
-          "l10n",
-          "product",
-          "proxy",
-          "questions",
-          "security",
-          "software",
-          "storage",
-          "files",
-          "iscsi",
-          "dasd",
-          "zfcp",
-          "users"
-        ],
-        "type": "string"
+        "oneOf": [
+          {
+            "enum": [
+              "access",
+              "bootloader",
+              "manager",
+              "network",
+              "ntp",
+              "hostname",
+              "l10n",
+              "product",
+              "proxy",
+              "questions",
+              "security",
+              "software",
+              "storage",
+              "files",
+              "iscsi",
+              "dasd",
+              "zfcp",
+              "users"
+            ],
+            "type": "string"
+          },
+          {
+            "const": "unknown",
+            "description": "Fallback for scopes this client doesn't know about yet.\n\nKeeps older clients from failing to deserialize data when a newer server reports a scope\nthat didn't exist when this client was built. See API-COMPATIBILITY-POLICY.md.",
+            "type": "string"
+          }
+        ]
       },
       "ScriptsConfig": {
         "additionalProperties": false,
@@ -3525,25 +3560,28 @@
         "type": "string"
       },
       "Stage": {
-        "description": "Represents the current state of the installation process.\n\nAvailable values:\n- `configuring` - Configuring the installation\n- `installing` - Installing the system\n- `finished` - Installation finished\n- `failed` - Installation failed",
+        "description": "Represents the current state of the installation process.\n\nAvailable values:\n- `configuring` - Configuring the installation\n- `installing` - Installing the system\n- `finished` - Installation finished\n- `failed` - Installation failed\n- `unknown` - Fallback for stages this client doesn't know about yet.\n\nKeeps older clients from failing to deserialize the status when a newer server reports a\nstage that didn't exist when this client was built. See API-COMPATIBILITY-POLICY.md.",
         "enum": [
           "configuring",
           "installing",
           "finished",
-          "failed"
+          "failed",
+          "unknown"
         ],
         "type": "string",
         "x-enum-descriptions": {
           "configuring": "Configuring the installation",
           "failed": "Installation failed",
           "finished": "Installation finished",
-          "installing": "Installing the system"
+          "installing": "Installing the system",
+          "unknown": "Fallback for stages this client doesn't know about yet.\n\nKeeps older clients from failing to deserialize the status when a newer server reports a\nstage that didn't exist when this client was built. See API-COMPATIBILITY-POLICY.md."
         },
         "x-enumDescriptions": {
           "configuring": "Configuring the installation",
           "failed": "Installation failed",
           "finished": "Installation finished",
-          "installing": "Installing the system"
+          "installing": "Installing the system",
+          "unknown": "Fallback for stages this client doesn't know about yet.\n\nKeeps older clients from failing to deserialize the status when a newer server reports a\nstage that didn't exist when this client was built. See API-COMPATIBILITY-POLICY.md."
         }
       },
       "StateSettings": {

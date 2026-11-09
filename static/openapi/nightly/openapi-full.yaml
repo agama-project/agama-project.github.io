@@ -2366,6 +2366,20 @@ components:
         - title
         - detail
         type: object
+      - description: |-
+          Fallback for problem types this client doesn't know about yet.
+
+          Keeps older clients from failing to deserialize an error response when a newer server
+          reports a problem type that didn't exist when this client was built. `#[serde(other)]`
+          only allows a unit variant, so the original `title`/`detail` are not preserved here - the
+          client falls back to a generic message instead. See API-COMPATIBILITY-POLICY.md.
+        properties:
+          type:
+            const: unknown
+            type: string
+        required:
+        - type
+        type: object
     Product:
       description: Represents a software product
       properties:
@@ -2606,6 +2620,19 @@ components:
         - type
         - options
         type: object
+      - description: |-
+          Fallback for field types this client doesn't know about yet.
+
+          Keeps older clients from failing to deserialize a question when a newer server sends a
+          field type that didn't exist when this client was built. See
+          API-COMPATIBILITY-POLICY.md.
+        properties:
+          type:
+            const: unknown
+            type: string
+        required:
+        - type
+        type: object
     QuestionSpec:
       description: |-
         Defines how a question should look like.
@@ -2764,26 +2791,34 @@ components:
       type: string
     Scope:
       description: Scope to distinguish each service.
-      enum:
-      - access
-      - bootloader
-      - manager
-      - network
-      - ntp
-      - hostname
-      - l10n
-      - product
-      - proxy
-      - questions
-      - security
-      - software
-      - storage
-      - files
-      - iscsi
-      - dasd
-      - zfcp
-      - users
-      type: string
+      oneOf:
+      - enum:
+        - access
+        - bootloader
+        - manager
+        - network
+        - ntp
+        - hostname
+        - l10n
+        - product
+        - proxy
+        - questions
+        - security
+        - software
+        - storage
+        - files
+        - iscsi
+        - dasd
+        - zfcp
+        - users
+        type: string
+      - const: unknown
+        description: |-
+          Fallback for scopes this client doesn't know about yet.
+
+          Keeps older clients from failing to deserialize data when a newer server reports a scope
+          that didn't exist when this client was built. See API-COMPATIBILITY-POLICY.md.
+        type: string
     ScriptsConfig:
       additionalProperties: false
       properties:
@@ -2911,22 +2946,37 @@ components:
         - `installing` - Installing the system
         - `finished` - Installation finished
         - `failed` - Installation failed
+        - `unknown` - Fallback for stages this client doesn't know about yet.
+
+        Keeps older clients from failing to deserialize the status when a newer server reports a
+        stage that didn't exist when this client was built. See API-COMPATIBILITY-POLICY.md.
       enum:
       - configuring
       - installing
       - finished
       - failed
+      - unknown
       type: string
       x-enum-descriptions:
         configuring: Configuring the installation
         failed: Installation failed
         finished: Installation finished
         installing: Installing the system
+        unknown: |-
+          Fallback for stages this client doesn't know about yet.
+
+          Keeps older clients from failing to deserialize the status when a newer server reports a
+          stage that didn't exist when this client was built. See API-COMPATIBILITY-POLICY.md.
       x-enumDescriptions:
         configuring: Configuring the installation
         failed: Installation failed
         finished: Installation finished
         installing: Installing the system
+        unknown: |-
+          Fallback for stages this client doesn't know about yet.
+
+          Keeps older clients from failing to deserialize the status when a newer server reports a
+          stage that didn't exist when this client was built. See API-COMPATIBILITY-POLICY.md.
     StateSettings:
       additionalProperties: false
       description: |-
