@@ -50,6 +50,10 @@ rust:
 systems-management:
   label: Systems Management
 
+mcp:
+  label: MCP
+  description: Model Context Protocol
+
 YaST:
   label: YaST
   permalink: /yast
