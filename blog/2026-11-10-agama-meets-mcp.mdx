@@ -1,0 +1,333 @@
+---
+title: "Agama meets MCP: The first AI-ready OS installer"
+discussion_id: 205
+tags:
+  - agama
+  - auto-installation
+  - rust
+  - systems-management
+  - mcp
+---
+
+Installing an operating system on bare metal has traditionally been a binary choice: you either sit
+in front of an interactive graphical or text-mode wizard, or you feed the installer a static,
+pre-baked configuration file (such as an AutoYaST XML or Kickstart profile).
+
+To cope with heterogeneous hardware, complex disk topologies, or dynamic network setups, automation
+frameworks traditionally relied on templating and dynamic rules: AutoYaST offered rules and classes,
+ERB templates, and custom pre-scripts, while Agama natively supports dynamic evaluation using
+[Jsonnet](https://jsonnet.org/). While these templating capabilities are powerful, they still
+require writing declarative logic up front to anticipate every variation.
+
+Agama introduces an embedded Model Context Protocol (MCP) server. Written in Rust and integrated
+directly into the `agama-web-server` process, it exposes the installer's hardware probing,
+configuration schema validation, proposal calculation, installation execution, and systemd journal
+logging as standardized protocol primitives. This makes Agama the first AI-ready bare-metal
+installer—and, as far as we know, the first operating system installer to provide native,
+protocol-level integration for AI orchestration.
+
+To be clear: this is not about putting an LLM inside the installation ISO or replacing deterministic
+installer logic with probabilistic guessing. Instead, it provides external AI clients (from local
+command-line assistants to datacenter orchestrators like Uyuni) with a structured, safely guarded
+protocol to inspect hardware, negotiate valid installation configurations, validate proposals, and
+monitor progress.
+
+{/* truncate */}
+
+## Architecture and the actor model {#architecture}
+
+Agama was designed from the beginning with a clean separation of concerns. While D-Bus is still
+retained internally for a few legacy parts (such as interfacing with external system daemons or
+historical YaST components), the core communication within Agama is built on an in-memory
+asynchronous **Actor model** implemented in Rust (`agama_utils::actor`) on top of Tokio tasks.
+
+In this architecture, core subsystems like `agama-manager` and `question-service` are spawned
+actors. Components interact by sending strongly typed messages over asynchronous channels using an
+actor handler (`handle.call(Message).await`), ensuring compile-time safety and non-blocking
+operation without IPC overhead.
+
+Because the installer core does not care whether messages originate from a web UI backend, a CLI
+command, or an automated protocol, adding AI protocol support fit naturally into the existing stack:
+
+```
++-------------------------------------------------------------+
+|             External AI Client / Orchestrator               |
+|      (Claude Desktop, Gemini CLI, Cursor, Uyuni, etc.)      |
++-------------------------------------------------------------+
+                               |
+                   HTTPS (Streamable HTTP / SSE)
+                               |
+                               v
++-------------------------------------------------------------+
+|                   agama-web-server (/mcp)                   |
+|  +-------------------------------------------------------+  |
+|  |             agama-mcp (Rust / rmcp SDK)               |  |
+|  +-------------------------------------------------------+  |
+|          | Token Isolation | Schema Validator |             |
++----------+-----------------+------------------+-------------+
+                               |
+                   In-Memory Actor Messages (Tokio)
+                               |
+                               v
++-------------------------------------------------------------+
+|        Agama Actor System (agama-manager, question-service) |
+|  (Storage Solver, Package Manager, Network, Bootloader)     |
+|          \___ [D-Bus used only for legacy parts]            |
++-------------------------------------------------------------+
+```
+
+The new `agama-mcp` crate uses the official `rmcp` Rust SDK and is embedded directly inside the
+`agama-web-server` binary. It mounts an endpoint at `/mcp` using Streamable HTTP transport:
+
+- **HTTP POST**: Handles tool discovery and tool execution, returning `application/json` responses
+  directly.
+- **Server-Sent Events (SSE)**: Streams server-side notifications and status changes back to the
+  client.
+- **Direct Actor Dispatch**: Tool invocations translate into direct, in-process `.call()` requests
+  to the `agama-manager` and `question-service` actor handlers. The source of truth remains Agama's
+  internal state machine and deterministic solver engines.
+
+## Deterministic guardrails: Why LLMs need strict boundaries {#guardrails}
+
+Operating system installation on bare metal is an inherently destructive operation. If an autonomous
+agent is given raw shell access or arbitrary command execution, a single hallucination (such as
+confusing `/dev/sda` with `/dev/nvme0n1`, or inventing non-existent mount options) can permanently
+destroy data or leave the machine unbootable.
+
+For this reason, `agama-mcp` does not grant the model shell access or expose raw partitioning tools
+like `parted` or `mkfs`. Instead, it forces all interactions through deterministic validation
+layers:
+
+### 1. JSON Schema enforcement
+
+The installer configuration is governed by a strict JSON Schema. The model discovers valid fields,
+types, and enums either by querying the `get_config_schema` tool (which supports filtering by
+subsystem, such as `storage`, `software`, `network`, `user`, or `bootloader`) or by reading the
+`agama://schema/config.json` MCP resource.
+
+When the agent submits a profile via `set_config`, Agama runs the payload through its profile
+validator _before_ passing it to any subsystem. If the model invents invalid keys or supplies bad
+types, the tool call fails immediately.
+
+### 2. Proposal calculation and closed-loop validation
+
+In Agama, setting a configuration does not write anything to disk. Instead, it triggers the storage
+and software solvers to compute a **Proposal**.
+
+The model calls `get_proposal()` to see how Agama plans to partition the detected drives, which
+volumes it will create, and which package patterns will be installed.
+
+If the configuration requested by the model cannot be satisfied by the hardware—for example, if the
+profile demands 120&nbsp;GB of root storage on a 64&nbsp;GB disk, specifies a non-existent network
+interface, or introduces conflicting software packages—Agama's solver detects the conflict and
+returns structured issues (`issues_detected`).
+
+```json
+{
+  "status": "issues_detected",
+  "message": "The proposed configuration produced logical issues that must be resolved.",
+  "issues": [
+    {
+      "scope": "storage",
+      "issue": "Requested partition size exceeds available disk space on /dev/vda."
+    }
+  ]
+}
+```
+
+The MCP tool responds with `isError: true` containing these exact diagnostics. Because modern models
+reason well over structured compiler and validator errors, the agent can parse the failure, adjust
+its configuration parameters (e.g., reduce partition sizing or select a different drive), and submit
+a corrected configuration—all before any partition table is touched.
+
+## Bootstrapping, operating modes, and security {#modes}
+
+To prevent unexpected network exposure, the MCP server is **disabled by default** on installation
+media. It must be explicitly enabled via the Linux kernel command line at boot:
+
+- `inst.mcp=disabled` (default): The `/mcp` route is not mounted, and the MCP service remains
+  inactive.
+- `inst.mcp=config` (Configuration-only mode): The AI agent can query hardware inventory, fetch
+  schemas, submit configuration profiles, verify proposals, and answer configuration prompts.
+  However, destructive execution tools (`commit_install` and `reboot`) are strictly forbidden,
+  returning an HTTP `403 Forbidden` error. Furthermore, profiles containing pre-installation scripts
+  (`scripts.pre`) are rejected to prevent arbitrary command execution. A human operator reviews the
+  final proposal in Agama's Web UI and manually initiates installation.
+- `inst.mcp=full` (Autonomous deployment mode): Allows the AI agent to drive the entire deployment
+  lifecycle, including triggering disk partitioning and software installation (`commit_install`),
+  monitoring installation events, and rebooting into the newly installed operating system
+  (`reboot`).
+
+### Cryptographic token isolation
+
+A common security risk with agentic setups is boundary bypass through introspection: an AI agent
+with local tool access might read its own configuration file, discover its HTTP bearer token, and
+use `curl` to call general REST endpoints (like `/api/install`), bypassing the `inst.mcp=config`
+restrictions.
+
+Agama prevents this via strict token isolation:
+
+- The `/mcp` route validates requests against a dedicated MCP token using constant-time comparison
+  via OpenSSL (`openssl::memcmp::eq`).
+- Any attempt to use the MCP token against the standard `/api/...` endpoints is rejected with
+  `401 Unauthorized`.
+- The MCP token can be pre-seeded via `inst.mcp.token=<SECRET>` on the kernel command line, or read
+  from `/run/agama/mcp-token` (file permissions `0400`, owned by root).
+
+## Observability: Logs, progress, and interactive questions {#observability}
+
+Once an installation is underway, an orchestrator needs to know what is happening without busy
+polling or guessing. `agama-mcp` addresses this with three dedicated observability mechanisms:
+
+### 1. Scoped journal logging (`get_logs`)
+
+Dumping thousands of lines of raw console logs into an LLM context window quickly exhausts token
+limits and causes loss of focus. The `get_logs` tool queries `journalctl` directly with targeted
+scopes and line limits:
+
+- `installer` (default): Filters logs specifically from Agama services (`agama*`).
+- `system`: Queries the general systemd journal.
+- `zypp`: Filters package manager transactions and libzypp solver output.
+- Custom unit: Queries any specific systemd unit (e.g., `NetworkManager.service`).
+
+If an installation step fails (for example, a mirror times out or a driver fails to load), the agent
+can query the relevant log slice, identify the failure reason, and either take corrective action or
+report the exact root cause to the operator.
+
+### 2. Event-driven progress monitoring (`wait_progress`)
+
+Rather than having the client sleep and poll the progress endpoint repeatedly, `wait_progress`
+subscribes to Agama's internal Tokio broadcast event bus.
+
+The tool call suspends and returns immediately when an actionable event occurs:
+
+- A background solver task completes or updates the proposal.
+- An interactive question requires an answer.
+- The installation finishes or encounters an error.
+- A configurable timeout elapses (default 60 seconds, max 300 seconds).
+
+### 3. Interactive questions (`get_questions` and `answer_question`)
+
+During installation, Agama may raise interactive questions—such as prompting for an encrypted disk
+passphrase, confirming an untrusted repository GPG key, or deciding whether to retry a failed
+package download.
+
+The `get_questions` and `answer_question` tools allow the agent to detect these prompts, inspect the
+available response actions, and supply answers programmatically to unblock the installer.
+
+## Summary of available MCP tools {#tools}
+
+The server exposes 11 tools and 1 resource:
+
+| Tool                                  | Mode          | Description                                                                                                                       |
+| :------------------------------------ | :------------ | :-------------------------------------------------------------------------------------------------------------------------------- |
+| `get_system(resource?)`               | Config / Full | Probes hardware inventory (storage devices, NICs, CPU/memory, software products). Optional `resource` filter limits payload size. |
+| `get_config_schema(section?)`         | Config / Full | Returns JSON Schema for the profile or a specific subsystem (`storage`, `software`, `network`, `user`, etc.).                     |
+| `set_config(config)`                  | Config / Full | Validates against schema and applies an installation profile. Rejects `scripts.pre` in `config` mode.                             |
+| `get_proposal()`                      | Config / Full | Commands Agama solvers to calculate the disk and package plan. Returns diffs or structured issues.                                |
+| `commit_install()`                    | Full only     | Locks the state machine, formats disks, and deploys packages. Returns 403 in `config` mode.                                       |
+| `get_progress()`                      | Config / Full | One-shot query returning installer stage, active task list, percentage, and pending questions.                                    |
+| `wait_progress(timeout?)`             | Config / Full | Event-driven wait on the internal event bus. Blocks until tasks finish, prompts arise, or timeout elapses.                        |
+| `get_logs(log_type?, lines?)`         | Config / Full | Queries `journalctl` directly with scopes (`installer`, `system`, `zypp`, or specific unit).                                      |
+| `get_questions()`                     | Config / Full | Lists currently pending, unanswered interactive installer prompts.                                                                |
+| `answer_question(id, action, value?)` | Config / Full | Answers a pending question by ID to unblock installer progress.                                                                   |
+| `reboot()`                            | Full only     | Reboots the system into the installed OS. Terminates the MCP session. Returns 403 in `config` mode.                               |
+
+**Resource:**
+
+- `agama://schema/config.json`: The complete JSON Schema for unattended installation profiles,
+  readable via standard MCP `resources/read`.
+
+## How to give it a try {#trying-it-out}
+
+You can test the MCP server today using a virtual machine or test hardware.
+
+### Step 1: Boot Agama with MCP enabled
+
+Boot an Agama Live ISO. At the bootloader prompt, edit the kernel command-line arguments to enable
+MCP and optionally set a pre-shared token:
+
+```text
+inst.mcp=config inst.mcp.token=secret123
+```
+
+_(Use `inst.mcp=full` if you want the agent to be able to execute formatting and rebooting.)_
+
+If you do not specify `inst.mcp.token`, Agama generates a random token on startup. You can read it
+from the local virtual console or the built-in web terminal:
+
+```bash
+cat /run/agama/mcp-token
+```
+
+### Step 2: Configure your MCP client
+
+Configure your MCP-compliant client (such as Gemini CLI, Claude Desktop, or Cursor) to connect to
+the Agama node over HTTPS:
+
+```json
+{
+  "mcpServers": {
+    "agama": {
+      "url": "https://<AGAMA_HOST_IP>/mcp",
+      "headers": {
+        "Authorization": "Bearer secret123"
+      }
+    }
+  }
+}
+```
+
+:::tip TLS Certificates
+
+Agama generates self-signed HTTPS certificates by default. Node.js-based AI clients reject
+self-signed certificates unless told otherwise. You can allow them during testing by launching your
+client with `NODE_TLS_REJECT_UNAUTHORIZED=0`:
+
+```bash
+NODE_TLS_REJECT_UNAUTHORIZED=0 gemini
+# or
+NODE_TLS_REJECT_UNAUTHORIZED=0 claude
+```
+
+:::
+
+### Step 3: Run an interactive session
+
+Once connected, your AI client has direct access to Agama's tools. You can instruct it using natural
+language:
+
+> _"Inspect the available storage and network interfaces on this machine. Generate an Agama
+> installation profile for openSUSE Tumbleweed that selects the GNOME desktop pattern, sets up Btrfs
+> on the primary NVMe disk, creates an admin user 'tux' with sudo access, enables SSH, and
+> calculates the installation proposal. Verify whether the proposal has any issues and display the
+> planned partition layout and package selection."_
+
+The model will:
+
+1. Call `get_system(resource="storage")` and `get_system(resource="software")` to inspect available
+   block devices and product definitions.
+2. Call `get_config_schema(section="software")` and `get_config_schema(section="storage")` to
+   inspect the valid fields for pattern addition (e.g.
+   `{ "software": { "patterns": { "add": ["gnome"] } } }`) and disk partitioning.
+3. Formulate the JSON profile and call `set_config(config={...})`.
+4. Call `get_proposal()` to review the solver's calculated plan.
+5. If the solver reports an issue (e.g. swap partition constraints or disk space issues), read the
+   issue message, adjust the profile, re-submit, and present the final verified plan back to you.
+
+In `config` mode, you can open `https://<AGAMA_HOST_IP>` in your browser to verify the proposal
+visually in Agama's web UI and press **Install** yourself. In `full` mode, you can instruct the
+agent to proceed with `commit_install()` and monitor progress until completion.
+
+## Where to find it {#availability}
+
+The embedded MCP server will be included in the upcoming **Agama 26** release.
+
+If you want to test it right now or integrate it into your automated deployment pipelines, the code
+is already merged and available in the
+[systemsmanagement:Agama:Devel](https://build.opensuse.org/project/show/systemsmanagement:Agama:Devel)
+OBS repository, including the nightly live installation media.
+
+Give it a spin on a test VM, test your favorite LLM or orchestration workflow against it, and let us
+know what you think via [GitHub Discussions](https://github.com/agama-project/agama/discussions) or
+by opening an issue on [GitHub](https://github.com/agama-project/agama/issues)!
