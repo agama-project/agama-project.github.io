@@ -214,8 +214,9 @@ again to finish the job. The unit above does.
 
 ## Checking the result
 
-Boot the installer with `inst.auto=http://<server>/autoinst.jsonnet`. After the installation, on the
-installed system:
+Boot the installer with `inst.auto=` pointing at the profile, for example
+`inst.auto=http://<server>/autoinst.jsonnet` on an installation network. After the installation, on
+the installed system:
 
 ```console
 # journalctl -u ansible-firstboot
