@@ -6259,6 +6259,7 @@ paths:
       summary: List issues
       tags:
       - Issues & Questions
+      x-agama-translated: true
   /api/licenses/{id}:
     get:
       description: Returns the content of a specific license. The license is always returned in the current system language (see the ConfigureL10n action).
@@ -6290,6 +6291,7 @@ paths:
       summary: Get license by ID
       tags:
       - System & Monitoring
+      x-agama-translated: true
   /api/proposal:
     get:
       description: Returns the proposed configuration for the target system. The proposal is generated based on the current configuration and represents how the system will be configured when installed.
@@ -6312,6 +6314,7 @@ paths:
       summary: Get installation proposal
       tags:
       - Configuration
+      x-agama-translated: true
   /api/questions:
     get:
       description: Returns all pending questions that require user input. Questions represent interactive prompts where the installer needs additional information or decisions from the user.
@@ -6334,6 +6337,7 @@ paths:
       summary: List questions
       tags:
       - Issues & Questions
+      x-agama-translated: true
     patch:
       description: Updates the question collection by answering or removing a question. Use this endpoint to provide an answer to a pending question or to dismiss it.
       operationId: updateQuestion
@@ -6450,6 +6454,7 @@ paths:
       summary: Get installer status
       tags:
       - System & Monitoring
+      x-agama-translated: true
   /api/system:
     get:
       description: Returns detailed information about the installation system including hardware details, platform information, and system capabilities. It includes Agama specific information like the list of available products for installation.
@@ -6470,6 +6475,7 @@ paths:
       summary: Get system information
       tags:
       - System & Monitoring
+      x-agama-translated: true
 security:
 - bearerAuth: []
 servers:
