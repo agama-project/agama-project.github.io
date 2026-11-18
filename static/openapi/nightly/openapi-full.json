@@ -5108,7 +5108,9 @@
           "linux_usr_s390",
           "linux_usr_s390x",
           "linux_usr_x86",
-          "linux_usr_x86_64"
+          "linux_usr_x86_64",
+          "linux_var",
+          "linux_var_tmp"
         ],
         "title": "Partition id"
       },
@@ -5489,7 +5491,8 @@
               "raid",
               "esp",
               "prep",
-              "bios_boot"
+              "bios_boot",
+              "xbootldr"
             ],
             "title": "Partition id"
           },
@@ -6392,7 +6395,9 @@
           "linux_usr_s390",
           "linux_usr_s390x",
           "linux_usr_x86",
-          "linux_usr_x86_64"
+          "linux_usr_x86_64",
+          "linux_var",
+          "linux_var_tmp"
         ],
         "title": "Partition id"
       },
@@ -6732,7 +6737,8 @@
           "raid",
           "esp",
           "prep",
-          "bios_boot"
+          "bios_boot",
+          "xbootldr"
         ]
       },
       "StorageModelConfigPtableType": {
@@ -8563,7 +8569,8 @@
         "summary": "List issues",
         "tags": [
           "Issues & Questions"
-        ]
+        ],
+        "x-agama-translated": true
       }
     },
     "/api/licenses/{id}": {
@@ -8611,7 +8618,8 @@
         "summary": "Get license by ID",
         "tags": [
           "System & Monitoring"
-        ]
+        ],
+        "x-agama-translated": true
       }
     },
     "/api/proposal": {
@@ -8646,7 +8654,8 @@
         "summary": "Get installation proposal",
         "tags": [
           "Configuration"
-        ]
+        ],
+        "x-agama-translated": true
       }
     },
     "/api/questions": {
@@ -8681,7 +8690,8 @@
         "summary": "List questions",
         "tags": [
           "Issues & Questions"
-        ]
+        ],
+        "x-agama-translated": true
       },
       "patch": {
         "description": "Updates the question collection by answering or removing a question. Use this endpoint to provide an answer to a pending question or to dismiss it.",
@@ -8848,7 +8858,8 @@
         "summary": "Get installer status",
         "tags": [
           "System & Monitoring"
-        ]
+        ],
+        "x-agama-translated": true
       }
     },
     "/api/system": {
@@ -8880,7 +8891,8 @@
         "summary": "Get system information",
         "tags": [
           "System & Monitoring"
-        ]
+        ],
+        "x-agama-translated": true
       }
     }
   },
