@@ -3874,6 +3874,8 @@ components:
       - linux_usr_s390x
       - linux_usr_x86
       - linux_usr_x86_64
+      - linux_var
+      - linux_var_tmp
       title: Partition id
     StorageConfigPartitionSearch:
       anyOf:
@@ -4110,6 +4112,7 @@ components:
           - esp
           - prep
           - bios_boot
+          - xbootldr
           title: Partition id
         search:
           $ref: '#/components/schemas/StorageConfigPartitionSearch'
@@ -4715,6 +4718,8 @@ components:
       - linux_usr_s390x
       - linux_usr_x86
       - linux_usr_x86_64
+      - linux_var
+      - linux_var_tmp
       title: Partition id
     StorageDevicePartitionTable:
       additionalProperties: false
@@ -4952,6 +4957,7 @@ components:
       - esp
       - prep
       - bios_boot
+      - xbootldr
     StorageModelConfigPtableType:
       enum:
       - gpt
