@@ -127,7 +127,15 @@ rebooting the machine it runs on. The runner below takes care of that reboot.
 
 `ansible-firstboot` runs the playbook twice and requires the second run to report no changes. Tasks
 that always report a change, such as `command` or `shell` without `changed_when`, fail this check;
-the unit then runs the playbook again on every boot until it passes.
+the unit then runs the playbook again on every boot until it passes. Give such a task a
+`changed_when` condition, for example `false` for a command that only reads:
+
+```yaml
+- name: Read the running kernel version
+  ansible.builtin.command: uname -r
+  register: kernel_version
+  changed_when: false
+```
 
 If the first run installed a package on an immutable system, `transactional-update` leaves
 `/run/reboot-needed` behind, and the runner reboots into the new snapshot and runs again on the next
