@@ -9,246 +9,92 @@ tags:
   - mcp
 ---
 
-Whether you are an openSUSE user setting up a custom homelab machine, a SLES administrator managing
-bare-metal servers across different hardware generations, or a SUSE engineer integrating unattended
-deployment into datacenter automation, bare-metal OS installation has always presented the same
-dilemma: manual wizard-driven installation does not scale, but static automation profiles (such as
-AutoYaST XML or Kickstart) are notoriously rigid.
-
-To handle heterogeneous hardware, complex disk layouts, or dynamic network setups, sysadmins have
-spent decades writing AutoYaST rules and classes, ERB templates, pre-scripts, or dynamic
-[Jsonnet](https://jsonnet.org/) profiles in Agama. While these templating tools are powerful,
-anticipating every hardware variation up front still requires significant boilerplate and
-trial-and-error.
-
-Agama introduces an embedded Model Context Protocol (MCP) server directly in the live installation
-environment. It exposes Agama's hardware probing, configuration validation, proposal calculation,
-deployment execution, and systemd journal logging as standardized protocol primitives. This makes
-Agama the first AI-ready bare-metal installer—and, as far as we know, the first operating system
-installer with native protocol support for AI orchestration.
-
-To be clear: there is no LLM running inside the ISO, and no probabilistic guessing on your disks.
-The installer logic and solver engines remain completely deterministic. Instead, Agama provides
-external AI clients (from a local CLI assistant on your workstation to fleet orchestrators like
-Uyuni) with a structured, safely guarded protocol to inspect live hardware, negotiate valid
-configurations, verify calculated proposals, and monitor deployment.
+Whether you are installing openSUSE on a workstation, managing SLES servers across hardware
+generations, or orchestrating bare-metal deployments with Uyuni, Agama introduces a new way
+to install Linux. By embedding a Model Context Protocol (MCP) server directly into the live
+installer environment, Agama becomes the first AI-ready OS installer. Without running an LLM
+inside the installation media, it exposes hardware probing, configuration validation,
+proposal calculation, and systemd logs as standardized tools—allowing external AI assistants
+and orchestrators to safely inspect hardware, prepare valid configurations, and monitor
+installations under strict, deterministic guardrails.
 
 {/* truncate */}
 
+Traditional automated installation relies on static profiles or templating—such as AutoYaST
+rules and classes, ERB templates, pre-scripts, or dynamic [Jsonnet](https://jsonnet.org/)
+profiles. While flexible, anticipating hardware variations up front requires maintaining
+extensive declarative logic. Agama's MCP server takes a different approach by exposing the
+installer's state machine to external agents over a standard protocol.
+
 ## Two main use cases {#use-cases}
 
-Rather than exposing low-level system internals, Agama's MCP server is designed around two distinct
-deployment scenarios: assisted configuration creation and autonomous orchestration.
+Agama's MCP server is designed around two distinct scenarios:
 
 ### 1. Assisted configuration creation (Human-in-the-loop) {#use-case-assisted}
 
-Creating an unattended installation profile from scratch can be tedious. You have to look up the
-exact syntax for partitioning schemes, find the right pattern names for software selection, and
-ensure network settings match the physical interfaces of the target machine.
+In configuration mode (`inst.mcp=config`), an AI assistant helps generate a valid installation
+profile from natural language (for example: *"Select openSUSE Tumbleweed with GNOME desktop, use
+Btrfs on the NVMe disk, and set up user tux"*). The agent inspects hardware inventory, checks schema
+constraints, drafts the profile, and asks Agama to calculate the proposal.
 
-With Agama's MCP server, you can connect an AI assistant (such as Gemini CLI, Claude Desktop, or
-Cursor) directly to a running Agama installer and describe what you want in plain human terms:
-
-> _"Inspect the available storage and network interfaces on this machine. Generate an Agama
-> installation profile for openSUSE Tumbleweed that selects the GNOME desktop pattern, sets up Btrfs
-> on the primary NVMe disk, creates an admin user 'tux' with sudo access, enables SSH, and
-> calculates the installation proposal. Verify whether the proposal has any issues and display the
-> planned partition layout and package selection."_
-
-Instead of guessing, the AI agent interacts with Agama:
-
-1. It queries the machine's actual hardware inventory (detecting disk names, sizes, and network
-   cards).
-2. It fetches the profile schema to inspect valid options for software patterns and disk layouts.
-3. It generates and submits a valid JSON configuration profile.
-4. It commands Agama's solvers to calculate the installation proposal.
-
-At this point, the human operator stays in control. You open the familiar Agama Web UI in your
-browser, visually review the calculated partition layout and software selection that the AI
-prepared, and press **Install** yourself when satisfied.
-
-To make this workflow completely safe, Agama provides a dedicated configuration mode
-(`inst.mcp=config`). In this mode, destructive operations like triggering disk formatting or
-rebooting are strictly forbidden (returning an HTTP 403 error), and pre-installation scripts are
-rejected. The AI can help you prepare and validate the configuration, but it cannot touch the disks.
-
-#### Why not just use the Web UI? {#why-not-web-ui}
-
-Agama already features a responsive Web UI, so why use an AI assistant to prepare your
-configuration?
-
-- **Intent-based hardware mapping**: The Web UI shows raw device identifiers (`/dev/nvme0n1`,
-  `/dev/sda`, `enp3s0`). A user must manually inspect capacities, bus types, and link speeds to make
-  decisions. With an AI assistant, you describe your intent: _"Use the fastest NVMe drive for root
-  with Btrfs, put data on secondary storage, and configure whichever NIC has an active link."_ The
-  agent queries the hardware inventory and maps your intent to the correct devices.
-- **Eliminating multi-screen navigation**: A tailored setup typically requires jumping across
-  multiple screens—storage layouts, software patterns, extra packages, user accounts, sudo rights,
-  and SSH keys. A single prompt covers everything at once, avoiding repetitive manual form-filling.
-- **Instant "what-if" proposal validation**: If you are testing whether a specific setup works on
-  constrained hardware (such as disk size limits or specific package selections), trial-and-error in
-  a UI can be slow. The agent submits the profile, commands the solver, and reports immediately if
-  any constraints or package conflicts arise.
-- **Effortless profile reuse**: While you can also export the configuration from the Web UI, having
-  the assistant formulate the profile gives you a clean JSON configuration along with an explanation
-  of every setting. You can test and verify it against real hardware, check in the resulting JSON
-  profile into version control, and reuse it for unattended installations across similar systems.
+Destructive operations like disk formatting and rebooting are disabled in this mode (returning HTTP
+403), and pre-installation scripts are rejected. The human operator reviews the resulting proposal
+in Agama's Web UI and starts the installation manually.
 
 ### 2. Autonomous AI orchestration (Full automation) {#use-case-orchestration}
 
-In datacenter environments, edge deployments, homelabs, or centralized fleet management platforms
-like Uyuni, human operators cannot sit in front of every machine.
+In full mode (`inst.mcp=full`), an external orchestrator (such as Uyuni or an automated bare-metal
+pipeline) can drive the deployment end-to-end. The orchestrator probes hardware, generates the
+profile, validates the proposal, and triggers disk formatting and package installation
+(`commit_install`). It can also answer interactive installer prompts (such as disk encryption
+passwords or GPG keys), monitor progress events, inspect logs if an error occurs, and reboot the
+machine into the new system.
 
-In autonomous mode (`inst.mcp=full`), an AI orchestrator can drive the entire bare-metal deployment
-from start to finish:
+## Deterministic guardrails {#guardrails}
 
-- **Hardware discovery**: Detects hardware resources and chooses appropriate profiles dynamically.
-- **Proposal calculation**: Submits the profile and validates that Agama's storage and software
-  solvers produce an issue-free proposal.
-- **Triggering deployment**: Initiates disk formatting and package installation (`commit_install`).
-- **Interactive prompt resolution**: Detects and answers interactive installer questions (such as
-  confirming repository GPG keys or handling disk decryption prompts) to keep the installation
-  moving.
-- **Monitoring & Reboot**: Watches progress events until completion, checks diagnostic logs if any
-  step fails, and safely reboots the system into the newly installed OS.
-
-## Deterministic guardrails: Keeping AI on solid ground {#guardrails}
-
-Operating system installation on bare metal is an inherently destructive operation. If an autonomous
-agent is given raw shell access or unconstrained partitioning tools like `fdisk` or `parted`, a
-single hallucination could easily wipe the wrong drive or create unbootable disk topologies.
-
-Agama ensures safety by placing deterministic guardrails between the model and the machine:
+Operating system installation is an inherently destructive operation. Because language models can
+hallucinate device names or configuration options, Agama does not grant shell access or run raw
+partitioning tools. Instead, all interactions pass through deterministic safety layers:
 
 ### Schema validation {#schema-validation}
 
-Every configuration profile submitted by an AI client must conform to Agama's strict JSON Schema.
-The model can inspect schemas dynamically per subsystem (`storage`, `software`, `network`, `user`,
-`bootloader`, etc.) via the `get_config_schema` tool. If the model hallucinates invalid keys or
-passes wrong types, the profile is rejected before touching any installer subsystem.
+Every profile submitted by an AI client must strictly conform to Agama's JSON Schema. The agent
+can inspect schema definitions dynamically per subsystem (`storage`, `software`, `network`, `user`,
+`bootloader`) via the `get_config_schema` tool. Unknown keys or invalid types are rejected
+immediately before reaching any installer subsystem.
 
 ### Proposal verification and self-correction {#proposal-verification}
 
-In Agama, applying a configuration profile does not immediately write to disk. Instead, Agama runs
-its storage and software solvers to calculate a **Proposal** against the real hardware.
-
-If the AI requests something impossible—for instance, allocating 120&nbsp;GB of root storage on a
-64&nbsp;GB disk, specifying a non-existent network interface, or selecting conflicting package
-patterns—Agama's solver detects the conflict and returns structured issues (`issues_detected`).
-
-The MCP tool responds with `isError: true` and the exact solver diagnostics. Because language models
-reason effectively over structured validator errors, the agent can understand what went wrong,
-adjust its parameters (such as shrinking volume sizes), and re-submit a corrected profile—all before
-a single partition is written.
+Setting a configuration does not write to disk. Instead, Agama calculates a proposal against the
+detected hardware. If the agent requests an invalid configuration—such as allocating more space
+than a disk has or selecting conflicting software patterns—Agama rejects it with structured
+diagnostic issues. The agent receives a clear error description and can adjust its profile before
+any disk is touched.
 
 ### Operating modes and token isolation {#modes-and-security}
 
-The MCP server is **disabled by default** on installation media. It is activated only when
-explicitly requested via the Linux kernel command line:
+The MCP server is disabled by default and must be explicitly enabled on the kernel command line
+(`inst.mcp=config` for configuration only, or `inst.mcp=full` for autonomous deployment). To prevent
+an agent from using its token to call general REST endpoints, Agama enforces strict token isolation:
+the dedicated MCP token only grants access to `/mcp` and is rejected by the rest of the API.
 
-- `inst.mcp=disabled` (default): MCP endpoint is completely disabled.
-- `inst.mcp=config`: Configuration-only mode. AI can inspect hardware, inject profiles, and check
-  proposals. Installation and reboot are blocked.
-- `inst.mcp=full`: Full autonomous deployment mode. Installation and reboot are permitted.
+### Observability {#observability}
 
-To prevent an agent with terminal access from reading its own client settings and using `curl` to
-call general REST endpoints (like `/api/install`), Agama enforces strict token isolation: the
-dedicated MCP token is authenticated exclusively for `/mcp` and is strictly rejected by the general
-`/api/...` routes.
+To keep external agents informed without flooding their context with raw console output, the server
+provides targeted diagnostic tools. Agents can query scoped systemd journal logs (`get_logs`) for
+installer, package manager, or system units, track progress without busy polling (`wait_progress`),
+and answer interactive prompts (`answer_question`).
 
-## Observability: Logs, progress, and questions {#observability}
+## Try it out and check the docs {#next-steps}
 
-For an AI orchestrator to operate reliably, it needs clear visibility into installer progress and
-diagnostics when something goes wrong:
+The embedded MCP server will be included in the upcoming **Agama 26** release, and is already
+available in the [systemsmanagement:Agama:Devel](https://build.opensuse.org/project/show/systemsmanagement:Agama:Devel)
+OBS repository and nightly live ISOs.
 
-- **Scoped journal logs (`get_logs`)**: Instead of overflowing the model's context window with
-  thousands of lines of raw console output, the agent can retrieve targeted log slices directly from
-  `journalctl`. It can filter by installer traces (`installer`), package management (`zypp`),
-  system-wide events (`system`), or a specific systemd service. If package downloads fail or a
-  driver fails to initialize, the AI can read the logs and report the exact failure reason.
-- **Event-driven progress (`wait_progress`)**: Rather than constantly polling progress endpoints,
-  the agent can suspend and wake up when background tasks complete, when an interactive prompt
-  arises, or when installation finishes or fails.
-- **Interactive questions (`get_questions` and `answer_question`)**: If the installer needs user
-  input—such as a password for an encrypted volume or approval for an untrusted repository key—the
-  agent can inspect pending questions and submit answers programmatically.
+You can test it today on a virtual machine or test hardware by booting with `inst.mcp=config` and
+connecting an MCP-compliant client (such as Gemini CLI, Claude Desktop, or Cursor).
 
-## How to give it a try {#trying-it-out}
-
-You can test the MCP server today using a virtual machine or test hardware.
-
-### Step 1: Boot Agama with MCP enabled {#step-boot}
-
-Boot an Agama Live ISO. At the bootloader prompt, edit the kernel command-line arguments to enable
-the MCP server and set a pre-shared token:
-
-```text
-inst.mcp=config inst.mcp.token=secret123
-```
-
-_(Use `inst.mcp=full` if you want to test fully autonomous installation and reboot.)_
-
-If you omit `inst.mcp.token`, Agama generates a random token on boot, which you can read from the
-virtual console or the web terminal:
-
-```bash
-cat /run/agama/mcp-token
-```
-
-### Step 2: Connect your MCP client {#step-connect}
-
-Add the Agama endpoint to your client configuration (e.g. Gemini CLI, Claude Desktop, or Cursor):
-
-```json
-{
-  "mcpServers": {
-    "agama": {
-      "url": "https://<AGAMA_HOST_IP>/mcp",
-      "headers": {
-        "Authorization": "Bearer secret123"
-      }
-    }
-  }
-}
-```
-
-:::tip Self-Signed TLS Certificates
-
-Agama generates self-signed HTTPS certificates by default. Node.js-based AI clients reject
-self-signed certificates unless told otherwise. You can allow them during testing by launching your
-client with `NODE_TLS_REJECT_UNAUTHORIZED=0`:
-
-```bash
-NODE_TLS_REJECT_UNAUTHORIZED=0 gemini
-# or
-NODE_TLS_REJECT_UNAUTHORIZED=0 claude
-```
-
-:::
-
-### Step 3: Run an interactive session {#step-session}
-
-With the client connected, you can ask your AI assistant to examine the machine and prepare a
-profile:
-
-> _"Inspect the available storage and network interfaces on this machine. Generate an Agama
-> installation profile for openSUSE Tumbleweed that selects the GNOME desktop pattern, sets up Btrfs
-> on the primary NVMe disk, creates an admin user 'tux' with sudo access, enables SSH, and
-> calculates the installation proposal. Verify whether the proposal has any issues and display the
-> planned partition layout and package selection."_
-
-In `config` mode, open `https://<AGAMA_HOST_IP>` in your browser to inspect the resulting proposal
-in Agama's Web UI and confirm the installation yourself. In `full` mode, you can instruct the agent
-to proceed with installation and monitor the progress to completion.
-
-## Where to find it {#availability}
-
-The embedded MCP server will be included in the upcoming **Agama 26** release.
-
-If you would like to test it right now, the packages are already available in the
-[systemsmanagement:Agama:Devel](https://build.opensuse.org/project/show/systemsmanagement:Agama:Devel)
-OBS repository, including the nightly live installation media.
-
-Give it a try on a test machine, see how it fits into your workflows, and share your thoughts with
-us on [GitHub Discussions](https://github.com/agama-project/agama/discussions) or by opening an
-issue on [GitHub](https://github.com/agama-project/agama/issues)!
+For complete setup instructions, client configuration examples, and token details, check out the
+[Agama MCP README](https://github.com/agama-project/agama/tree/master/rust/agama-mcp#security--token-isolation).
+We would love to hear your feedback on [GitHub Discussions](https://github.com/agama-project/agama/discussions)
+or via [GitHub Issues](https://github.com/agama-project/agama/issues)!
