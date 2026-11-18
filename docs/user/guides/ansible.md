@@ -30,7 +30,6 @@ The files are fetched from URLs relative to the profile, so the profile, `site.y
   software: {
     packages: [
       'ansible-linux-system-roles',
-      'python313-rpm',
     ],
   },
   files: [
@@ -72,8 +71,6 @@ Serve them over HTTPS, or from a server that only the installation network can r
 :::
 
 - `ansible-linux-system-roles` brings `ansible-core` and the `ansible` package with it.
-  `python313-rpm` lets the `package_facts` module, which the roles call, read the RPM database:
-  ansible-core 2.20, the version in 16.1, needs it; 2.21 and later do not.
 - In immutable mode, packages listed in `software` are part of the first root snapshot. If they
   cover everything the playbook installs, the first boot does not need an extra reboot.
 - On openSUSE Leap 16.1, set `id: 'openSUSE_Leap'`, remove `registrationCode` and use
