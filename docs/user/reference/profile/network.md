@@ -203,8 +203,9 @@ includes the list of ports to connect.
       {
         id: "Bridge0",
         interface: "br0",
+        method4: "auto",
         bridge: {
-          ports: ["eth0", "eth1"]
+          portConnections: ["eth0", "eth1"]
         }
       }
     ]
@@ -217,9 +218,11 @@ name.
 
 The `bridge` section can include:
 
-- `ports`: A list of interfaces or connections IDs which will be part of the bridge.
+- `portConnections`: The ports of the bridge. See [Ports](#ports) for more details.
+- `ports`: A list of interfaces or connections IDs which will be part of the bridge. It is
+  deprecated and replaced by `portConnections`. When both lists are given, `ports` is ignored.
 - `stp`: Whether the
-  [Spanning Tree Protocol (STP)](https://es.wikipedia.org/wiki/Spanning_Tree_Protocol) should be
+  [Spanning Tree Protocol (STP)](https://en.wikipedia.org/wiki/Spanning_Tree_Protocol) should be
   enabled.
 - `forwardDelay`: STP forward delay, in seconds.
 - `priority`: STP priority. It is represented by a number equal to or greater than zero. Lower
@@ -239,8 +242,9 @@ includes the list of ports to connect.
       {
         id: "Bond0",
         interface: "bond0",
+        method4: "auto",
         bond: {
-          ports: ["eth0", "eth1"],
+          portConnections: ["eth0", "eth1"],
           mode: "active-backup",
           options: "primary=eth1"
         }
@@ -255,10 +259,93 @@ name.
 
 The `bond` section can contain:
 
-- `ports`: Devices to be included in the bond.
+- `portConnections`: The ports of the bond. See [Ports](#ports) for more details.
+- `ports`: Devices to be included in the bond. It is deprecated and replaced by `portConnections`.
+  When both lists are given, `ports` is ignored.
 - `mode`: Bond mode. Possible values: `balance-rr` (default), `active-backup`, `balance-xor`,
   `broadcast`, `802.3ad`, `balance-tlb`, `balance-alb`.
 - `options`: Additional options.
+
+### Ports
+
+The ports of a bond or a bridge are nested in the `portConnections` list of their controller. Each
+entry of the list can be:
+
+- An interface name or a connection ID, like `"eth0"`. It refers to the connection with that
+  interface name or ID, and a new Ethernet connection is created when there is none.
+- A connection, with the same fields as any other connection except the IP settings. The kind of the
+  port is told apart by the section it has: `bond`, `bridge`, `vlan`, `wireless`, or none of them
+  for an Ethernet port. When the `id` is omitted, the port refers to the connection bound to its
+  `interface`, or it gets the interface name as its ID.
+
+A port has no IP configuration of its own, as its controller holds it. So, a nested port does not
+accept the `method4`, `method6`, `addresses`, `gateway4`, `gateway6`, `nameservers`,
+`dnsSearchList`, and `ignoreAutoDns` fields.
+
+The ports of a bridge can include a `port` section with the settings they have as ports of that
+bridge:
+
+- `priority`: Port priority used by the Spanning Tree Protocol.
+- `pathCost`: Port cost used by the Spanning Tree Protocol.
+
+The ports of a bond have no port settings, and neither has a connection at the top level.
+
+As a port can be a controller itself, you can stack them. In the example below, a bond with two
+Ethernet ports is a port of a bridge, which holds the IP settings. A VLAN on top of the bridge is a
+connection at the top level, as it is not a port.
+
+```jsonnet
+{
+  network: {
+    connections: [
+      {
+        id: "br0",
+        interface: "br0",
+        method4: "manual",
+        addresses: ["192.168.1.100/24"],
+        bridge: {
+          stp: true,
+          portConnections: [
+            {
+              id: "bond0",
+              interface: "bond0",
+              port: { priority: 24, pathCost: 200 },
+              bond: {
+                mode: "802.3ad",
+                options: "miimon=100 lacp_rate=fast",
+                portConnections: [{ interface: "eth0", mtu: 9000 }, "eth1"]
+              }
+            }
+          ]
+        }
+      },
+      {
+        id: "br0.100",
+        interface: "br0.100",
+        method4: "manual",
+        addresses: ["10.100.0.10/24"],
+        vlan: { id: 100, parent: "br0" }
+      }
+    ]
+  }
+}
+```
+
+#### Where a connection is given
+
+The place of a connection in the configuration decides its controller:
+
+- A connection at the top level has no controller. If it was a port, it is taken out of its
+  controller and its IP methods default to `auto`, so it is not left without an address. To update a
+  port and keep it where it is, give it nested in its controller, together with the controllers
+  above it.
+- A port dropped from the list of ports of its controller, and not given anywhere else, is removed.
+- A controller that is not given keeps its ports, and so does a controller given without
+  `portConnections` nor `ports`. So, you do not need to include the connections you do not change,
+  as long as they are not ports of the ones you change.
+
+A connection at the top level can still be listed by name in the ports of a controller, as in the
+deprecated `ports` list. In that case, its IP settings are ignored.
 
 ### VLAN
 
