@@ -1,4 +1,4 @@
-# Run Ansible on first boot
+# Running Ansible on first boot
 
 Agama configures what matters at installation time and leaves any additional configuration to other
 tools once the system is installed. This guide shows how to hand the installed system over to an
