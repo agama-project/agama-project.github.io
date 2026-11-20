@@ -138,6 +138,9 @@ is disabled.
 They are a good alternative for those cases where a post-script falls short. The system is fully
 operational in this case, so there are no limitations.
 
+For a first-boot configuration that may need a reboot, such as an Ansible playbook on an immutable
+system, see [Run Ansible on first boot](../../guides/ansible).
+
 ## Troubleshooting
 
 You can find the scripts and their logs at `/var/log/agama-installation/scripts` after the
