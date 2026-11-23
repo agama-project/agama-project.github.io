@@ -23,11 +23,8 @@ information, configuration validation, proposal calculation and monitoring tools
 agents can inspect hardware, prepare valid configurations and monitor the installation process
 under strict and deterministic guardrails.
 
-:::info Disabled by default
-
-The MCP server *is disabled by default* so, if you are not into AI, you will not notice any difference.
-
-:::
+The MCP server **is disabled by default** so, if you are not into AI, you will not notice any
+difference.
 
 ## Describing your system
 
