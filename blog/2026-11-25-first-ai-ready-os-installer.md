@@ -19,9 +19,9 @@ philosophy towards AI.
 
 Starting in version 26, Agama will ship a Model Context Protocol (MCP) server, giving AI assistants
 and orchestrators a safe, structured way to drive an installation. Agama will expose hardware
-information, configuration validation, proposal calculation and monitoring tools, so external
-agents can inspect hardware, prepare valid configurations and monitor the installation process
-under strict and deterministic guardrails.
+information, configuration validation, proposal calculation and monitoring tools, so external agents
+can inspect hardware, prepare valid configurations and monitor the installation process under strict
+and deterministic guardrails.
 
 The MCP server **is disabled by default** so, if you are not into AI, you will not notice any
 difference.
@@ -79,10 +79,10 @@ Instead, all interactions pass through a set of deterministic safety layers.
 
 The MCP server will be included in the upcoming Agama 26. But if you cannot wait, you can use
 [our nightly image](/download) and point your favorite MCP client at it. Although the documentation
-is still a work in progress, [the agama-mcp
-README](https://github.com/agama-project/agama/tree/master/rust/agama-mcp) should include all the
-information you need to get started.
+is still a work in progress,
+[the agama-mcp README](https://github.com/agama-project/agama/tree/master/rust/agama-mcp) should
+include all the information you need to get started.
 
-As usual, we would love to read your feedback on [GitHub
-Discussions](https://github.com/agama-project/agama/discussions) or via [GitHub
-Issues](https://github.com/agama-project/agama/issues)!
+As usual, we would love to read your feedback on
+[GitHub Discussions](https://github.com/agama-project/agama/discussions) or via
+[GitHub Issues](https://github.com/agama-project/agama/issues)!
