@@ -11,6 +11,13 @@ to set it up correctly in many situations and architectures.
 
 These options are defined in the `bootloader` section.
 
+- `type` <Since version="16.2"/>: type of bootloader to install. The supported options are:
+  - `grub2`: install GRUB2 (on EFI systems, `grub2-efi` is used).
+  - `systemd-boot`: install systemd-boot. Note that `systemd-boot` can only be installed on EFI systems.
+  - `none`: do not install any bootloader.
+
+  If not specified, the bootloader type is chosen based on the product definition (such as `boot.default_efi_bootloader` on EFI systems) or defaults to `grub2`.
+  Setting an incompatible bootloader type (such as `systemd-boot` on a non-EFI system or an unsupported architecture) will generate an installation issue (`configWrongBootloader`).
 - `stopOnBootMenu`: stop on the menu instead of booting the system automatically.
 - `timeout`: specify how many seconds the bootloader should wait on the menu before booting the
   default entry. Unlike AutoYaST, the timeout should be a positive number. If you want the
@@ -21,11 +28,12 @@ These options are defined in the `bootloader` section.
   untouched, which is useful for preserving existing boot managers or specific firmware
   configurations.
 
-```
+```json
 {
-  bootloader: {
-    stopOnBootMenu: true,
-    extraKernelParams: "processor.max_cstate=1"
+  "bootloader": {
+    "type": "systemd-boot",
+    "stopOnBootMenu": true,
+    "extraKernelParams": "processor.max_cstate=1"
   }
 }
 ```

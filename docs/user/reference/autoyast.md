@@ -50,10 +50,10 @@ This section is supported.
 
 This section is supported.
 
-| AutoYaST      | Supported | Agama | Notes |
-| ------------- | --------- | ----- | ----- |
-| `device_map`  | no        |       |       |
-| `loader_type` | no        |       |       |
+| AutoYaST      | Supported | Agama             | Notes                                         |
+| ------------- | --------- | ----------------- | --------------------------------------------- |
+| `device_map`  | no        |                   |                                               |
+| `loader_type` | yes       | `bootloader.type` | Mapped to `grub2`, `systemd-boot`, or `none`. |
 
 ### bootloader/global
 

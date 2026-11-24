@@ -125,16 +125,16 @@ options at the end of the `linux` line.
   libzypp in the `/var/log/YaST2/autoTestcase` directory and the `inst.solver_testcase` option is
   ignored.
 
-- `inst.systemd_boot_preview=1`: <Since version="16.1"/> Enables the systemd-boot bootloader as a
+- `inst.systemd_boot_preview=1`: <Since version="16.1"/> **(Deprecated)** Enables the systemd-boot bootloader as a
   preview feature.
 
-  :::note
+  :::warning Deprecated
 
-  This is a preview feature for testing systemd-boot support. It will automatically fall back to
-  using grub2 bootloader if the system does not meet
-  [BLS requirements](https://uapi-group.org/specifications/specs/boot_loader_specification/). This
-  option may disappear in the future, after finishing the testing period for the systemd-boot
-  support.
+  This option is deprecated and will soon be removed. You can now configure the bootloader directly
+  in the configuration profile using [`bootloader.type`](../profile/bootloader.mdx).
+
+  When used, it will automatically fall back to using grub2 bootloader if the system does not meet
+  [BLS requirements](https://uapi-group.org/specifications/specs/boot_loader_specification/).
 
   :::
 
