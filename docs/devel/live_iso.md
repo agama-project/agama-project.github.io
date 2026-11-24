@@ -99,7 +99,9 @@ different use case.
 
 You can define the password directly on the boot command line. There are two options:
 
-- Use `live.password=<password>` with a plain text password.
+- Use `live.password=<password>` with a plain text password. Note that a plain text password is less
+  secure because it is visible in the bootloader and remains readable in `/proc/cmdline` after
+  booting.
 - Use `live.password_hash=<password_hash>` with a hashed password. This is more secure than using a
   plaintext password.
 
@@ -132,8 +134,7 @@ You can enter your password during boot in an interactive session. Again, there 
   dialog but a single line prompt so it should work better in special environments like a serial
   console.
 
-The Agama and the SSH server are not started until a password is configured. This avoids using the
-default password accidentally.
+The Agama and the SSH server are not started until a password is configured.
 
 ### Setting the password in the ISO image using mkmedia
 
@@ -160,14 +161,16 @@ the single quotes around `'$(openssl passwd -6)'`: because password hashes conta
 enclosing the hash in single quotes prevents the bootloader from interpreting them as variables
 during boot.
 
-You can also specify a plain text password instead using `live.password`:
+:::warning
 
-```sh
-# replace agama.iso with your image name
-mkmedia --create custom-agama.iso \
-  --boot "live.password=<password>" \
-  agama.iso
-```
+Using a plain text password (`live.password=<password>`) should be avoided here. When using
+`mkmedia`, you can hash the password very easily so it should always be preferred. A plain text
+password is less secure because it is stored unencrypted in the bootloader configuration and remains
+visible in the `/proc/cmdline` file after booting. Plain text passwords should only be used when
+setting the password interactively at the boot prompt, where typing a very long password hash is
+error-prone.
+
+:::
 
 See the [Creating a Hashed Password](#creating-a-hashed-password) section below if you want to use a
 different hashing algorithm than SHA512 or another tool such as `mkpasswd`.
