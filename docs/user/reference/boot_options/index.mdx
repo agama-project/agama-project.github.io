@@ -156,6 +156,14 @@ options at the end of the `linux` line.
   long and is not easy to type it into the boot prompt manually. It makes sense in environments
   where you can prepare the boot parameters in advance like in PXE boot or some virtual machines.
 
+  :::warning
+
+  Because password hashes contain `$` characters, you need to quote or escape the value (such as
+  `live.password_hash='<hash>'`) in bootloader configurations to prevent `$` from being evaluated as
+  a variable.
+
+  :::
+
   ```text
   live.password=nots3cr3t
   ```
