@@ -99,13 +99,23 @@ different use case.
 
 You can define the password directly on the boot command line. There are two options:
 
-- Use `live.password=<password>` with a plain text password.
+- Use `live.password=<password>` with a plain text password. Note that a plain text password is less
+  secure because it is visible in the bootloader and remains readable in `/proc/cmdline` after
+  booting.
 - Use `live.password_hash=<password_hash>` with a hashed password. This is more secure than using a
   plaintext password.
 
   The disadvantage is that the hashed password is quite long and is not easy to type it into the
   boot prompt manually. It makes sense in environments where you can prepare the boot parameters in
   advance like in PXE boot or some virtual machines.
+
+  :::warning
+
+  Because password hashes contain `$` characters, you need to quote or escape the value (for
+  example, `live.password_hash='<hash>'`) so that bootloaders like GRUB do not interpret `$` as a
+  variable expansion.
+
+  :::
 
   See more details about creating a hashed password [below](#creating-a-hashed-password).
 
@@ -124,49 +134,56 @@ You can enter your password during boot in an interactive session. Again, there 
   dialog but a single line prompt so it should work better in special environments like a serial
   console.
 
-The Agama and the SSH server are not started until a password is configured. This avoid using the
-default password from the medium accidentally.
+The Agama and the SSH server are not started until a password is configured.
 
-### Injecting the default password into the ISO image
+### Setting the password in the ISO image using mkmedia
 
-Another option is to inject your custom hashed password directly into the ISO image. The advantage
-is than you can easily use the same image for installing multiple machines and you do not need to
-configure anything during the boot.
+Another option is to set the password on the kernel command line directly in the ISO image using
+[mkmedia](https://github.com/openSUSE/mkmedia) (formerly `mksusecd`). The advantage is that you can
+easily use the same image for installing multiple machines and you do not need to configure anything
+during the boot.
 
-To inject a new password into the ISO run:
+The `mkmedia` tool can modify the bootloader configuration and change kernel command-line options
+when creating a new ISO image.
 
-```sh
-# replace the agama.iso name with your image name
-tagmedia --add-tag "live_password=$((openssl passwd -6) | base64 -w 0)" agama.iso
-```
-
-It will interactively ask for a password then it will be hashed using the SHA512 algorithm, encoded
-to the Base64 encoding and appended to the application area in the ISO file. If you want to update
-the password then just the same command again, it will overwrite the existing password.
-
-See the [Creating a Hashed Password](#creating-a-hashed-password) section below if you want to use a
-different hashing algorithm than SHA512.
-
-To check all tags present in an ISO file use this command:
+To create a new ISO image with a hashed password on the kernel command line:
 
 ```sh
-# replace the agama.iso name with your image name
-tagmedia agama.iso
+# replace agama.iso with your image name
+mkmedia --create custom-agama.iso \
+  --boot "live.password_hash='$(openssl passwd -6)'" \
+  agama.iso
 ```
 
-If you want to remove the password setting from the ISO image then run:
+This will interactively prompt for a password, hash it using the SHA512 algorithm, and embed the
+`live.password_hash` boot parameter into the bootloader configuration of `custom-agama.iso`. Note
+the single quotes around `'$(openssl passwd -6)'`: because password hashes contain `$` characters,
+enclosing the hash in single quotes prevents the bootloader from interpreting them as variables
+during boot.
 
-```sh
-# replace the agama.iso name with your image name
-tagmedia --remove-tag live_password agama.iso
-```
+:::warning
 
-:::danger
-
-The image usually already contains some other tags, like the checksums for verifying the medium
-integrity. Do not touch them!
+Using a plain text password (`live.password=<password>`) should be avoided here. When using
+`mkmedia`, you can hash the password very easily so it should always be preferred. A plain text
+password is less secure because it is stored unencrypted in the bootloader configuration and remains
+visible in the `/proc/cmdline` file after booting. Plain text passwords should only be used when
+setting the password interactively at the boot prompt, where typing a very long password hash is
+error-prone.
 
 :::
+
+See the [Creating a Hashed Password](#creating-a-hashed-password) section below if you want to use a
+different hashing algorithm than SHA512 or another tool such as `mkpasswd`.
+
+If you want to remove the password setting from the boot parameters, `mkmedia` allows prefixing the
+parameter with a minus sign (`-`):
+
+```sh
+# replace custom-agama.iso with your image name
+mkmedia --create clean-agama.iso \
+  --boot "-live.password -live.password_hash" \
+  custom-agama.iso
+```
 
 ### Random password as a fallback
 
@@ -179,8 +196,7 @@ The password setting priority is following (from highest priority to the lowest)
 
 1. Password entered interactively during the boot process
 2. Password entered on the boot command line
-3. Default password from the ISO image meta data
-4. A random password is generated as a fallback
+3. A random password is generated as a fallback
 
 ### Creating a Hashed Password
 

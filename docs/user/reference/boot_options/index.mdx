@@ -152,9 +152,19 @@ options at the end of the `linux` line.
 
 - `live.password` and `live.password_hash`: sets the `root` password of the live system.
   `live.password` accepts a plain text password, while `live.password_hash` is expected to receive a
-  hashed password, which is more secure. The disadvantage of a hashed password is that it is quite
-  long and is not easy to type it into the boot prompt manually. It makes sense in environments
-  where you can prepare the boot parameters in advance like in PXE boot or some virtual machines.
+  hashed password, which is more secure. Plain text passwords are less secure because they remain
+  visible in the bootloader configuration and in `/proc/cmdline` after booting. The disadvantage of
+  a hashed password is that it is quite long and is not easy to type it into the boot prompt
+  manually. It makes sense in environments where you can prepare the boot parameters in advance like
+  in PXE boot, some virtual machines, or when pre-configuring the ISO image with `mkmedia`.
+
+  :::warning
+
+  Because password hashes contain `$` characters, you need to quote or escape the value (such as
+  `live.password_hash='<hash>'`) in bootloader configurations to prevent `$` from being evaluated as
+  a variable.
+
+  :::
 
   ```text
   live.password=nots3cr3t
