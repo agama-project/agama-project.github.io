@@ -244,6 +244,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -294,6 +297,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -342,6 +348,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -448,6 +457,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -498,6 +510,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -588,6 +603,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -641,6 +659,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -692,6 +713,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -827,6 +851,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -880,6 +907,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -1909,6 +1939,9 @@ components:
         id:
           description: Unique identifier for the network connection
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -5086,6 +5119,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -5141,6 +5177,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -5192,6 +5231,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -5292,6 +5334,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -5347,6 +5392,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -5406,6 +5454,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -5464,6 +5515,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -5518,6 +5572,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -5628,6 +5685,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -5686,6 +5746,9 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -5842,6 +5905,9 @@ components:
         id:
           description: Unique identifier for the network connection
           type: string
+        ieee-8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
@@ -6125,6 +6191,7 @@ components:
           description: Indicates that the wireless network is not broadcasting its SSID
           type: boolean
         mode:
+          default: infrastructure
           description: Wireless network mode
           enum:
           - infrastructure
@@ -6148,6 +6215,7 @@ components:
           format: int32
           type: integer
         security:
+          default: none
           description: Security method/key management
           enum:
           - none
@@ -6170,9 +6238,7 @@ components:
             type: string
           type: array
       required:
-      - security
       - ssid
-      - mode
       type: object
     ZfcpConfig:
       additionalProperties: false

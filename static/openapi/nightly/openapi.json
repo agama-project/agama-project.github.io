@@ -320,6 +320,10 @@
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
           },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
@@ -380,6 +384,10 @@
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
           },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
@@ -431,6 +439,10 @@
           "id": {
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
@@ -547,6 +559,10 @@
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
           },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
@@ -606,6 +622,10 @@
           "id": {
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
@@ -726,6 +746,10 @@
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
           },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
@@ -790,6 +814,10 @@
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
           },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
@@ -845,6 +873,10 @@
           "id": {
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
@@ -992,6 +1024,10 @@
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
           },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
@@ -1055,6 +1091,10 @@
           "id": {
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
@@ -2292,6 +2332,10 @@
           "id": {
             "description": "Unique identifier for the network connection",
             "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
@@ -6799,6 +6843,10 @@
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
           },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
@@ -6868,6 +6916,10 @@
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
           },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
@@ -6928,6 +6980,10 @@
           "id": {
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
@@ -7055,6 +7111,10 @@
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
           },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
@@ -7123,6 +7183,10 @@
           "id": {
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
@@ -7201,6 +7265,10 @@
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
           },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
@@ -7274,6 +7342,10 @@
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
           },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
@@ -7338,6 +7410,10 @@
           "id": {
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
@@ -7477,6 +7553,10 @@
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
           },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
+          },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
@@ -7549,6 +7629,10 @@
           "id": {
             "description": "Unique identifier for the network connection\n\nWhen it is omitted, the port refers to the connection bound to its interface, or\ngets the interface name as its ID.",
             "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
@@ -7691,6 +7775,10 @@
           "id": {
             "description": "Unique identifier for the network connection",
             "type": "string"
+          },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
@@ -8055,6 +8143,7 @@
             "type": "boolean"
           },
           "mode": {
+            "default": "infrastructure",
             "description": "Wireless network mode",
             "enum": [
               "infrastructure",
@@ -8085,6 +8174,7 @@
             "type": "integer"
           },
           "security": {
+            "default": "none",
             "description": "Security method/key management",
             "enum": [
               "none",
@@ -8114,9 +8204,7 @@
           }
         },
         "required": [
-          "security",
-          "ssid",
-          "mode"
+          "ssid"
         ],
         "type": "object"
       },
