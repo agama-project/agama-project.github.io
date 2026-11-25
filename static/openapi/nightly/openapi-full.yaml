@@ -2459,6 +2459,10 @@ components:
         text:
           description: Question text.
           type: string
+        title:
+          default: Question
+          description: Question title.
+          type: string
       required:
       - id
       - text
@@ -2566,6 +2570,10 @@ components:
             password, a selector, etc.).
         text:
           description: Question text.
+          type: string
+        title:
+          default: Question
+          description: Question title.
           type: string
       required:
       - text

@@ -2957,6 +2957,11 @@
           "text": {
             "description": "Question text.",
             "type": "string"
+          },
+          "title": {
+            "default": "Question",
+            "description": "Question title.",
+            "type": "string"
           }
         },
         "required": [
@@ -3082,6 +3087,11 @@
           },
           "text": {
             "description": "Question text.",
+            "type": "string"
+          },
+          "title": {
+            "default": "Question",
+            "description": "Question title.",
             "type": "string"
           }
         },
