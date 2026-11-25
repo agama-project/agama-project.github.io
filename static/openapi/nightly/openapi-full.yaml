@@ -244,7 +244,7 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
-        ieee-8021x:
+        ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
         interface:
@@ -294,7 +294,7 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
-        ieee-8021x:
+        ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
         interface:
@@ -342,7 +342,7 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
-        ieee-8021x:
+        ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
         interface:
@@ -448,7 +448,7 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
-        ieee-8021x:
+        ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
         interface:
@@ -498,7 +498,7 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
-        ieee-8021x:
+        ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
         interface:
@@ -588,7 +588,7 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
-        ieee-8021x:
+        ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
         interface:
@@ -641,7 +641,7 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
-        ieee-8021x:
+        ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
         interface:
@@ -692,7 +692,7 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
-        ieee-8021x:
+        ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
         interface:
@@ -827,7 +827,7 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
-        ieee-8021x:
+        ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
         interface:
@@ -880,7 +880,7 @@ components:
             When it is omitted, the port refers to the connection bound to its interface, or
             gets the interface name as its ID.
           type: string
-        ieee-8021x:
+        ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
           description: IEEE 802.1X settings
         interface:
@@ -1962,133 +1962,24 @@ components:
       required:
       - id
       type: object
-    NetworkConnectionWithState:
-      description: |-
-        A connection as the system reports it, with its current state.
-
-        The state is not part of the configuration, so only the system information reports it. The
-        ports nested in a controller do not report it.
-      properties:
-        addresses:
-          description: List of assigned IP addresses
-          items:
-            $ref: '#/components/schemas/IpInet'
-          type: array
-        autoconnect:
-          description: Specifies if the connection should automatically connect
-          type: boolean
-        bond:
-          $ref: '#/components/schemas/BondSettings'
-          description: Bonding settings if part of a bond
-        bridge:
-          $ref: '#/components/schemas/BridgeSettings'
-          description: Bridge settings if part of a bridge
-        customMacAddress:
-          description: |-
-            Custom MAC address of the connection's interface
-
-            Can also be 'preserve', 'permanent', 'random' or 'stable'.
-          type: string
-        dnsSearchList:
-          description: List of search domains for DNS resolution
-          items:
-            type: string
-          type: array
-        dnsSearchlist:
-          deprecated: true
-          description: List of search domains for DNS resolution
-          items:
-            type: string
-          type: array
-        gateway4:
-          description: Gateway IP address for the IPv4 connection
-          examples:
-          - 192.168.122.1
-          format: ip
-          type: string
-        gateway6:
-          description: Gateway IP address for the IPv6 connection
-          examples:
-          - ::ffff:c0a8:7a01
-          format: ip
-          type: string
-        id:
-          description: Unique identifier for the network connection
-          type: string
-        ieee8021x:
-          $ref: '#/components/schemas/IEEE8021XSettings'
-          description: IEEE 802.1X settings
-        ignoreAutoDns:
-          description: Specifies whether to ignore automatically assigned DNS settings
-          type: boolean
-        interface:
-          description: Network interface associated with the connection
-          type: string
-        macAddress:
-          description: MAC address of the connection's interface
-          type: string
-        match:
-          $ref: '#/components/schemas/MatchSettings'
-          description: Match settings for the network connection
-        method4:
-          $ref: '#/components/schemas/Ipv4Method'
-          description: |-
-            IPv4 method used for the network connection
-
-            Defaults to 'auto'.
-        method6:
-          $ref: '#/components/schemas/Ipv6Method'
-          description: |-
-            IPv6 method used for the network connection
-
-            Defaults to 'auto'.
-        mtu:
-          description: Maximum Transmission Unit (MTU) for the connection
-          format: uint32
-          minimum: 0
-          type: integer
-        nameservers:
-          description: List of DNS server IP addresses
-          items:
-            format: ip
-            type: string
-          type: array
-        persistent:
-          description: Specifies whether the connection should be persisted or not
-          type: boolean
-        state:
-          allOf:
-          - $ref: '#/components/schemas/ConnectionState'
-          description: Current state of the connection
-        status:
-          $ref: '#/components/schemas/Status2'
-          description: Current status of the network connection
-        vlan:
-          $ref: '#/components/schemas/VlanSettings'
-          description: VLAN settings for the connection
-        wireless:
-          $ref: '#/components/schemas/WirelessSettings'
-          description: Wireless settings for the connection
-      required:
-      - id
-      - state
-      type: object
     NetworkConnections:
       description: |-
         Collection of connections.
 
         It only holds the root connections: the ports of a bond or a bridge are nested inside the
-        `portConnections` list of their controller. Use [`Self::flatten`] to go through all of them.
+        `portConnections` list of their controller.
+
+        Where a connection is given decides its controller:
+
+        * A connection at the top level has none. If it was a port, it is taken out of its controller
+          and its IP methods default to `auto`. To update a port and keep it where it is, give it
+          nested in its controller, together with the controllers above it.
+        * A port dropped from the list of ports of its controller, and not given anywhere else, is
+          removed.
+        * A controller that is not given keeps its ports, so an update does not need to include the
+          connections it does not change, as long as they are not ports of the ones it does.
       items:
         $ref: '#/components/schemas/NetworkConnection'
-      type: array
-    NetworkConnectionsWithState:
-      description: |-
-        Collection of connections with their current state, as the system reports them.
-
-        Like [`NetworkConnectionsCollection`], it only holds the root connections.
-      items:
-        $ref: '#/components/schemas/NetworkConnectionWithState'
       type: array
     Patch:
       description: Patch for the config.
@@ -5163,6 +5054,668 @@ components:
       - items:
           type: string
         type: array
+    SystemBondBondPort:
+      additionalProperties: false
+      description: Port of a bond that is a bond itself, with its current state and the one of its ports
+      properties:
+        autoconnect:
+          description: Specifies if the connection should automatically connect
+          type: boolean
+        bond:
+          allOf:
+          - $ref: '#/components/schemas/SystemBondSettings'
+          description: Bonding settings
+        customMacAddress:
+          description: |-
+            Custom MAC address of the connection's interface
+
+            Can also be 'preserve', 'permanent', 'random' or 'stable'.
+          type: string
+        id:
+          description: |-
+            Unique identifier for the network connection
+
+            When it is omitted, the port refers to the connection bound to its interface, or
+            gets the interface name as its ID.
+          type: string
+        ieee8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
+        interface:
+          description: Network interface associated with the connection
+          type: string
+        macAddress:
+          description: MAC address of the connection's interface
+          type: string
+        match:
+          $ref: '#/components/schemas/MatchSettings'
+          description: Match settings for the network connection
+        mtu:
+          description: Maximum Transmission Unit (MTU) for the connection
+          format: uint32
+          minimum: 0
+          type: integer
+        persistent:
+          description: Specifies whether the connection should be persisted or not
+          type: boolean
+        state:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionState'
+          description: Current state of the connection
+        status:
+          $ref: '#/components/schemas/Status2'
+          description: Current status of the network connection
+      required:
+      - bond
+      - state
+      type: object
+    SystemBondBridgePort:
+      additionalProperties: false
+      description: Port of a bond that is a bridge, with its current state and the one of its ports
+      properties:
+        autoconnect:
+          description: Specifies if the connection should automatically connect
+          type: boolean
+        bridge:
+          allOf:
+          - $ref: '#/components/schemas/SystemBridgeSettings'
+          description: Bridge settings
+        customMacAddress:
+          description: |-
+            Custom MAC address of the connection's interface
+
+            Can also be 'preserve', 'permanent', 'random' or 'stable'.
+          type: string
+        id:
+          description: |-
+            Unique identifier for the network connection
+
+            When it is omitted, the port refers to the connection bound to its interface, or
+            gets the interface name as its ID.
+          type: string
+        ieee8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
+        interface:
+          description: Network interface associated with the connection
+          type: string
+        macAddress:
+          description: MAC address of the connection's interface
+          type: string
+        match:
+          $ref: '#/components/schemas/MatchSettings'
+          description: Match settings for the network connection
+        mtu:
+          description: Maximum Transmission Unit (MTU) for the connection
+          format: uint32
+          minimum: 0
+          type: integer
+        persistent:
+          description: Specifies whether the connection should be persisted or not
+          type: boolean
+        state:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionState'
+          description: Current state of the connection
+        status:
+          $ref: '#/components/schemas/Status2'
+          description: Current status of the network connection
+      required:
+      - bridge
+      - state
+      type: object
+    SystemBondEthernetPort:
+      additionalProperties: false
+      description: Port of a bond that is an Ethernet connection, with its current state
+      properties:
+        autoconnect:
+          description: Specifies if the connection should automatically connect
+          type: boolean
+        customMacAddress:
+          description: |-
+            Custom MAC address of the connection's interface
+
+            Can also be 'preserve', 'permanent', 'random' or 'stable'.
+          type: string
+        id:
+          description: |-
+            Unique identifier for the network connection
+
+            When it is omitted, the port refers to the connection bound to its interface, or
+            gets the interface name as its ID.
+          type: string
+        ieee8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
+        interface:
+          description: Network interface associated with the connection
+          type: string
+        macAddress:
+          description: MAC address of the connection's interface
+          type: string
+        match:
+          $ref: '#/components/schemas/MatchSettings'
+          description: Match settings for the network connection
+        mtu:
+          description: Maximum Transmission Unit (MTU) for the connection
+          format: uint32
+          minimum: 0
+          type: integer
+        persistent:
+          description: Specifies whether the connection should be persisted or not
+          type: boolean
+        state:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionState'
+          description: Current state of the connection
+        status:
+          $ref: '#/components/schemas/Status2'
+          description: Current status of the network connection
+      required:
+      - state
+      type: object
+    SystemBondPort:
+      anyOf:
+      - description: Interface name or ID of a connection, which reports no state.
+        type: string
+      - $ref: '#/components/schemas/SystemBondEthernetPort'
+      - $ref: '#/components/schemas/SystemBondBondPort'
+      - $ref: '#/components/schemas/SystemBondBridgePort'
+      - $ref: '#/components/schemas/SystemBondVlanPort'
+      - $ref: '#/components/schemas/SystemBondWirelessPort'
+      description: |-
+        Entry of the `portConnections` list of a bond, with the state of the port.
+
+        Like [`config::BondPort`], with the state of every port given as a connection.
+    SystemBondSettings:
+      additionalProperties: false
+      description: Bonding configuration with the state of the ports, as the system reports it.
+      properties:
+        mode:
+          description: Bonding mode
+          enum:
+          - balance-rr
+          - active-backup
+          - balance-xor
+          - broadcast
+          - 802.3ad
+          - balance-tlb
+          - balance-alb
+          type: string
+        options:
+          description: Bonding options, separated by spaces (e.g., "miimon=100 primary=eth0")
+          type: string
+        portConnections:
+          description: Ports of the controller, with their current state
+          items:
+            $ref: '#/components/schemas/SystemBondPort'
+          type: array
+        ports:
+          deprecated: true
+          description: |-
+            Interface names or IDs of the ports of the controller.
+
+            DEPRECATED: replaced by `portConnections`, which also takes names. It keeps working, and it
+            is still reported for the clients that read it. When both lists are given,
+            `portConnections` is used and this one is ignored.
+          items:
+            type: string
+          type: array
+      required:
+      - mode
+      type: object
+    SystemBondVlanPort:
+      additionalProperties: false
+      description: Port of a bond that is a VLAN, with its current state
+      properties:
+        autoconnect:
+          description: Specifies if the connection should automatically connect
+          type: boolean
+        customMacAddress:
+          description: |-
+            Custom MAC address of the connection's interface
+
+            Can also be 'preserve', 'permanent', 'random' or 'stable'.
+          type: string
+        id:
+          description: |-
+            Unique identifier for the network connection
+
+            When it is omitted, the port refers to the connection bound to its interface, or
+            gets the interface name as its ID.
+          type: string
+        ieee8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
+        interface:
+          description: Network interface associated with the connection
+          type: string
+        macAddress:
+          description: MAC address of the connection's interface
+          type: string
+        match:
+          $ref: '#/components/schemas/MatchSettings'
+          description: Match settings for the network connection
+        mtu:
+          description: Maximum Transmission Unit (MTU) for the connection
+          format: uint32
+          minimum: 0
+          type: integer
+        persistent:
+          description: Specifies whether the connection should be persisted or not
+          type: boolean
+        state:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionState'
+          description: Current state of the connection
+        status:
+          $ref: '#/components/schemas/Status2'
+          description: Current status of the network connection
+        vlan:
+          allOf:
+          - $ref: '#/components/schemas/VlanSettings'
+          description: VLAN settings
+      required:
+      - vlan
+      - state
+      type: object
+    SystemBondWirelessPort:
+      additionalProperties: false
+      description: Port of a bond that is a wireless connection, with its current state
+      properties:
+        autoconnect:
+          description: Specifies if the connection should automatically connect
+          type: boolean
+        customMacAddress:
+          description: |-
+            Custom MAC address of the connection's interface
+
+            Can also be 'preserve', 'permanent', 'random' or 'stable'.
+          type: string
+        id:
+          description: |-
+            Unique identifier for the network connection
+
+            When it is omitted, the port refers to the connection bound to its interface, or
+            gets the interface name as its ID.
+          type: string
+        ieee8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
+        interface:
+          description: Network interface associated with the connection
+          type: string
+        macAddress:
+          description: MAC address of the connection's interface
+          type: string
+        match:
+          $ref: '#/components/schemas/MatchSettings'
+          description: Match settings for the network connection
+        mtu:
+          description: Maximum Transmission Unit (MTU) for the connection
+          format: uint32
+          minimum: 0
+          type: integer
+        persistent:
+          description: Specifies whether the connection should be persisted or not
+          type: boolean
+        state:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionState'
+          description: Current state of the connection
+        status:
+          $ref: '#/components/schemas/Status2'
+          description: Current status of the network connection
+        wireless:
+          allOf:
+          - $ref: '#/components/schemas/WirelessSettings'
+          description: Wireless settings
+      required:
+      - wireless
+      - state
+      type: object
+    SystemBridgeBondPort:
+      additionalProperties: false
+      description: Port of a bridge that is a bond itself, with its current state and the one of its ports
+      properties:
+        autoconnect:
+          description: Specifies if the connection should automatically connect
+          type: boolean
+        bond:
+          allOf:
+          - $ref: '#/components/schemas/SystemBondSettings'
+          description: Bonding settings
+        customMacAddress:
+          description: |-
+            Custom MAC address of the connection's interface
+
+            Can also be 'preserve', 'permanent', 'random' or 'stable'.
+          type: string
+        id:
+          description: |-
+            Unique identifier for the network connection
+
+            When it is omitted, the port refers to the connection bound to its interface, or
+            gets the interface name as its ID.
+          type: string
+        ieee8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
+        interface:
+          description: Network interface associated with the connection
+          type: string
+        macAddress:
+          description: MAC address of the connection's interface
+          type: string
+        match:
+          $ref: '#/components/schemas/MatchSettings'
+          description: Match settings for the network connection
+        mtu:
+          description: Maximum Transmission Unit (MTU) for the connection
+          format: uint32
+          minimum: 0
+          type: integer
+        persistent:
+          description: Specifies whether the connection should be persisted or not
+          type: boolean
+        port:
+          $ref: '#/components/schemas/BridgePortSettings'
+          description: Settings that this connection has because it is a port of a bridge
+        state:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionState'
+          description: Current state of the connection
+        status:
+          $ref: '#/components/schemas/Status2'
+          description: Current status of the network connection
+      required:
+      - bond
+      - state
+      type: object
+    SystemBridgeBridgePort:
+      additionalProperties: false
+      description: Port of a bridge that is a bridge itself, with its current state and the one of its ports
+      properties:
+        autoconnect:
+          description: Specifies if the connection should automatically connect
+          type: boolean
+        bridge:
+          allOf:
+          - $ref: '#/components/schemas/SystemBridgeSettings'
+          description: Bridge settings
+        customMacAddress:
+          description: |-
+            Custom MAC address of the connection's interface
+
+            Can also be 'preserve', 'permanent', 'random' or 'stable'.
+          type: string
+        id:
+          description: |-
+            Unique identifier for the network connection
+
+            When it is omitted, the port refers to the connection bound to its interface, or
+            gets the interface name as its ID.
+          type: string
+        ieee8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
+        interface:
+          description: Network interface associated with the connection
+          type: string
+        macAddress:
+          description: MAC address of the connection's interface
+          type: string
+        match:
+          $ref: '#/components/schemas/MatchSettings'
+          description: Match settings for the network connection
+        mtu:
+          description: Maximum Transmission Unit (MTU) for the connection
+          format: uint32
+          minimum: 0
+          type: integer
+        persistent:
+          description: Specifies whether the connection should be persisted or not
+          type: boolean
+        port:
+          $ref: '#/components/schemas/BridgePortSettings'
+          description: Settings that this connection has because it is a port of a bridge
+        state:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionState'
+          description: Current state of the connection
+        status:
+          $ref: '#/components/schemas/Status2'
+          description: Current status of the network connection
+      required:
+      - bridge
+      - state
+      type: object
+    SystemBridgeEthernetPort:
+      additionalProperties: false
+      description: Port of a bridge that is an Ethernet connection, with its current state
+      properties:
+        autoconnect:
+          description: Specifies if the connection should automatically connect
+          type: boolean
+        customMacAddress:
+          description: |-
+            Custom MAC address of the connection's interface
+
+            Can also be 'preserve', 'permanent', 'random' or 'stable'.
+          type: string
+        id:
+          description: |-
+            Unique identifier for the network connection
+
+            When it is omitted, the port refers to the connection bound to its interface, or
+            gets the interface name as its ID.
+          type: string
+        ieee8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
+        interface:
+          description: Network interface associated with the connection
+          type: string
+        macAddress:
+          description: MAC address of the connection's interface
+          type: string
+        match:
+          $ref: '#/components/schemas/MatchSettings'
+          description: Match settings for the network connection
+        mtu:
+          description: Maximum Transmission Unit (MTU) for the connection
+          format: uint32
+          minimum: 0
+          type: integer
+        persistent:
+          description: Specifies whether the connection should be persisted or not
+          type: boolean
+        port:
+          $ref: '#/components/schemas/BridgePortSettings'
+          description: Settings that this connection has because it is a port of a bridge
+        state:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionState'
+          description: Current state of the connection
+        status:
+          $ref: '#/components/schemas/Status2'
+          description: Current status of the network connection
+      required:
+      - state
+      type: object
+    SystemBridgePort:
+      anyOf:
+      - description: Interface name or ID of a connection, which reports no state.
+        type: string
+      - $ref: '#/components/schemas/SystemBridgeEthernetPort'
+      - $ref: '#/components/schemas/SystemBridgeBondPort'
+      - $ref: '#/components/schemas/SystemBridgeBridgePort'
+      - $ref: '#/components/schemas/SystemBridgeVlanPort'
+      - $ref: '#/components/schemas/SystemBridgeWirelessPort'
+      description: |-
+        Entry of the `portConnections` list of a bridge, with the state of the port.
+
+        Like [`config::BridgePort`], with the state of every port given as a connection.
+    SystemBridgeSettings:
+      additionalProperties: false
+      description: Bridge configuration with the state of the ports, as the system reports it.
+      properties:
+        forwardDelay:
+          description: Spanning Tree Protocol forward delay, in seconds
+          format: uint32
+          minimum: 0
+          type: integer
+        helloTime:
+          description: Spanning Tree Protocol hello time, in seconds
+          format: uint32
+          minimum: 0
+          type: integer
+        maxAge:
+          description: Spanning Tree Protocol maximum message age, in seconds
+          format: uint32
+          minimum: 0
+          type: integer
+        portConnections:
+          description: Ports of the controller, with their current state
+          items:
+            $ref: '#/components/schemas/SystemBridgePort'
+          type: array
+        ports:
+          deprecated: true
+          description: |-
+            Interface names or IDs of the ports of the controller.
+
+            DEPRECATED: replaced by `portConnections`, which also takes names. It keeps working, and it
+            is still reported for the clients that read it. When both lists are given,
+            `portConnections` is used and this one is ignored.
+          items:
+            type: string
+          type: array
+        priority:
+          description: Spanning Tree Protocol priority (lower values are 'better')
+          format: uint32
+          minimum: 0
+          type: integer
+        stp:
+          description: Whether the Spanning Tree Protocol is enabled or not
+          type: boolean
+      type: object
+    SystemBridgeVlanPort:
+      additionalProperties: false
+      description: Port of a bridge that is a VLAN, with its current state
+      properties:
+        autoconnect:
+          description: Specifies if the connection should automatically connect
+          type: boolean
+        customMacAddress:
+          description: |-
+            Custom MAC address of the connection's interface
+
+            Can also be 'preserve', 'permanent', 'random' or 'stable'.
+          type: string
+        id:
+          description: |-
+            Unique identifier for the network connection
+
+            When it is omitted, the port refers to the connection bound to its interface, or
+            gets the interface name as its ID.
+          type: string
+        ieee8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
+        interface:
+          description: Network interface associated with the connection
+          type: string
+        macAddress:
+          description: MAC address of the connection's interface
+          type: string
+        match:
+          $ref: '#/components/schemas/MatchSettings'
+          description: Match settings for the network connection
+        mtu:
+          description: Maximum Transmission Unit (MTU) for the connection
+          format: uint32
+          minimum: 0
+          type: integer
+        persistent:
+          description: Specifies whether the connection should be persisted or not
+          type: boolean
+        port:
+          $ref: '#/components/schemas/BridgePortSettings'
+          description: Settings that this connection has because it is a port of a bridge
+        state:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionState'
+          description: Current state of the connection
+        status:
+          $ref: '#/components/schemas/Status2'
+          description: Current status of the network connection
+        vlan:
+          allOf:
+          - $ref: '#/components/schemas/VlanSettings'
+          description: VLAN settings
+      required:
+      - vlan
+      - state
+      type: object
+    SystemBridgeWirelessPort:
+      additionalProperties: false
+      description: Port of a bridge that is a wireless connection, with its current state
+      properties:
+        autoconnect:
+          description: Specifies if the connection should automatically connect
+          type: boolean
+        customMacAddress:
+          description: |-
+            Custom MAC address of the connection's interface
+
+            Can also be 'preserve', 'permanent', 'random' or 'stable'.
+          type: string
+        id:
+          description: |-
+            Unique identifier for the network connection
+
+            When it is omitted, the port refers to the connection bound to its interface, or
+            gets the interface name as its ID.
+          type: string
+        ieee8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
+        interface:
+          description: Network interface associated with the connection
+          type: string
+        macAddress:
+          description: MAC address of the connection's interface
+          type: string
+        match:
+          $ref: '#/components/schemas/MatchSettings'
+          description: Match settings for the network connection
+        mtu:
+          description: Maximum Transmission Unit (MTU) for the connection
+          format: uint32
+          minimum: 0
+          type: integer
+        persistent:
+          description: Specifies whether the connection should be persisted or not
+          type: boolean
+        port:
+          $ref: '#/components/schemas/BridgePortSettings'
+          description: Settings that this connection has because it is a port of a bridge
+        state:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionState'
+          description: Current state of the connection
+        status:
+          $ref: '#/components/schemas/Status2'
+          description: Current status of the network connection
+        wireless:
+          allOf:
+          - $ref: '#/components/schemas/WirelessSettings'
+          description: Wireless settings
+      required:
+      - wireless
+      - state
+      type: object
     SystemInfo:
       description: Global information of the system where the installer is running.
       properties:
@@ -5227,6 +5780,126 @@ components:
       required:
       - patterns
       type: object
+    SystemNetworkConnection:
+      additionalProperties: false
+      description: |-
+        A connection as the system reports it, with its current state.
+
+        The state is not part of the configuration, so only the system information reports it, for
+        every connection, nested ports included.
+      properties:
+        addresses:
+          description: List of assigned IP addresses
+          items:
+            $ref: '#/components/schemas/IpInet'
+          type: array
+        autoconnect:
+          description: Specifies if the connection should automatically connect
+          type: boolean
+        bond:
+          $ref: '#/components/schemas/SystemBondSettings'
+          description: Bonding settings if part of a bond
+        bridge:
+          $ref: '#/components/schemas/SystemBridgeSettings'
+          description: Bridge settings if part of a bridge
+        customMacAddress:
+          description: |-
+            Custom MAC address of the connection's interface
+
+            Can also be 'preserve', 'permanent', 'random' or 'stable'.
+          type: string
+        dnsSearchList:
+          description: List of search domains for DNS resolution
+          items:
+            type: string
+          type: array
+        dnsSearchlist:
+          deprecated: true
+          description: List of search domains for DNS resolution
+          items:
+            type: string
+          type: array
+        gateway4:
+          description: Gateway IP address for the IPv4 connection
+          examples:
+          - 192.168.122.1
+          format: ip
+          type: string
+        gateway6:
+          description: Gateway IP address for the IPv6 connection
+          examples:
+          - ::ffff:c0a8:7a01
+          format: ip
+          type: string
+        id:
+          description: Unique identifier for the network connection
+          type: string
+        ieee8021x:
+          $ref: '#/components/schemas/IEEE8021XSettings'
+          description: IEEE 802.1X settings
+        ignoreAutoDns:
+          description: Specifies whether to ignore automatically assigned DNS settings
+          type: boolean
+        interface:
+          description: Network interface associated with the connection
+          type: string
+        macAddress:
+          description: MAC address of the connection's interface
+          type: string
+        match:
+          $ref: '#/components/schemas/MatchSettings'
+          description: Match settings for the network connection
+        method4:
+          $ref: '#/components/schemas/Ipv4Method'
+          description: |-
+            IPv4 method used for the network connection
+
+            Defaults to 'auto'.
+        method6:
+          $ref: '#/components/schemas/Ipv6Method'
+          description: |-
+            IPv6 method used for the network connection
+
+            Defaults to 'auto'.
+        mtu:
+          description: Maximum Transmission Unit (MTU) for the connection
+          format: uint32
+          minimum: 0
+          type: integer
+        nameservers:
+          description: List of DNS server IP addresses
+          items:
+            format: ip
+            type: string
+          type: array
+        persistent:
+          description: Specifies whether the connection should be persisted or not
+          type: boolean
+        state:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionState'
+          description: Current state of the connection
+        status:
+          $ref: '#/components/schemas/Status2'
+          description: Current status of the network connection
+        vlan:
+          $ref: '#/components/schemas/VlanSettings'
+          description: VLAN settings for the connection
+        wireless:
+          $ref: '#/components/schemas/WirelessSettings'
+          description: Wireless settings for the connection
+      required:
+      - id
+      - state
+      type: object
+    SystemNetworkConnections:
+      description: |-
+        Collection of connections with their current state, as the system reports them.
+
+        Like [`config::NetworkConnectionsCollection`], it only holds the root connections.
+      items:
+        $ref: '#/components/schemas/SystemNetworkConnection'
+      type: array
     Task:
       description: Represents a background task.
       properties:
@@ -5854,7 +6527,7 @@ components:
           type: array
         connections:
           allOf:
-          - $ref: '#/components/schemas/NetworkConnectionsWithState'
+          - $ref: '#/components/schemas/SystemNetworkConnections'
           description: Connections to use in the installation, with their current state
         devices:
           items:
