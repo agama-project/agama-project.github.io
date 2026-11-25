@@ -17,10 +17,9 @@ These options are defined in the `bootloader` section.
     systems.
   - `none`: do not install any bootloader.
 
-  If not specified, the bootloader type is chosen based on the product definition (such as
-  `boot.default_efi_bootloader` on EFI systems) or defaults to `grub2`. Setting an incompatible
-  bootloader type (such as `systemd-boot` on a non-EFI system or an unsupported architecture) will
-  generate an installation issue (`configWrongBootloader`).
+  If not specified, the bootloader type is chosen based on the product definition or defaults to
+  `grub2`. Setting an incompatible bootloader type (such as `systemd-boot` on a non-EFI system or an
+  unsupported architecture) will generate an installation issue (`configWrongBootloader`).
 
 - `stopOnBootMenu`: stop on the menu instead of booting the system automatically.
 - `timeout`: specify how many seconds the bootloader should wait on the menu before booting the
