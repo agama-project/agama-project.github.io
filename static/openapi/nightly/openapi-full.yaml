@@ -184,8 +184,17 @@ components:
 
         If the rule matches with the question ([class](Self::class),
         [text](Self::text) or [data](Self::data), it applies the specified `answer`).
+      oneOf:
+      - required:
+        - action
+      - required:
+        - answer
       properties:
         action:
+          description: Action to use for answering the question.
+          type: string
+        answer:
+          deprecated: true
           description: Action to use for answering the question.
           type: string
         class:
@@ -200,14 +209,16 @@ components:
             A question can include custom data. If any of the entries matches,
             the rule is applied (see [QuestionSpec::data]).
           type: object
+        password:
+          deprecated: true
+          description: Value to use for the question (e.g. password or string input, depending on the question type).
+          type: string
         text:
           description: Question text (see [QuestionSpec::text]).
           type: string
         value:
           description: Value to use for the question (e.g. password or string input, depending on the question type).
           type: string
-      required:
-      - action
       title: Automatic answer to questions
       type: object
     AuthResponse:
@@ -246,6 +257,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -299,6 +311,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -350,6 +363,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -459,6 +473,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -512,6 +527,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -605,6 +621,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -661,6 +678,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -715,6 +733,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -853,6 +872,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -909,6 +929,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -1941,6 +1962,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -5121,6 +5143,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -5179,6 +5202,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -5233,6 +5257,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -5336,6 +5361,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -5394,6 +5420,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -5456,6 +5483,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -5517,6 +5545,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -5574,6 +5603,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -5687,6 +5717,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -5748,6 +5779,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -5789,6 +5821,11 @@ components:
       type: object
     SystemInfo:
       description: Global information of the system where the installer is running.
+      oneOf:
+      - required:
+        - hostname
+      - required:
+        - transient
       properties:
         bootloader: true
         dasd: true
@@ -5830,7 +5867,6 @@ components:
       - products
       - licenses
       - hardware
-      - hostname
       - l10n
       - software
       - network
@@ -5907,6 +5943,7 @@ components:
           type: string
         ieee-8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
+          deprecated: true
           description: IEEE 802.1X settings
         ieee8021x:
           $ref: '#/components/schemas/IEEE8021XSettings'
@@ -6034,20 +6071,32 @@ components:
 
               It includes the action and, optionally, and additional value which depends
               on the question field.
+            oneOf:
+            - required:
+              - action
+            - required:
+              - answer
             properties:
               action:
+                description: Action to use for answering the question.
+                type: string
+              answer:
+                deprecated: true
                 description: Action to use for answering the question.
                 type: string
               id:
                 format: uint32
                 minimum: 0
                 type: integer
+              password:
+                deprecated: true
+                description: Value to use for the question (e.g. password or string input, depending on the question type).
+                type: string
               value:
                 description: Value to use for the question (e.g. password or string input, depending on the question type).
                 type: string
             required:
             - id
-            - action
             title: Predefined question action
             type: object
         required:
@@ -6422,6 +6471,11 @@ components:
       type: object
     hostname.Proposal:
       description: Describes what Agama proposes for the target system.
+      oneOf:
+      - required:
+        - hostname
+      - required:
+        - transient
       properties:
         hostname:
           type: string
@@ -6430,11 +6484,14 @@ components:
         transient:
           deprecated: true
           type: string
-      required:
-      - hostname
       type: object
     hostname.SystemInfo:
       description: Describes the current system hostname information
+      oneOf:
+      - required:
+        - hostname
+      - required:
+        - transient
       properties:
         hostname:
           type: string
@@ -6443,8 +6500,6 @@ components:
         transient:
           deprecated: true
           type: string
-      required:
-      - hostname
       type: object
     l10n.Config:
       additionalProperties: false
@@ -6486,7 +6541,18 @@ components:
       title: Localization settings
       type: object
     l10n.Proposal:
+      allOf:
+      - oneOf:
+        - required:
+          - keymap
+        - required:
+          - keyboard
       description: Describes what Agama proposes for the target system.
+      oneOf:
+      - required:
+        - locale
+      - required:
+        - language
       properties:
         keyboard:
           deprecated: true
@@ -6506,8 +6572,6 @@ components:
           description: Timezone (e.g., "Europe/Berlin").
           type: string
       required:
-      - keymap
-      - locale
       - timezone
       type: object
     l10n.SystemConfig:
@@ -6524,7 +6588,18 @@ components:
           type: string
       type: object
     l10n.SystemInfo:
+      allOf:
+      - oneOf:
+        - required:
+          - keymap
+        - required:
+          - keyboard
       description: Localization-related information of the system where the installer is running.
+      oneOf:
+      - required:
+        - locale
+      - required:
+        - language
       properties:
         keyboard:
           deprecated: true
@@ -6562,8 +6637,6 @@ components:
       - locales
       - timezones
       - keymaps
-      - locale
-      - keymap
       - timezone
       type: object
     network.Config:
@@ -6683,15 +6756,26 @@ components:
 
         It includes the action and, optionally, and additional value which depends
         on the question field.
+      oneOf:
+      - required:
+        - action
+      - required:
+        - answer
       properties:
         action:
           description: Action to use for answering the question.
           type: string
+        answer:
+          deprecated: true
+          description: Action to use for answering the question.
+          type: string
+        password:
+          deprecated: true
+          description: Value to use for the question (e.g. password or string input, depending on the question type).
+          type: string
         value:
           description: Value to use for the question (e.g. password or string input, depending on the question type).
           type: string
-      required:
-      - action
       title: Predefined question action
       type: object
     questions.Config:

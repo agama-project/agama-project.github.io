@@ -248,8 +248,25 @@
       "AnswerRule": {
         "additionalProperties": false,
         "description": "Defines the answer to use for any question which matches the rule.\n\nIf the rule matches with the question ([class](Self::class),\n[text](Self::text) or [data](Self::data), it applies the specified `answer`).",
+        "oneOf": [
+          {
+            "required": [
+              "action"
+            ]
+          },
+          {
+            "required": [
+              "answer"
+            ]
+          }
+        ],
         "properties": {
           "action": {
+            "description": "Action to use for answering the question.",
+            "type": "string"
+          },
+          "answer": {
+            "deprecated": true,
             "description": "Action to use for answering the question.",
             "type": "string"
           },
@@ -267,6 +284,11 @@
             "description": "A question can include custom data. If any of the entries matches,\nthe rule is applied (see [QuestionSpec::data]).",
             "type": "object"
           },
+          "password": {
+            "deprecated": true,
+            "description": "Value to use for the question (e.g. password or string input, depending on the question type).",
+            "type": "string"
+          },
           "text": {
             "description": "Question text (see [QuestionSpec::text]).",
             "type": "string"
@@ -276,9 +298,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "action"
-        ],
         "title": "Automatic answer to questions",
         "type": "object"
       },
@@ -322,6 +341,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -386,6 +406,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -442,6 +463,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -561,6 +583,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -625,6 +648,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -748,6 +772,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -816,6 +841,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -876,6 +902,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -1026,6 +1053,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -1094,6 +1122,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -2335,6 +2364,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -6845,6 +6875,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -6918,6 +6949,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -6983,6 +7015,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -7113,6 +7146,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -7186,6 +7220,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -7267,6 +7302,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -7344,6 +7380,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -7413,6 +7450,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -7555,6 +7593,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -7632,6 +7671,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -7778,6 +7818,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -7935,8 +7976,25 @@
             "properties": {
               "answer": {
                 "description": "Question answer.\n\nIt includes the action and, optionally, and additional value which depends\non the question field.",
+                "oneOf": [
+                  {
+                    "required": [
+                      "action"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "answer"
+                    ]
+                  }
+                ],
                 "properties": {
                   "action": {
+                    "description": "Action to use for answering the question.",
+                    "type": "string"
+                  },
+                  "answer": {
+                    "deprecated": true,
                     "description": "Action to use for answering the question.",
                     "type": "string"
                   },
@@ -7945,14 +8003,18 @@
                     "minimum": 0,
                     "type": "integer"
                   },
+                  "password": {
+                    "deprecated": true,
+                    "description": "Value to use for the question (e.g. password or string input, depending on the question type).",
+                    "type": "string"
+                  },
                   "value": {
                     "description": "Value to use for the question (e.g. password or string input, depending on the question type).",
                     "type": "string"
                   }
                 },
                 "required": [
-                  "id",
-                  "action"
+                  "id"
                 ],
                 "title": "Predefined question action",
                 "type": "object"
@@ -8456,6 +8518,18 @@
       },
       "hostname.Proposal": {
         "description": "Describes what Agama proposes for the target system.",
+        "oneOf": [
+          {
+            "required": [
+              "hostname"
+            ]
+          },
+          {
+            "required": [
+              "transient"
+            ]
+          }
+        ],
         "properties": {
           "hostname": {
             "type": "string"
@@ -8468,13 +8542,22 @@
             "type": "string"
           }
         },
-        "required": [
-          "hostname"
-        ],
         "type": "object"
       },
       "hostname.SystemInfo": {
         "description": "Describes the current system hostname information",
+        "oneOf": [
+          {
+            "required": [
+              "hostname"
+            ]
+          },
+          {
+            "required": [
+              "transient"
+            ]
+          }
+        ],
         "properties": {
           "hostname": {
             "type": "string"
@@ -8487,9 +8570,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "hostname"
-        ],
         "type": "object"
       },
       "l10n.Config": {
@@ -8544,7 +8624,35 @@
         "type": "object"
       },
       "l10n.Proposal": {
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "required": [
+                  "keymap"
+                ]
+              },
+              {
+                "required": [
+                  "keyboard"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Describes what Agama proposes for the target system.",
+        "oneOf": [
+          {
+            "required": [
+              "locale"
+            ]
+          },
+          {
+            "required": [
+              "language"
+            ]
+          }
+        ],
         "properties": {
           "keyboard": {
             "deprecated": true,
@@ -8570,8 +8678,6 @@
           }
         },
         "required": [
-          "keymap",
-          "locale",
           "timezone"
         ],
         "type": "object"
@@ -8596,7 +8702,35 @@
         "type": "object"
       },
       "l10n.SystemInfo": {
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "required": [
+                  "keymap"
+                ]
+              },
+              {
+                "required": [
+                  "keyboard"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Localization-related information of the system where the installer is running.",
+        "oneOf": [
+          {
+            "required": [
+              "locale"
+            ]
+          },
+          {
+            "required": [
+              "language"
+            ]
+          }
+        ],
         "properties": {
           "keyboard": {
             "deprecated": true,
@@ -8646,8 +8780,6 @@
           "locales",
           "timezones",
           "keymaps",
-          "locale",
-          "keymap",
           "timezone"
         ],
         "type": "object"
@@ -8810,9 +8942,31 @@
       "questions.Answer": {
         "additionalProperties": false,
         "description": "Question answer.\n\nIt includes the action and, optionally, and additional value which depends\non the question field.",
+        "oneOf": [
+          {
+            "required": [
+              "action"
+            ]
+          },
+          {
+            "required": [
+              "answer"
+            ]
+          }
+        ],
         "properties": {
           "action": {
             "description": "Action to use for answering the question.",
+            "type": "string"
+          },
+          "answer": {
+            "deprecated": true,
+            "description": "Action to use for answering the question.",
+            "type": "string"
+          },
+          "password": {
+            "deprecated": true,
+            "description": "Value to use for the question (e.g. password or string input, depending on the question type).",
             "type": "string"
           },
           "value": {
@@ -8820,9 +8974,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "action"
-        ],
         "title": "Predefined question action",
         "type": "object"
       },

@@ -45,6 +45,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -109,6 +110,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -165,6 +167,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -284,6 +287,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -348,6 +352,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -420,6 +425,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -488,6 +494,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -548,6 +555,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -698,6 +706,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -766,6 +775,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -1099,6 +1109,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -1911,6 +1922,18 @@
       },
       "hostname.Proposal": {
         "description": "Describes what Agama proposes for the target system.",
+        "oneOf": [
+          {
+            "required": [
+              "hostname"
+            ]
+          },
+          {
+            "required": [
+              "transient"
+            ]
+          }
+        ],
         "properties": {
           "hostname": {
             "type": "string"
@@ -1923,9 +1946,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "hostname"
-        ],
         "type": "object"
       },
       "l10n.Config": {
@@ -1980,7 +2000,35 @@
         "type": "object"
       },
       "l10n.Proposal": {
+        "allOf": [
+          {
+            "oneOf": [
+              {
+                "required": [
+                  "keymap"
+                ]
+              },
+              {
+                "required": [
+                  "keyboard"
+                ]
+              }
+            ]
+          }
+        ],
         "description": "Describes what Agama proposes for the target system.",
+        "oneOf": [
+          {
+            "required": [
+              "locale"
+            ]
+          },
+          {
+            "required": [
+              "language"
+            ]
+          }
+        ],
         "properties": {
           "keyboard": {
             "deprecated": true,
@@ -2006,8 +2054,6 @@
           }
         },
         "required": [
-          "keymap",
-          "locale",
           "timezone"
         ],
         "type": "object"

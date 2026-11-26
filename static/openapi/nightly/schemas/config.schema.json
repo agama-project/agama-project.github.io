@@ -49,8 +49,25 @@
       "AnswerRule": {
         "additionalProperties": false,
         "description": "Defines the answer to use for any question which matches the rule.\n\nIf the rule matches with the question ([class](Self::class),\n[text](Self::text) or [data](Self::data), it applies the specified `answer`).",
+        "oneOf": [
+          {
+            "required": [
+              "action"
+            ]
+          },
+          {
+            "required": [
+              "answer"
+            ]
+          }
+        ],
         "properties": {
           "action": {
+            "description": "Action to use for answering the question.",
+            "type": "string"
+          },
+          "answer": {
+            "deprecated": true,
             "description": "Action to use for answering the question.",
             "type": "string"
           },
@@ -68,6 +85,11 @@
             "description": "A question can include custom data. If any of the entries matches,\nthe rule is applied (see [QuestionSpec::data]).",
             "type": "object"
           },
+          "password": {
+            "deprecated": true,
+            "description": "Value to use for the question (e.g. password or string input, depending on the question type).",
+            "type": "string"
+          },
           "text": {
             "description": "Question text (see [QuestionSpec::text]).",
             "type": "string"
@@ -77,9 +99,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "action"
-        ],
         "title": "Automatic answer to questions",
         "type": "object"
       },
@@ -109,6 +128,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -173,6 +193,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -229,6 +250,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -348,6 +370,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -412,6 +435,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -484,6 +508,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -552,6 +577,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -612,6 +638,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -762,6 +789,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -830,6 +858,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
@@ -1320,6 +1349,7 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
             "description": "IEEE 802.1X settings"
           },
           "ieee8021x": {
