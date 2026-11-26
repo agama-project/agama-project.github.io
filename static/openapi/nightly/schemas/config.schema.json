@@ -49,8 +49,25 @@
       "AnswerRule": {
         "additionalProperties": false,
         "description": "Defines the answer to use for any question which matches the rule.\n\nIf the rule matches with the question ([class](Self::class),\n[text](Self::text) or [data](Self::data), it applies the specified `answer`).",
+        "oneOf": [
+          {
+            "required": [
+              "action"
+            ]
+          },
+          {
+            "required": [
+              "answer"
+            ]
+          }
+        ],
         "properties": {
           "action": {
+            "description": "Action to use for answering the question.",
+            "type": "string"
+          },
+          "answer": {
+            "deprecated": true,
             "description": "Action to use for answering the question.",
             "type": "string"
           },
@@ -68,6 +85,11 @@
             "description": "A question can include custom data. If any of the entries matches,\nthe rule is applied (see [QuestionSpec::data]).",
             "type": "object"
           },
+          "password": {
+            "deprecated": true,
+            "description": "Value to use for the question (e.g. password or string input, depending on the question type).",
+            "type": "string"
+          },
           "text": {
             "description": "Question text (see [QuestionSpec::text]).",
             "type": "string"
@@ -77,9 +99,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "action"
-        ],
         "title": "Automatic answer to questions",
         "type": "object"
       },
@@ -108,6 +127,11 @@
             "type": "string"
           },
           "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
+            "description": "IEEE 802.1X settings"
+          },
+          "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
           },
@@ -169,6 +193,11 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
+            "description": "IEEE 802.1X settings"
+          },
+          "ieee8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
           },
           "interface": {
@@ -220,6 +249,11 @@
             "type": "string"
           },
           "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
+            "description": "IEEE 802.1X settings"
+          },
+          "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
           },
@@ -336,6 +370,11 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
+            "description": "IEEE 802.1X settings"
+          },
+          "ieee8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
           },
           "interface": {
@@ -395,6 +434,11 @@
             "type": "string"
           },
           "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
+            "description": "IEEE 802.1X settings"
+          },
+          "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
           },
@@ -464,6 +508,11 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
+            "description": "IEEE 802.1X settings"
+          },
+          "ieee8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
           },
           "interface": {
@@ -528,6 +577,11 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
+            "description": "IEEE 802.1X settings"
+          },
+          "ieee8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
           },
           "interface": {
@@ -583,6 +637,11 @@
             "type": "string"
           },
           "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
+            "description": "IEEE 802.1X settings"
+          },
+          "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
           },
@@ -730,6 +789,11 @@
           },
           "ieee-8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
+            "description": "IEEE 802.1X settings"
+          },
+          "ieee8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
           },
           "interface": {
@@ -793,6 +857,11 @@
             "type": "string"
           },
           "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
+            "description": "IEEE 802.1X settings"
+          },
+          "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
           },
@@ -1278,6 +1347,11 @@
             "description": "Unique identifier for the network connection",
             "type": "string"
           },
+          "ieee-8021x": {
+            "$ref": "#/components/schemas/IEEE8021XSettings",
+            "deprecated": true,
+            "description": "IEEE 802.1X settings"
+          },
           "ieee8021x": {
             "$ref": "#/components/schemas/IEEE8021XSettings",
             "description": "IEEE 802.1X settings"
@@ -1343,7 +1417,7 @@
         "type": "object"
       },
       "NetworkConnections": {
-        "description": "Collection of connections.\n\nIt only holds the root connections: the ports of a bond or a bridge are nested inside the\n`portConnections` list of their controller. Use [`Self::flatten`] to go through all of them.",
+        "description": "Collection of connections.\n\nIt only holds the root connections: the ports of a bond or a bridge are nested inside the\n`portConnections` list of their controller.\n\nWhere a connection is given decides its controller:\n\n* A connection at the top level has none. If it was a port, it is taken out of its controller\n  and its IP methods default to `auto`. To update a port and keep it where it is, give it\n  nested in its controller, together with the controllers above it.\n* A port dropped from the list of ports of its controller, and not given anywhere else, is\n  removed.\n* A controller that is not given keeps its ports, so an update does not need to include the\n  connections it does not change, as long as they are not ports of the ones it does.",
         "items": {
           "$ref": "#/components/schemas/NetworkConnection"
         },
@@ -4299,6 +4373,7 @@
             "type": "boolean"
           },
           "mode": {
+            "default": "infrastructure",
             "description": "Wireless network mode",
             "enum": [
               "infrastructure",
@@ -4329,6 +4404,7 @@
             "type": "integer"
           },
           "security": {
+            "default": "none",
             "description": "Security method/key management",
             "enum": [
               "none",
@@ -4358,9 +4434,7 @@
           }
         },
         "required": [
-          "security",
-          "ssid",
-          "mode"
+          "ssid"
         ],
         "type": "object"
       },
