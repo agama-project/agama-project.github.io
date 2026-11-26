@@ -737,7 +737,8 @@
         "enum": [
           "grub2",
           "grub2-bls",
-          "systemd-boot"
+          "systemd-boot",
+          "none"
         ]
       },
       "BootloaderSystemInfoEncryptionAuthMethod": {
@@ -745,6 +746,15 @@
           "password",
           "tpm"
         ]
+      },
+      "BootloaderType": {
+        "description": "Bootloader type.",
+        "enum": [
+          "grub2",
+          "systemd-boot",
+          "none"
+        ],
+        "type": "string"
       },
       "BridgeBondPort": {
         "additionalProperties": false,
@@ -3080,6 +3090,9 @@
         "properties": {
           "access": {
             "$ref": "#/components/schemas/access.ExtendedConfig"
+          },
+          "bootloader": {
+            "$ref": "#/components/schemas/bootloader.Proposal"
           },
           "hostname": {
             "$ref": "#/components/schemas/hostname.Proposal"
@@ -8686,12 +8699,33 @@
             "minimum": 0,
             "type": "integer"
           },
+          "type": {
+            "$ref": "#/components/schemas/BootloaderType",
+            "description": "Bootloader type.\n\nSupported options are `grub2`, `systemd-boot`, and `none`.\nNote that `systemd-boot` can only be installed on EFI systems."
+          },
           "updateNvram": {
             "description": "Whether bootloader should update persistent RAM.",
             "type": "boolean"
           }
         },
         "title": "Bootloader settings",
+        "type": "object"
+      },
+      "bootloader.Proposal": {
+        "description": "Describes what Agama proposes for the bootloader in the target system.",
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BootloaderType"
+              }
+            ],
+            "description": "Bootloader type."
+          }
+        },
+        "required": [
+          "type"
+        ],
         "type": "object"
       },
       "hostname.Config": {

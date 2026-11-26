@@ -399,6 +399,15 @@
         ],
         "type": "object"
       },
+      "BootloaderType": {
+        "description": "Bootloader type.",
+        "enum": [
+          "grub2",
+          "systemd-boot",
+          "none"
+        ],
+        "type": "string"
+      },
       "BridgeBondPort": {
         "additionalProperties": false,
         "description": "Port of a bridge that is a bond itself",
@@ -1920,6 +1929,23 @@
         ],
         "type": "object"
       },
+      "bootloader.Proposal": {
+        "description": "Describes what Agama proposes for the bootloader in the target system.",
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BootloaderType"
+              }
+            ],
+            "description": "Bootloader type."
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
       "hostname.Proposal": {
         "description": "Describes what Agama proposes for the target system.",
         "oneOf": [
@@ -2124,6 +2150,9 @@
   "properties": {
     "access": {
       "$ref": "#/components/schemas/access.ExtendedConfig"
+    },
+    "bootloader": {
+      "$ref": "#/components/schemas/bootloader.Proposal"
     },
     "hostname": {
       "$ref": "#/components/schemas/hostname.Proposal"

@@ -482,6 +482,15 @@
         ],
         "type": "object"
       },
+      "BootloaderType": {
+        "description": "Bootloader type.",
+        "enum": [
+          "grub2",
+          "systemd-boot",
+          "none"
+        ],
+        "type": "string"
+      },
       "BridgeBondPort": {
         "additionalProperties": false,
         "description": "Port of a bridge that is a bond itself",
@@ -4530,6 +4539,10 @@
             "format": "uint32",
             "minimum": 0,
             "type": "integer"
+          },
+          "type": {
+            "$ref": "#/components/schemas/BootloaderType",
+            "description": "Bootloader type.\n\nSupported options are `grub2`, `systemd-boot`, and `none`.\nNote that `systemd-boot` can only be installed on EFI systems."
           },
           "updateNvram": {
             "description": "Whether bootloader should update persistent RAM.",

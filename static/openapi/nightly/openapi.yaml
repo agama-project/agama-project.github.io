@@ -591,10 +591,18 @@ components:
       - grub2
       - grub2-bls
       - systemd-boot
+      - none
     BootloaderSystemInfoEncryptionAuthMethod:
       enum:
       - password
       - tpm
+    BootloaderType:
+      description: Bootloader type.
+      enum:
+      - grub2
+      - systemd-boot
+      - none
+      type: string
     BridgeBondPort:
       additionalProperties: false
       description: Port of a bridge that is a bond itself
@@ -6294,10 +6302,27 @@ components:
           format: uint32
           minimum: 0
           type: integer
+        type:
+          $ref: '#/components/schemas/BootloaderType'
+          description: |-
+            Bootloader type.
+
+            Supported options are `grub2`, `systemd-boot`, and `none`.
+            Note that `systemd-boot` can only be installed on EFI systems.
         updateNvram:
           description: Whether bootloader should update persistent RAM.
           type: boolean
       title: Bootloader settings
+      type: object
+    bootloader.Proposal:
+      description: Describes what Agama proposes for the bootloader in the target system.
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/BootloaderType'
+          description: Bootloader type.
+      required:
+      - type
       type: object
     hostname.Config:
       additionalProperties: false
